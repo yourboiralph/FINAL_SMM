@@ -1,8 +1,8 @@
-<?php
-    {{ Auth::user()->role === '1' ? return redirect('/client/dashboard'); : return redirect('/admin/dashboard');
-}}
-?>
+@extends('layouts.application')
 
+@section('title', 'Page Title')
+
+@section('content')
 <form action="{{ url('/joborder/store')}}" method="POST">
     @csrf
     <p>
@@ -57,3 +57,6 @@
     <button type="submit">Create Job Order</button>
     <a href="{{url('/joborder')}}">Go back</a>
 </form>
+@endsection
+
+
