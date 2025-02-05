@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JobOrderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +28,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// JobOrderController
+Route::get('/joborder', [JobOrderController::class, 'index'])->name('joborder');
+Route::get('/joborder/create', [JobOrderController::class, 'create'])->name('joborder.create');
+Route::post('/joborder/store', [JobOrderController::class, 'store'])->name('joborder.store');
+Route::get('/joborder/show/{id}', [JobOrderController::class, 'show'])->name('joborder.show');
+Route::get('/joborder/edit/{id}', [JobOrderController::class, 'edit'])->name('joborder.edit');
+Route::put('/joborder/update/{id}', [JobOrderController::class, 'update'])->name('joborder.update');
 
 require __DIR__.'/auth.php';
