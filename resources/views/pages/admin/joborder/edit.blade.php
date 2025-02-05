@@ -1,69 +1,87 @@
-this is the edit blade
+@extends('layouts.application')
 
-<form action="{{ url('/joborder/update/' . $job_order->id) }}" method="POST">
-    @csrf
-    @method('PUT')
+@section('title', 'Page Title')
+@section('header', "Job Order") 
 
-    <p>
-        <label for="">Title</label>
-        <input type="text" name="title" value="{{$job_order->title}}">
-    </p>
+@section('content')
 
-    <p>
-        <label for="">Description</label>
-        <input type="text" name="description" value="{{$job_order->description}}">
-    </p>
-    <p>
-        <label for="content_writer_id">Content Writer</label>
-        <select name="content_writer_id" id="content_writer_id">
-            <option value="">Select Content Writer</option>
-            @foreach ($content_writers as $content_writer)
-                <option value="{{ $content_writer->id }}" 
-                    {{ $content_writer->id == $job_order->content_writer_id ? 'selected' : '' }}>
-                    {{ $content_writer->name }}
-                </option>
-            @endforeach
-        </select>
-    </p>
-    
-    <p>
-        <label for="graphic_designer_id">Graphic Designer</label>
-        <select name="graphic_designer_id" id="graphic_designer_id">
-            <option value="">Select a Graphic Designer</option>
-            @foreach ($graphic_designers as $graphic_designer)
-                <option value="{{ $graphic_designer->id }}" 
-                    {{ $graphic_designer->id == $job_order->graphic_designer_id ? 'selected' : '' }}>
-                    {{ $graphic_designer->name }}
-                </option>
-            @endforeach
-        </select>
-    </p>
-    
-    <p>
-        <label for="client_id">Client</label>
-        <select name="client_id" id="client_id">
-            <option value="">Select a Client</option>
-            @foreach ($clients as $client)
-                <option value="{{ $client->id }}" 
-                    {{ $client->id == $job_order->client_id ? 'selected' : '' }}>
-                    {{ $client->name }}
-                </option>
-            @endforeach
-        </select>
-    </p>
-    <p>
-        <label for="date_started">Date Started</label>
-        <input type="date" name="date_started" 
-        value="{{ \Carbon\Carbon::parse($job_order->latest_job_draft->date_started)->format('Y-m-d') }}"
-        >
-    </p>
-    
-    <p>
-        <label for="date_target">Date Target</label>
-        <input type="date" name="date_target" 
-        value="{{ \Carbon\Carbon::parse($job_order->latest_job_draft->date_target)->format('Y-m-d') }}">
-    </p>
-    
-    <button type="submit">Update</button>
-    <a href="{{url('/joborder')}}">Back</a>
-</form>
+<style>
+    .custom-shadow {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, .3), 0 1px 3px rgba(0, 0, 0, .3);
+    }
+    .custom-hover-shadow:hover {
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0), 0 4px 6px rgba(0, 0, 0, 0);
+        transition: box-shadow 0.3s ease;
+    }
+    .custom-focus-ring:focus {
+        outline: none;
+        box-shadow: 0 0 0 1px #fa7011;
+        transition: box-shadow 0.3s ease;
+    }
+</style>
+
+<div class="container mx-auto p-6">
+    <div class="bg-[#ffaa71] w-1/2 px-6 py-10 mx-auto rounded-lg custom-shadow">
+        <div>
+            <a href="#">
+                <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
+                    Back
+                </div>
+            </a>
+        </div>
+        <form action="{{ url('/joborder/update/' . $job_order->id ) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <h1 class="mt-10 text-xl font-bold">Edit Form</h1>
+            <div class="grid grid-cols-2 pb-10 space-y-4">
+                <div class="col-span-2 grid grid-cols-2 gap-4 mt-10">
+                    <div class="w-full">
+                        <p class="text-sm text-gray-600">Title</p>
+                        <input type="text" name="title" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" value="{{ old('title', $job_order->title) }}">
+                    </div>
+
+                    @if ($job_order->type === 'graphics_designer')
+                        <div class="w-full">
+                            <p class="text-sm text-gray-600">Graphics Designer</p>
+                            <select name="designer_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
+                                <option value="1" {{ $job_order->designer_id == 1 ? 'selected' : '' }}>Raprap</option>
+                                <option value="2" {{ $job_order->designer_id == 2 ? 'selected' : '' }}>Designer 2</option>
+                                <option value="3" {{ $job_order->designer_id == 3 ? 'selected' : '' }}>Designer 3</option>
+                            </select>
+                        </div>
+                    @elseif ($job_order->type === 'content_writer')
+                        <div class="w-full">
+                            <p class="text-sm text-gray-600">Content Writer</p>
+                            <select name="writer_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
+                                <option value="1" {{ $job_order->writer_id == 1 ? 'selected' : '' }}>Raprap</option>
+                                <option value="2" {{ $job_order->writer_id == 2 ? 'selected' : '' }}>Writer 2</option>
+                                <option value="3" {{ $job_order->writer_id == 3 ? 'selected' : '' }}>Writer 3</option>
+                            </select>
+                        </div>
+                    @endif
+                </div>
+
+                <div class="col-span-2 w-full">
+                    <p class="text-sm text-gray-600">Description</p>
+                    <textarea name="description" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring resize-none">{{ old('description', $job_order->description) }}</textarea>
+                </div>
+
+                <div class="col-span-2 grid grid-cols-2 w-full gap-4 rounded-lg">
+                    <div>
+                        <p class="text-sm text-gray-600">Date Started</p>
+                        <input type="date" name="date_started" class="w-full rounded-lg custom-shadow custom-focus-ring" value="{{ old('date_started', $job_order->date_started) }}">
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Date Deadline</p>
+                        <input type="date" name="date_deadline" class="w-full rounded-lg custom-shadow custom-focus-ring" value="{{ old('date_deadline', $job_order->date_deadline) }}">
+                    </div>
+                </div>
+
+                <div class="col-span-2 text-center py-4 w-full bg-[#fa7011] mt-10 rounded-lg custom-shadow custom-hover-shadow">
+                    <button type="submit" class="text-white font-bold">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@endsection
