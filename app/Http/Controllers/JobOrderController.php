@@ -9,18 +9,21 @@ use Illuminate\Http\Request;
 
 class JobOrderController extends Controller
 {
-    public function index () {
+    public function index()
+    {
         $job_orders = JobOrder::all();
         return view('pages/admin/joborder/joborder', compact('job_orders'));
     }
-    public function create() {
+    public function create()
+    {
         $content_writers = User::where('role_id', 3)->get();
         $graphic_designers = User::where('role_id', 4)->get();
         $clients = User::where('role_id', 1)->get();
-    
+
         return view('pages.admin.joborder.create', compact('content_writers', 'graphic_designers', 'clients'));
     }
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         // Validate request before proceeding
         $request->validate([
             'title' => 'required|string',
@@ -31,7 +34,7 @@ class JobOrderController extends Controller
             'date_target' => 'required|date',
             'date_started' => 'required|date'
         ]);
-    
+
         $job_order = JobOrder::create([
             'title' => $request->title,
             'description' => $request->description,
@@ -52,16 +55,18 @@ class JobOrderController extends Controller
         return redirect()->route('joborder.create')->with('status', 'Job Order Create Successfully');
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $job_order = JobOrder::findOrFail($id);
         return view('pages.admin.joborder.show', compact('job_order'));
     }
-    
-    public function edit($id) {
+
+    public function edit($id)
+    {
         $content_writers = User::where('role_id', 3)->get();
         $graphic_designers = User::where('role_id', 4)->get();
         $clients = User::where('role_id', 1)->get();
-        $job_order = JobOrder::with('latest_job_draft')->find($id);
+        $job_order = JobOrder::with('latest_job_draft', 'client', 'contentWriter', 'graphicDesigner')->find($id);
         return view('pages.admin.joborder.edit', compact('job_order', 'content_writers', 'graphic_designers', 'clients'));
     }
     public function update(Request $request, $id)
@@ -79,7 +84,7 @@ class JobOrderController extends Controller
 
         // Find the job order by ID
         $job_order = JobOrder::findOrFail($id);
-        
+
         // Update job order details
         $job_order->update([
             'title' => $request->title,
@@ -96,9 +101,8 @@ class JobOrderController extends Controller
             'date_started' => $request->date_started,
             'date_target' => $request->date_target,
         ]);
-        
+
 
         return redirect()->route('joborder.edit', $id)->with('status', 'Job Order Updated Successfully');
     }
-
 }
