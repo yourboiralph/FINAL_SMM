@@ -23,7 +23,6 @@ class JobDraft extends Model
 
     public function jobOrder()
     {
-        return $this->hasOne(JobDraft::class)->latestOfMany();
+        return $this->belongsTo(JobOrder::class, 'job_order_id');
     }
-    
 }

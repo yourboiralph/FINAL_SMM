@@ -11,8 +11,8 @@ class JobOrderController extends Controller
 {
     public function index()
     {
-        $job_orders = JobOrder::all();
-        return view('pages/admin/joborder/joborder', compact('job_orders'));
+        $job_drafts = JobDraft::with('jobOrder')->where('status', 'pending')->get();
+        return view('pages/admin/joborder/joborder', compact('job_drafts'));
     }
     public function create()
     {
@@ -67,6 +67,7 @@ class JobOrderController extends Controller
         $graphic_designers = User::where('role_id', 4)->get();
         $clients = User::where('role_id', 1)->get();
         $job_order = JobOrder::with('latest_job_draft', 'client', 'contentWriter', 'graphicDesigner')->find($id);
+
         return view('pages.admin.joborder.edit', compact('job_order', 'content_writers', 'graphic_designers', 'clients'));
     }
     public function update(Request $request, $id)
@@ -106,3 +107,30 @@ class JobOrderController extends Controller
         return redirect()->route('joborder.edit', $id)->with('status', 'Job Order Updated Successfully');
     }
 }
+
+
+
+
+
+
+
+
+
+
+// @foreach ($job_drafts as $job_draft)
+//     <div>
+//         <h3>Job Draft ID: {{ $job_draft->id }}</h3>
+//         <p>Type: {{ $job_draft->type }}</p>
+//         <p>Date Started: {{ $job_draft->date_started }}</p>
+//         <p>Date Target: {{ $job_draft->date_target }}</p>
+//         <p>Signature Admin: {{ $job_draft->signature_admin ?? 'Not signed' }}</p>
+//         <p>Signature Top Manager: {{ $job_draft->signature_top_manager ?? 'Not signed' }}</p>
+//         <p>Status: {{ $job_draft->status }}</p>
+
+//         <!-- Access job_order relationship -->
+//         <h4>Job Order:</h4>
+//         <p>Title: {{ $job_draft->jobOrder->title ?? 'No job order available' }}</p>
+//         <p>Description: {{ $job_draft->jobOrder->description ?? 'No description available' }}</p>
+//         <p>Client ID: {{ $job_draft->jobOrder->client_id ?? 'N/A' }}</p>
+//     </div>
+// @endforeach
