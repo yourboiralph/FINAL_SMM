@@ -12,10 +12,10 @@ class Role extends Model
     protected $fillable = ['position'];
 
     /**
-     * Define the relationship between Role and User
+     * Define the relationship between Role and User.
      */
     public function users()
     {
-        return $this->hasMany(User::class, 'role');
+        return $this->hasMany(User::class, 'role'); // Role is the foreign key in the User table
     }
 }

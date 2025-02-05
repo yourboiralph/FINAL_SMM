@@ -21,12 +21,12 @@ class RegisteredUserController extends Controller
 
      public function index() {
         $users = User::all();
-        return view('pages.admin.users', ['users' => $users]);
+        return view('pages.admin.users.users', ['users' => $users]);
     }    
 
     public function create(): View
     {
-        return view('auth.register');
+        return view('pages.admin.users.create');
     }
 
     /**
@@ -65,11 +65,22 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        return redirect()->route('users')->with('status', 'Users Created Successfully');
+    }
+
+    public function show($id) {
+        $user = User::findOrFail($id); // Fetch user or return 404 if not found
+        return view('pages.admin.users.show', compact('user'));
+    }
+    
+    public function edit($id)
+    {
+        $user = User::with('role')->findOrFail($id); // Load role relationship before retrieving the user
+        return view('pages.admin.users.edit', compact('user'));
+    }
+
+    public function update () {
         
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
     }
 }
