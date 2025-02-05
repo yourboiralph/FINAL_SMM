@@ -21,7 +21,7 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'role' => fake()->numberBetween(1, 5), // Generates a number between 1 and 5
+            'role_id' => fake()->numberBetween(1, 5), // Generates a number between 1 and 5
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
             'image' => fake()->filePath(),

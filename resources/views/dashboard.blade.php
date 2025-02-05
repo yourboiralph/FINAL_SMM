@@ -1,6 +1,6 @@
 
     {{ Auth::user()->name }}
-    {{ Auth::user()->role }}
+    {{ Auth::user()->role_id }}
 
 
 
