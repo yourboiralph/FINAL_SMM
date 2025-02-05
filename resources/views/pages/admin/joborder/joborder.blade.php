@@ -43,14 +43,17 @@
                         data-status="{{ strtolower($job_order->status) }}">
                         <td class="px-6 py-3 border-b">{{ $job_order->title }}</td>
                         <td class="px-6 py-3 border-b text-right">
-                            <a href="/client/projectdev/form/approval/{{$job_order->id}}">
+                            <a href="{{url('joborder/edit/' . $job_order->id)}}">
                                 <button class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
                                     Edit
                                 </button>
                             </a>
-                            <button class="px-4 py-2 text-sm text-white bg-gray-700 rounded hover:bg-gray-800">
-                                Show
-                            </button>
+                            <a href="{{url('joborder/show/' . $job_order->id)}}">
+
+                                <button class="px-4 py-2 text-sm text-white bg-gray-700 rounded hover:bg-gray-800">
+                                    Show
+                                </button>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

@@ -16,6 +16,7 @@ class Role extends Model
      */
     public function users()
     {
-        return $this->hasMany(User::class, 'role'); // Role is the foreign key in the User table
+        return $this->hasMany(User::class);
     }
+
 }

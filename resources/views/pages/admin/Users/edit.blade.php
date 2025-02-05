@@ -1,5 +1,4 @@
 
-{{ $user }}
 
 
 <form method="POST" action="{{ url('users/update/' . $user->id) }}" enctype="multipart/form-data"
@@ -16,11 +15,9 @@
         </div>
 
         <!-- Role -->
-        <div>
-            <x-input-label for="role" :value="__('Role')" />
-            <x-text-input id="role" class="block mt-1 w-full" type="text" name="role" :value="$user->role" required autofocus autocomplete="role" />
-            <x-input-error :messages="$errors->get('role')" class="mt-2" />
-        </div>
+        <select name="" id="">
+            <option value=""></option>
+        </select>
 
         <!-- Phone -->
         <div>

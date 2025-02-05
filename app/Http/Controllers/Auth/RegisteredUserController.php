@@ -39,7 +39,7 @@ class RegisteredUserController extends Controller
         
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'role' => ['required'],
+            'role_id' => ['required'],
             'phone' => ['required'],
             'address' => ['required'],
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -58,7 +58,7 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
-            'role' => $request->role,
+            'role_id' => $request->role_id,
             'phone' => $request->phone,
             'address' => $request->address,
             'image' => $picturePath, // Save the image path
@@ -76,11 +76,12 @@ class RegisteredUserController extends Controller
     
     public function edit($id)
     {
-        $user = User::with('role')->findOrFail($id); // Load role relationship before retrieving the user
+        $user = User::with('role')->find($id);
         return view('pages.admin.users.edit', compact('user'));
     }
 
-    public function update () {
+
+    public function update (Request $request, $id) {
         
     }
 }

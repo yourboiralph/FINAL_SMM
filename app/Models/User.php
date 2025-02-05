@@ -19,7 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'role',
+        'role_id',
         'phone',
         'image',
         'address',
@@ -48,7 +48,6 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->belongsTo(Role::class, 'role'); // Ensure 'role' matches the foreign key column name in the 'users' table
+        return $this->belongsTo(Role::class);
     }
-
 }

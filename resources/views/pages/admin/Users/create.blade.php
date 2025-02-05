@@ -13,9 +13,9 @@
 
         <!-- Role -->
         <div>
-            <x-input-label for="role" :value="__('Role')" />
-            <x-text-input id="role" class="block mt-1 w-full" type="text" name="role" :value="old('role')" required autofocus autocomplete="role" />
-            <x-input-error :messages="$errors->get('role')" class="mt-2" />
+            <x-input-label for="role_id" :value="__('Role')" />
+            <x-text-input id="role_id" class="block mt-1 w-full" type="text" name="role_id" :value="old('role_id')" required autofocus autocomplete="role_id" />
+            <x-input-error :messages="$errors->get('role_id')" class="mt-2" />
         </div>
 
         <!-- Phone -->

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('role'); // Foreign key reference
+            $table->unsignedBigInteger('role_id'); // Foreign key reference
             $table->string('name');
             $table->string('phone', 20);
             $table->text('address');
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->timestamps();
 
             // Foreign key constraint
-            $table->foreign('role')->references('id')->on('roles')->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
     }
 

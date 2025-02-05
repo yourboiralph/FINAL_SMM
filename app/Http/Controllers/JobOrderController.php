@@ -14,9 +14,9 @@ class JobOrderController extends Controller
         return view('pages/admin/joborder/joborder', compact('job_orders'));
     }
     public function create() {
-        $content_writers = User::where('role', 3)->get();
-        $graphic_designers = User::where('role', 4)->get();
-        $clients = User::where('role', 1)->get();
+        $content_writers = User::where('role_id', 3)->get();
+        $graphic_designers = User::where('role_id', 4)->get();
+        $clients = User::where('role_id', 1)->get();
     
         return view('pages.admin.joborder.create', compact('content_writers', 'graphic_designers', 'clients'));
     }
@@ -58,9 +58,9 @@ class JobOrderController extends Controller
     }
     
     public function edit($id) {
-        $content_writers = User::where('role', 3)->get();
-        $graphic_designers = User::where('role', 4)->get();
-        $clients = User::where('role', 1)->get();
+        $content_writers = User::where('role_id', 3)->get();
+        $graphic_designers = User::where('role_id', 4)->get();
+        $clients = User::where('role_id', 1)->get();
         $job_order = JobOrder::with('latest_job_draft')->find($id);
         return view('pages.admin.joborder.edit', compact('job_order', 'content_writers', 'graphic_designers', 'clients'));
     }
