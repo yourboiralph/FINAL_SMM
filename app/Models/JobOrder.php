@@ -49,7 +49,4 @@ class JobOrder extends Model
     {
         return $this->hasOne(JobDraft::class)->orderByDesc('date_started');
     }
-
-
-
 }

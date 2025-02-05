@@ -38,19 +38,17 @@
                 </tr>
             </thead>
             <tbody id="tableBody">
-                @foreach ($job_orders as $job_order)
-                    <tr class="project-row" data-name="{{ strtolower($job_order->title) }}"
-                        data-date="{{ strtolower($job_order->target_date) }}"
-                        data-status="{{ strtolower($job_order->status) }}">
-                        <td class="px-6 py-3 border-b">{{ $job_order->title }}</td>
-                        <td class="px-6 py-3 border-b">{{ $job_order->status }}</td>
+                @foreach ($job_drafts as $job_draft)
+                    <tr class="project-row">
+                        <td class="px-6 py-3 border-b">{{ $job_draft->jobOrder->title }}</td>
+                        <td class="px-6 py-3 border-b">{{ $job_draft->type }} - {{ $job_draft->jobOrder->client_id }}</td>
                         <td class="px-6 py-3 border-b text-right">
-                            <a href="{{url('joborder/edit/' . $job_order->id)}}">
+                            <a href="{{url('joborder/edit/' . $job_draft->jobOrder->id)}}">
                                 <button class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
                                     Edit
                                 </button>
                             </a>
-                            <a href="{{url('joborder/show/' . $job_order->id)}}">
+                            <a href="{{url('joborder/show/' . $job_draft->id)}}">
 
                                 <button class="px-4 py-2 text-sm text-white bg-gray-700 rounded hover:bg-gray-800">
                                     Show
