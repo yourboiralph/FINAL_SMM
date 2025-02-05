@@ -16,7 +16,11 @@
 
         <!-- Role -->
         <select name="" id="">
-            <option value=""></option>
+            <option value="1">Client</option>
+            <option value="2">Operations</option>
+            <option value="3">Content Writer</option>
+            <option value="4">Graphic Designer</option>
+            <option value="5">Top Manager</option>
         </select>
 
         <!-- Phone -->

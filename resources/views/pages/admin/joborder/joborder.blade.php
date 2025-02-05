@@ -33,6 +33,7 @@
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
                     <th class="px-6 py-3 border-b-2">File Name</th>
+                    <th>Designated</th>
                     <th></th>
                 </tr>
             </thead>
@@ -42,6 +43,7 @@
                         data-date="{{ strtolower($job_order->target_date) }}"
                         data-status="{{ strtolower($job_order->status) }}">
                         <td class="px-6 py-3 border-b">{{ $job_order->title }}</td>
+                        <td class="px-6 py-3 border-b">{{ $job_order->status }}</td>
                         <td class="px-6 py-3 border-b text-right">
                             <a href="{{url('joborder/edit/' . $job_order->id)}}">
                                 <button class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">

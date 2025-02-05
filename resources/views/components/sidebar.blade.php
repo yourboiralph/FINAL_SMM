@@ -1,17 +1,17 @@
 @php
     $user = Auth::user();
     $role = "";
-
     if ($user->role_id == 1) {
         $role = "client";
     } elseif($user->role_id == 2){
-        $role = "operations";
+        $role = "admin";
     };
 @endphp
 
-@props(['link' => $role])
+@props(['link' => 'client'])
 
 <div class="space-y-4 z-10">
+
     @if ($link === 'operations')
         {{-- Admin Sidebar Menu --}}
         <div class="hidden md:block md:px-6">

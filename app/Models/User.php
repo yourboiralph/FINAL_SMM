@@ -48,26 +48,7 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->belongsTo(Role::class);
-    }
-    // Job Orders Relationships (User Can Have Multiple Roles)
-    public function jobOrdersAsContentWriter()
-    {
-        return $this->hasMany(JobOrder::class, 'content_writer_id');
+        return $this->belongsTo(Role::class, 'role_id');
     }
 
-    public function jobOrdersAsGraphicDesigner()
-    {
-        return $this->hasMany(JobOrder::class, 'graphic_designer_id');
-    }
-
-    public function jobOrdersAsClient()
-    {
-        return $this->hasMany(JobOrder::class, 'client_id');
-    }
-
-    public function jobOrdersIssued()
-    {
-        return $this->hasMany(JobOrder::class, 'issued_by');
-    }
 }
