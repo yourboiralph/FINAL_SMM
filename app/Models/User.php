@@ -48,6 +48,7 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->belongsTo(Role::class, 'role'); // Role model must exist
+        return $this->belongsTo(Role::class, 'role'); // Ensure 'role' matches the foreign key column name in the 'users' table
     }
+
 }
