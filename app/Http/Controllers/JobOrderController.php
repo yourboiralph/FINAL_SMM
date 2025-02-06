@@ -71,8 +71,9 @@ class JobOrderController extends Controller
         return view('pages.admin.joborder.edit', compact('job_draft', 'content_writers', 'graphic_designers', 'clients'));
     }
 
-    public function update(Request $request, $id, $jdID)
+    public function update(Request $request, $id)
     {
+        dd($request->all(), $id);
         // Validate request before proceeding
         $request->validate([
             'title' => 'sometimes|string',
@@ -87,36 +88,36 @@ class JobOrderController extends Controller
         // Find the job order by ID
         $job_order = JobOrder::findOrFail($id);
 
-        // Create an array for updating fields
-        $updateData = [
-            'title' => $request->title,
-            'description' => $request->description,
-        ];
+        $updateDraft =
+            [
+                'date_started' => $request->date_started,
+                'date_target' => $request->date_target,
+            ];
 
         // Conditionally update graphic_designer_id and client_id if provided
         if ($request->has('graphic_designer_id') && $request->graphic_designer_id !== null) {
-            $updateData['graphic_designer_id'] = $request->graphic_designer_id;
+            $updateDraft['graphic_designer_id'] = $request->graphic_designer_id;
         }
 
         if ($request->has('client_id') && $request->client_id !== null) {
-            $updateData['client_id'] = $request->client_id;
+            $updateDraft['client_id'] = $request->client_id;
         }
 
         if ($request->has('content_writer_id') && $request->content_writer_id !== null) {
-            $updateData['content_writer_id'] = $request->content_writer_id;
+            $updateDraft['content_writer_id'] = $request->content_writer_id;
         }
 
         // Update the job order
-        $job_order->update($updateData);
+        $job_order->update([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
 
         // Find the related job draft
         $job_draft = JobDraft::where('job_order_id', $job_order->id)->where('id', $jdID)->first();
 
         if ($job_draft) {
-            $job_draft->update([
-                'date_started' => $request->date_started,
-                'date_target' => $request->date_target,
-            ]);
+            $job_draft->update($updateDraft);
         }
 
         return redirect()->route('joborder.edit', $id)->with('Status', 'Job Order Updated Successfully');
