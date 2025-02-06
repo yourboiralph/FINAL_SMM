@@ -28,6 +28,9 @@ class JobDraftSeeder extends Seeder
                 'signature_admin' => 'signed',
                 'signature_top_manager' => 'signed',
                 'status' => 'completed',
+                'content_writer_id' => 5,
+                'graphic_designer_id' => 8,
+                'client_id' => 1,
             ],
             [
                 'id' => 2,
@@ -38,6 +41,9 @@ class JobDraftSeeder extends Seeder
                 'signature_admin' => null,
                 'signature_top_manager' => null,
                 'status' => 'pending',
+                'content_writer_id' => 5,
+                'graphic_designer_id' => 8,
+                'client_id' => 1,
             ],
             [
                 'id' => 3,
@@ -48,6 +54,9 @@ class JobDraftSeeder extends Seeder
                 'signature_admin' => null,
                 'signature_top_manager' => null,
                 'status' => 'pending',
+                'content_writer_id' => 5,
+                'graphic_designer_id' => 8,
+                'client_id' => 1,
             ],
             [
                 'id' => 4,
@@ -58,6 +67,9 @@ class JobDraftSeeder extends Seeder
                 'signature_admin' => 'signed',
                 'signature_top_manager' => 'signed',
                 'status' => 'completed',
+                'content_writer_id' => 5,
+                'graphic_designer_id' => 8,
+                'client_id' => 1,
             ],
             [
                 'id' => 5,
@@ -68,6 +80,9 @@ class JobDraftSeeder extends Seeder
                 'signature_admin' => 'signed',
                 'signature_top_manager' => 'signed',
                 'status' => 'completed',
+                'content_writer_id' => 5,
+                'graphic_designer_id' => 8,
+                'client_id' => 1,
             ],
             [
                 'id' => 6,
@@ -78,6 +93,9 @@ class JobDraftSeeder extends Seeder
                 'signature_admin' => null,
                 'signature_top_manager' => null,
                 'status' => 'pending',
+                'content_writer_id' => 5,
+                'graphic_designer_id' => 8,
+                'client_id' => 1,
             ],
             [
                 'id' => 7,
@@ -88,6 +106,9 @@ class JobDraftSeeder extends Seeder
                 'signature_admin' => 'signed',
                 'signature_top_manager' => 'signed',
                 'status' => 'completed',
+                'content_writer_id' => 5,
+                'graphic_designer_id' => 8,
+                'client_id' => 1,
             ],
             [
                 'id' => 8,
@@ -98,6 +119,9 @@ class JobDraftSeeder extends Seeder
                 'signature_admin' => 'signed',
                 'signature_top_manager' => 'signed',
                 'status' => 'completed',
+                'content_writer_id' => 5,
+                'graphic_designer_id' => 8,
+                'client_id' => 1,
             ],
             [
                 'id' => 9,
@@ -108,6 +132,9 @@ class JobDraftSeeder extends Seeder
                 'signature_admin' => 'signed',
                 'signature_top_manager' => 'signed',
                 'status' => 'completed',
+                'content_writer_id' => 5,
+                'graphic_designer_id' => 8,
+                'client_id' => 1,
             ],
             [
                 'id' => 10,
@@ -118,6 +145,9 @@ class JobDraftSeeder extends Seeder
                 'signature_admin' => 'signed',
                 'signature_top_manager' => 'signed',
                 'status' => 'completed',
+                'content_writer_id' => 5,
+                'graphic_designer_id' => 8,
+                'client_id' => 1,
             ]
         ]);
     }

@@ -17,17 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->unsignedBigInteger('content_writer_id');
-            $table->unsignedBigInteger('graphic_designer_id');
-            $table->unsignedBigInteger('client_id');
+
+
+            $table->foreign('issued_by')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('issued_by');
             $table->boolean('renewable')->default(false);
-
-            // Foreign Key Constraints
-            $table->foreign('content_writer_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('graphic_designer_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('client_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('issued_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
