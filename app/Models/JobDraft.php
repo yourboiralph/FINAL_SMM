@@ -18,11 +18,41 @@ class JobDraft extends Model
         'date_target',
         'signature_admin',
         'signature_top_manager',
-        'status'
+        'status',
+        'draft',
+        'admin_signed',
+        'top_manager_signed',
+        'content_writer_id',
+        'graphic_designer_id',
+        'client_id'
     ];
 
     public function jobOrder()
     {
         return $this->belongsTo(JobOrder::class, 'job_order_id');
+    }
+
+    /**
+     * Get the content writer assigned to this draft.
+     */
+    public function contentWriter()
+    {
+        return $this->belongsTo(User::class, 'content_writer_id');
+    }
+
+    /**
+     * Get the graphic designer assigned to this draft.
+     */
+    public function graphicDesigner()
+    {
+        return $this->belongsTo(User::class, 'graphic_designer_id');
+    }
+
+    /**
+     * Get the client assigned to this draft.
+     */
+    public function client()
+    {
+        return $this->belongsTo(User::class, 'client_id');
     }
 }

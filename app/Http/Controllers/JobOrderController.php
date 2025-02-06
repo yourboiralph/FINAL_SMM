@@ -11,7 +11,7 @@ class JobOrderController extends Controller
 {
     public function index()
     {
-        $job_drafts = JobDraft::with('jobOrder')->where('status', 'pending')->get();
+        $job_drafts = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner')->where('status', 'pending')->get();
         return view('pages/admin/joborder/joborder', compact('job_drafts'));
     }
     public function create()
@@ -49,7 +49,7 @@ class JobOrderController extends Controller
             'type' => 'content_writer',
             'date_started' => $request->date_started,
             'date_target' => $request->date_target,
-            'status' => 'new'
+            'status' => 'pending'
         ]);
 
         return redirect()->route('joborder.create')->with('status', 'Job Order Create Successfully');
@@ -66,11 +66,11 @@ class JobOrderController extends Controller
         $content_writers = User::where('role_id', 3)->get();
         $graphic_designers = User::where('role_id', 4)->get();
         $clients = User::where('role_id', 1)->get();
-        $job_order = JobOrder::with('pendingJobDraft', 'client', 'contentWriter', 'graphicDesigner')->find($id);
+        $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
 
-
-        return view('pages.admin.joborder.edit', compact('job_order', 'content_writers', 'graphic_designers', 'clients'));
+        return view('pages.admin.joborder.edit', compact('job_draft', 'content_writers', 'graphic_designers', 'clients'));
     }
+
     public function update(Request $request, $id, $jdID)
     {
         // Validate request before proceeding

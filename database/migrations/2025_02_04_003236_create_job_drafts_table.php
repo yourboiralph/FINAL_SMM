@@ -18,14 +18,23 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('job_order_id');
             $table->enum('type', ['content_writer', 'graphic_designer']);
+            $table->string('draft')->nullable();
             $table->timestamp('date_started')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->date('date_target');
             $table->longText('signature_admin')->nullable();
+            $table->string('admin_signed')->nullable();
             $table->longText('signature_top_manager')->nullable();
+            $table->string('top_manager_signed')->nullable();
             $table->string('status');
+            $table->unsignedBigInteger('content_writer_id');
+            $table->unsignedBigInteger('graphic_designer_id');
+            $table->unsignedBigInteger('client_id');
 
             // Foreign Key Constraint
             $table->foreign('job_order_id')->references('id')->on('job_orders')->onDelete('cascade');
+            $table->foreign('content_writer_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('graphic_designer_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('client_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
