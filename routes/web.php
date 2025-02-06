@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/joborder/store', [JobOrderController::class, 'store'])->name('joborder.store');
     Route::get('/joborder/show/{id}', [JobOrderController::class, 'show'])->name('joborder.show');
     Route::get('/joborder/edit/{id}', [JobOrderController::class, 'edit'])->name('joborder.edit');
-    Route::put('/joborder/update/{id}', [JobOrderController::class, 'update'])->name('joborder.update');
+    Route::put('/joborder/update/{id}/{jdID}', [JobOrderController::class, 'update'])->name('joborder.update');
 });
 
 

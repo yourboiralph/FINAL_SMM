@@ -29,7 +29,7 @@
                 </div>
             </a>
         </div>
-        <form action="{{ url('/joborder/update/' . $job_order->id ) }}" method="POST">
+        <form action="{{ url('/joborder/update/' . $job_order->id .'/'.$job_order->pendingJobDraft->id ) }}" method="POST">
             @csrf
             @method('PUT')
             <h1 class="mt-10 text-xl font-bold">Edit Form</h1>
@@ -43,7 +43,7 @@
                             <p class="text-red-600 text-sm">{{$message}}</p>
                         @enderror
                     </div>
-
+                    @if ($job_order->latest_job_draft->type === 'graphic_designer')
                         <div class="w-full">
                             <p class="text-sm text-gray-600">Graphics Designer</p>
                             <select name="graphic_designer_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
@@ -54,19 +54,24 @@
                                     </option>
                                 @endforeach
                             </select>
-                            
+                            {{-- <input type="hidden" name="content_writer_id" value="{{ $job_order->content_writer_id }}"> --}}
                             @error('designer_id')
                                 <p class="text-red-600 text-sm">{{$message}}</p>
                             @enderror
+                            
                         </div>
-                    @if ($job_order->latest_job_draft->type === 'content_writer')
+                    @elseif ($job_order->latest_job_draft->type === 'content_writer')
                         <div class="w-full">
                             <p class="text-sm text-gray-600">Content Writer</p>
                             <select name="content_writer_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
                                 @foreach ($content_writers as $content_writer)
-                                    <option >{{$content_writer->name}}</option>
-                                @endforeach                  
+                                    <option value="{{ $content_writer->id }}" 
+                                        {{ $job_order->content_writer_id == $content_writer->id ? 'selected' : '' }}>
+                                        {{ $content_writer->name }}
+                                    </option>
+                                @endforeach                
                             </select>
+                            {{-- <input type="hidden" name="graphic_designer_id" value="{{ $job_order->graphic_designer_id }}"> --}}
                             @error('writer_id')
                                 <p class="text-red-600 text-sm">{{$message}}</p>
                             @enderror
@@ -85,15 +90,17 @@
                 <div class="col-span-2 grid grid-cols-2 w-full gap-4 rounded-lg">
                     <div>
                         <p class="text-sm text-gray-600">Date Started</p>
-                        <input type="date" name="date_started" class="w-full rounded-lg custom-shadow custom-focus-ring" value="{{ old('date_started', $job_order->date_started) }}">
+                        
+                        <input type="date" name="date_started" class="w-full rounded-lg custom-shadow custom-focus-ring" value="{{ \Carbon\Carbon::parse($job_order->pendingJobDraft->date_started)->format('Y-m-d') }}">
+
                         @error('date_started')
                             <p class="text-red-600 text-sm">{{$message}}</p>
                         @enderror
                     </div>
                     <div>
                         <p class="text-sm text-gray-600">Date Deadline</p>
-                        <input type="date" name="date_deadline" class="w-full rounded-lg custom-shadow custom-focus-ring" value="{{ old('date_deadline', $job_order->date_deadline) }}">
-                        @error('date_deadline')
+                        <input type="date" name="date_target" class="w-full rounded-lg custom-shadow custom-focus-ring" value="{{ \Carbon\Carbon::parse($job_order->pendingJobDraft->date_target)->format('Y-m-d') }}">
+       @error('date_target')
                             <p class="text-red-600 text-sm">{{$message}}</p>
                         @enderror
                     </div>
