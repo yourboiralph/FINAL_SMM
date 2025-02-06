@@ -41,12 +41,13 @@ class JobOrder extends Model
     {
         return $this->belongsTo(User::class, 'issued_by');
     }
-    public function jobDrafts()
+    public function pendingJobDraft()
     {
-        return $this->hasMany(JobDraft::class, 'job_order_id');
+        return $this->hasOne(JobDraft::class, 'job_order_id')->where('status', 'pending');
     }
+
     public function latest_job_draft()
     {
-        return $this->hasOne(JobDraft::class)->orderByDesc('date_started');
+        return $this->hasOne(JobDraft::class)->orderByDesc('status');
     }
 }
