@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContentApprovalController;
 use App\Http\Controllers\JobOrderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/joborder/edit/{id}', [JobOrderController::class, 'edit'])->name('joborder.edit');
     Route::put('/joborder/update/{id}', [JobOrderController::class, 'update'])->name('joborder.update');
 });
+
+Route::get('/approve', [ContentApprovalController::class, 'index'])->name('approve');
 
 
 require __DIR__ . '/auth.php';
