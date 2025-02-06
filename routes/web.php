@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/joborder/update/{id}', [JobOrderController::class, 'update'])->name('joborder.update');
 });
 
-Route::get('/content/index', [ContentApprovalController::class, 'index'])->name('content.approve');
+Route::get('/content', [ContentApprovalController::class, 'index'])->name('content.approve');
 Route::get('/content/edit/{id}', [ContentApprovalController::class, 'edit'])->name('content.edit');
 Route::get('/content/update/{id}', [ContentApprovalController::class, 'update'])->name('content.update');
 

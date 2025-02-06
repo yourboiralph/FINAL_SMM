@@ -33,7 +33,7 @@
             <tbody id="tableBody">
                 @foreach ($job_drafts as $job_draft)
                     <tr class="project-row">
-                        <td class="px-6 py-3 border-b">{{ $job_draft->title }}</td>
+                        <td class="px-6 py-3 border-b">{{ $job_draft->jobOrder->title }}</td>
                         @if ($job_draft->type == "content_writer")
                             <td class="px-6 py-3 border-b">Content Writer - {{ $job_draft->contentWriter->name }}</td>
                         @else
