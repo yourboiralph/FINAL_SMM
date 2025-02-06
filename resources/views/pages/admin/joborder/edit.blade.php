@@ -37,13 +37,13 @@
                 <div class="col-span-2 grid grid-cols-2 gap-4 mt-10">
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Title</p>
+                        <p class="text-sm text-gray-600">{{$job_order->type}}</p>
                         <input type="text" name="title" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" value="{{ old('title', $job_order->title) }}">
                         @error('title')
                             <p class="text-red-600 text-sm">{{$message}}</p>
                         @enderror
                     </div>
-                    
-                    @if ($job_order->latest_job_draft->type === 'graphic_designer')
+
                         <div class="w-full">
                             <p class="text-sm text-gray-600">Graphics Designer</p>
                             <select name="graphic_designer_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
