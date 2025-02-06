@@ -154,14 +154,15 @@
         </div>
 
     @elseif ($link === 'content_writer')
+
         <div class="hidden md:block md:px-6">
-            <a href="{{ url("/approve") }}"
+            <a href="{{ url("/content") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
-                {{ request()->is("approve", "approve/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is("approve", "approve/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                {{ request()->is("content", "content/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("content", "content/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <img src="/Assets/icon-profile-white.png"
                     draggable="false"
-                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("approve", "approve/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("content", "content/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
                 <h1 class="hidden md:block">List of Job Orders</h1>
             </a>
