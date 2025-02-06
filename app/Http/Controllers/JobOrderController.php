@@ -38,9 +38,6 @@ class JobOrderController extends Controller
         $job_order = JobOrder::create([
             'title' => $request->title,
             'description' => $request->description,
-            'content_writer_id' => $request->content_writer_id,
-            'graphic_designer_id' => $request->graphic_designer_id,
-            'client_id' => $request->client_id,
             'issued_by' => auth()->user()->id,
         ]);
 
@@ -49,7 +46,10 @@ class JobOrderController extends Controller
             'type' => 'content_writer',
             'date_started' => $request->date_started,
             'date_target' => $request->date_target,
-            'status' => 'pending'
+            'status' => 'pending',
+            'content_writer_id' => $request->content_writer_id,
+            'graphic_designer_id' => $request->graphic_designer_id,
+            'client_id' => $request->client_id,
         ]);
 
         return redirect()->route('joborder.create')->with('status', 'Job Order Create Successfully');
