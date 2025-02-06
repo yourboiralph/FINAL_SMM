@@ -57,8 +57,8 @@ class JobOrderController extends Controller
 
     public function show($id)
     {
-        $job_order = JobOrder::findOrFail($id);
-        return view('pages.admin.joborder.show', compact('job_order'));
+        $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
+        return view('pages.admin.joborder.show', compact('job_draft'));
     }
 
     public function edit($id)
