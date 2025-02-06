@@ -44,25 +44,28 @@
                         @enderror
                     </div>
 
-                    @if ($job_order->type === 'graphic_designer')
                         <div class="w-full">
                             <p class="text-sm text-gray-600">Graphics Designer</p>
-                            <select name="designer_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
-                                <option value="1" {{ $job_order->designer_id == 1 ? 'selected' : '' }}>Raprap</option>
-                                <option value="2" {{ $job_order->designer_id == 2 ? 'selected' : '' }}>Designer 2</option>
-                                <option value="3" {{ $job_order->designer_id == 3 ? 'selected' : '' }}>Designer 3</option>
+                            <select name="graphic_designer_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
+                                @foreach ($graphic_designers as $graphic_designer)
+                                    <option value="{{ $graphic_designer->id }}" 
+                                        {{ $job_order->graphic_designer_id == $graphic_designer->id ? 'selected' : '' }}>
+                                        {{ $graphic_designer->name }}
+                                    </option>
+                                @endforeach
                             </select>
+                            
                             @error('designer_id')
                                 <p class="text-red-600 text-sm">{{$message}}</p>
                             @enderror
                         </div>
-                    @elseif ($job_order->type === 'content_writer')
+                    @elseif ($job_order->latest_job_draft->type === 'content_writer')
                         <div class="w-full">
                             <p class="text-sm text-gray-600">Content Writer</p>
-                            <select name="writer_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
-                                <option value="1" {{ $job_order->writer_id == 1 ? 'selected' : '' }}>Raprap</option>
-                                <option value="2" {{ $job_order->writer_id == 2 ? 'selected' : '' }}>Writer 2</option>
-                                <option value="3" {{ $job_order->writer_id == 3 ? 'selected' : '' }}>Writer 3</option>
+                            <select name="content_writer_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
+                                @foreach ($content_writers as $content_writer)
+                                    <option >{{$content_writer->name}}</option>
+                                @endforeach                  
                             </select>
                             @error('writer_id')
                                 <p class="text-red-600 text-sm">{{$message}}</p>

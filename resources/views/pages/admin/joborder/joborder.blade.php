@@ -41,7 +41,13 @@
                 @foreach ($job_drafts as $job_draft)
                     <tr class="project-row">
                         <td class="px-6 py-3 border-b">{{ $job_draft->jobOrder->title }}</td>
-                        <td class="px-6 py-3 border-b">{{ $job_draft->type }} - {{ $job_draft->jobOrder->client_id }}</td>
+                        @if ($job_draft->type == "content_writer")
+                            <td class="px-6 py-3 border-b">Content Writer - {{ $job_draft->jobOrder->contentWriter->name }}</td>
+                        @else
+                            <td class="px-6 py-3 border-b">Graphic Designer - {{ $job_draft->jobOrder->graphicDesigner->name }}</td>
+                        @endif
+
+                        
                         <td class="px-6 py-3 border-b text-right">
                             <a href="{{url('joborder/edit/' . $job_draft->jobOrder->id)}}">
                                 <button class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
