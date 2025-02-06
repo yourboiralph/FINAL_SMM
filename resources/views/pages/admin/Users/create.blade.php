@@ -1,80 +1,109 @@
+@extends('layouts.application')
 
-    <form method="POST" action="{{ url('register') }}" enctype="multipart/form-data"
-    >
-        @csrf
-        
+@section('title', 'Register')
+@section('header', 'User Registration')
 
-        <!-- Name -->
+@section('content')
+
+<style>
+    .custom-shadow {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, .3), 0 1px 3px rgba(0, 0, 0, .3);
+    }
+    .custom-hover-shadow:hover {
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0), 0 4px 6px rgba(0, 0, 0, 0);
+        transition: box-shadow 0.3s ease;
+    }
+    .custom-focus-ring:focus {
+        outline: none;
+        box-shadow: 0 0 0 1px #fa7011;
+        transition: box-shadow 0.3s ease;
+    }
+</style>
+
+<div class="container mx-auto p-6">
+    <div class="bg-[#ffaa71] w-1/2 px-6 py-10 mx-auto rounded-lg custom-shadow">
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <a href="{{url('users')}}">
+                <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
+                    Go Back
+                </div>
+            </a>
         </div>
-
-        <!-- Role -->
-        <div>
-            <x-input-label for="role_id" :value="__('Role')" />
-            <x-text-input id="role_id" class="block mt-1 w-full" type="text" name="role_id" :value="old('role_id')" required autofocus autocomplete="role_id" />
-            <x-input-error :messages="$errors->get('role_id')" class="mt-2" />
-        </div>
-
-        <!-- Phone -->
-        <div>
-            <x-input-label for="phone" :value="__('Phone')" />
-            <x-text-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required autofocus autocomplete="phone" />
-            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-        </div>
-
-        <!-- Address -->
-        <div>
-            <x-input-label for="address" :value="__('Address')" />
-            <x-text-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required autofocus autocomplete="address" />
-            <x-input-error :messages="$errors->get('address')" class="mt-2" />
-        </div>
-
-        <!-- Image -->
-        <div>
-            <x-input-label for="image" :value="__('Image')" />
-            <x-text-input id="image" class="block mt-1 w-full" type="file" name="image" :value="old('image')" required autofocus autocomplete="image" />
-            <x-input-error :messages="$errors->get('image')" class="mt-2" />
-        </div>
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
+        <form method="POST" action="{{ url('register') }}" enctype="multipart/form-data">
+            @csrf
             
+            <h1 class="mt-10 text-xl font-bold">Register User</h1>
+            <div class="grid grid-cols-2 pb-10 space-y-4">
+                <div class="w-full col-span-2">
+                    <p class="text-sm text-gray-600">Name</p>
+                    <input type="text" name="name" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" required>
+                    @error('name')
+                        <p class="text-red-600 text-sm">{{$message}}</p>
+                    @enderror
+                </div>
 
-            <x-primary-button class="ml-4">
-                {{ __('Create') }}
-            </x-primary-button>
-            <a href="{{url('users')}}">Go Back</a>
-        </div>
-    </form>
+                <div class="col-span-2 grid grid-cols-2 gap-4">
+                    <div class="w-full">
+                        <p class="text-sm text-gray-600">Role</p>
+                        <input type="text" name="role_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" required>
+                        @error('role_id')
+                            <p class="text-red-600 text-sm">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="w-full">
+                        <p class="text-sm text-gray-600">Phone</p>
+                        <input type="text" name="phone" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" required>
+                        @error('phone')
+                            <p class="text-red-600 text-sm">{{$message}}</p>
+                        @enderror
+                    </div>
+                </div>
+                <div class="w-full col-span-2">
+                    <p class="text-sm text-gray-600">Address</p>
+                    <input type="text" name="address" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" required>
+                    @error('address')
+                        <p class="text-red-600 text-sm">{{$message}}</p>
+                    @enderror
+                </div>
+
+                <div class="w-full col-span-2">
+                    <p class="text-sm text-gray-600">Image</p>
+                    <input type="file" name="image" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" required>
+                    @error('image')
+                        <p class="text-red-600 text-sm">{{$message}}</p>
+                    @enderror
+                </div>
+
+                <div class="w-full col-span-2">
+                    <p class="text-sm text-gray-600">Email</p>
+                    <input type="email" name="email" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" required>
+                    @error('email')
+                        <p class="text-red-600 text-sm">{{$message}}</p>
+                    @enderror
+                </div>
+
+                <div class="col-span-2 grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-600">Password</p>
+                        <input type="password" name="password" class="w-full rounded-lg custom-shadow custom-focus-ring" required>
+                        @error('password')
+                            <p class="text-red-600 text-sm">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Confirm Password</p>
+                        <input type="password" name="password_confirmation" class="w-full rounded-lg custom-shadow custom-focus-ring" required>
+                        @error('password_confirmation')
+                            <p class="text-red-600 text-sm">{{$message}}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-span-2 text-center py-4 w-full bg-[#fa7011] mt-10 rounded-lg custom-shadow custom-hover-shadow">
+                    <button type="submit" class="text-white font-bold">Create</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@endsection
