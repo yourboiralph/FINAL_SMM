@@ -73,7 +73,6 @@ class JobOrderController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->all(), $id);
         // Validate request before proceeding
         $request->validate([
             'title' => 'sometimes|string',
@@ -86,7 +85,7 @@ class JobOrderController extends Controller
         ]);
 
         // Find the job order by ID
-        $job_order = JobOrder::findOrFail($id);
+        $job_draft = JobDraft::findOrFail($id);
 
         $updateDraft =
             [
@@ -107,18 +106,14 @@ class JobOrderController extends Controller
             $updateDraft['content_writer_id'] = $request->content_writer_id;
         }
 
+        $job_draft->update($updateDraft);
+        // Find the related job draft
+        $job_order = JobOrder::findOrFail($job_draft->job_order_id);
         // Update the job order
         $job_order->update([
             'title' => $request->title,
             'description' => $request->description,
         ]);
-
-        // Find the related job draft
-        $job_draft = JobDraft::where('job_order_id', $job_order->id)->where('id', $jdID)->first();
-
-        if ($job_draft) {
-            $job_draft->update($updateDraft);
-        }
 
         return redirect()->route('joborder.edit', $id)->with('Status', 'Job Order Updated Successfully');
     }

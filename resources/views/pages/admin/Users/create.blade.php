@@ -45,7 +45,14 @@
                 <div class="col-span-2 grid grid-cols-2 gap-4">
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Role</p>
-                        <input type="text" name="role_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" required>
+                        <select name="role_id" id="" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" required>
+                            <option value="">Select a role</option>
+                            <option value="1">Client</option>
+                            <option value="2">Operations Manager</option>
+                            <option value="3">Content Writer</option>
+                            <option value="4">Graphic Designer</option>
+                            <option value="5">Top Manager</option>
+                        </select>
                         @error('role_id')
                             <p class="text-red-600 text-sm">{{$message}}</p>
                         @enderror
