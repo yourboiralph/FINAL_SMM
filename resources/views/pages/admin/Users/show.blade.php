@@ -4,6 +4,15 @@
 @section('header', 'Edit User')
 
 @section('content')
+@php
+    $roles = [
+        1 => 'Client',
+        2 => 'Operations Manager',
+        3 => 'Content Writer',
+        4 => 'Graphic Designer',
+        5 => 'Top Manager'
+    ];
+@endphp
 <div class="mx-auto max-w-screen-2xl">
     {{-- Middle Part --}}
 
@@ -24,6 +33,9 @@
                 </div>
                 <div class="text-center">
                     <h1 class="text-gray-500">{{ $user->address }}</h1>
+                </div>
+                <div class="text-center w-full flex items-center justify-center">
+                    <h1 class="text-[#fa7011] font-bold">{{ $roles[$user->role_id] }}</h1>
                 </div>
             </div>
 

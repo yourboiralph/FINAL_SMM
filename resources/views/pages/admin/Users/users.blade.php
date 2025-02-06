@@ -4,7 +4,15 @@
 @section('header', "Job Order") 
 
 @section('content')
-
+@php
+    $roles = [
+        1 => 'Client',
+        2 => 'Operations Manager',
+        3 => 'Content Writer',
+        4 => 'Graphic Designer',
+        5 => 'Top Manager'
+    ];
+@endphp
 <div class="container mx-auto p-6">
 
     {{-- Search Bar --}}
@@ -41,7 +49,7 @@
                 @foreach ($users as $user)
                     <tr class="project-row">
                         <td class="px-6 py-3">{{ $user->name }}</td>                     
-                        <td class="px-6 py-3">{{ $user->role->position }}</td>                     
+                        <td class="px-6 py-3">{{ $roles[$user->role_id] ?? 'Unknown' }}</td>                  
                         <td class="px-6 py-3">
                             <a href="{{url('users/edit/' . $user->id)}}">
                                 <button class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">

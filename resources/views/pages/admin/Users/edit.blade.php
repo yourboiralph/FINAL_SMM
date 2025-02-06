@@ -62,8 +62,14 @@
                             </div>
                             <div class="gap-4 items-center">
                                 <h1 class="text-slate-500 font-bold">Role</h1>
-                                <input class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]" 
-                                    value="{{ old('role', $user->role->position) }}" name="role" required>
+                                <select name="role_id" id="" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" required>
+                                    <option value="1" {{ $user->role_id == 1 ? 'selected' : '' }}>Client</option>
+                                    <option value="2" {{ $user->role_id == 2 ? 'selected' : '' }}>Operations Manager</option>
+                                    <option value="3" {{ $user->role_id == 3 ? 'selected' : '' }}>Content Writer</option>
+                                    <option value="4" {{ $user->role_id == 4 ? 'selected' : '' }}>Graphic Designer</option>
+                                    <option value="5" {{ $user->role_id == 5 ? 'selected' : '' }}>Top Manager</option>
+                                </select>
+                                
                                 @error('phone') <p class="text-sm text-red-700">{{ $message }}</p> @enderror
                             </div>
 
