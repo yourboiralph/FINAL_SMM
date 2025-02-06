@@ -1,81 +1,139 @@
+@extends('layouts.application')
 
+@section('title', 'Edit User')
+@section('header', 'Edit User')
 
+@section('content')
+<div class="mx-auto max-w-screen-2xl">
 
-<form method="POST" action="{{ url('users/update/' . $user->id) }}" enctype="multipart/form-data"
-    >
-        @csrf
-        @method('PUT')
-        
-
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="$user->name" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+    @if (session('status'))
+        <div id="success-message" class="bg-green-500 text-white p-4 rounded-md mb-4">
+            {{ session('status') }}
         </div>
+    @endif
 
-        <!-- Role -->
-        <select name="" id="">
-            <option value="1">Client</option>
-            <option value="2">Operations</option>
-            <option value="3">Content Writer</option>
-            <option value="4">Graphic Designer</option>
-            <option value="5">Top Manager</option>
-        </select>
+    <div class="h-auto">
+        <div class="px-10 pr-32 text-white">
+            <div class="w-full flex justify-end items-end mb-4 cursor-pointer" onclick="window.location.assign('{{ url('users') }}')">
+                <div class="w-fit px-4 py-1 bg-[#f68e12] rounded-md">Go Back</div>
+            </div>
 
-        <!-- Phone -->
-        <div>
-            <x-input-label for="phone" :value="__('Phone')" />
-            <x-text-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="$user->phone" required autofocus autocomplete="phone" />
-            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+            <form action="{{ url('users/update/' . $user->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <div class="grid grid-cols-3 h-auto gap-6 text-black">
+                    <div class="col-span-3 px-4 lg:col-span-1 h-fit pb-10 bg-white shadow-md rounded-md pt-10 border border-[#e1e1e1]">
+                        <div class="w-full flex justify-center items-center">
+                            <img id="profileImage" class="rounded-full w-32 h-32 object-cover" 
+                                src="{{ $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}" 
+                                alt="Profile Picture">
+                        </div>
+                        <div class="text-center">
+                            <h1>{{ $user->name }}</h1>
+                            <h1>{{ $user->address }}</h1>
+                        </div>
+
+                        <div class="flex items-center justify-center gap-2 text-white mt-4">
+                            <div id="changeProfileBtn" class="px-4 py-1 bg-[#fa7011] rounded-md cursor-pointer text-nowrap text-sm">Change Profile</div>
+                            <div id="removeProfileBtn" class="px-4 py-1 bg-red-500 rounded-md cursor-pointer text-nowrap text-sm">Remove Profile</div>
+                        </div>
+                        <input type="file" name="image" id="profileImageInput" accept="image/*" class="hidden">
+                    </div>
+
+                    <div class="col-span-3 lg:col-span-2 bg-white shadow-md rounded-md p-5 border border-[#e1e1e1]">
+                        <div class="text-slate-500">
+                            <h1 class="text-sm">User Information</h1>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="gap-4 items-center">
+                                <h1 class="text-slate-500 font-bold">Name</h1>
+                                <input class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]" 
+                                    value="{{ old('name', $user->name) }}" name="name" required>
+                                @error('name') <p class="text-sm text-red-700">{{ $message }}</p> @enderror
+                            </div>
+
+                            <div class="gap-4 items-center">
+                                <h1 class="text-slate-500 font-bold">Email</h1>
+                                <input class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]" 
+                                    value="{{ old('email', $user->email) }}" name="email" required>
+                                @error('email') <p class="text-sm text-red-700">{{ $message }}</p> @enderror
+                            </div>
+                            <div class="gap-4 items-center">
+                                <h1 class="text-slate-500 font-bold">Role</h1>
+                                <input class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]" 
+                                    value="{{ old('role', $user->role->position) }}" name="role" required>
+                                @error('phone') <p class="text-sm text-red-700">{{ $message }}</p> @enderror
+                            </div>
+
+                            <div class="gap-4 items-center">
+                                <h1 class="text-slate-500 font-bold">Phone</h1>
+                                <input class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]" 
+                                    value="{{ old('phone', $user->phone) }}" name="phone" required>
+                                @error('phone') <p class="text-sm text-red-700">{{ $message }}</p> @enderror
+                            </div>
+
+                            <div class="gap-4 items-center pb-4">
+                                <h1 class="text-slate-500 font-bold">Address</h1>
+                                <input class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]" 
+                                    value="{{ old('address', $user->address) }}" name="address" required>
+                                @error('address') <p class="text-sm text-red-700">{{ $message }}</p> @enderror
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="text-slate-500">
+                            <h1 class="text-sm">Password</h1>
+                        </div>
+                        <div class="gap-4 items-center">
+                            <h1 class="text-slate-500 font-bold">New Password</h1>
+                            <input type="password" name="password" class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]">
+                            @error('password') <p class="text-sm text-red-700">{{ $message }}</p> @enderror
+                        </div>
+                        <div class="gap-4 items-center">
+                            <h1 class="text-slate-500 font-bold">Confirm Password</h1>
+                            <input type="password" name="password_confirmation" class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]">
+                            @error('password_confirmation') <p class="text-sm text-red-700">{{ $message }}</p> @enderror
+                        </div>
+                        
+                        <div class="pt-4">
+                            <button type="submit" class="px-4 py-1 bg-[#f68e12] w-fit cursor-pointer text-white">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
+    </div>
+</div>
 
-        <!-- Address -->
-        <div>
-            <x-input-label for="address" :value="__('Address')" />
-            <x-text-input id="address" class="block mt-1 w-full" type="text" name="address" :value="$user->address" required autofocus autocomplete="address" />
-            <x-input-error :messages="$errors->get('address')" class="mt-2" />
-        </div>
+<script>
+    setTimeout(function() {
+        var message = document.getElementById('success-message');
+        if (message) {
+            message.style.transition = "opacity 0.5s";
+            message.style.opacity = "0";
+            setTimeout(() => message.style.display = "none", 500);
+        }
+    }, 3000);
 
-        <!-- Image -->
-        <div>
-            <x-input-label for="image" :value="__('Image')" />
-            <x-text-input id="image" class="block mt-1 w-full" type="file" name="image" :value="$user->image" required autofocus autocomplete="image" />
-            <x-input-error :messages="$errors->get('image')" class="mt-2" />
-        </div>
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <button type="submit">Update</button>
-    </form>
-
-
-<a href="{{url('users')}}">Go Back</a>
+    document.getElementById("changeProfileBtn").addEventListener("click", function() {
+        document.getElementById("profileImageInput").click();
+    });
+    document.getElementById("profileImageInput").addEventListener("change", function(event) {
+        let file = event.target.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                document.querySelector("img.rounded-full").src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+    document.getElementById("removeProfileBtn").addEventListener("click", function() {
+        document.getElementById("profileImageInput").value = "";
+        document.querySelector("img.rounded-full").src = "{{ asset('/Assets/user-profile-profilepage.png') }}";
+    });
+</script>
+@endsection
