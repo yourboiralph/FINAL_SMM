@@ -26,8 +26,9 @@
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
                     <th class="px-6 py-3">File Name</th>
-                    <th>Designated</th>
-                    <th></th>
+                    <th class="px-6 py-3">Designated</th>
+                    <th class="px-6 py-3">Deadline</th>
+                    <th class="px-6 py-3">Actions</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
@@ -39,18 +40,21 @@
                         @else
                             <td class="px-6 py-3 border-b">Graphic Designer - {{ $job_draft->graphicDesigner->name }}</td>
                         @endif
+                        <td class="px-6 py-3">
+                            {{$job_draft->date_target}}
+                        </td>
 
-                        
-                        <td class="px-6 py-3 border-b text-right">
-                            <a href="{{url('joborder/edit/' . $job_draft->id)}}">
+
+                        <td class="px-6 py-3 border-b">
+                            <a href="{{url('content/edit/' . $job_draft->id)}}">
                                 <button class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
-                                    Edit
+                                    Create draft
                                 </button>
                             </a>
-                            <a href="{{url('joborder/show/' . $job_draft->id)}}">
+                            <a href="{{url('content/show/' . $job_draft->id)}}">
 
                                 <button class="px-4 py-2 text-sm text-white bg-gray-700 rounded hover:bg-gray-800">
-                                    Show
+                                    Show Details
                                 </button>
                             </a>
                         </td>
