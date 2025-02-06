@@ -21,7 +21,7 @@
 </style>
 
 <div class="container mx-auto p-6">
-    <div class="bg-[#ffaa71] w-1/2 px-6 py-10 mx-auto rounded-lg custom-shadow">
+    <div class=" w-1/2 px-6 py-10 mx-auto rounded-lg custom-shadow">
         <div>
             <a href="{{url('/joborder')}}">
                 <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
@@ -32,13 +32,11 @@
         <form action="{{ url('/joborder/update/'. $job_draft->id ) }}" method="POST">
             @csrf
             @method('PUT')
-            <h1 class="mt-10 text-xl font-bold">Edit Form</h1>
-            <div class="grid grid-cols-2 pb-10 space-y-4">
-                <div class="col-span-2 grid grid-cols-2 gap-4 mt-10">
+            <h1 class="text-xl font-bold mt-4">Edit Form</h1>
+            <div class="grid grid-cols-2 space-y-4">
+                <div class="col-span-2 grid grid-cols-2 gap-4 mt-4">
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Title</p>
-                        {{$job_draft->jobOrder->title}}
-                        <p class="text-sm text-gray-600">{{$job_draft->type}}</p>
                         <input type="text" name="title" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" value="{{ old('title', $job_draft->jobOrder->title) }}">
                         @error('title')
                             <p class="text-red-600 text-sm">{{$message}}</p>
@@ -88,6 +86,17 @@
                     @enderror
                 </div>
 
+                <div class="col-span-2 w-full">
+                    <p class="text-sm text-gray-600">Client</p>
+                    <div class="relative">
+                        <input type="text" name="client" id="selected-client" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring cursor-pointer" 
+                               value="{{ old('title', $job_draft->client->name) }}" readonly onclick="openModal()">
+                    </div>
+                    @error('client')
+                        <p class="text-red-600 text-sm">{{$message}}</p>
+                    @enderror
+                </div>
+
                 <div class="col-span-2 grid grid-cols-2 w-full gap-4 rounded-lg">
                     <div>
                         <p class="text-sm text-gray-600">Date Started</p>
@@ -113,5 +122,37 @@
             </div>
         </form>
     </div>
+
+
+    <!-- Modal -->
+<div id="client-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+        <h2 class="text-lg font-semibold mb-4">Select a Client</h2>
+        <ul class="max-h-60 overflow-y-auto">
+            @foreach($clients as $client)
+                <li class="p-2 border-b cursor-pointer hover:bg-gray-100" onclick="selectClient('{{ $client->name }}')">
+                    {{ $client->name }}
+                </li>
+            @endforeach
+        </ul>
+        <button onclick="closeModal()" class="mt-4 bg-gray-500 text-white px-4 py-2 rounded">Close</button>
+    </div>
+</div>
 </div>
 @endsection
+
+<!-- JavaScript -->
+<script>
+    function openModal() {
+        document.getElementById('client-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('client-modal').classList.add('hidden');
+    }
+
+    function selectClient(clientName) {
+        document.getElementById('selected-client').value = clientName;
+        closeModal();
+    }
+</script>

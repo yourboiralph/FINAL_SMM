@@ -26,7 +26,6 @@
                 placeholder="Search..." />
         </div>
     </div>
- {{$job_drafts[0]->jobOrder->title}}
     {{-- Table Wrapper --}}
     <div class="h-96 overflow-auto">
         <table class="w-full text-left border-collapse" id="projectTable">
