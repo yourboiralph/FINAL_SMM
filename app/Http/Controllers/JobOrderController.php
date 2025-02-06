@@ -24,6 +24,8 @@ class JobOrderController extends Controller
     }
     public function store(Request $request)
     {
+
+        // dd($request->all());
         // Validate request before proceeding
         $request->validate([
             'title' => 'required|string',
@@ -31,8 +33,8 @@ class JobOrderController extends Controller
             'content_writer_id' => 'required|integer',
             'graphic_designer_id' => 'required|integer',
             'client_id' => 'required|integer',
-            'date_target' => 'required|date',
-            'date_started' => 'required|date'
+            'date_target' => 'required',
+            'date_started' => 'required'
         ]);
 
         $job_order = JobOrder::create([

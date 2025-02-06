@@ -59,7 +59,7 @@
                                 <p class="text-red-600 text-sm">{{$message}}</p>
                             @enderror
                         </div>
-                    @elseif ($job_order->latest_job_draft->type === 'content_writer')
+                    @if ($job_order->latest_job_draft->type === 'content_writer')
                         <div class="w-full">
                             <p class="text-sm text-gray-600">Content Writer</p>
                             <select name="content_writer_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
