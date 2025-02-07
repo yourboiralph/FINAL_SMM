@@ -35,6 +35,8 @@ return new class extends Migration
             $table->foreign('content_writer_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('graphic_designer_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('client_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('admin_signed')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('top_manager_signed')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

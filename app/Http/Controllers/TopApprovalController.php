@@ -13,7 +13,7 @@ class TopApprovalController extends Controller
             ->with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
             ->get();
 
-        return view('pages.admin.topmanager.list', compact('job_drafts'));
+        return view('pages.topmanager.joborderapproval.list', compact('job_drafts'));
     }
 
     public function show($id)
