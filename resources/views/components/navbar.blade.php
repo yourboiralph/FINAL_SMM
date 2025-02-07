@@ -16,9 +16,13 @@
                  alt="User Profile" 
                  draggable="false">
             
-            <div>
-                <i class="fa-solid fa-power-off text-xl bg-white px-2 py-1 rounded-lg" style="color: #fa7011;"></i>
-            </div>
+            {{-- Logout Button --}}
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit">
+                    <i class="fa-solid fa-power-off text-xl bg-white px-2 py-1 rounded-lg" style="color: #fa7011;"></i>
+                </button>
+            </form>
         </div>
     </div>
 </div>
