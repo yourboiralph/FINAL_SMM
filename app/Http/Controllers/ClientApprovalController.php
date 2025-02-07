@@ -52,5 +52,6 @@ class ClientApprovalController extends Controller
                 'client_id' => $job_draft_id->client_id,
             ]);
         }
+        return redirect()->route('client.approve')->with('Status', 'Job Order Approved Successfully');
     }
 }

@@ -19,13 +19,13 @@ class TopApprovalController extends Controller
     public function show($id)
     {
         $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
-        return view('pages.admin.topmanager.show', compact('job_draft'));
+        return view('pages.topmanager.joborderapproval.show', compact('job_draft'));
     }
 
     public function edit($id)
     {
         $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
-        return view('pages.admin.topmanager.show', compact('job_draft'));
+        return view('pages.topmanager.joborderapproval.edit', compact('job_draft'));
     }
 
     public function update(Request $request, $id)
