@@ -20,11 +20,8 @@
     }
 </style>
 
-<!-- Quill CSS -->
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-
-<!-- Quill JS -->
-<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<!-- CKEditor 5 Classic -->
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 
 <div class="container mx-auto p-6">
     <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow">
@@ -37,69 +34,59 @@
         </div>
         <h1 class="text-xl font-bold mt-4">Show</h1>
         <div class="mt-4 grid grid-cols-4">
-            <div class="col-span-4 flex  mb-10">
+            <div class="col-span-4 flex mb-10">
                 <div class="w-full">
                     <p class="text-sm font-bold text-gray-600">Title</p>
                     <p class="border-b-2 border-[#fa7011] w-fit">{{ $job_draft->jobOrder->title }}</p>
                 </div>
                 <div class="w-full">
                     <p class="text-sm font-bold text-gray-600">Client</p>
-                    <p class="border-b-2 border-[#fa7011] w-fit">{{$job_draft->client->name}}</p>
+                    <p class="border-b-2 border-[#fa7011] w-fit">{{ $job_draft->client->name }}</p>
                 </div>
                 <div class="w-full">
                     <p class="text-sm font-bold text-gray-600">Date Started</p>
-                    <p class="border-b-2 border-[#fa7011] w-fit">{{$job_draft->date_started}}</p>
+                    <p class="border-b-2 border-[#fa7011] w-fit">{{ $job_draft->date_started }}</p>
                 </div>
-                <div class="w-full ">
+                <div class="w-full">
                     <p class="text-sm font-bold text-gray-600">Deadline</p>
-                    <p class="border-b-2 border-[#fa7011] w-fit">{{$job_draft->date_target}}</p>
+                    <p class="border-b-2 border-[#fa7011] w-fit">{{ $job_draft->date_target }}</p>
                 </div>
             </div>
             <div class="col-span-4 h-fit">
                 <p class="text-sm font-bold text-gray-600">Description</p>
-                <!-- Quill Editor -->
-                <div id="quill-editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-fit max-h-[500px] overflow-y-auto">{!! json_encode($job_draft->jobOrder->description) !!}</div>
-
-                <!-- Hidden textarea to store Quill content -->
-                <textarea name="description" id="description" class="hidden max-h-[300px]"></textarea>
+                
+                <!-- CKEditor Read-Only -->
+                <textarea id="editor" class="hidden">{{ $job_draft->jobOrder->description }}</textarea>
             </div>
-            <div class="mt-10 flex gap-8 ">
+            <div class="mt-10 flex gap-8">
                 <div class="flex items-center justify-center flex-col">
                     <img class="size-14" src="/Assets/user-profile-profilepage.png" alt="">
-                    {{-- <img src="{{ asset('/Assets/' . $job_draft->content_writer->image) }}" alt="Content Writer Image"> --}}
-                    <h1 class="text-sm">{{$job_draft->graphicDesigner->name}}</h1>
+                    <h1 class="text-sm">{{ $job_draft->graphicDesigner->name }}</h1>
                     <h1 class="text-[10px] border-b-2 border-[#fa7011] w-fit">Graphic Designer</h1>
                 </div>
                 <div class="flex items-center justify-center flex-col">
                     <img class="size-14" src="/Assets/user-profile-profilepage.png" alt="">
-                    {{-- <img src="{{ asset('/Assets/' . $job_draft->content_writer->image) }}" alt="Content Writer Image"> --}}
-                    <h1 class="text-sm">{{$job_draft->contentWriter->name}}</h1>
+                    <h1 class="text-sm">{{ $job_draft->contentWriter->name }}</h1>
                     <h1 class="text-[10px] border-b-2 border-[#fa7011] w-fit">Content Writer</h1>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
 <script>
-    var quill = new Quill('#quill-editor', {
-        theme: 'snow', // Snow theme with toolbar
-        placeholder: 'Write something...',
-        readOnly: true, // Set to read-only
-        modules: {
-            toolbar: false,
-        },
-        scrollingContainer: '#quill-editor' // Add scrolling behavior
-    });
-    
-    // Set existing content in the Quill editor
-    quill.root.innerHTML = {!! json_encode($job_draft->jobOrder->description) !!};
-    
-    // Sync Quill content with the hidden textarea on form submission
-    document.querySelector('form').onsubmit = function () {
-        document.querySelector('#description').value = quill.root.innerHTML;
-    };
-    
-    </script>
+    // Initialize CKEditor in Read-Only mode
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+            toolbar: false, // Hide toolbar since it's read-only
+            readOnly: true // Disable editing
+        })
+        .then(editor => {
+            console.log('CKEditor (Read-Only) initialized');
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+
 @endsection
