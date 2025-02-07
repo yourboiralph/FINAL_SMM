@@ -12,7 +12,7 @@ class GraphicApprovalController extends Controller
         $authuser = auth()->user();
 
         // Fetch all job drafts for the authenticated user
-        $job_drafts = JobDraft::where('content_writer_id', $authuser->id)
+        $job_drafts = JobDraft::where('graphic_designer_id', $authuser->id)
             ->where('status', 'pending')
             ->where('type', 'graphic_designer')
             ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client') // Corrected ->with() usage
