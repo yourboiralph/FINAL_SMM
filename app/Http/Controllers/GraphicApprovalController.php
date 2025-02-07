@@ -33,5 +33,19 @@ class GraphicApprovalController extends Controller
         return view('pages.graphic_designer.joborder.edit', compact('job_draft'));
     }
 
-    public function update($id) {}
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'draft' => 'required'
+        ]);
+
+        $job_draft = JobDraft::findOrFail($id);
+
+        $job_draft->update([
+            'draft' => $request->draft,
+            'status' => 'Submitted to operations',
+        ]);
+
+        return redirect()->route('graphic.approve')->with('Status', 'Job Order Updated Successfully');
+    }
 }
