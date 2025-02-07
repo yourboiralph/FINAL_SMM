@@ -69,7 +69,7 @@
                         </div>
 
                         
-                        <form action="" method="POST" enctype="multipart/form-data" id="approvalForm">
+                        <form action="{{url('/operation/update/' . $job_draft->id)}}" method="POST" enctype="multipart/form-data" id="approvalForm">
                             @csrf
                             @method('PUT')
                             
@@ -92,7 +92,7 @@
                                 Submit Approval
                             </button>
                             {{-- Submit Button --}}
-                            <button type="submit" class="mt-4 px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed" id="submitBtn">
+                            <button type="" class="mt-4 px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed" id="submitBtn">
                                 Decline Submission
                             </button>
                         </form>
