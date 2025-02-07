@@ -33,12 +33,12 @@
             </thead>
             <tbody id="tableBody">
                 @foreach ($job_drafts as $job_draft)
-                    <tr class="project-row">
-                        <td class="px-6 py-3 border-b">{{ $job_draft->jobOrder->title }}</td>
+                    <tr class="project-row border-b">
+                        <td class="px-6 py-3">{{ $job_draft->jobOrder->title }}</td>
                         @if ($job_draft->type == "content_writer")
-                            <td class="px-6 py-3 border-b">Content Writer - {{ $job_draft->contentWriter->name }}</td>
+                            <td class="px-6 py-3">Content Writer - {{ $job_draft->contentWriter->name }}</td>
                         @else
-                            <td class="px-6 py-3 border-b">Graphic Designer - {{ $job_draft->graphicDesigner->name }}</td>
+                            <td class="px-6 py-3">Graphic Designer - {{ $job_draft->graphicDesigner->name }}</td>
                         @endif
                         <td class="px-6 py-3">
                             {{$job_draft->date_target}}
