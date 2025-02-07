@@ -1,3 +1,3 @@
 This is the edit part
 
-{{$job_draft}}
+{{$job_drafts}}

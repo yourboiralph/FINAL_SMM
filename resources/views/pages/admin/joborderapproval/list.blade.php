@@ -28,6 +28,7 @@
                     <th class="px-6 py-3">File Name</th>
                     <th class="px-6 py-3">Designated</th>
                     <th class="px-6 py-3">Deadline</th>
+                    <th class="px-6 py-3">Status</th>
                     <th class="px-6 py-3">Actions</th>
                 </tr>
             </thead>
@@ -40,14 +41,17 @@
                         @else
                             <td class="px-6 py-3">Graphic Designer - {{ $job_draft->graphicDesigner->name }}</td>
                         @endif
-                        <td class="px-6 py-3">
+                        <td class="px-6 py-3 text-nowrap">
                             {{$job_draft->date_target}}
+                        </td>
+                        <td class="px-6 py-3">
+                            {{$job_draft->status}}
                         </td>
 
 
                         <td class="px-6 py-3 border-b">
-                            <a href="{{url('operation/edit/' . $job_draft->id)}}">
-                                <button class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
+                            <a href="{{url('operation/show/' . $job_draft->id)}}">
+                                <button class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 text-nowrap">
                                     View Form
                                 </button>
                             </a>

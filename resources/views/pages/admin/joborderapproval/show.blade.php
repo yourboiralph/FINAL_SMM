@@ -73,28 +73,40 @@
                             @csrf
                             @method('PUT')
                             
+                            @php
+                                $isDisabled = $job_draft->status != "Submitted to operations";
+                            @endphp
                             {{-- File Upload --}}
-                            <input type="file" name="signature_admin" accept="image/*" required class="mt-2 border p-2 rounded-md" id="signatureInput">
-
+                            <input type="file" name="signature_admin" accept="image/*" required class="mt-2 border p-2 rounded-md" id="signatureInput" {{ $isDisabled ? 'disabled' : '' }}>
                             {{-- Image Preview --}}
                             <div class="mt-4 w-52 h-32 border border-gray-300 rounded-md overflow-hidden flex items-center justify-center bg-gray-100">
-                                <img id="imagePreview" src="#" alt="Selected Image" class="hidden w-full h-full object-cover">
+                                <img id="imagePreview" src="#" alt="Selected Image" class="hidden w-full h-full object-cover" {{ $isDisabled ? 'disabled' : '' }}>
                             </div>
                             
                             {{-- Checkbox for Agreement --}}
                             <div class="mt-4 flex items-center space-x-2">
-                                <input type="checkbox" id="agree" required>
+                                <input type="checkbox" id="agree" required {{ $isDisabled ? 'disabled' : '' }}>
                                 <label for="agree">I agree to the terms and conditions.</label>
                             </div>
 
+
+                            
                             {{-- Submit Button --}}
-                            <button type="submit" class="mt-4 px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed" id="submitBtn">
+                            <button type="submit" 
+                                class="mt-4 px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed" 
+                                id="submitBtn" 
+                                {{ $isDisabled ? 'disabled' : '' }}>
                                 Submit Approval
                             </button>
-                            {{-- Submit Button --}}
-                            <button type="" class="mt-4 px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed" id="submitBtn">
+                            
+                            {{-- Decline Button --}}
+                            <button type="button" 
+                                class="mt-4 px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed" 
+                                id="declineBtn" 
+                                {{ $isDisabled ? 'disabled' : '' }}>
                                 Decline Submission
                             </button>
+                        
                         </form>
                     </div>
                 </div>
