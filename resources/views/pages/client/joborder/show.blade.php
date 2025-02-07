@@ -53,11 +53,9 @@
                         <ul class="space-y-4">
                             <li>{{ $job_draft->jobOrder->title }}</li>
                             <li>{{$job_draft->type}}</li>
-                            <li>
-                                {!! $job_draft->jobOrder->description !!}
-                            </li>
+                            <li>{!! $job_draft->draft !!}</li>
                             <li>{{ $job_draft->date_target }}</li>
-                            <li>{{ $job_draft->client->name }}</li>
+                            <li>{{ $job_draft->client->name }}</li> 
                         </ul>
 
                         {{-- Signature Upload Section --}}
