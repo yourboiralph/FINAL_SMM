@@ -18,16 +18,10 @@
         box-shadow: 0 0 0 1px #545454;
         transition: box-shadow 0.3s ease;
     }
-    #quill-editor {
-        min-height: 200px; /* Ensure enough space for the editor */
-    }
 </style>
 
-<!-- Quill CSS -->
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-
-<!-- Quill JS -->
-<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<!-- CKEditor 5 Classic CDN -->
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 
 <div class="container mx-auto p-6">
     <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow">
@@ -105,11 +99,8 @@
                     <div class="col-span-2 h-fit w-full">
                         <p class="text-sm text-gray-600">Description</p>
                         
-                        <!-- Quill Editor -->
-                        <div id="quill-editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-[300px] max-h-[500px] overflow-y-auto"></div>
-                    
-                        <!-- Hidden textarea to store Quill content -->
-                        <textarea name="description" id="description" class="hidden max-h-[300px]"></textarea>
+                        <!-- CKEditor Textarea -->
+                        <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring"></textarea>
                     
                         @error('description')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
@@ -153,28 +144,16 @@
         document.getElementById('selected-client-id').value = clientId;
         closeModal();
     }
-</script>
 
-<script>
-    var quill = new Quill('#quill-editor', {
-        theme: 'snow', // Snow theme with toolbar
-        placeholder: 'Write something...',
-        modules: {
-            toolbar: [
-                [{ 'bold': true }, { 'italic': true }, { 'underline': true }], // Text Formatting
-                [{ 'list': 'ordered' }, { 'list': 'bullet' }], // Lists
-                [{ 'align': [] }], // Alignment
-                ['link'], // Add links
-                ['clean'] // Remove formatting
-            ]
-        },
-        scrollingContainer: '#quill-editor' // Ensure scrolling works
-    });
-
-    // Store Quill content into the hidden textarea before form submission
-    document.querySelector('form').onsubmit = function() {
-        document.querySelector('#description').value = quill.root.innerHTML;
-    };
+    // Initialize CKEditor
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(editor => {
+            console.log('CKEditor initialized');
+        })
+        .catch(error => {
+            console.error(error);
+        });
 </script>
 
 @endsection
