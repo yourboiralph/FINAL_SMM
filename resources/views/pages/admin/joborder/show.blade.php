@@ -20,6 +20,12 @@
     }
 </style>
 
+<!-- Quill CSS -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+<!-- Quill JS -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
 <div class="container mx-auto p-6">
     <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow">
         <div>
@@ -49,9 +55,13 @@
                     <p class="border-b-2 border-[#fa7011] w-fit">{{$job_draft->date_target}}</p>
                 </div>
             </div>
-            <div class="col-span-4">
+            <div class="col-span-4 h-fit">
                 <p class="text-sm font-bold text-gray-600">Description</p>
-                <div class="border-b-2 border-[#fa7011] w-fit">"{{$job_draft->jobOrder->description}}"</div>
+                <!-- Quill Editor -->
+                <div id="quill-editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-fit max-h-[500px] overflow-y-auto">{!! json_encode($job_draft->jobOrder->description) !!}</div>
+
+                <!-- Hidden textarea to store Quill content -->
+                <textarea name="description" id="description" class="hidden max-h-[300px]"></textarea>
             </div>
             <div class="mt-10 flex gap-8 ">
                 <div class="flex items-center justify-center flex-col">
@@ -71,4 +81,25 @@
 
     </div>
 </div>
+
+<script>
+    var quill = new Quill('#quill-editor', {
+        theme: 'snow', // Snow theme with toolbar
+        placeholder: 'Write something...',
+        readOnly: true, // Set to read-only
+        modules: {
+            toolbar: false,
+        },
+        scrollingContainer: '#quill-editor' // Add scrolling behavior
+    });
+    
+    // Set existing content in the Quill editor
+    quill.root.innerHTML = {!! json_encode($job_draft->jobOrder->description) !!};
+    
+    // Sync Quill content with the hidden textarea on form submission
+    document.querySelector('form').onsubmit = function () {
+        document.querySelector('#description').value = quill.root.innerHTML;
+    };
+    
+    </script>
 @endsection

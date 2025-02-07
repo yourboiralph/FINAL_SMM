@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
 @section('title', 'Page Title')
-@section('header', "Job Order") 
+@section('header', "Users") 
 
 @section('content')
 @php
@@ -20,7 +20,7 @@
         <a href="{{ url('register') }}">
             <div class="bg-[#fa7011] text-white px-4 py-2 rounded-lg shadow-md hover:bg-cyan-800 transition">
 
-                Create New Job Order
+                Create New Users
 
             </div>
         </a>
