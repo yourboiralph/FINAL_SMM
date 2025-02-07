@@ -13,7 +13,8 @@ class ContentApprovalController extends Controller
 
         // Fetch all job drafts for the authenticated user
         $job_drafts = JobDraft::where('content_writer_id', $authuser->id)
-            ->where('status', 'pending')
+            ->whereNot('status', 'completed')
+            ->where('type', 'content_writer')
             ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client') // Corrected ->with() usage
             ->get();
 
@@ -34,7 +35,6 @@ class ContentApprovalController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request, $id);
         $request->validate([
             'draft' => 'required'
         ]);
@@ -43,7 +43,7 @@ class ContentApprovalController extends Controller
 
         $job_draft->update([
             'draft' => $request->draft,
-            'status' => 'submitted to operations',
+            'status' => 'Submitted to operations',
         ]);
 
         return redirect()->route('content')->with('Status', 'Job Order Updated Successfully');

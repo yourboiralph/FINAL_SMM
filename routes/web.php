@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\ClientApprovalController;
 use App\Http\Controllers\ContentApprovalController;
+use App\Http\Controllers\GraphicApprovalController;
 use App\Http\Controllers\JobOrderController;
+use App\Http\Controllers\OperationApprovalController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TopApprovalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +45,26 @@ Route::middleware('auth')->group(function () {
 Route::get('/content', [ContentApprovalController::class, 'index'])->name('content.approve');
 Route::get('/content/show/{id}', [ContentApprovalController::class, 'show'])->name('content.show');
 Route::get('/content/edit/{id}', [ContentApprovalController::class, 'edit'])->name('content.edit');
-Route::get('/content/update/{id}', [ContentApprovalController::class, 'update'])->name('content.update');
+Route::put('/content/update/{id}', [ContentApprovalController::class, 'update'])->name('content.update');
+
+Route::get('/graphic', [GraphicApprovalController::class, 'index'])->name('graphic.approve');
+Route::get('/graphic/show/{id}', [GraphicApprovalController::class, 'show'])->name('graphic.show');
+Route::get('/graphic/edit/{id}', [GraphicApprovalController::class, 'edit'])->name('graphic.edit');
+Route::put('/graphic/update/{id}', [GraphicApprovalController::class, 'update'])->name('graphic.update');
+
+Route::get('/operation', [OperationApprovalController::class, 'index'])->name('operation.approve');
+Route::get('/operation/show/{id}', [OperationApprovalController::class, 'show'])->name('operation.show');
+Route::get('/operation/edit/{id}', [OperationApprovalController::class, 'edit'])->name('operation.edit');
+Route::put('/operation/update/{id}', [OperationApprovalController::class, 'update'])->name('operation.update');
+
+Route::get('/topmanager', [TopApprovalController::class, 'index'])->name('topmanager.approve');
+Route::get('/topmanager/show/{id}', [TopApprovalController::class, 'show'])->name('topmanager.show');
+Route::get('/topmanager/edit/{id}', [TopApprovalController::class, 'edit'])->name('topmanager.edit');
+Route::put('/topmanager/update/{id}', [TopApprovalController::class, 'update'])->name('topmanager.update');
+
+Route::get('/client', [ClientApprovalController::class, 'index'])->name('client.approve');
+Route::get('/client/show/{id}', [ClientApprovalController::class, 'show'])->name('client.show');
+Route::get('/client/edit/{id}', [ClientApprovalController::class, 'edit'])->name('client.edit');
+Route::put('/client/update/{id}', [ClientApprovalController::class, 'update'])->name('client.update');
 
 require __DIR__ . '/auth.php';

@@ -1,0 +1,1 @@
+Showing the details for {{$job_draft}}
