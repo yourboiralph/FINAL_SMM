@@ -35,6 +35,19 @@
         </div>
 
         <div class="hidden md:block md:px-6">
+            <a href="{{ url("/operation") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("operation", "operation/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("operation", "operation/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-projdev-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation", "operation/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="Project Development Icon">
+                <h1 class="hidden md:block">Approval</h1>
+            </a>
+        </div>
+
+        <div class="hidden md:block md:px-6">
             <a href="{{ url("/profile") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("profile", "profile/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
