@@ -46,6 +46,6 @@ class ContentApprovalController extends Controller
             'status' => 'Submitted to operations',
         ]);
 
-        return redirect()->route('content')->with('Status', 'Job Order Updated Successfully');
+        return redirect()->route('content.approve')->with('Status', 'Job Order Updated Successfully');
     }
 }

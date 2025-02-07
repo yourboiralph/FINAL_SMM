@@ -25,13 +25,11 @@ class OperationApprovalController extends Controller
     public function edit($id)
     {
         $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
-        return view('pages.admin.joborderapproval.show', compact('job_draft'));
+        return view('pages.admin.joborderapproval.edit', compact('job_draft'));
     }
 
     public function update(Request $request, $id)
     {
-        dd($request->all(), $id);
-
         $request->validate([
             'signature_admin' => 'required',
         ]);
@@ -44,6 +42,6 @@ class OperationApprovalController extends Controller
             'status' => 'Approved by Operations',
         ]);
 
-        return redirect()->route('content')->with('Status', 'Job Order Updated Successfully');
+        return redirect()->route('operation.approve')->with('Status', 'Job Order Approved Successfully');
     }
 }
