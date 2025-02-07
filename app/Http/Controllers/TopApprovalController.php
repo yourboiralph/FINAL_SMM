@@ -9,7 +9,7 @@ class TopApprovalController extends Controller
 {
     public function index()
     {
-        $job_drafts = JobDraft::whereNot('status', 'completed')
+        $job_drafts = JobDraft::where('status', 'Approved by Operations')
             ->with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
             ->get();
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobDraft;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ClientApprovalController extends Controller
@@ -34,16 +35,22 @@ class ClientApprovalController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->all(), $id);
+        $job_draft_id = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
 
-        $job_draft = JobDraft::find($id);
+        $job_draft_id->update([
+            'status' => 'complete'
+        ]);
 
-
-        if ($job_draft->type != 'content_writer') {
-            $job_draft->update([
-                'status' => 'complete'
+        if ($job_draft_id->type == 'content_writer') {
+            JobDraft::create([
+                'job_order_id' => $job_draft_id->job_order_id,
+                'type' => 'graphic_designer',
+                'date_target' => Carbon::now()->addDays(3),
+                'status' => 'pending',
+                'content_writer_id' => $job_draft_id->content_writer_id,
+                'graphic_designer_id' => $job_draft_id->graphic_designer_id,
+                'client_id' => $job_draft_id->client_id,
             ]);
-        } else {
         }
     }
 }
