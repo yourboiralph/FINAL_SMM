@@ -13,7 +13,7 @@ class ClientApprovalController extends Controller
 
         // Fetch all job drafts for the authenticated user
         $job_drafts = JobDraft::where('client_id', $authuser->id)
-            ->whereNot('status', 'completed')
+            ->where('status', 'Approved by Top Manager')
             ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client') // Corrected ->with() usage
             ->get();
 
@@ -38,13 +38,12 @@ class ClientApprovalController extends Controller
 
         $job_draft = JobDraft::find($id);
 
+
         if ($job_draft->type != 'content_writer') {
+            $job_draft->update([
+                'status' => 'complete'
+            ]);
         } else {
-            // create new job order
         }
-
-        // asdasd
-        // if type == content_Writer -> create new job order na type graphic designer
-
     }
 }
