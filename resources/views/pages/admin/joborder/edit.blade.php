@@ -20,6 +20,12 @@
     }
 </style>
 
+<!-- Quill CSS -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+<!-- Quill JS -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
 <div class="container mx-auto p-6">
     <div class=" w-full px-6 py-10 mx-auto rounded-lg custom-shadow">
         <div>
@@ -107,11 +113,17 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-span-2 w-full">
+                    <div class="col-span-2 h-fit w-full">
                         <p class="text-sm text-gray-600">Description</p>
-                        <textarea name="description" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring resize-none min-h-[90px]" oninput="autoResize(this)">{{ old('description', $job_draft->jobOrder->description) }}</textarea>
+                        
+                        <!-- Quill Editor -->
+                        <div id="quill-editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-[300px] max-h-[500px] overflow-y-auto">{{$job_draft->jobOrder->description}}</div>
+                    
+                        <!-- Hidden textarea to store Quill content -->
+                        <textarea name="description" id="description" class="hidden max-h-[300px]"></textarea>
+                    
                         @error('description')
-                            <p class="text-red-600 text-sm">{{$message}}</p>
+                            <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
@@ -141,37 +153,43 @@
     </div>
 </div>
 </div>
-@endsection
-
-<!-- JavaScript -->
 <script>
     function openModal() {
         document.getElementById('client-modal').classList.remove('hidden');
     }
-
     function closeModal() {
         document.getElementById('client-modal').classList.add('hidden');
     }
-
     function selectClient(clientId, clientName) {
-        document.getElementById('selected-client-name').value = clientName; // Show name in the text field
-        document.getElementById('selected-client-id').value = clientId; // Store ID in the hidden input
+        document.getElementById('selected-client-name').value = clientName;
+        document.getElementById('selected-client-id').value = clientId;
         closeModal();
     }
 </script>
 
-
 <script>
-    function autoResize(textarea) {
-        textarea.style.height = "90px"; // Reset height to minimum
-        textarea.style.height = (textarea.scrollHeight) + "px"; // Adjust height based on content
-    }
+var quill = new Quill('#quill-editor', {
+    theme: 'snow', // Snow theme with toolbar
+    placeholder: 'Write something...',
+    modules: {
+        toolbar: [
+            [{ 'bold': true }, { 'italic': true }, { 'underline': true }],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            [{ 'align': [] }],
+            ['link'], ['clean']
+        ]
+    },
+    scrollingContainer: '#quill-editor' // Add scrolling behavior
+});
 
-    // Ensure the textarea resizes on page load (for pre-filled content)
-    document.addEventListener("DOMContentLoaded", function() {
-        let textarea = document.querySelector('textarea[name="description"]');
-        if (textarea) {
-            autoResize(textarea);
-        }
-    });
+// Set existing content in the Quill editor
+quill.root.innerHTML = {!! json_encode($job_draft->jobOrder->description) !!};
+
+// Sync Quill content with the hidden textarea on form submission
+document.querySelector('form').onsubmit = function () {
+    document.querySelector('#description').value = quill.root.innerHTML;
+};
+
 </script>
+
+@endsection

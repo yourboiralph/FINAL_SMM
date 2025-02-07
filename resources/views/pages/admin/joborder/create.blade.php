@@ -1,6 +1,6 @@
 @extends('layouts.application')
 
-@section('title', 'Page Title')
+@section('title', 'Create Job Order')
 @section('header', "Job Order") 
 
 @section('content')
@@ -15,48 +15,62 @@
     }
     .custom-focus-ring:focus {
         outline: none;
-        box-shadow: 0 0 0 1px #fa7011;
+        box-shadow: 0 0 0 1px #545454;
         transition: box-shadow 0.3s ease;
+    }
+    #quill-editor {
+        min-height: 200px; /* Ensure enough space for the editor */
     }
 </style>
 
+<!-- Quill CSS -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+<!-- Quill JS -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
 <div class="container mx-auto p-6">
-    <div class="bg-[#ffaa71] w-1/2 px-6 py-10 mx-auto rounded-lg custom-shadow">
+    <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow">
         <div>
-            <a href="{{url('/joborder')}}">
+            <a href="{{ url('/joborder') }}">
                 <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
                     Back
                 </div>
             </a>
         </div>
-        <form action="{{ url('/joborder/store' ) }}" method="POST">
+        <form action="{{ url('/joborder/store') }}" method="POST">
             @csrf
             
-            <h1 class="mt-10 text-xl font-bold">Create Form</h1>
-            <div class="grid grid-cols-2 pb-10 space-y-4">
-                <div class="w-full col-span-2">
-                    <p class="text-sm text-gray-600">Title</p>
-                    <p class="text-sm text-gray-600"></p>
-                    <input type="text" name="title" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
-                    @error('title')
-                        <p class="text-red-600 text-sm">{{$message}}</p>
-                    @enderror
-                </div>
-
-                <div class="col-span-2 grid grid-cols-2 gap-4">
+            <h1 class="text-xl font-bold mt-4">Create Job Order</h1>
+            <div class="grid grid-cols-4 space-y-4">
+                <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
+                    <div class="w-full">
+                        <p class="text-sm text-gray-600">Title</p>
+                        <input type="text" name="title" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
+                        @error('title')
+                            <p class="text-red-600 text-sm">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="col-span-1 w-full">
+                        <p class="text-sm text-gray-600">Client</p>
+                        <div class="relative">
+                            <input type="text" id="selected-client-name" value="Select a Client" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring cursor-pointer" readonly onclick="openModal()">
+                            <input type="hidden" name="client_id" id="selected-client-id">
+                        </div>
+                        @error('client_id')
+                            <p class="text-red-600 text-sm">{{ $message }}</p>
+                        @enderror
+                    </div>
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Graphics Designer</p>
                         <select name="graphic_designer_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
                             <option></option>
                             @foreach ($graphic_designers as $graphic_designer)
-                                <option value="{{ $graphic_designer->id }}">
-                                    {{ $graphic_designer->name }}
-                                </option>
+                                <option value="{{ $graphic_designer->id }}">{{ $graphic_designer->name }}</option>
                             @endforeach
                         </select>
-                        
                         @error('graphic_designer_id')
-                            <p class="text-red-600 text-sm">{{$message}}</p>
+                            <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="w-full">
@@ -64,62 +78,103 @@
                         <select name="content_writer_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
                             <option></option>
                             @foreach ($content_writers as $content_writer)
-                                <option value="{{ $content_writer->id }}">
-                                    {{ $content_writer->name }}
-                                </option>
+                                <option value="{{ $content_writer->id }}">{{ $content_writer->name }}</option>
                             @endforeach
                         </select>
                         @error('content_writer_id')
-                            <p class="text-red-600 text-sm">{{$message}}</p>
+                            <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-                </div>
-                <div class="w-full col-span-2">
+
+                    <div class="col-span-2 grid grid-cols-2 w-full gap-4 rounded-lg">
+                        <div>
+                            <p class="text-sm text-gray-600">Date Started</p>
+                            <input type="date" name="date_started" class="w-full rounded-lg custom-shadow custom-focus-ring">
+                            @error('date_started')
+                                <p class="text-red-600 text-sm">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600">Date Deadline</p>
+                            <input type="date" name="date_target" class="w-full rounded-lg custom-shadow custom-focus-ring">
+                            @error('date_target')
+                                <p class="text-red-600 text-sm">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-span-2 h-fit w-full">
+                        <p class="text-sm text-gray-600">Description</p>
+                        
+                        <!-- Quill Editor -->
+                        <div id="quill-editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-[300px] max-h-[500px] overflow-y-auto"></div>
                     
-                    <p class="text-sm text-gray-600">Client</p>
-                    <select name="client_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
-                        <option></option>
-                        @foreach ($clients as $client)
-                            <option value="{{ $client->id }}">
-                                {{ $client->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('client_id')
-                        <p class="text-red-600 text-sm">{{$message}}</p>
-                    @enderror
-                </div>
-
-                <div class="col-span-2 w-full">
-                    <p class="text-sm text-gray-600">Description</p>
-                    <textarea name="description" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring resize-none"></textarea>
-                    @error('description')
-                        <p class="text-red-600 text-sm">{{$message}}</p>
-                    @enderror
-                </div>
-
-                <div class="col-span-2 grid grid-cols-2 w-full gap-4 rounded-lg">
-                    <div>
-                        <p class="text-sm text-gray-600">Date Started</p>
-                        <input type="date" name="date_started" class="w-full rounded-lg custom-shadow custom-focus-ring" >
-                        @error('date_started')
-                            <p class="text-red-600 text-sm">{{$message}}</p>
+                        <!-- Hidden textarea to store Quill content -->
+                        <textarea name="description" id="description" class="hidden max-h-[300px]"></textarea>
+                    
+                        @error('description')
+                            <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div>
-                        <p class="text-sm text-gray-600">Date Deadline</p>
-                        <input type="date" name="date_target" class="w-full rounded-lg custom-shadow custom-focus-ring">
-                        @error('date_target')
-                            <p class="text-red-600 text-sm">{{$message}}</p>
-                        @enderror
-                    </div>
+                    
                 </div>
 
-                <div class="col-span-2 text-center py-4 w-full bg-[#fa7011] mt-10 rounded-lg custom-shadow custom-hover-shadow">
-                    <button type="submit" class="text-white font-bold">Submit</button>
-                </div>
+                <button type="submit" class="col-span-1 text-center py-4 w-full bg-[#fa7011] mt-10 rounded-lg custom-shadow custom-hover-shadow text-white font-bold">
+                    Submit
+                </button>
             </div>
         </form>
     </div>
+
+    <!-- Modal -->
+    <div id="client-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 class="text-lg font-semibold mb-4">Select a Client</h2>
+            <ul class="max-h-60 overflow-y-auto">
+                @foreach($clients as $client)
+                <li class="p-2 border-b cursor-pointer hover:bg-gray-100" onclick="selectClient('{{ $client->id }}', '{{ $client->name }}')">
+                    {{ $client->name }}
+                </li>
+                @endforeach
+            </ul>
+            <button onclick="closeModal()" class="mt-4 bg-[#fa7011] text-white px-4 py-2 rounded">Close</button>
+        </div>
+    </div>
 </div>
+
+<script>
+    function openModal() {
+        document.getElementById('client-modal').classList.remove('hidden');
+    }
+    function closeModal() {
+        document.getElementById('client-modal').classList.add('hidden');
+    }
+    function selectClient(clientId, clientName) {
+        document.getElementById('selected-client-name').value = clientName;
+        document.getElementById('selected-client-id').value = clientId;
+        closeModal();
+    }
+</script>
+
+<script>
+    var quill = new Quill('#quill-editor', {
+        theme: 'snow', // Snow theme with toolbar
+        placeholder: 'Write something...',
+        modules: {
+            toolbar: [
+                [{ 'bold': true }, { 'italic': true }, { 'underline': true }], // Text Formatting
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }], // Lists
+                [{ 'align': [] }], // Alignment
+                ['link'], // Add links
+                ['clean'] // Remove formatting
+            ]
+        },
+        scrollingContainer: '#quill-editor' // Ensure scrolling works
+    });
+
+    // Store Quill content into the hidden textarea before form submission
+    document.querySelector('form').onsubmit = function() {
+        document.querySelector('#description').value = quill.root.innerHTML;
+    };
+</script>
+
 @endsection
