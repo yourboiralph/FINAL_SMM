@@ -67,4 +67,14 @@ Route::get('/client/show/{id}', [ClientApprovalController::class, 'show'])->name
 Route::get('/client/edit/{id}', [ClientApprovalController::class, 'edit'])->name('client.edit');
 Route::put('/client/update/{id}', [ClientApprovalController::class, 'update'])->name('client.update');
 
+
+use App\Http\Controllers\SignatureController;
+
+Route::get('/signature', function () {
+    return view('signature');
+});
+
+Route::post('/signature/store', [SignatureController::class, 'store'])->name('signature.store');
+
+
 require __DIR__ . '/auth.php';
