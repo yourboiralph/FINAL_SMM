@@ -22,9 +22,9 @@ return new class extends Migration
             $table->timestamp('date_started')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->date('date_target');
             $table->longText('signature_admin')->nullable();
-            $table->string('admin_signed')->nullable();
+            $table->unsignedBigInteger('admin_signed')->nullable();
             $table->longText('signature_top_manager')->nullable();
-            $table->string('top_manager_signed')->nullable();
+            $table->unsignedBigInteger('top_manager_signed')->nullable();
             $table->string('status');
             $table->unsignedBigInteger('content_writer_id');
             $table->unsignedBigInteger('graphic_designer_id');
