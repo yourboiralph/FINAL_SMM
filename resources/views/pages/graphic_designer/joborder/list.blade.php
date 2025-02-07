@@ -1,6 +1,6 @@
 @extends('layouts.application')
 
-@section('title', 'Clients')
+@section('title', 'Job Order')
 @section('header', 'List of Job Orders')
 
 @section('content')
@@ -28,7 +28,6 @@
                     <th class="px-6 py-3">File Name</th>
                     <th class="px-6 py-3">Designated</th>
                     <th class="px-6 py-3">Deadline</th>
-                    <th class="px-6 py-3">Status</th>
                     <th class="px-6 py-3">Actions</th>
                 </tr>
             </thead>
@@ -41,18 +40,21 @@
                         @else
                             <td class="px-6 py-3">Graphic Designer - {{ $job_draft->graphicDesigner->name }}</td>
                         @endif
-                        <td class="px-6 py-3 text-nowrap">
-                            {{$job_draft->date_target}}
-                        </td>
                         <td class="px-6 py-3">
-                            {{$job_draft->status}}
+                            {{$job_draft->date_target}}
                         </td>
 
 
                         <td class="px-6 py-3 border-b">
+                            <a href="{{url('graphic/edit/' . $job_draft->id)}}">
+                                <button class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
+                                    Create draft
+                                </button>
+                            </a>
                             <a href="{{url('graphic/show/' . $job_draft->id)}}">
-                                <button class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 text-nowrap">
-                                    View Form
+
+                                <button class="px-4 py-2 text-sm text-white bg-gray-700 rounded hover:bg-gray-800">
+                                    Show Details
                                 </button>
                             </a>
                         </td>
@@ -64,4 +66,3 @@
 </div>
 
 @endsection
-

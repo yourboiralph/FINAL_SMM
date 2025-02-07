@@ -18,27 +18,21 @@
         box-shadow: 0 0 0 1px #545454;
         transition: box-shadow 0.3s ease;
     }
-    #quill-editor {
-        min-height: 200px; /* Ensure enough space for the editor */
-    }
 </style>
 
-<!-- Quill CSS -->
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-
-<!-- Quill JS -->
-<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<!-- CKEditor 5 CDN -->
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 
 <div class="container mx-auto p-6">
-    <div class=" w-full px-6 py-10 mx-auto rounded-lg custom-shadow">
+    <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow">
         <div>
-            <a href="{{url('/content')}}">
+            <a href="{{ url('/content') }}">
                 <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
                     Back
                 </div>
             </a>
         </div>
-        <form action="{{ url('/content/update/'. $job_draft->id ) }}" method="POST">
+        <form action="{{ url('/content/update/' . $job_draft->id) }}" method="POST">
             @csrf
             @method('PUT')
             <h1 class="text-xl font-bold mt-4">Create Draft</h1>
@@ -47,11 +41,11 @@
                     <div class="col-span-4 grid grid-cols-4">
                         <div class="col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Title</p>
-                            <p class="text-xl font-bold">{{$job_draft->jobOrder->title}}</p>
+                            <p class="text-xl font-bold">{{ $job_draft->jobOrder->title }}</p>
                         </div>
                         <div class="col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Client</p>
-                            <p class="text-xl font-bold">{{$job_draft->client->name}}</p>
+                            <p class="text-xl font-bold">{{ $job_draft->client->name }}</p>
                         </div>
                         <div class="col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Date Started</p>
@@ -66,13 +60,10 @@
                     <div class="col-span-2 h-fit w-full">
                         <p class="text-sm text-gray-600">Draft</p>
                         
-                        <!-- Quill Editor -->
-                        <div id="quill-editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-[300px] max-h-[500px] overflow-y-auto"></div>
+                        <!-- CKEditor 5 textarea -->
+                        <textarea name="draft" id="editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-[300px]"></textarea>
                     
-                        <!-- Hidden textarea to store Quill content -->
-                        <textarea name="draft" id="description" class="hidden max-h-[300px]"></textarea>
-                    
-                        @error('description')
+                        @error('draft')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
@@ -86,26 +77,27 @@
         </form>
     </div>
 </div>
-<script>
-    var quill = new Quill('#quill-editor', {
-        theme: 'snow', // Snow theme with toolbar
-        placeholder: 'Write something...',
-        modules: {
-            toolbar: [
-                [{ 'bold': true }, { 'italic': true }, { 'underline': true }], // Text Formatting
-                [{ 'list': 'ordered' }, { 'list': 'bullet' }], // Lists
-                [{ 'align': [] }], // Alignment
-                ['link'], // Add links
-                ['clean'] // Remove formatting
-            ]
-        },
-        scrollingContainer: '#quill-editor' // Ensure scrolling works
-    });
 
-    // Store Quill content into the hidden textarea before form submission
-    document.querySelector('form').onsubmit = function() {
-        document.querySelector('#description').value = quill.root.innerHTML;
-    };
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .then(editor => {
+                console.log('CKEditor 5 initialized!', editor);
+                
+                // Load existing content
+                editor.setData(`{!! addslashes($job_draft->draft ?? '') !!}`);
+
+                // Before form submission, update the textarea with editor data
+                document.querySelector("form").addEventListener("submit", function () {
+                    document.querySelector("#editor").value = editor.getData();
+                });
+
+            })
+            .catch(error => {
+                console.error('Error initializing CKEditor 5:', error);
+            });
+    });
 </script>
 
 @endsection
