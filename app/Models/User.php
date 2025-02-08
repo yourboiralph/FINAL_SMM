@@ -79,4 +79,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(JobDraft::class, 'client_id');
     }
+
+    public function declinedRevisions()
+    {
+        return $this->hasMany(Revision::class, 'declined_by');
+    }
 }
