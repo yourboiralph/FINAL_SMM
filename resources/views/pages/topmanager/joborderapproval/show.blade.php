@@ -72,7 +72,7 @@
 
                             {{-- File Upload (Default) --}}
                             <div id="uploadSection">
-                                <input type="file" name="signature_admin" accept="image/*" class="mt-2 border p-2 rounded-md" id="signatureInput" {{ $isDisabled ? 'disabled' : '' }}>
+                                <input type="file" name="signature_top_manager" accept="image/*" class="mt-2 border p-2 rounded-md" id="signatureInput" {{ $isDisabled ? 'disabled' : '' }}>
                                 <div class="mt-4 w-52 h-32 border border-gray-300 rounded-md overflow-hidden flex items-center justify-center bg-gray-100">
                                     <img id="imagePreview" src="#" alt="Selected Image" class="hidden w-full h-full object-cover">
                                 </div>
