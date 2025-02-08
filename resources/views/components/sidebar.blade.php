@@ -6,7 +6,7 @@
 @props(['link' => $user->role->position])
 
 <div class="space-y-4 z-10">
-    @if ($link === 'operations')
+    @if ($link === 'operations' || $link === 'top_manager')
 
         {{-- Admin Sidebar Menu --}}
         <div class="hidden md:block md:px-6">

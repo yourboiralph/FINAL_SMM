@@ -4,6 +4,7 @@
 
 @props(['header' => ""])
 
+<div class="container mx-auto max-w-screen-xl overflow-hidden">
 <div class="grid grid-cols-3">
     <x-pagetitle header="{{ $header }}" />
     <div class="hidden md:block">
@@ -25,4 +26,5 @@
             </form>
         </div>
     </div>
+</div>
 </div>
