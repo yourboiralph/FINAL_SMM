@@ -49,14 +49,15 @@
                 </div>
                 <div class="w-full">
                     <p class="text-sm font-bold text-gray-600">Deadline</p>
-                    <p class="border-b-2 border-[#fa7011] w-fit">{{ $job_draft->date_target }}</p>
+                    <p >{{ $job_draft->date_target }}</p>
                 </div>
             </div>
             <div class="col-span-4 h-fit">
                 <p class="text-sm font-bold text-gray-600">Description</p>
                 
                 <!-- CKEditor Read-Only -->
-                <textarea id="editor" class="hidden">{{ $job_draft->jobOrder->description }}</textarea>
+                <p class="border-b-2 border-[#fa7011] w-fit">{!! $job_draft->joborder->description !!}</p>
+
             </div>
             <div class="mt-10 flex gap-8">
                 <div class="flex items-center justify-center flex-col">

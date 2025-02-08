@@ -62,12 +62,12 @@
                             </div>
                         </div>
 
-                        <form action="{{url('/operation/update/' . $job_draft->id)}}" method="POST" enctype="multipart/form-data" id="approvalForm">
+                        <form action="{{url('/topmanager/update/' . $job_draft->id)}}" method="POST" enctype="multipart/form-data" id="approvalForm">
                             @csrf
                             @method('PUT')
 
                             @php
-                                $isDisabled = $job_draft->status != "Submitted to operations";
+                                $isDisabled = $job_draft->status != "Submitted to Top Manager";
                             @endphp
 
                             {{-- File Upload (Default) --}}
