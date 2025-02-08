@@ -9,7 +9,7 @@ class TopApprovalController extends Controller
 {
     public function index()
     {
-        $job_drafts = JobDraft::where('status', 'Approved by Operations')
+        $job_drafts = JobDraft::where('status', 'Submitted to Top Manager')
             ->with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
             ->get();
 
@@ -39,7 +39,7 @@ class TopApprovalController extends Controller
         $job_draft->update([
             'signature_admin' => $request->signature_admin,
             'admin_signed' => auth()->user()->id,
-            'status' => 'Approved by Top Manager',
+            'status' => 'Submitted to Client',
         ]);
 
         return redirect()->route('topmanager.approve')->with('Status', 'Job Order Approved Successfully');

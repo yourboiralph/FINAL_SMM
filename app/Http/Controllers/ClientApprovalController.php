@@ -14,7 +14,7 @@ class ClientApprovalController extends Controller
 
         // Fetch all job drafts for the authenticated user
         $job_drafts = JobDraft::where('client_id', $authuser->id)
-            ->where('status', 'Approved by Top Manager')
+            ->where('status', 'Submitted to Client')
             ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client') // Corrected ->with() usage
             ->get();
 
