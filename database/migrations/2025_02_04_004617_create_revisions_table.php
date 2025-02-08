@@ -16,14 +16,14 @@ return new class extends Migration
     {
         Schema::create('revisions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('record_id');
-            $table->timestamp('revision_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->unsignedBigInteger('job_draft_id');
+            $table->unsignedBigInteger('declined_by');
             $table->text('summary');
-            $table->text('old');
-            $table->text('new');
+            $table->timestamp('revision_date')->default(DB::raw('CURRENT_TIMESTAMP'));
 
             // Foreign Key Constraint
-            $table->foreign('record_id')->references('id')->on('job_drafts')->onDelete('cascade');
+            $table->foreign('job_draft_id')->references('id')->on('job_drafts')->onDelete('cascade');
+            $table->foreign('declined_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
