@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobDraft;
+use App\Models\Revision;
 use Illuminate\Http\Request;
 
 class OperationApprovalController extends Controller
@@ -70,6 +71,17 @@ class OperationApprovalController extends Controller
 
     public function decline(Request $request, $id)
     {
+
+        $request->validate([
+            'summary' => 'required',
+        ]);
+
+        // Update Database with Signature Path
+        Revision::create([
+            'job_draft_id' => $id,
+            'declined_by' => auth()->user()->id,
+            'summary' => $request->summary,
+        ]);
         return redirect()->route('operation.approve')->with('Status', 'Job Order Declined Successfully');
     }
 }

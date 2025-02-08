@@ -56,6 +56,8 @@ Route::get('/operation', [OperationApprovalController::class, 'index'])->name('o
 Route::get('/operation/show/{id}', [OperationApprovalController::class, 'show'])->name('operation.show');
 Route::get('/operation/edit/{id}', [OperationApprovalController::class, 'edit'])->name('operation.edit');
 Route::put('/operation/update/{id}', [OperationApprovalController::class, 'update'])->name('operation.update');
+Route::get('/operation/decline/{id}', [OperationApprovalController::class, 'declineForm']);
+Route::post('/operation/decline/{id}', [OperationApprovalController::class, 'decline']);
 
 Route::get('/topmanager', [TopApprovalController::class, 'index'])->name('topmanager.approve');
 Route::get('/topmanager/show/{id}', [TopApprovalController::class, 'show'])->name('topmanager.show');
