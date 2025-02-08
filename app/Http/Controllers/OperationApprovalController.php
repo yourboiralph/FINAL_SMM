@@ -62,5 +62,14 @@ class OperationApprovalController extends Controller
         return redirect()->route('operation.approve')->with('Status', 'Job Order Approved Successfully');
     }
 
-    public function decline() {}
+    public function declineForm($id)
+    {
+        $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
+        return view('pages.admin.joborderapproval.declineform', compact('job_draft'));
+    }
+
+    public function decline(Request $request, $id)
+    {
+        return redirect()->route('operation.approve')->with('Status', 'Job Order Declined Successfully');
+    }
 }

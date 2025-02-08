@@ -55,4 +55,12 @@ class JobDraft extends Model
     {
         return $this->belongsTo(User::class, 'client_id');
     }
+
+    /**
+     * Get all revisions for this job draft.
+     */
+    public function revisions()
+    {
+        return $this->hasMany(Revision::class, 'job_draft_id');
+    }
 }
