@@ -70,6 +70,8 @@ Route::get('/client', [ClientApprovalController::class, 'index'])->name('client.
 Route::get('/client/show/{id}', [ClientApprovalController::class, 'show'])->name('client.show');
 Route::get('/client/edit/{id}', [ClientApprovalController::class, 'edit'])->name('client.edit');
 Route::put('/client/update/{id}', [ClientApprovalController::class, 'update'])->name('client.update');
+Route::get('/client/decline/{id}', [TopApprovalController::class, 'declineForm']);
+Route::post('/client/decline/{id}', [TopApprovalController::class, 'decline']);
 
 
 use App\Http\Controllers\SignatureController;
