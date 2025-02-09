@@ -25,7 +25,7 @@
         <table class="w-full text-left border-collapse" id="projectTable">
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
-                    <th class="px-6 py-3">File Name</th>
+                    <th class="px-6 py-3">JO Name</th>
                     <th class="px-6 py-3">Designated</th>
                     <th class="px-6 py-3">Deadline</th>
                     <th class="px-6 py-3">Actions</th>
@@ -46,9 +46,9 @@
 
 
                         <td class="px-6 py-3 border-b">
-                            <a href="{{url('graphic/edit/' . $job_draft->id)}}">
+                            <a href="{{url('content/revisions/edit/' . $job_draft->id)}}">
                                 <button class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
-                                    Create draft
+                                    Edit Draft
                                 </button>
                             </a>
                             <a href="{{url('graphic/show/' . $job_draft->id)}}">
