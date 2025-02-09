@@ -12,6 +12,7 @@ class ContentRevisionController extends Controller
     {
         $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client', 'revisions'])
             ->where('status', 'Revision')
+            ->where('type', 'content_writer')
             ->where('content_writer_id', auth()->user()->id) // Cleaner way to get the authenticated user's ID
             ->get(); // Retrieve all records
 
