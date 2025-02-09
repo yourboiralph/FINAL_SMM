@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientApprovalController;
 use App\Http\Controllers\ContentApprovalController;
+use App\Http\Controllers\ContentRevisionController;
 use App\Http\Controllers\GraphicApprovalController;
 use App\Http\Controllers\JobOrderController;
 use App\Http\Controllers\OperationApprovalController;
@@ -73,6 +74,7 @@ Route::put('/client/update/{id}', [ClientApprovalController::class, 'update'])->
 Route::get('/client/decline/{id}', [ClientApprovalController::class, 'declineForm']);
 Route::post('/client/decline/{id}', [ClientApprovalController::class, 'decline']);
 
+Route::get('/revisions', [ContentRevisionController::class, 'index']);
 
 use App\Http\Controllers\SignatureController;
 
