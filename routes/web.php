@@ -63,6 +63,8 @@ Route::get('/topmanager', [TopApprovalController::class, 'index'])->name('topman
 Route::get('/topmanager/show/{id}', [TopApprovalController::class, 'show'])->name('topmanager.show');
 Route::get('/topmanager/edit/{id}', [TopApprovalController::class, 'edit'])->name('topmanager.edit');
 Route::put('/topmanager/update/{id}', [TopApprovalController::class, 'update'])->name('topmanager.update');
+Route::get('/topmanager/decline/{id}', [TopApprovalController::class, 'declineForm']);
+Route::post('/topmanager/decline/{id}', [TopApprovalController::class, 'decline']);
 
 Route::get('/client', [ClientApprovalController::class, 'index'])->name('client.approve');
 Route::get('/client/show/{id}', [ClientApprovalController::class, 'show'])->name('client.show');
