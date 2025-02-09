@@ -75,6 +75,8 @@ Route::get('/client/decline/{id}', [ClientApprovalController::class, 'declineFor
 Route::post('/client/decline/{id}', [ClientApprovalController::class, 'decline']);
 
 Route::get('/content/revisions', [ContentRevisionController::class, 'index']);
+Route::get('/content/revisions/edit/{id}', [ContentRevisionController::class, 'edit']);
+Route::put('/content/revisions/update/{id}', [ContentRevisionController::class, 'update']);
 
 use App\Http\Controllers\SignatureController;
 
