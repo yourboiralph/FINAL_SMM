@@ -43,7 +43,7 @@ class GraphicApprovalController extends Controller
 
         $job_draft->update([
             'draft' => $request->draft,
-            'status' => 'Submitted to operations',
+            'status' => 'Submitted to Operations',
         ]);
 
         return redirect()->route('graphic.approve')->with('Status', 'Job Order Updated Successfully');
