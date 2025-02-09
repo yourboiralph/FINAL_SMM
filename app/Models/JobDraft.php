@@ -24,7 +24,8 @@ class JobDraft extends Model
         'top_manager_signed',
         'content_writer_id',
         'graphic_designer_id',
-        'client_id'
+        'client_id',
+        'feedback'
     ];
 
     public function jobOrder()

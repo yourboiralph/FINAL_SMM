@@ -82,6 +82,12 @@ class OperationApprovalController extends Controller
             'declined_by' => auth()->user()->id,
             'summary' => $request->summary,
         ]);
+
+        $job_draft = JobDraft::find($id);
+
+        $job_draft->update([
+            'status' => 'Revision',
+        ]);
         return redirect()->route('operation.approve')->with('Status', 'Job Order Declined Successfully');
     }
 }

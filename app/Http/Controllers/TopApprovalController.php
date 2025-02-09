@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobDraft;
+use App\Models\Revision;
 use Illuminate\Http\Request;
 
 class TopApprovalController extends Controller
@@ -56,9 +57,32 @@ class TopApprovalController extends Controller
         $job_draft->update([
             'signature_top_manager' => $imagePath,
             'top_manager_signed' => auth()->user()->id,
-            'status' => 'Submitted to Top Manager',
+            'status' => 'Submitted to Client',
         ]);
 
         return redirect()->route('topmanager.approve')->with('Status', 'Job Order Approved Successfully');
+    }
+
+    public function declineForm($id)
+    {
+        $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
+        return view('pages.topmanager.joborderapproval.declineform', compact('job_draft'));
+    }
+
+    public function decline(Request $request, $id)
+    {
+        $request->validate([
+            'summary' => 'required',
+        ]);
+
+        // Update Database with Signature Path
+        Revision::create([
+            'job_draft_id' => $id,
+            'declined_by' => auth()->user()->id,
+            'summary' => $request->summary,
+        ]);
+
+        $job_draft = JobDraft::find($id);
+        return redirect()->route('topmanager.approve')->with('Status', 'Job Order Declined Successfully');
     }
 }

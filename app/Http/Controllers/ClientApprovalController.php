@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobDraft;
+use App\Models\Revision;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -35,10 +36,13 @@ class ClientApprovalController extends Controller
 
     public function update(Request $request, $id)
     {
+
+
         $job_draft_id = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
 
         $job_draft_id->update([
-            'status' => 'complete'
+            'feedback' => $request->feedback,
+            'status' => 'omplete'
         ]);
 
         if ($job_draft_id->type == 'content_writer') {
@@ -53,5 +57,35 @@ class ClientApprovalController extends Controller
             ]);
         }
         return redirect()->route('client.approve')->with('Status', 'Job Order Approved Successfully');
+    }
+    public function declineForm($id)
+    {
+        $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
+        return view('pages.client.joborderapproval.declineform', compact('job_draft'));
+    }
+
+    public function decline(Request $request, $id)
+    {
+        $request->validate([
+            'summary' => 'required',
+        ]);
+
+        // Update Database with Signature Path
+        Revision::create([
+            'job_draft_id' => $id,
+            'declined_by' => auth()->user()->id,
+            'summary' => $request->summary,
+        ]);
+
+        $job_draft = JobDraft::find($id);
+
+        $job_draft->update([
+            'status' => 'Revision',
+            'signature_admin' => null,
+            'admin_signed' => null,
+            'signature_top_manager' => null,
+            'top_manager_signed' => null
+        ]);
+        return redirect()->route('client.approve')->with('Status', 'Job Order Declined Successfully');
     }
 }
