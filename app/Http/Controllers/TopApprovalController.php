@@ -83,6 +83,12 @@ class TopApprovalController extends Controller
         ]);
 
         $job_draft = JobDraft::find($id);
+
+        $job_draft->update([
+            'status' => 'Revision',
+            'signature_admin' => null,
+            'admin_signed' => null,
+        ]);
         return redirect()->route('topmanager.approve')->with('Status', 'Job Order Declined Successfully');
     }
 }
