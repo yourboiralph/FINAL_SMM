@@ -70,8 +70,8 @@
                             @csrf
                             @method('PUT')
                             <!-- CKEditor 5 for Decline Reason -->
-                            <label for="summary" class="block font-semibold">Feedback:</label>
-                            <textarea class="w-full border p-2 rounded-md" name="summary" id="summaryEditor"></textarea>
+                            <label for="feedback" class="block font-semibold">Feedback:</label>
+                            <textarea class="w-full border p-2 rounded-md" name="feedback" id="summaryEditor"></textarea>
 
                             <button type="submit"
                                 class="px-4 py-2 mt-4 text-sm text-white bg-[#fa7011] rounded hover:bg-[#c06b32] disabled:opacity-50 disabled:cursor-not-allowed"

@@ -80,7 +80,7 @@
                                         @method('PUT')
 
                                         @php
-                                            $isDisabled = $job_draft->status != "Submitted to operations";
+                                            $isDisabled = $job_draft->status != "Submitted to Operations";
                                         @endphp
 
                                         {{-- File Upload (Default) --}}
