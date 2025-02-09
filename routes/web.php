@@ -4,6 +4,7 @@ use App\Http\Controllers\ClientApprovalController;
 use App\Http\Controllers\ContentApprovalController;
 use App\Http\Controllers\ContentRevisionController;
 use App\Http\Controllers\GraphicApprovalController;
+use App\Http\Controllers\GraphicRevisionController;
 use App\Http\Controllers\JobOrderController;
 use App\Http\Controllers\OperationApprovalController;
 use App\Http\Controllers\ProfileController;
@@ -77,6 +78,10 @@ Route::post('/client/decline/{id}', [ClientApprovalController::class, 'decline']
 Route::get('/content/revisions', [ContentRevisionController::class, 'index'])->name('content.revisions');
 Route::get('/content/revisions/edit/{id}', [ContentRevisionController::class, 'edit']);
 Route::put('/content/revisions/update/{id}', [ContentRevisionController::class, 'update']);
+
+Route::get('/graphic/revisions', [GraphicRevisionController::class, 'index']);
+Route::get('/graphic/revisions/edit/{id}', [GraphicRevisionController::class, 'edit']);
+Route::put('/graphic/revisions/update/{id}', [GraphicRevisionController::class, 'update']);
 
 use App\Http\Controllers\SignatureController;
 
