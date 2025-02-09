@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
-@section('title', 'Job Order')
-@section('header', 'List of Job Orders')
+@section('title', 'Content Revision')
+@section('header', 'Content List Revision')
 
 @section('content')
 
