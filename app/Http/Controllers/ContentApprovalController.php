@@ -43,7 +43,7 @@ class ContentApprovalController extends Controller
 
         $job_draft->update([
             'draft' => $request->draft,
-            'status' => 'Submitted to operations',
+            'status' => 'Submitted to Operations',
         ]);
 
         return redirect()->route('content.approve')->with('Status', 'Job Order Updated Successfully');
