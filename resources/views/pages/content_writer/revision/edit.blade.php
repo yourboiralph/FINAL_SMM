@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
-@section('title', 'Page Title')
-@section('header', "Job Order") 
+@section('title', 'Revision')
+@section('header', "Content Revision") 
 
 @section('content')
 
@@ -90,7 +90,7 @@
                 console.log('CKEditor 5 initialized!', editor);
                 
                 // Load existing content
-                editor.setData(`{!! addslashes($job_draft->draft ?? '') !!}`);
+                editor.setData();
 
                 // Before form submission, update the textarea with editor data
                 document.querySelector("form").addEventListener("submit", function () {

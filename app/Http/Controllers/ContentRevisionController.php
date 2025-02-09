@@ -41,6 +41,6 @@ class ContentRevisionController extends Controller
             'status' => 'Submitted to Operation',
             'draft' => $request->draft
         ]);
-        return route('content.revisions', compact('job_draft'));
+        return redirect()->route('content.revisions', compact('job_draft'));
     }
 }
