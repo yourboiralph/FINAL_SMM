@@ -128,15 +128,15 @@
         </div>
 
         <div class="hidden md:block md:px-6">
-            <a href="{{ url("/joborder") }}"
+            <a href="{{ url("/client") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
-                {{ request()->is("joborder", "joborder/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is("joborder", "joborder/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                {{ request()->is("client", "client/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("client", "client/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <img src="/Assets/icon-projdev-white.png"
                     draggable="false"
-                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("joborder", "ghihgjoborder/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("client", "client/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
-                <h1 class="hidden md:block">Job Order</h1>
+                <h1 class="hidden md:block">Approvals</h1>
             </a>
         </div>
 
@@ -167,6 +167,18 @@
         </div>
 
     @elseif ($link === 'content_writer')
+        <div class="hidden md:block md:px-6">
+            <a href="{{ url("/dashboard") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("dashboard", "dashboard/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("dashboard", "dashboard/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-dashboard-white.png"
+                    draggable="false"
+                    class=" p-2 rounded-lg w-10 h-10 {{ request()->is("dashboard", "dashboard/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="project Icon">
+                <h1 class="hidden md:block">Dashboard</h1>
+            </a>
+        </div>
 
         <div class="hidden md:block md:px-6">
             <a href="{{ url("/content") }}"
@@ -176,6 +188,32 @@
                 <img src="/Assets/icon-profile-white.png"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("content", "content/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="Profile Icon">
+                <h1 class="hidden md:block">List of Job Orders</h1>
+            </a>
+        </div>
+    @elseif ($link === 'graphic_designer')
+        <div class="hidden md:block md:px-6">
+            <a href="{{ url("/dashboard") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("dashboard", "dashboard/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("dashboard", "dashboard/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-dashboard-white.png"
+                    draggable="false"
+                    class=" p-2 rounded-lg w-10 h-10 {{ request()->is("dashboard", "dashboard/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="project Icon">
+                <h1 class="hidden md:block">Dashboard</h1>
+            </a>
+        </div>
+
+        <div class="hidden md:block md:px-6">
+            <a href="{{ url("/graphic") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("graphic", "graphic/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("graphic", "graphic/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-profile-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("graphic", "graphic/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
                 <h1 class="hidden md:block">List of Job Orders</h1>
             </a>
