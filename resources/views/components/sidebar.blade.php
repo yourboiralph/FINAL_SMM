@@ -222,23 +222,23 @@
         <div class="hidden md:block md:px-6">
             <a href="{{ url("/graphic") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
-                {{ request()->is("graphic", "graphic/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is("graphic", "graphic/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                {{ request()->is("graphic", "graphic") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("graphic", "graphic") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <img src="/Assets/icon-profile-white.png"
                     draggable="false"
-                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("graphic", "graphic/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("graphic", "graphic") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
                 <h1 class="hidden md:block">List of Job Orders</h1>
             </a>
         </div>
         <div class="hidden md:block md:px-6">
-            <a href="{{ url("/revisions") }}"
+            <a href="{{ url("/graphic/revisions") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
-                {{ request()->is("revisions", "revisions/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is("revisions", "revisions/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                {{ request()->is("graphic/revisions", "graphic/revisions/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("graphic/revisions", "graphic/revisions/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <img src="/Assets/icon-projdev-white.png"
                     draggable="false"
-                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("revisions", "revisions/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("graphic/revisions", "graphic/revisions/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="joborder Icon">
                 <h1 class="hidden md:block">Revision Checklist</h1>
             </a>
