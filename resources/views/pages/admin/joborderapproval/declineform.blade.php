@@ -27,9 +27,8 @@
     }
 </style>
 
-<!-- Signature Pad -->
-<script src="https://cdn.jsdelivr.net/npm/signature_pad"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include CKEditor 5 CDN -->
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 
 <div class="mx-auto max-w-screen-2xl">
     <div class="h-full mx-auto max-w-screen-xl">
@@ -66,69 +65,34 @@
                         </div>
                     </div>
                     
+                    <div class="mt-10">
+                        <form action="{{url('/operation/decline/' . $job_draft->id)}}" method="POST">
+                            @csrf
+                            
+                            <!-- CKEditor 5 for Decline Reason -->
+                            <label for="summary" class="block font-semibold">Decline Reason:</label>
+                            <textarea class="w-full border p-2 rounded-md" name="summary" id="summaryEditor"></textarea>
+
+                            <button type="submit"
+                                class="px-4 py-2 mt-4 text-sm text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                                id="declineBtn">
+                                Decline
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-{{-- JS for Live Preview, Signature Pad, and Switching --}}
+<!-- Initialize CKEditor 5 -->
 <script>
-    var signaturePad = new SignaturePad(document.getElementById("signature-pad"));
-
-    // Toggle between File Upload and Signature Pad
-    document.getElementById("useUpload").addEventListener("click", function () {
-        document.getElementById("uploadSection").classList.remove("hidden");
-        document.getElementById("padSection").classList.add("hidden");
-        document.getElementById("signaturePadData").value = "";
-    });
-
-    document.getElementById("usePad").addEventListener("click", function () {
-        document.getElementById("uploadSection").classList.add("hidden");
-        document.getElementById("padSection").classList.remove("hidden");
-        document.getElementById("signatureInput").value = "";
-    });
-
-    // Clear Signature Pad
-    document.getElementById("clearPad").addEventListener("click", function () {
-        signaturePad.clear();
-    });
-
-    // Convert Signature Pad to Base64 and store it in hidden input before submitting
-    document.getElementById("approvalForm").addEventListener("submit", function (event) {
-        if (!document.getElementById("uploadSection").classList.contains("hidden")) {
-            return; // Skip if file upload is selected
-        }
-
-        if (signaturePad.isEmpty()) {
-            alert("Please sign before submitting.");
-            event.preventDefault();
-        } else {
-            document.getElementById("signaturePadData").value = signaturePad.toDataURL("image/png");
-        }
-    });
-
-    // Image Preview for File Upload
-    document.getElementById('signatureInput').addEventListener('change', function (event) {
-        const file = event.target.files[0];
-        const preview = document.getElementById('imagePreview');
-
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                preview.src = e.target.result;
-                preview.classList.remove('hidden');
-            };
-            reader.readAsDataURL(file);
-        } else {
-            preview.src = '#';
-            preview.classList.add('hidden');
-        }
-    });
-
-    // Enable Submit Button only if checkbox is checked
-    document.getElementById('agree').addEventListener('change', function () {
-        document.getElementById('submitBtn').disabled = !this.checked;
-    });
+    ClassicEditor
+        .create(document.querySelector('#summaryEditor'))
+        .catch(error => {
+            console.error(error);
+        });
 </script>
+
 @endsection

@@ -80,7 +80,7 @@
                                         @method('PUT')
 
                                         @php
-                                            $isDisabled = $job_draft->status != "Submitted to Operations";
+                                            $isDisabled = $job_draft->status != "Submitted to operations";
                                         @endphp
 
                                         {{-- File Upload (Default) --}}
@@ -118,58 +118,85 @@
                                                 Submit Approval
                                             </button>
 
-                                            <!-- Decline Button triggers modal -->
-                                            <button type="button"
-                                                class="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                                                id="declineBtn" {{ $isDisabled ? 'disabled' : '' }}>
-                                                Decline
-                                            </button>
+                                            <a href="{{ url('/operation/decline/' . $job_draft->id) }}">
+                                                <button type="button"
+                                                    class="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                                                    id="declineBtn" {{ $isDisabled ? 'disabled' : '' }}>
+                                                    Decline
+                                                </button>
+                                            </a>
                                         </div>
                                     </form>
                                 </div>
                             @endif
+    
+    
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Decline Modal -->
-<div id="declineModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center hidden">
-    <div class="bg-white rounded-lg p-6 max-w-md w-full">
-        <h2 class="text-lg font-semibold mb-4">Decline Job Order</h2>
-        <p class="text-sm text-gray-600 mb-2">Please provide a reason for declining this job order:</p>
-        
-        <form action="{{ url('/operation/decline/' . $job_draft->id) }}" method="POST">
-            @csrf
-            @method('POST')
-
-            <!-- Reason Textbox -->
-            <textarea name="summary" id="declineReason" rows="3"
-                class="w-full border p-2 rounded-md" placeholder="Enter your reason..." required></textarea>
-
-            <!-- Buttons -->
-            <div class="mt-4 flex justify-end space-x-2">
-                <button type="button" id="closeModal"
-                    class="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500">Cancel</button>
-                <button type="submit"
-                    class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Submit Decline</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- JavaScript for Modal -->
+{{-- JS for Live Preview, Signature Pad, and Switching --}}
 <script>
-    document.getElementById("declineBtn").addEventListener("click", function () {
-        document.getElementById("declineModal").classList.remove("hidden");
+    var signaturePad = new SignaturePad(document.getElementById("signature-pad"));
+
+    // Toggle between File Upload and Signature Pad
+    document.getElementById("useUpload").addEventListener("click", function () {
+        document.getElementById("uploadSection").classList.remove("hidden");
+        document.getElementById("padSection").classList.add("hidden");
+        document.getElementById("signaturePadData").value = "";
     });
 
-    document.getElementById("closeModal").addEventListener("click", function () {
-        document.getElementById("declineModal").classList.add("hidden");
+    document.getElementById("usePad").addEventListener("click", function () {
+        document.getElementById("uploadSection").classList.add("hidden");
+        document.getElementById("padSection").classList.remove("hidden");
+        document.getElementById("signatureInput").value = "";
+    });
+
+    // Clear Signature Pad
+    document.getElementById("clearPad").addEventListener("click", function () {
+        signaturePad.clear();
+    });
+
+    // Convert Signature Pad to Base64 and store it in hidden input before submitting
+    document.getElementById("approvalForm").addEventListener("submit", function (event) {
+        if (!document.getElementById("uploadSection").classList.contains("hidden")) {
+            return; // Skip if file upload is selected
+        }
+
+        if (signaturePad.isEmpty()) {
+            alert("Please sign before submitting.");
+            event.preventDefault();
+        } else {
+            document.getElementById("signaturePadData").value = signaturePad.toDataURL("image/png");
+        }
+    });
+
+    // Image Preview for File Upload
+    document.getElementById('signatureInput').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById('imagePreview');
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '#';
+            preview.classList.add('hidden');
+        }
+    });
+
+    // Enable Submit Button only if checkbox is checked
+    document.getElementById('agree').addEventListener('change', function () {
+        document.getElementById('submitBtn').disabled = !this.checked;
     });
 </script>
-
 @endsection
