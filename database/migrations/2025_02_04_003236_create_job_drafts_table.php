@@ -29,7 +29,7 @@ return new class extends Migration
             $table->unsignedBigInteger('content_writer_id');
             $table->unsignedBigInteger('graphic_designer_id');
             $table->unsignedBigInteger('client_id');
-            $table->string('feedback');
+            $table->string('feedback')->nullable();
 
             // Foreign Key Constraint
             $table->foreign('job_order_id')->references('id')->on('job_orders')->onDelete('cascade');
