@@ -31,5 +31,15 @@ class ContentRevisionController extends Controller
         return view('pages.content_writer.revision.edit', compact('job_draft'));
     }
 
-    public function update(Request $request, $id) {}
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'draft' => 'required',
+        ]);
+        $job_draft = JobDraft::find($id);
+        $job_draft->update([
+            'status' => 'Submitted to Operation',
+            'draft' => $request->draft
+        ]);
+    }
 }
