@@ -130,13 +130,26 @@
         <div class="hidden md:block md:px-6">
             <a href="{{ url("/client") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
-                {{ request()->is("client", "client/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is("client", "client/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                {{ request()->is("client", "client") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("client", "client") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <img src="/Assets/icon-projdev-white.png"
                     draggable="false"
-                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("client", "client/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("client", "client") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
                 <h1 class="hidden md:block">Approvals</h1>
+            </a>
+        </div>
+
+        <div class="hidden md:block md:px-6">
+            <a href="{{ url("/client/history") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("client/history", "client/history/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("client/history", "client/history/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-profile-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("client/history", "client/history/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="Profile Icon">
+                <h1 class="hidden md:block">History</h1>
             </a>
         </div>
 
