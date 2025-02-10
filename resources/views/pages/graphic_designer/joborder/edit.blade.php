@@ -62,7 +62,7 @@
                         <p class="text-sm text-gray-600">Content Writer Draft</p>
                         
                         <!-- CKEditor 5 textarea -->
-                        {!! $latest_job_draft->draft !!}
+                        {!! $job_draft->parentDraft->draft !!}
                     
                         @error('draft')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
