@@ -50,7 +50,7 @@ class ClientApprovalController extends Controller
             JobDraft::create([
                 'job_order_id' => $job_draft_id->job_order_id,
                 'type' => 'graphic_designer',
-                'date_target' => Carbon::now()->addDays(3),
+                'date_target' => Carbon::now()->addDays(3)->toDateString(),
                 'status' => 'pending',
                 'content_writer_id' => $job_draft_id->content_writer_id,
                 'graphic_designer_id' => $job_draft_id->graphic_designer_id,
