@@ -31,6 +31,7 @@ return new class extends Migration
             $table->unsignedBigInteger('client_id');
             $table->string('feedback')->nullable();
             $table->date('date_completed')->nullable();
+            $table->unsignedBigInteger('reference_draft_id')->nullable();
 
             // Foreign Key Constraint
             $table->foreign('job_order_id')->references('id')->on('job_orders')->onDelete('cascade');
@@ -39,6 +40,7 @@ return new class extends Migration
             $table->foreign('client_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('admin_signed')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('top_manager_signed')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('reference_draft_id')->references('id')->on('job_drafts')->onDelete('cascade');
         });
     }
 
