@@ -33,7 +33,7 @@ class GraphicApprovalController extends Controller
         $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client', 'parentDraft')->find($id);
 
         // Pass both the job draft and the latest job draft to the view
-        return view('pages.graphic_designer.joborder.edit', compact('job_draft', 'latest_job_draft'));
+        return view('pages.graphic_designer.joborder.edit', compact('job_draft'));
     }
 
 
