@@ -50,9 +50,9 @@
 
 
                         <td class="px-6 py-3 border-b">
-                            <a href="{{url('client/history/show/' . $job_draft->id)}}">
+                            <a href="{{ route('client.history.download', $job_draft->id) }}">
                                 <button class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 text-nowrap">
-                                    View Form
+                                    Download PDF
                                 </button>
                             </a>
                         </td>

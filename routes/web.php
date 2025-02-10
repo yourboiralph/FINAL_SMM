@@ -86,6 +86,9 @@ Route::put('/graphic/revisions/update/{id}', [GraphicRevisionController::class, 
 
 Route::get('/client/history', [ClientHistoryController::class, 'index'])->name('client.history');
 Route::get('/client/history/show/{id}', [ClientHistoryController::class, 'show'])->name('client.history.show');
+Route::get('/client/history/download/{id}', [ClientHistoryController::class, 'downloadPDF'])->name('client.history.download');
+
+
 
 use App\Http\Controllers\SignatureController;
 
