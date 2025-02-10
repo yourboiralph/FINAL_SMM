@@ -100,7 +100,7 @@
         <div class=""><strong> Complete Information </strong></div>
         <table>
             <tr>
-                <td><strong>Date Completed:</strong><br>{{ $job_draft->date_started }}</td>
+                <td><strong>Date Completed:</strong><br>{{ $job_draft->date_completed }}</td>
                 <td><strong>Time Required:</strong><br>{{ $job_draft->date_target }}</td>
             </tr>
         </table>
