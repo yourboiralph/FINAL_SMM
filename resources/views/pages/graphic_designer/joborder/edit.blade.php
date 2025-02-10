@@ -57,7 +57,20 @@
                         </div>
                     </div>
 
+                    <div class="col-span-4 h-fit w-full">
+
+                        <p class="text-sm text-gray-600">Content Writer Draft</p>
+                        
+                        <!-- CKEditor 5 textarea -->
+                        {!! $latest_job_draft->draft !!}
+                    
+                        @error('draft')
+                            <p class="text-red-600 text-sm">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <div class="col-span-2 h-fit w-full">
+
                         <p class="text-sm text-gray-600">Draft</p>
                         
                         <!-- CKEditor 5 textarea -->

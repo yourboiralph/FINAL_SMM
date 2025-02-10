@@ -51,12 +51,6 @@
                                     Create draft
                                 </button>
                             </a>
-                            <a href="{{url('graphic/show/' . $job_draft->id)}}">
-
-                                <button class="px-4 py-2 text-sm text-white bg-gray-700 rounded hover:bg-gray-800">
-                                    Show Details
-                                </button>
-                            </a>
                         </td>
                     </tr>
                 @endforeach
