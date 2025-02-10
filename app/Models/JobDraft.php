@@ -26,7 +26,8 @@ class JobDraft extends Model
         'graphic_designer_id',
         'client_id',
         'feedback',
-        'date_completed'
+        'date_completed',
+        'reference_draft_id'
     ];
 
     public function jobOrder()
@@ -64,5 +65,18 @@ class JobDraft extends Model
     public function revisions()
     {
         return $this->hasMany(Revision::class, 'job_draft_id');
+    }
+
+    public function parentDraft()
+    {
+        return $this->belongsTo(JobDraft::class, 'reference_draft_id');
+    }
+
+    /**
+     * Get all drafts that reference this draft.
+     */
+    public function childDrafts()
+    {
+        return $this->hasMany(JobDraft::class, 'reference_draft_id');
     }
 }

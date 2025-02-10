@@ -43,7 +43,7 @@ class ClientApprovalController extends Controller
         $job_draft_id->update([
             'feedback' => $request->feedback,
             'status' => 'completed',
-            'date_completed' => now()
+            'date_completed' => now(),
         ]);
 
         if ($job_draft_id->type == 'content_writer') {
@@ -55,6 +55,7 @@ class ClientApprovalController extends Controller
                 'content_writer_id' => $job_draft_id->content_writer_id,
                 'graphic_designer_id' => $job_draft_id->graphic_designer_id,
                 'client_id' => $job_draft_id->client_id,
+                'reference_draft_id' => $id
             ]);
         }
         return redirect()->route('client.approve')->with('Status', 'Job Order Approved Successfully');
