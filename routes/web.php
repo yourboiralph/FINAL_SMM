@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientApprovalController;
+use App\Http\Controllers\ClientHistoryController;
 use App\Http\Controllers\ContentApprovalController;
 use App\Http\Controllers\ContentRevisionController;
 use App\Http\Controllers\GraphicApprovalController;
@@ -82,6 +83,9 @@ Route::put('/content/revisions/update/{id}', [ContentRevisionController::class, 
 Route::get('/graphic/revisions', [GraphicRevisionController::class, 'index']);
 Route::get('/graphic/revisions/edit/{id}', [GraphicRevisionController::class, 'edit']);
 Route::put('/graphic/revisions/update/{id}', [GraphicRevisionController::class, 'update']);
+
+Route::get('/client/history', [ClientHistoryController::class, 'index'])->name('client.history');
+
 
 use App\Http\Controllers\SignatureController;
 
