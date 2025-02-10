@@ -38,7 +38,7 @@ class ContentRevisionController extends Controller
         ]);
         $job_draft = JobDraft::find($id);
         $job_draft->update([
-            'status' => 'Submitted to Operation',
+            'status' => 'Submitted to Operations',
             'draft' => $request->draft
         ]);
         return redirect()->route('content.revisions', compact('job_draft'));
