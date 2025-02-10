@@ -42,7 +42,8 @@ class ClientApprovalController extends Controller
 
         $job_draft_id->update([
             'feedback' => $request->feedback,
-            'status' => 'omplete'
+            'status' => 'completed',
+            'date_completed' => now()
         ]);
 
         if ($job_draft_id->type == 'content_writer') {
