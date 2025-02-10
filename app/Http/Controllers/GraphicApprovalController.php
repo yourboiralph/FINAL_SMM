@@ -29,9 +29,20 @@ class GraphicApprovalController extends Controller
 
     public function edit($id)
     {
+        // Fetch the job draft with related models
         $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
-        return view('pages.graphic_designer.joborder.edit', compact('job_draft'));
+
+        // Get the latest job draft based on the target date of the current job draft
+        $latest_job_draft = JobDraft::where('type', 'content_writer')
+            ->where('date_target', $job_draft->date_target)
+            ->where('job_order_id', $job_draft->job_order_id)
+            ->latest()
+            ->first(); // Assuming you want the latest content writer draft
+
+        // Pass both the job draft and the content draft to the view
+        return view('pages.graphic_designer.joborder.edit', compact('job_draft', 'latest_job_draft'));
     }
+
 
     public function update(Request $request, $id)
     {
