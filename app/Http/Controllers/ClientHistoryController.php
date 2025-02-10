@@ -18,4 +18,9 @@ class ClientHistoryController extends Controller
             ->get();
         return view('pages.client.history.index', compact('job_drafts'));
     }
+    public function show($id)
+    {
+        $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
+        return view('pages.client.history.show', compact('job_draft'));
+    }
 }

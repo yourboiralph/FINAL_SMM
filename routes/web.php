@@ -85,7 +85,7 @@ Route::get('/graphic/revisions/edit/{id}', [GraphicRevisionController::class, 'e
 Route::put('/graphic/revisions/update/{id}', [GraphicRevisionController::class, 'update']);
 
 Route::get('/client/history', [ClientHistoryController::class, 'index'])->name('client.history');
-
+Route::get('/client/history/show/{id}', [ClientHistoryController::class, 'show'])->name('client.history.show');
 
 use App\Http\Controllers\SignatureController;
 
