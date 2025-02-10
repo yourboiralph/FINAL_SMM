@@ -55,18 +55,7 @@
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="w-full">
-                        <p class="text-sm text-gray-600">Graphics Designer</p>
-                        <select name="graphic_designer_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
-                            <option></option>
-                            @foreach ($graphic_designers as $graphic_designer)
-                                <option value="{{ $graphic_designer->id }}">{{ $graphic_designer->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('graphic_designer_id')
-                            <p class="text-red-600 text-sm">{{ $message }}</p>
-                        @enderror
-                    </div>
+
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Content Writer</p>
                         <select name="content_writer_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
@@ -76,6 +65,19 @@
                             @endforeach
                         </select>
                         @error('content_writer_id')
+                            <p class="text-red-600 text-sm">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="w-full">
+                        <p class="text-sm text-gray-600">Graphics Designer</p>
+                        <select name="graphic_designer_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
+                            <option></option>
+                            @foreach ($graphic_designers as $graphic_designer)
+                                <option value="{{ $graphic_designer->id }}">{{ $graphic_designer->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('graphic_designer_id')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>

@@ -32,62 +32,58 @@
 
 <div class="mx-auto max-w-screen-2xl">
     <div class="h-full mx-auto max-w-screen-xl">
-        {{-- Middle Part --}}
-        <div class="">
-            <div class="" >
+        <div class="h-auto gap-8 m-10 p-10 relative bg-white" style="box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.3); border-radius: 8px;">
+            <div class="rounded-md text-white flex justify-end mb-10">
+                <a href="{{ url('/operation') }}" class="w-fit px-4 py-1 bg-[#fa7011] rounded hover:bg-[#d95f0a] transition duration-200">
+                    Back
+                </a>
+            </div>
 
-                <div class="h-auto gap-8 m-10 p-10 relative bg-white " style="box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.3); border-radius: 8px;">
-                    <div class="rounded-md text-white flex justify-end mb-10">
-                        <a href="{{ url('/operation') }}" class="w-fit px-4 py-1 bg-[#fa7011] rounded hover:bg-[#d95f0a] transition duration-200">
-                            Back
+            <table class=" table-auto border-collapse border-none">
+                <tbody>
+                    <tr class="align-top">
+                        <td class="px-4 py-2 font-semibold">Project Name:</td>
+                        <td class="px-4 py-2">{{ $job_draft->jobOrder->title }}</td>
+                    </tr>
+                    <tr class="align-top">
+                        <td class="px-4 py-2 font-semibold">Designation:</td>
+                        <td class="px-4 py-2">{{$job_draft->type}}</td>
+                    </tr>
+                    <tr class="align-top">
+                        <td class="px-4 py-2 font-semibold">Google Drive Link:</td>
+                        <td class="px-4 py-2">{!! $job_draft->draft !!}</td>
+                    </tr>
+                    <tr class="align-top">
+                        <td class="px-4 py-2 font-semibold">Date:</td>
+                        <td class="px-4 py-2">{{ $job_draft->date_target }}</td>
+                    </tr>
+                    <tr class="align-top">
+                        <td class="px-4 py-2 font-semibold">Client Name:</td>
+                        <td class="px-4 py-2">{{ $job_draft->client->name }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="mt-10">
+                <form action="{{url('/client/update/' . $job_draft->id)}}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <label for="feedback" class="block font-semibold">Feedback:</label>
+                    <textarea class="w-full border p-2 rounded-md" name="feedback" id="summaryEditor"></textarea>
+
+                    <div class="mt-4 flex space-x-4">
+                        <button type="submit"
+                            class="px-4 py-2 text-sm text-white bg-[#fa7011] rounded hover:bg-[#c06b32] disabled:opacity-50 disabled:cursor-not-allowed">
+                            Accept
+                        </button>
+                        <a href="{{ url('/client/decline/' . $job_draft->id) }}">
+                            <button type="button"
+                                class="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed">
+                                Decline
+                            </button>
                         </a>
                     </div>
-                    
-                    <div class="flex gap-8">
-                        <div>
-                            <ul class="space-y-4 font-semibold">
-                                <li>Project Name:</li>
-                                <li>Designation:</li>
-                                <li>Google Drive Link:</li>
-                                <li>Date:</li>
-                                <li>Client Name:</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <ul class="space-y-4">
-                                <li>{{ $job_draft->jobOrder->title }}</li>
-                                <li>{{$job_draft->type}}</li>
-                                <li class="overflow-hidden text-ellipsis whitespace-nowrap">{!! $job_draft->draft !!}</li>
-                                <li>{{ $job_draft->date_target }}</li>
-                                <li>{{ $job_draft->client->name }}</li>
-                            </ul>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="mt-10">
-                        <form action="{{url('/client/update/' . $job_draft->id)}}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <!-- CKEditor 5 for Decline Reason -->
-                            <label for="feedback" class="block font-semibold">Feedback:</label>
-                            <textarea class="w-full border p-2 rounded-md" name="feedback" id="summaryEditor"></textarea>
-
-                            <button type="submit"
-                                class="px-4 py-2 mt-4 text-sm text-white bg-[#fa7011] rounded hover:bg-[#c06b32] disabled:opacity-50 disabled:cursor-not-allowed"
-                                id="declineBtn">
-                                Accept
-                            </button>
-                            <a href="{{ url('/client/decline/' . $job_draft->id) }}">
-                                <button type="button"
-                                    class="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                                    id="declineBtn">
-                                    Decline
-                                </button>
-                            </a>
-                        </form>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

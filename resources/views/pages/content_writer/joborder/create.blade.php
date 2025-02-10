@@ -56,7 +56,18 @@
                             <p class="text-xl font-bold">{{ \Carbon\Carbon::parse($job_draft->date_target)->format('Y-m-d') }}</p>
                         </div>
                     </div>
+                    <div class="col-span-4 h-fit w-full">
+                        <p class="text-sm text-gray-600 max-h-96 overflow-y-auto">Instructions</p>
+                        
+                        
+                        <p>{!! $job_draft->jobOrder->description !!}</p>
+                    
+                        @error('draft')
+                            <p class="text-red-600 text-sm">{{ $message }}</p>
+                        @enderror
+                    </div>
 
+                    <hr class="col-span-4 border border-gray-200" />
                     <div class="col-span-2 h-fit w-full">
                         <p class="text-sm text-gray-600">Draft</p>
                         
