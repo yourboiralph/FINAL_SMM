@@ -166,6 +166,19 @@
             </a>
         </div>
 
+        <div class=" block px-6">
+            <a href="{{ url("/client/renewal") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("client/renewal", "client/renewal/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("client/renewal", "client/renewal/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-profile-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("client/renewal", "client/renewal/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="Profile Icon">
+                <h1 class=" block">Renewal</h1>
+            </a>
+        </div>
+
     @elseif ($link === 'content_writer')
         <div class=" block px-6">
             <a href="{{ url("/dashboard") }}"

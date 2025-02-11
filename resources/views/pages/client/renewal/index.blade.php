@@ -1,14 +1,125 @@
-@foreach ($job_orders as $job_order)
-    <p>{{ $job_order->title }} 
-        <input type="checkbox" name="renewable[]" value="{{ $job_order->id }}" onclick="handleClick(this)">
-    </p>
-@endforeach
+@extends('layouts.application')
+
+@section('title', 'Clients')
+@section('header', 'List of Job Orders to Approve || Client')
+
+@section('content')
+
+<style>
+    .custom-shadow {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, .3), 0 1px 3px rgba(0, 0, 0, .3);
+    }
+    .custom-hover-shadow:hover {
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0), 0 4px 6px rgba(0, 0, 0, 0);
+        transition: box-shadow 0.3s ease;
+    }
+    .custom-focus-ring:focus {
+        outline: none;
+        box-shadow: 0 0 0 1px #fa7011;
+        transition: box-shadow 0.3s ease;
+    }
+
+    /* Toggle Switch */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 34px;
+        height: 20px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 14px;
+        width: 14px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked + .slider {
+        background-color: #fa7011;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(14px);
+    }
+</style>
+
+<div class="container mx-auto p-6">
+    <div class="h-96 overflow-auto">
+        <table class="w-full text-left border-collapse" id="projectTable">
+            <thead class="sticky top-0 bg-[#fa7011] text-white">
+                <tr>
+                    <th class="px-6 py-3">File Name</th>
+                    <th class="px-6 py-3">Renewable</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                @foreach ($job_orders as $job_order)
+                    <tr class="project-row border-b">
+                        <td class="px-6 py-3">{{ $job_order->title }}</td>
+                        
+                        <td class="px-6 py-3 border-b">
+                            <label class="switch">
+                                <input type="checkbox" class="renew-toggle" data-id="{{ $job_order->id }}" {{ $job_order->renewable ? 'checked' : '' }}>
+                                <span class="slider"></span>
+                            </label>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <script>
-    function handleClick(checkbox) {
-        if (checkbox.checked) {
-            let jobOrderId = checkbox.value;
-            window.location.href = "{{ url('/client/update') }}/" + jobOrderId;
-        }
-    }
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.renew-toggle').forEach(toggle => {
+        toggle.addEventListener('change', function() {
+            let jobOrderId = this.getAttribute('data-id');
+            let newStatus = this.checked ? 1 : 0;
+
+            fetch(`/client/update/${jobOrderId}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ renewable: newStatus }) 
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.success) {
+                    alert('Failed to update status');
+                    this.checked = !this.checked; // Revert toggle if failed
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+});
+
 </script>
+
+@endsection
