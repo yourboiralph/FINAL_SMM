@@ -14,11 +14,16 @@
     ];
 @endphp
 <div class="container mx-auto p-6">
+    <a href="{{ url('joborder/create') }}">
+        <div class="bg-[#fa7011] w-fit block text-white px-4 py-2 rounded-lg shadow-md hover:bg-cyan-800 transition text-center md:w-auto lg:hidden">
+            <i class="fa-solid fa-plus"></i>
+        </div>
+    </a>
 
     {{-- Search Bar --}}
     <div class="w-full flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
         <a href="{{ url('register') }}">
-            <div class="bg-[#fa7011] text-white px-4 py-2 rounded-lg shadow-md hover:bg-cyan-800 transition text-center w-full md:w-auto">
+            <div class="bg-[#fa7011] hidden text-white px-4 py-2 rounded-lg shadow-md hover:bg-cyan-800 transition text-center w-full md:w-auto lg:block">
                 Create New User
             </div>
         </a>
