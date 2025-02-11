@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\ClientApprovalController;
 use App\Http\Controllers\ClientHistoryController;
+use App\Http\Controllers\ClientRenewalController;
 use App\Http\Controllers\ContentApprovalController;
 use App\Http\Controllers\ContentRevisionController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GraphicApprovalController;
 use App\Http\Controllers\GraphicRevisionController;
 use App\Http\Controllers\JobOrderController;
@@ -23,13 +25,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware('guest')->group(function () {
+    Route::get('/', function () {
+        return view('auth/login');
+    });
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -88,7 +90,7 @@ Route::get('/client/history', [ClientHistoryController::class, 'index'])->name('
 Route::get('/client/history/show/{id}', [ClientHistoryController::class, 'show'])->name('client.history.show');
 Route::get('/client/history/download/{id}', [ClientHistoryController::class, 'downloadPDF'])->name('client.history.download');
 
-
+Route::get('/client/renewal', [ClientRenewalController::class, 'index'])->name('client.renewal');
 
 use App\Http\Controllers\SignatureController;
 
