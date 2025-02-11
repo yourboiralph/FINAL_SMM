@@ -7,7 +7,6 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 @section('content')
-
 <div class="container mx-auto p-6 max-w-screen-xl overflow-hidden">
     <div>
         <div class="grid grid-cols-1 md:grid md:grid-cols-3 md:px-2 mx-auto">
@@ -24,36 +23,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="px-4 py-2 text-sm">Site Map</td>
-                                    <td class="px-4 py-2 text-sm flex items-center gap-8">
-                                        Signed
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                        </svg>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 text-sm">Draft Homepage Proposal</td>
-                                    <td class="px-4 py-2 text-sm flex items-center gap-8">
-                                        Signed
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                        </svg>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 text-sm">Final Homepage Proposal</td>
-                                    <td class="px-4 py-2 text-sm text-orange-500 cursor-pointer">Sign Now</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 text-sm">All Pages Proposal</td>
-                                    <td class="px-4 py-2 text-sm text-orange-500 cursor-pointer">Sign Now</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 text-sm">Front-End Approval</td>
-                                    <td class="px-4 py-2 text-sm text-orange-500 cursor-pointer">Sign Now</td>
-                                </tr>
+                                @foreach ($job_drafts as $job_draft )
+                                    <tr>
+                                        <td class="px-4 py-2 text-sm">{{$job_draft->jobOrder->title}}</td>
+                                        @if ($job_draft->signature_admin)
+                                            <td class="px-4 py-2 text-sm flex items-center gap-8">
+                                                Signed
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                                </svg>
+                                            </td>
+                                        @else
+                                            <td class="px-4 py-2 text-sm text-orange-500 cursor-pointer">Sign Now</td>
+                                        @endif
+
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -83,6 +68,18 @@
             <div class="max-w-screen-xl pt-10">
                 <div class="carousel">
                     <div class="carousel-track flex">
+                        <a href="https://link1.com" class="carousel-item">
+                            <img src="/Assets/ads1.png" alt="Image 1" draggable="false">
+                        </a>
+                        <a href="https://link2.com" class="carousel-item">
+                            <img src="/Assets/ads2.png" alt="Image 2" draggable="false">
+                        </a>
+                        <a href="https://link3.com" class="carousel-item">
+                            <img src="/Assets/ads3.png" alt="Image 3" draggable="false">
+                        </a>
+                        <a href="https://link4.com" class="carousel-item">
+                            <img src="/Assets/ads4.png" alt="Image 4" draggable="false">
+                        </a>
                         <a href="https://link1.com" class="carousel-item">
                             <img src="/Assets/ads1.png" alt="Image 1" draggable="false">
                         </a>
