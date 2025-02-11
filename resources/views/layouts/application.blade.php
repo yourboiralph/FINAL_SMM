@@ -10,27 +10,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
+<body class="bg-gray-100">
     <div class="container mx-auto max-w-screen-2xl">
+        <!-- Toggle Sidebar Button for Mobile -->
+        <i id="toggleButton" class="sticky top-10 z-20 left-5 bg-[#fa7011] px-3 py-2 opacity-70 rounded-full  text-2xl cursor-pointer fa-solid fa-bars lg:hidden"></i>
         <div class="flex min-h-screen">
+            <!-- Sidebar & Overlay -->
+            <div id="sidebarBackdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden lg:hidden"></div>
+
             <!-- Sidebar -->
             <div id="sidebar"
-                class="sticky top-0 left-0 w-1/4 bg-white shadow-md h-screen flex flex-col">
+                class="fixed top-0 left-0 w-80 md:w-96 z-20 bg-white shadow-lg h-full lg:h-screen flex flex-col transition-transform transform -translate-x-full lg:translate-x-0 lg:sticky lg:block">
                 <div class="p-6 flex items-center justify-between">
-                    <img class="w-48 sm:w-48 lg:w-64" src="/Assets/logo.png" draggable="false" alt="">
-                    <i id="toggleButton" class="text-2xl cursor-pointer fa-solid fa-bars"></i>
+                    <img class="w-48 sm:w-48 lg:w-64 lg:mx-auto" src="/Assets/logo.png" draggable="false" alt="Logo">
+                    <i id="closeSidebar" class="text-2xl cursor-pointer fa-solid fa-xmark lg:hidden"></i>
                 </div>
-                <hr class="hidden md:block md:border md:border-[#EC690F] mb-10">
+                <hr class="border border-[#EC690F] mb-10">
                 <x-sidebar />
             </div>
 
-            <!-- Main Content -->
-            <div class="flex-1 flex flex-col">
+             <!-- Main Content -->
+             <div class="flex-1 flex flex-col">
                 <div class="h-24">
                     <x-navbar :header="View::yieldContent('header')" />
                 </div>
@@ -40,7 +47,28 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sidebar = document.getElementById("sidebar");
+            const sidebarBackdrop = document.getElementById("sidebarBackdrop");
+            const toggleButton = document.getElementById("toggleButton");
+            const closeSidebar = document.getElementById("closeSidebar");
+
+            function openSidebar() {
+                sidebar.classList.remove("-translate-x-full");
+                sidebarBackdrop.classList.remove("hidden");
+            }
+
+            function closeSidebarFunction() {
+                sidebar.classList.add("-translate-x-full");
+                sidebarBackdrop.classList.add("hidden");
+            }
+
+            toggleButton.addEventListener("click", openSidebar);
+            closeSidebar.addEventListener("click", closeSidebarFunction);
+            sidebarBackdrop.addEventListener("click", closeSidebarFunction);
+        });
+    </script>
 </body>
-
-
 </html>
