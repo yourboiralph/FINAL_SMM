@@ -47,7 +47,7 @@
             </a>
         </div>
 
-        <div class=" block px-6">
+        {{-- <div class=" block px-6">
             <a href="{{ url("/revisions") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("revisions", "revisions/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
@@ -84,7 +84,7 @@
                     alt="joborder Icon">
                 <h1 class=" block">Instruction Manual</h1>
             </a>
-        </div>
+        </div> --}}
 
         <div class=" block px-6">
             <a href="{{ url("/users") }}"
@@ -140,7 +140,7 @@
             </a>
         </div>
 
-        <div class=" block px-6">
+        {{-- <div class=" block px-6">
             <a href="{{ url("/profile") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("profile", "profile/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
@@ -164,7 +164,7 @@
                     alt="Profile Icon">
                 <h1 class=" block">Promotions</h1>
             </a>
-        </div>
+        </div> --}}
 
         <div class=" block px-6">
             <a href="{{ url("/client/renewal") }}"
@@ -284,7 +284,7 @@
             </a>
         </div>
 
-        <div class=" block px-6">
+        {{-- <div class=" block px-6">
             <a href="{{ url("/profile") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("profile", "profile/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
@@ -334,7 +334,7 @@
                     alt="joborder Icon">
                 <h1 class=" block">Instruction Manual</h1>
             </a>
-        </div>
+        </div> --}}
 
         <div class=" block px-6">
             <a href="{{ url("/users") }}"
