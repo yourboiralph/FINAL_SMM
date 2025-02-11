@@ -34,7 +34,13 @@
                                                 </svg>
                                             </td>
                                         @else
-                                            <td class="px-4 py-2 text-sm text-orange-500 cursor-pointer">Sign Now</td>
+                                            @if ($job_draft->status == "pending")
+                                                <td class="px-4 py-2 text-sm text-gray-500 cursor-not-allowed">Sign Now</td>
+                                            @else
+                                            <td class="px-4 py-2 text-sm text-orange-500 cursor-pointer">
+                                                <a href="{{ url('/operation/show/' . $job_draft->id) }}" class="text-orange-500">Sign Now</a>
+                                            </td>                                            
+                                            @endif
                                         @endif
 
                                     </tr>
@@ -54,7 +60,7 @@
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
-                    <div class="h-20 w-72 bg-white flex items-center justify-center gap-8">
+                    <div class="h-20 w-full bg-white flex items-center justify-center gap-8">
                         <i class="fa-brands fa-facebook-f px-3 py-2 rounded-full bg-[#fa7011]"
                             style="color: #ffffff;"></i>
                         <i class="fa-brands fa-instagram px-3 py-2 rounded-full bg-[#fa7011]"

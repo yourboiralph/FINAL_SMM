@@ -60,7 +60,7 @@
                                 </button>
                             </a>
                             <a href="{{url('joborder/show/' . $job_draft->id)}}">
-                                <button class="px-2 py-1 lg:px-4 text-white bg-gray-700 rounded hover:bg-gray-800">
+                                <button class="px-2 py-1 lg:px-4 lg:py-2 text-sm text-white bg-gray-700 rounded hover:bg-gray-800">
                                     Show
                                 </button>
                             </a>
