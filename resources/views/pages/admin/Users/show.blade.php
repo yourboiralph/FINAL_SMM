@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
-@section('title', 'Edit User')
-@section('header', 'Edit User')
+@section('title', 'Show User')
+@section('header', 'Show User')
 
 @section('content')
 @php
@@ -16,13 +16,13 @@
 <div class="mx-auto max-w-screen-2xl">
     {{-- Middle Part --}}
 
-    <div class="px-10 pr-32 text-white">
+    <div class="px-10 text-white">
         <div class="w-full flex justify-end items-end mb-4 cursor-pointer"
             onclick="window.location.assign('{{ url('users') }}')">
             <div class="w-fit px-4 py-1 bg-[#f68e12] rounded-md">Go Back</div>
         </div>
         <div class="grid mt-10 grid-cols-3 h-80 gap-6 text-black">
-            <div class="px-10 col-span-3 lg:col-span-1 bg-white shadow-md rounded-md pt-10">
+            <div class="px-10 col-span-3 lg:col-span-1 bg-white shadow-md rounded-md pt-10 py-10">
                 <div class="w-full flex justify-center items-center">
                     <img class="rounded-full w-32 h-32 object-cover"
                         src="{{ file_exists(public_path($user->image)) && $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}"

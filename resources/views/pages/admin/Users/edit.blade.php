@@ -13,7 +13,7 @@
     @endif
 
     <div class="h-auto">
-        <div class="px-10 pr-32 text-white">
+        <div class="px-10 text-white">
             <div class="w-full flex justify-end items-end mb-4 cursor-pointer" onclick="window.location.assign('{{ url('users') }}')">
                 <div class="w-fit px-4 py-1 bg-[#f68e12] rounded-md">Go Back</div>
             </div>
