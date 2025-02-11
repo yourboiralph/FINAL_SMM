@@ -91,6 +91,7 @@ Route::get('/client/history/show/{id}', [ClientHistoryController::class, 'show']
 Route::get('/client/history/download/{id}', [ClientHistoryController::class, 'downloadPDF'])->name('client.history.download');
 
 Route::get('/client/renewal', [ClientRenewalController::class, 'index'])->name('client.renewal');
+Route::get('/client/update/{id}', [ClientRenewalController::class, 'update'])->name('client.update');
 
 use App\Http\Controllers\SignatureController;
 

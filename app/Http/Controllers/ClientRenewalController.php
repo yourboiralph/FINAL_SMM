@@ -15,4 +15,9 @@ class ClientRenewalController extends Controller
         })->get();
         return view('pages.client.renewal.index', compact('job_orders'));
     }
+
+    public function update(Request $request, $id)
+    {
+        dd($request->query('renewal')); // Should return 1 or 0
+    }
 }
