@@ -19,15 +19,14 @@ class ClientRenewalController extends Controller
     public function update(Request $request, $id)
     {
         $jobOrder = JobOrder::find($id);
-    
+
         if (!$jobOrder) {
             return response()->json(['success' => false, 'message' => 'Job Order not found'], 404);
         }
-    
+
         $jobOrder->renewable = $request->input('renewable'); // Fetch JSON data
         $jobOrder->save();
-    
+
         return response()->json(['success' => true, 'message' => 'Status updated successfully']);
     }
-    
 }

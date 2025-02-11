@@ -77,6 +77,7 @@ Route::get('/client/edit/{id}', [ClientApprovalController::class, 'edit'])->name
 Route::put('/client/update/{id}', [ClientApprovalController::class, 'update'])->name('client.update');
 Route::get('/client/decline/{id}', [ClientApprovalController::class, 'declineForm']);
 Route::post('/client/decline/{id}', [ClientApprovalController::class, 'decline']);
+Route::put('/client/renew/{id}', [ClientApprovalController::class, 'renew'])->name('client.renew');
 
 Route::get('/content/revisions/', [ContentRevisionController::class, 'index'])->name('content.revisions');
 Route::get('/content/revisions/edit/{id}', [ContentRevisionController::class, 'edit']);
