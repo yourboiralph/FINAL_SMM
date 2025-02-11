@@ -97,7 +97,7 @@
                             @enderror
                         </div>
                         <div>
-                            <p class="text-sm text-gray-600">Date Deadline</p>
+                            <p class="text-sm text-gray-600 text-nowrap">Date Deadline</p>
                             <input type="date" name="date_target" class="w-full rounded-lg shadow-lg border-gray-200" value="{{ \Carbon\Carbon::parse($job_draft->date_target)->format('Y-m-d') }}">
                             @error('date_target')
                                 <p class="text-red-600 text-sm">{{ $message }}</p>

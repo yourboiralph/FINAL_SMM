@@ -34,7 +34,7 @@
         </div>
         <h1 class="text-xl font-bold mt-4">Show</h1>
         <div class="mt-4 grid grid-cols-4">
-            <div class="col-span-4 flex flex-col space-y-4 mb-10">
+            <div class="col-span-4 flex flex-col space-y-4 mb-10 md:flex-row  md:space-y-0">
                 <div class="w-full">
                     <p class="text-sm font-bold text-gray-600">Title</p>
                     <p class="border-b-2 border-[#fa7011] w-fit">{{ $job_draft->jobOrder->title }}</p>
@@ -59,7 +59,7 @@
                 <p class="border-b-2 border-[#fa7011] w-fit">{!! $job_draft->joborder->description !!}</p>
 
                 {{-- Graphic Designer & Content Writer --}}
-                <div class="mt-8 flex sm:flex-row gap-8 justify-center">
+                <div class="mt-8 flex sm:flex-row gap-8 justify-center sm:justify-normal">
                     <div class="flex flex-col items-center">
                         <img class="w-14 h-14 md:w-16 md:h-16 rounded-full" src="/Assets/user-profile-profilepage.png" alt="Graphic Designer">
                         <h1 class="text-sm mt-2">{{ $job_draft->graphicDesigner->name }}</h1>

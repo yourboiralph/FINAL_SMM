@@ -47,7 +47,7 @@
                     </div>
 
                     <!-- Using a Table for Alignment -->
-                    <table class="w-full table-auto border-collapse border-none">
+                    <table class="{{$job_draft->signature_admin ? 'w-2/5' : 'w-full'}} table-auto border-collapse border-none">
                         <tbody>
                             <tr class="align-top">
                                 <td class="px-4 py-2 font-semibold">Project Name:</td>
