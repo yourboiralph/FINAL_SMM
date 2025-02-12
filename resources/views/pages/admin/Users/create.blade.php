@@ -5,9 +5,10 @@
 
 @section('content')
 
+
 <style>
     .custom-shadow {
-        box-shadow: 0 4px 6px rgba(0, 0, 0, .3), 0 1px 3px rgba(0, 0, 0, .3);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .3), 0 1px 3px rgba(0, 0, 0, .3);
     }
     .custom-hover-shadow:hover {
         box-shadow: 0 10px 15px rgba(0, 0, 0, 0), 0 4px 6px rgba(0, 0, 0, 0);
@@ -64,14 +65,14 @@
                 <div class="grid grid-cols-2 gap-4 mt-4">
                     <div class="w-full col-span-1">
                         <p class="text-sm text-gray-600">Name</p>
-                        <input type="text" name="name" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" required>
+                        <input type="text" name="name" class="w-full border-gray-200 rounded-lg" required>
                         @error('name')
                             <p class="text-red-600 text-sm">{{$message}}</p>
                         @enderror
                     </div>
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Email</p>
-                        <input type="email" name="email" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" required>
+                        <input type="email" name="email" class="w-full border-gray-200 rounded-lg" required>
                         @error('email')
                             <p class="text-red-600 text-sm">{{$message}}</p>
                         @enderror
@@ -79,7 +80,7 @@
     
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Role</p>
-                        <select name="role_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" required>
+                        <select name="role_id" class="w-full border-gray-200 rounded-lg" required>
                             <option value="">Select a role</option>
                             <option value="1">Client</option>
                             <option value="2">Operations Manager</option>
@@ -94,7 +95,7 @@
                     
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Phone</p>
-                        <input type="text" name="phone" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" required>
+                        <input type="text" name="phone" class="w-full border-gray-200 rounded-lg" required>
                         @error('phone')
                             <p class="text-red-600 text-sm">{{$message}}</p>
                         @enderror
@@ -102,7 +103,7 @@
     
                     <div class="w-full col-span-2">
                         <p class="text-sm text-gray-600">Address</p>
-                        <input type="text" name="address" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" required>
+                        <input type="text" name="address" class="w-full border-gray-200 rounded-lg" required>
                         @error('address')
                             <p class="text-red-600 text-sm">{{$message}}</p>
                         @enderror
@@ -110,7 +111,7 @@
                     
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Password</p>
-                        <input type="password" name="password" class="w-full rounded-lg custom-shadow custom-focus-ring" required>
+                        <input type="password" name="password" class="w-full rounded-lg border-gray-200 focus:ring-0" required>
                         @error('password')
                             <p class="text-red-600 text-sm">{{$message}}</p>
                         @enderror
@@ -118,7 +119,7 @@
                     
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Confirm Password</p>
-                        <input type="password" name="password_confirmation" class="w-full rounded-lg custom-shadow custom-focus-ring" required>
+                        <input type="password" name="password_confirmation" class="w-full rounded-lg border-gray-200 focus:ring-0" required>
                         @error('password_confirmation')
                             <p class="text-red-600 text-sm">{{$message}}</p>
                         @enderror
