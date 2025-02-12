@@ -11,6 +11,7 @@ use App\Http\Controllers\GraphicRevisionController;
 use App\Http\Controllers\JobOrderController;
 use App\Http\Controllers\OperationApprovalController;
 use App\Http\Controllers\OperationHistoryController;
+use App\Http\Controllers\OperationRenewalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TopApprovalController;
 use Illuminate\Support\Facades\Route;
@@ -98,6 +99,9 @@ Route::get('/operation/history/download/{id}', [OperationHistoryController::clas
 
 Route::get('/client/renewal', [ClientRenewalController::class, 'index'])->name('client.renewal');
 Route::post('/client/update/{id}', [ClientRenewalController::class, 'update'])->name('client.update');
+
+Route::get('/operation/renewal', [OperationRenewalController::class, 'index'])->name('operation.renewal');
+Route::post('/operation/update/{id}', [OperationRenewalController::class, 'update'])->name('operation.update');
 
 use App\Http\Controllers\SignatureController;
 
