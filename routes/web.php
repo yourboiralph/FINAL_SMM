@@ -10,6 +10,7 @@ use App\Http\Controllers\GraphicApprovalController;
 use App\Http\Controllers\GraphicRevisionController;
 use App\Http\Controllers\JobOrderController;
 use App\Http\Controllers\OperationApprovalController;
+use App\Http\Controllers\OperationHistoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TopApprovalController;
 use Illuminate\Support\Facades\Route;
@@ -90,6 +91,10 @@ Route::put('/graphic/revisions/update/{id}', [GraphicRevisionController::class, 
 Route::get('/client/history', [ClientHistoryController::class, 'index'])->name('client.history');
 Route::get('/client/history/show/{id}', [ClientHistoryController::class, 'show'])->name('client.history.show');
 Route::get('/client/history/download/{id}', [ClientHistoryController::class, 'downloadPDF'])->name('client.history.download');
+
+Route::get('/operation/history', [OperationHistoryController::class, 'index'])->name('operation.history');
+Route::get('/operation/history/show/{id}', [OperationHistoryController::class, 'show'])->name('operation.history.show');
+Route::get('/operation/history/download/{id}', [OperationHistoryController::class, 'downloadPDF'])->name('operation.history.download');
 
 Route::get('/client/renewal', [ClientRenewalController::class, 'index'])->name('client.renewal');
 Route::post('/client/update/{id}', [ClientRenewalController::class, 'update'])->name('client.update');
