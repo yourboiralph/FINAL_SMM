@@ -6,15 +6,15 @@
 @section('content')
 <div class="mx-auto max-w-screen-2xl">
 
-    @if (session('status'))
+    @if (session('Status'))
         <div id="success-message" class="bg-green-500 text-white p-4 rounded-md mb-4">
-            {{ session('status') }}
+            {{ session('Status') }}
         </div>
     @endif
 
     <div class="h-auto">
         <div class="px-10 text-white">
-            <div class="w-full flex justify-end items-end mb-4 cursor-pointer" onclick="window.location.assign('{{ url('users') }}')">
+            <div class="w-full flex justify-end items-end mb-4 cursor-pointer" onclick="window.location.assign('{{ url('profile/show') }}')">
                 <div class="w-fit px-4 py-1 bg-[#f68e12] rounded-md">Go Back</div>
             </div>
 

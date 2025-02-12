@@ -30,6 +30,8 @@
 <!-- Include CKEditor 5 CDN -->
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 
+
+
 <div class="mx-auto max-w-screen-2xl">
     <div class="h-full mx-auto max-w-screen-xl">
         <div class="h-auto gap-8 m-10 p-10 relative bg-white" style="box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.3); border-radius: 8px;">

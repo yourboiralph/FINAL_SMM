@@ -100,13 +100,13 @@
         </div>
 
         <div class=" block px-6">
-            <a href="{{ url("/profile") }}"
+            <a href="{{ url("/profile/show") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
-                {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is("operation/renewal", "operation/renewal/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                {{ request()->is("profile", "profile/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("profile", "profile/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <img src="/Assets/icon-profile-white.png"
                     draggable="false"
-                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("profile", "profile/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
                 <h1 class=" block">Profile</h1>
             </a>
@@ -191,7 +191,7 @@
         </div>
 
         {{-- <div class=" block px-6">
-            <a href="{{ url("/profile") }}"
+            <a href="{{ url("/profile/show") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("profile", "profile/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("profile", "profile/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
@@ -230,13 +230,13 @@
         </div>
 
         <div class=" block px-6">
-            <a href="{{ url("/profile") }}"
+            <a href="{{ url("/profile/show") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
-                {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is("operation/renewal", "operation/renewal/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                {{ request()->is("profile", "profile/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("profile", "profile/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <img src="/Assets/icon-profile-white.png"
                     draggable="false"
-                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("profile", "profile/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
                 <h1 class=" block">Profile</h1>
             </a>
@@ -282,13 +282,13 @@
         </div>
 
         <div class=" block px-6">
-            <a href="{{ url("/profile") }}"
+            <a href="{{ url("/profile/show") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
-                {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is("operation/renewal", "operation/renewal/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                {{ request()->is("profile", "profile/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("profile", "profile/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <img src="/Assets/icon-profile-white.png"
                     draggable="false"
-                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("profile", "profile/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
                 <h1 class=" block">Profile</h1>
             </a>
@@ -383,13 +383,13 @@
         </div>
 
         <div class=" block px-6">
-            <a href="{{ url("/profile") }}"
+            <a href="{{ url("/profile/show") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
-                {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is("operation/renewal", "operation/renewal/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                {{ request()->is("profile", "profile/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("profile", "profile/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <img src="/Assets/icon-profile-white.png"
                     draggable="false"
-                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("profile", "profile/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
                 <h1 class=" block">Profile</h1>
             </a>
@@ -434,7 +434,7 @@
         </div>
 
         {{-- <div class=" block px-6">
-            <a href="{{ url("/profile") }}"
+            <a href="{{ url("/profile/show") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("profile", "profile/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("profile", "profile/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
@@ -486,13 +486,13 @@
         </div> --}}
 
         <div class=" block px-6">
-            <a href="{{ url("/profile") }}"
+            <a href="{{ url("/profile/show") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
-                {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is("operation/renewal", "operation/renewal/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                {{ request()->is("profile", "profile/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("profile", "profile/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <img src="/Assets/icon-profile-white.png"
                     draggable="false"
-                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("profile", "profile/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
                 <h1 class=" block">Profile</h1>
             </a>
