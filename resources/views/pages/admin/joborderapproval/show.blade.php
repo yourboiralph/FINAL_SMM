@@ -103,6 +103,8 @@
                                                 </div>
                                             </div>
 
+
+
                                             {{-- Signature Pad --}}
                                             <div id="padSection" class="hidden">
                                                 <canvas id="signature-pad" width="400" height="200" {{ $isSigned ? 'style=pointer-events:none;opacity:0.5;' : '' }}></canvas>
@@ -112,6 +114,12 @@
                                                     </button>
                                                 </div>
                                                 <input type="hidden" name="signature_pad" id="signaturePadData">
+                                            </div>
+
+                                            {{-- Checkbox for Agreement --}}
+                                            <div class="mt-4 flex items-center space-x-2">
+                                                <input type="checkbox" id="agree" required {{ $isDisabled ? 'disabled' : '' }}>
+                                                <label for="agree">I agree to the terms and conditions.</label>
                                             </div>
 
                                             {{-- Approve and Decline Buttons --}}
