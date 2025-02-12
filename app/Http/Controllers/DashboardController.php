@@ -16,6 +16,7 @@ class DashboardController extends Controller
         if ($user_role == 1) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
                 ->where('client_id', $user->id)
+                ->whereIn('status', ['Submitted to Client', 'completed'])
                 ->orderBy('id', 'desc') // Sort by id descending
                 ->take(5) // Get the latest 5 data
                 ->get();
@@ -27,13 +28,12 @@ class DashboardController extends Controller
                 ->orderBy('id', 'desc') // Sort by id descending
                 ->limit(5) // Ensure a maximum of 5 records
                 ->get();
-        
+
             return view('dashboard', compact('job_drafts'));
-        }
-         elseif ($user_role == 3) {
+        } elseif ($user_role == 3) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
                 ->where('content_writer_id', $user->id)
-                ->where('status', 'pending')
+                ->where('type', 'content_writer')
                 ->orderBy('id', 'desc') // Sort by id descending
                 ->take(5) // Get the latest 5 data
                 ->get();
@@ -42,6 +42,7 @@ class DashboardController extends Controller
         } elseif ($user_role == 4) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
                 ->where('graphic_designer_id', $user->id)
+                ->where('type', 'graphic_designer')
                 ->orderBy('id', 'desc') // Sort by id descending
                 ->take(5) // Get the latest 5 data
                 ->get();
@@ -49,6 +50,7 @@ class DashboardController extends Controller
             return view('dashboard', compact('job_drafts'));
         } elseif ($user_role == 5) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
+                ->whereIn('status', ['Submitted to Client', 'completed', 'Submitted to Top Manager'])
                 ->orderBy('id', 'desc') // Sort by id descending
                 ->take(5) // Get the latest 5 data
                 ->get();
