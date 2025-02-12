@@ -7,7 +7,7 @@
 
 <style>
     .custom-shadow {
-        box-shadow: 0 4px 6px rgba(0, 0, 0, .3), 0 1px 3px rgba(0, 0, 0, .3);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .3), 0 1px 3px rgba(0, 0, 0, .3);
     }
     .custom-hover-shadow:hover {
         box-shadow: 0 10px 15px rgba(0, 0, 0, 0), 0 4px 6px rgba(0, 0, 0, 0);
@@ -40,7 +40,7 @@
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Title</p>
-                        <input type="text" name="title" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
+                        <input type="text" name="title" class="w-full border-gray-200 rounded-lg">
                         @error('title')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -48,7 +48,7 @@
                     <div class="col-span-1 w-full">
                         <p class="text-sm text-gray-600">Client</p>
                         <div class="relative">
-                            <input type="text" id="selected-client-name" value="Select a Client" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring cursor-pointer" readonly onclick="openModal()">
+                            <input type="text" id="selected-client-name" value="Select a Client" class="w-full border-gray-200 rounded-lg cursor-pointer" readonly onclick="openModal()">
                             <input type="hidden" name="client_id" id="selected-client-id">
                         </div>
                         @error('client_id')
@@ -58,21 +58,22 @@
 
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Content Writer</p>
-                        <select name="content_writer_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
-                            <option></option>
+                        <select name="content_writer_id" class="w-full border-gray-200 rounded-lg text-sm ">
+                            <option value="" disabled selected>Select A Content Writer</option>
                             @foreach ($content_writers as $content_writer)
-                                <option value="{{ $content_writer->id }}">{{ $content_writer->name }}</option>
+                                <option value="{{ $content_writer->id }}" class="text-black text-sm">{{ $content_writer->name }}</option>
                             @endforeach
                         </select>
                         @error('content_writer_id')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
+                    
 
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Graphics Designer</p>
-                        <select name="graphic_designer_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring">
-                            <option></option>
+                        <select name="graphic_designer_id" class="w-full border-gray-200 rounded-lg text-sm ">
+                            <option value="" disabled selected>Select A Graphic Designer</option>
                             @foreach ($graphic_designers as $graphic_designer)
                                 <option value="{{ $graphic_designer->id }}">{{ $graphic_designer->name }}</option>
                             @endforeach
@@ -85,24 +86,25 @@
                     <div class="col-span-2 grid grid-cols-2 w-full gap-4 rounded-lg">
                         <div>
                             <p class="text-sm text-gray-600">Date Started</p>
-                            <input type="date" name="date_started" class="w-full rounded-lg custom-shadow custom-focus-ring">
+                            <input type="date" name="date_started" class="w-full rounded-lg border-gray-200 focus:ring-0">
                             @error('date_started')
                                 <p class="text-red-600 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
                         <div>
                             <p class="text-sm text-gray-600">Date Deadline</p>
-                            <input type="date" name="date_target" class="w-full rounded-lg custom-shadow custom-focus-ring">
+                            <input type="date" name="date_target" class="w-full rounded-lg border-gray-200 focus:ring-0">
                             @error('date_target')
                                 <p class="text-red-600 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
+                    
                     <div class="col-span-2 h-fit w-full">
                         <p class="text-sm text-gray-600">Description</p>
                         
                         <!-- CKEditor Textarea -->
-                        <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring"></textarea>
+                        <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg"></textarea>
                     
                         @error('description')
                             <p class="text-red-600 text-sm">{{ $message }}</p>

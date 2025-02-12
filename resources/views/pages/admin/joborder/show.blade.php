@@ -49,7 +49,7 @@
                 </div>
                 <div class="w-full">
                     <p class="text-sm font-bold text-gray-600">Deadline</p>
-                    <p >{{ $job_draft->date_target }}</p>
+                    <p class="border-b-2 border-[#fa7011] w-fit">{{ $job_draft->date_target }}</p>
                 </div>
             </div>
             <div class="col-span-4 h-fit">
