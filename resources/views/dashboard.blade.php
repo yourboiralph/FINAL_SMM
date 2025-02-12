@@ -6,6 +6,10 @@
 <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+@php
+    $user_role = auth()->user()->role_id
+@endphp
+
 @section('content')
 <div class="container mx-auto p-6 max-w-screen-xl overflow-hidden">
     <div>
@@ -24,26 +28,71 @@
                             </thead>
                             <tbody>
                                 @foreach ($job_drafts as $job_draft )
-                                    <tr>
-                                        <td class="px-4 py-2 text-sm">{{$job_draft->jobOrder->title}}</td>
-                                        @if ($job_draft->signature_admin)
-                                            <td class="px-4 py-2 text-sm flex items-center gap-8">
-                                                Signed
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                                </svg>
-                                            </td>
-                                        @else
-                                            @if ($job_draft->status == "pending")
-                                                <td class="px-4 py-2 text-sm text-gray-500 cursor-not-allowed">Sign Now</td>
+                                    @if ($user_role == 3 || $user_role == 4)
+                                        <tr>
+                                            <td class="px-4 py-2 text-sm">{{$job_draft->jobOrder->title}}</td>
+                                            @if ($job_draft->status != "pending")
+                                                <td class="px-4 py-2 text-sm flex items-center gap-8">
+                                                    Created
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                </td>
                                             @else
-                                            <td class="px-4 py-2 text-sm text-orange-500 cursor-pointer">
-                                                <a href="{{ url('/operation/show/' . $job_draft->id) }}" class="text-orange-500">Sign Now</a>
-                                            </td>                                            
+                                                <td class="px-4 py-2 text-sm text-orange-500 cursor-pointer">
+                                                    <a href="{{ url(($user_role == 3 ? 'content' : 'graphic') . '/edit/' . $job_draft->id) }}" class="text-orange-500">Create Draft</a>
+                                                </td>                                            
                                             @endif
-                                        @endif
-
-                                    </tr>
+                                        </tr>
+                                    @elseif ($user_role == 2 && $job_draft->status == "Submitted to Operations" || $user_role == 2 && $job_draft->status == "Submitted to Top Manager")
+                                        <tr>
+                                            <td class="px-4 py-2 text-sm">{{$job_draft->jobOrder->title}}</td>
+                                            @if ($user_role == 2 ? $job_draft->signature_admin : $job_draft->signature_top_manager)
+                                                <td class="px-4 py-2 text-sm flex items-center gap-8">
+                                                    Signed
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                </td>
+                                            @else
+                                                <td class="px-4 py-2 text-sm text-orange-500 cursor-pointer">
+                                                    <a href="{{ url(($user_role == 2 ? 'operation' : 'topmanager') . '/show/' . $job_draft->id) }}" class="text-orange-500">Sign Now</a>
+                                                </td>  
+                                            @endif
+                                        </tr>
+                                    @elseif ($user_role == 5 && $job_draft->status == "Submitted to Top Manager" || $user_role == 5 && $job_draft->status == "Submitted to Client")
+                                        <tr>
+                                            <td class="px-4 py-2 text-sm">{{$job_draft->jobOrder->title}}</td>
+                                            @if ($user_role == 2 ? $job_draft->signature_admin : $job_draft->signature_top_manager)
+                                                <td class="px-4 py-2 text-sm flex items-center gap-8">
+                                                    Signed
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                </td>
+                                            @else
+                                                <td class="px-4 py-2 text-sm text-orange-500 cursor-pointer">
+                                                    <a href="{{ url(($user_role == 2 ? 'operation' : 'topmanager') . '/show/' . $job_draft->id) }}" class="text-orange-500">Sign Now</a>
+                                                </td>  
+                                            @endif
+                                        </tr>
+                                    @elseif ($user_role == 1 && $job_draft->status == "Submitted to Client" || $user_role == 1 && $job_draft->status == "completed")
+                                        <tr>
+                                            <td class="px-4 py-2 text-sm">{{$job_draft->jobOrder->title}}</td>
+                                            @if ($job_draft->status == "completed")
+                                                <td class="px-4 py-2 text-sm flex items-center gap-8">
+                                                    Approved
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                </td>
+                                            @elseif($job_draft->status == "Submitted to Client")
+                                                <td class="px-4 py-2 text-sm text-orange-500">
+                                                    <a href="{{ url('/client/show/' . $job_draft->id) }}" class="text-orange-500 cursor-not-allowed disabled:text-gray-400">View Form</a>
+                                                </td>  
+                                            @endif
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>
