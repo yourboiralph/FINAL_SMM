@@ -16,18 +16,18 @@ class OperationHistoryController extends Controller
         $job_drafts = JobDraft::where('status', 'completed')
             ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client') // Corrected ->with() usage
             ->get();
-        return view('pages.operation.history.index', compact('job_drafts'));
+        return view('pages.admin.history.index', compact('job_drafts'));
     }
     public function show($id)
     {
         $job_draft = JobDraft::with('jobOrder.issuer', 'contentWriter', 'graphicDesigner', 'client')->find($id);
-        return view('pages.operation.history.show', compact('job_draft'));
+        return view('pages.admin.history.show', compact('job_draft'));
     }
     public function downloadPDF($id)
     {
         $job_draft = JobDraft::with('jobOrder.issuer', 'contentWriter', 'graphicDesigner', 'client')->find($id);
 
-        $pdf = Pdf::loadView('pages.operation.history.show', compact('job_draft'));
+        $pdf = Pdf::loadView('pages.admin.history.show', compact('job_draft'));
 
         return $pdf->download('job_order_' . $id . '.pdf');
     }
