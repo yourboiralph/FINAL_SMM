@@ -134,6 +134,6 @@ class ClientApprovalController extends Controller
             'client_id' => $job_draft->client_id,
         ]);
 
-        return response()->json(['message' => 'Job draft renewed successfully']);
+        return redirect()->route('client.approve')->with('Status', 'Job Order Approved Successfully');
     }
 }
