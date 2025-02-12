@@ -99,6 +99,17 @@
             </a>
         </div>
 
+        <div class=" block lg:hidden px-6">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit"
+                    class="p-2 flex items-center w-full gap-2 rounded-md bg-red-500 text-white font-bold hover:bg-red-600 transition duration-300">
+                    <i class="fa-solid fa-power-off"></i>
+                    <h1 class="block">Logout</h1>
+                </button>
+            </form>
+        </div>
+
     @elseif ($link === 'client')
         {{-- Client Sidebar Menu --}}
         <div class=" block px-6">
@@ -179,6 +190,18 @@
             </a>
         </div>
 
+        <div class=" block lg:hidden px-6">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit"
+                    class="p-2 flex items-center w-full gap-2 rounded-md bg-red-500 text-white font-bold hover:bg-red-600 transition duration-300">
+                    <i class="fa-solid fa-power-off"></i>
+                    <h1 class="block">Logout</h1>
+                </button>
+            </form>
+        </div>
+        
+
     @elseif ($link === 'content_writer')
         <div class=" block px-6">
             <a href="{{ url("/dashboard") }}"
@@ -206,17 +229,15 @@
             </a>
         </div>
 
-        <div class=" block px-6">
-            <a href="{{ url("/content/revisions") }}"
-                class="p-2 flex items-center w-full gap-2 rounded-md 
-                {{ request()->is("content/revisions", "content/revisions/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is("content/revisions", "content/revisions/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
-                    draggable="false"
-                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("content/revisions", "content/revisions/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
-                    alt="joborder Icon">
-                <h1 class=" block">Revision Checklist</h1>
-            </a>
+        <div class=" block lg:hidden px-6">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit"
+                    class="p-2 flex items-center w-full gap-2 rounded-md bg-red-500 text-white font-bold hover:bg-red-600 transition duration-300">
+                    <i class="fa-solid fa-power-off"></i>
+                    <h1 class="block">Logout</h1>
+                </button>
+            </form>
         </div>
     @elseif ($link === 'graphic_designer')
         <div class=" block px-6">
@@ -255,6 +276,17 @@
                     alt="joborder Icon">
                 <h1 class=" block">Revision Checklist</h1>
             </a>
+        </div>
+
+        <div class=" block lg:hidden px-6">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit"
+                    class="p-2 flex items-center w-full gap-2 rounded-md bg-red-500 text-white font-bold hover:bg-red-600 transition duration-300">
+                    <i class="fa-solid fa-power-off"></i>
+                    <h1 class="block">Logout</h1>
+                </button>
+            </form>
         </div>
     @elseif ($link === 'top_manager')
         {{-- Admin Sidebar Menu --}}
@@ -347,6 +379,17 @@
                     alt="joborder Icon">
                 <h1 class=" block">Add users</h1>
             </a>
+        </div>
+
+        <div class=" block lg:hidden px-6">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit"
+                    class="p-2 flex items-center w-full gap-2 rounded-md bg-red-500 text-white font-bold hover:bg-red-600 transition duration-300">
+                    <i class="fa-solid fa-power-off"></i>
+                    <h1 class="block">Logout</h1>
+                </button>
+            </form>
         </div>
     @endif
 </div>
