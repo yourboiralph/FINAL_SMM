@@ -68,7 +68,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('users')->with('status', 'Users Created Successfully');
+        return redirect()->route('users')->with('Status', 'Users Created Successfully');
     }
 
     public function show($id)
@@ -131,6 +131,6 @@ class RegisteredUserController extends Controller
         // Update user
         $user->update($updateData);
 
-        return redirect()->route('users')->with('status', 'User Updated Successfully');
+        return redirect()->route('users')->with('Status', 'User Updated Successfully');
     }
 }
