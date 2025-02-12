@@ -100,6 +100,19 @@
         </div>
 
         <div class=" block px-6">
+            <a href="{{ url("/profile") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("operation/renewal", "operation/renewal/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-profile-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="Profile Icon">
+                <h1 class=" block">Profile</h1>
+            </a>
+        </div>
+
+        <div class=" block px-6">
             <a href="{{ url("/users") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("users", "users/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
@@ -216,6 +229,19 @@
             </a>
         </div>
 
+        <div class=" block px-6">
+            <a href="{{ url("/profile") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("operation/renewal", "operation/renewal/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-profile-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="Profile Icon">
+                <h1 class=" block">Profile</h1>
+            </a>
+        </div>
+
         <div class=" block lg:hidden px-6">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
@@ -252,6 +278,45 @@
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("content", "content") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
                 <h1 class=" block">List of Job Orders</h1>
+            </a>
+        </div>
+
+        <div class=" block px-6">
+            <a href="{{ url("/profile") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("operation/renewal", "operation/renewal/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-profile-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="Profile Icon">
+                <h1 class=" block">Profile</h1>
+            </a>
+        </div>
+
+        <div class=" block px-6">
+            <a href="{{ url("/content/revisions") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("content/revisions", "content/revisions/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("content/revisions", "content/revisions/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-projdev-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("content/revisions", "content/revisions/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="joborder Icon">
+                <h1 class=" block">Revision Checklist</h1>
+            </a>
+        </div>
+
+        <div class=" block px-6">
+            <a href="{{ url("/content/history") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("content/history", "content/history/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("content/history", "content/history/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-profile-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("content/history", "content/history/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="Profile Icon">
+                <h1 class=" block">History</h1>
             </a>
         </div>
 
@@ -301,6 +366,32 @@
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("graphic/revisions", "graphic/revisions/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="joborder Icon">
                 <h1 class=" block">Revision Checklist</h1>
+            </a>
+        </div>
+
+        <div class=" block px-6">
+            <a href="{{ url("/graphic/history") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("graphic/history", "graphic/history/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("graphic/history", "graphic/history/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-profile-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("graphic/history", "graphic/history/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="Profile Icon">
+                <h1 class=" block">History</h1>
+            </a>
+        </div>
+
+        <div class=" block px-6">
+            <a href="{{ url("/profile") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("operation/renewal", "operation/renewal/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-profile-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="Profile Icon">
+                <h1 class=" block">Profile</h1>
             </a>
         </div>
 
@@ -393,6 +484,19 @@
                 <h1 class=" block">Instruction Manual</h1>
             </a>
         </div> --}}
+
+        <div class=" block px-6">
+            <a href="{{ url("/profile") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("operation/renewal", "operation/renewal/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-profile-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="Profile Icon">
+                <h1 class=" block">Profile</h1>
+            </a>
+        </div>
 
         <div class=" block px-6">
             <a href="{{ url("/users") }}"

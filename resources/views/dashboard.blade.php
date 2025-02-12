@@ -34,15 +34,25 @@
                                                 @elseif ((auth()->user()->role_id == '3' && ($job_draft->status == 'Submitted to Operations' || $job_draft->status == 'completed' || $job_draft->status == 'Submitted to Top Manager' || $job_draft->status == "Submitted to Client")) || (auth()->user()->role_id == '4' && ($job_draft->status == 'Submitted to Operations' || $job_draft->status == 'completed' || $job_draft->status == 'Submitted to Top Manager' || $job_draft->status == "Submitted to Client")))
                                                     Created
                                                     @elseif (auth()->user()->role_id == '1' and $job_draft->status == 'Submitted to Client')
-                                                    Approve
+                                                    <a href="{{url('client/show/' . $job_draft->id)}}">
+                                                        <p class="text-[#fa7011]">Approve</p>
+                                                    </a>
                                                     @elseif (auth()->user()->role_id == '2' and $job_draft->status == 'Submitted to Operations')
-                                                    Sign
+                                                    <a href="{{url('operation/show/' . $job_draft->id)}}">
+                                                        <p class="text-[#fa7011]">Sign</p>
+                                                    </a>
                                                     @elseif (auth()->user()->role_id == '3' and $job_draft->status == 'pending')
-                                                    Create
+                                                    <a href="{{url('content/edit/' . $job_draft->id)}}">
+                                                        <p class="text-[#fa7011]">Create</p>
+                                                    </a>
                                                     @elseif (auth()->user()->role_id == '4' and $job_draft->status == 'pending')
-                                                    Create
+                                                    <a href="{{url('graphic/edit/' . $job_draft->id)}}">
+                                                        <p class="text-[#fa7011]">Create</p>
+                                                    </a>
                                                     @elseif (auth()->user()->role_id == '5' and $job_draft->status == 'Submitted to Top Manager')
-                                                    Sign
+                                                    <a href="{{url('topmanager/show/' . $job_draft->id)}}">
+                                                        <p class="text-[#fa7011]">Sign</p>
+                                                    </a>
                                                 @endif
                                                 @if (($job_draft->status =='completed' && auth()->user()->role_id == '1') || (($job_draft->status =='Submitted to Operations' || $job_draft->status =='Submitted to Top Manager' || $job_draft->status =='Submitted to Client' || $job_draft->status =='completed')  && (auth()->user()->role_id == '3' || auth()->user()->role_id == '4')) || (auth()->user()->role_id == "2" &&  ($job_draft->status == "Submitted to Top Manager" || $job_draft->status == "Submitted to Client" || $job_draft->status == "completed")) || (auth()->user()->role_id == "5" &&  ($job_draft->status == "Submitted to Client" || $job_draft->status == "completed")))   
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
