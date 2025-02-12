@@ -19,16 +19,15 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
 
-        return view('admin.profile', compact('user'));
+        return view('profile.show', compact('user'));
     }
 
     public function edit(Request $request): View
     {
         $user = auth()->user();
-        return view('admin.profile.edit', [
+        return view('profile.edit', [
             'user' => $request->user()
         ]);
-        
     }
 
     /**
@@ -76,7 +75,7 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return Redirect::route('admin.profile.edit')->with('status', 'Profile Updated Successfully!');
+        return Redirect::route('profile.edit')->with('status', 'Profile Updated Successfully!');
     }
 
     /**
