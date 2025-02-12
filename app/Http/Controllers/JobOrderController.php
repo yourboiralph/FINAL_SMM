@@ -52,7 +52,7 @@ class JobOrderController extends Controller
             'client_id' => $request->client_id,
         ]);
 
-        return redirect()->route('joborder')->with('status', 'Job Order Create Successfully');
+        return redirect()->route('joborder')->with('Status', 'Job Order Create Successfully');
     }
 
     public function show($id)
