@@ -11,7 +11,7 @@ class DashboardController extends Controller
     {
 
         $user = auth()->user();
-        $user_role = $user->role;
+        $user_role = $user->role->id;
 
         if ($user_role == 1) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
