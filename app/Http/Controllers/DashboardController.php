@@ -56,6 +56,9 @@ class DashboardController extends Controller
                 ->get();
 
             return view('dashboard', compact('job_drafts'));
+        } elseif ($user_role == 6) {
+
+            return view('dashboard', compact('job_drafts'));
         }
     }
 }
