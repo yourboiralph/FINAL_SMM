@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobOrder;
+use App\Models\Request as ModelsRequest; // Alias to avoid conflict
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -10,14 +11,13 @@ class SupervisorJobOrderController extends Controller
 {
     public function index()
     {
-        $job_orders = JobOrder::with('issuer')->get();
-        return view('pages.supervisor.job_order.index', compact('job_orders'));
+        $supervisor_requests = ModelsRequest::with('issuer')->get();
+        return view('pages.supervisor.job_order.index', compact('supervisor_requests'));
     }
 
     public function create()
     {
         $operators = User::where('role_id', 2)->get();
-
         return view('pages.supervisor.job_order.create', compact('operators'));
     }
 
@@ -26,16 +26,16 @@ class SupervisorJobOrderController extends Controller
         $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
-            'assigned_to' => 'required|string',
+            'assigned_to' => 'required|integer|exists:users,id',
         ]);
 
-        JobOrder::create([
+        ModelsRequest::create([ // Use ModelsRequest instead of Request
             'title' => $request->title,
             'description' => $request->description,
-            'assigned_to' => $request->description,
+            'assigned_to' => $request->assigned_to,
             'issued_by' => auth()->user()->id,
         ]);
 
-        return redirect()->route('joborder')->with('Status', 'Job Order Create Successfully');
+        return redirect()->route('supervisor.joborder')->with('status', 'Job Order Created Successfully');
     }
 }

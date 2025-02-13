@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminSupervisorRequestController;
 use App\Http\Controllers\ClientApprovalController;
 use App\Http\Controllers\ClientHistoryController;
 use App\Http\Controllers\ClientRenewalController;
@@ -108,6 +109,10 @@ Route::post('/operation/update/{id}', [OperationRenewalController::class, 'updat
 Route::get('/supervisor/joborder', [SupervisorJobOrderController::class, 'index'])->name('supervisor.joborder');
 Route::get('/supervisor/joborder/create', [SupervisorJobOrderController::class, 'create'])->name('supervisor.create');
 Route::post('/supervisor/joborder/store', [SupervisorJobOrderController::class, 'store'])->name('supervisor.store');
+
+Route::get('/operation/requests', [AdminSupervisorRequestController::class, 'index'])->name('operation.request');
+Route::get('/operation/request/show/{id}', [AdminSupervisorRequestController::class, 'show'])->name('operation.show');
+Route::get('/operation/request/create/{id}', [AdminSupervisorRequestController::class, 'create'])->name('operation.create');
 
 use App\Http\Controllers\SignatureController;
 

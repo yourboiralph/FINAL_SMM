@@ -2,9 +2,9 @@ These are the Job Orders po hehe
 
 
 
-@foreach ($job_orders as $job_order)
+@foreach ($supervisor_requests as $supervisor_request)
     
 <h1>
-    {{$job_order->title}}
+    {{$supervisor_request->title}}
 </h1>
 @endforeach
