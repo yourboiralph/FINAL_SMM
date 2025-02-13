@@ -13,15 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('job_orders', function (Blueprint $table) {
+        Schema::create('requests', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('description');
             $table->unsignedBigInteger('issued_by');
-            $table->unsignedBigInteger('request_id')->nullable();
-            $table->boolean('renewable')->default(false);
+            $table->unsignedBigInteger('assigned_to');
+            $table->timestamps();
+
+            $table->foreign('assigned_to')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('issued_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('request_id')->references('id')->on('requests')->onDelete('cascade');
         });
     }
 
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('job_orders');
+        Schema::dropIfExists('requests');
     }
 };

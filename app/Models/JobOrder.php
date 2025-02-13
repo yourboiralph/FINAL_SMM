@@ -15,6 +15,7 @@ class JobOrder extends Model
         'title',
         'description',
         'issued_by',
+        'request_id',
         'renewable'
     ];
 
@@ -29,5 +30,10 @@ class JobOrder extends Model
     public function jobDrafts()
     {
         return $this->hasMany(JobDraft::class, 'job_order_id');
+    }
+
+    public function request()
+    {
+        return $this->belongsTo(Request::class, 'request_id');
     }
 }
