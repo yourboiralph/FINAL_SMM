@@ -13,6 +13,7 @@ use App\Http\Controllers\OperationApprovalController;
 use App\Http\Controllers\OperationHistoryController;
 use App\Http\Controllers\OperationRenewalController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SupervisorJobOrderController;
 use App\Http\Controllers\TopApprovalController;
 use Illuminate\Support\Facades\Route;
 
@@ -103,6 +104,10 @@ Route::post('/client/update/{id}', [ClientRenewalController::class, 'update'])->
 
 Route::get('/operation/renewal', [OperationRenewalController::class, 'index'])->name('operation.renewal');
 Route::post('/operation/update/{id}', [OperationRenewalController::class, 'update'])->name('operation.update');
+
+Route::get('/supervisor/joborder', [SupervisorJobOrderController::class, 'index'])->name('supervisor.joborder');
+Route::get('/supervisor/joborder/create', [SupervisorJobOrderController::class, 'create'])->name('supervisor.create');
+Route::post('/supervisor/joborder/store', [SupervisorJobOrderController::class, 'store'])->name('supervisor.store');
 
 use App\Http\Controllers\SignatureController;
 
