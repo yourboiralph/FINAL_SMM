@@ -143,6 +143,31 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ]);
+
+        // Create 2 users for role 6
+        User::create([
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'role_id' => 6,
+            'phone' => fake()->phoneNumber(),
+            'address' => fake()->address(),
+            'image' => null,
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ]);
+
+        User::create([
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'role_id' => 6,
+            'phone' => fake()->phoneNumber(),
+            'address' => fake()->address(),
+            'image' => null,
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ]);
         $this->call(JobOrderSeeder::class);
         $this->call(JobDraftSeeder::class);
     }

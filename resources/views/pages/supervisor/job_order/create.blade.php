@@ -1,0 +1,1 @@
+pag create diri amaw

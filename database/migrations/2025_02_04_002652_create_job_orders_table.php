@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-
-
-            $table->foreign('issued_by')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('issued_by');
+            $table->unsignedBigInteger('issued_to');
             $table->boolean('renewable')->default(false);
+            $table->foreign('issued_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('issued_to')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
