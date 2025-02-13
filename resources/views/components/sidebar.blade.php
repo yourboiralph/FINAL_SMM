@@ -21,6 +21,20 @@
                 <h1 class=" block">Dashboard</h1>
             </a>
         </div>
+
+        <div class=" block px-6">
+            <a href="{{ url("/operation/requests") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("operation/requests", "operation/request/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("operation/requests", "operation/request/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-projdev-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/requests", "operation/request/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="Project Development Icon">
+                <h1 class=" block">Incoming Job Orders</h1>
+            </a>
+        </div>
+
         <div class=" block px-6">
             <a href="{{ url("/joborder") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
@@ -28,9 +42,9 @@
                 style="{{ request()->is("joborder", "joborder/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <img src="/Assets/icon-projdev-white.png"
                     draggable="false"
-                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("joborder", "ghihgjoborder/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("joborder", "joborder/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
-                <h1 class=" block">Job Order</h1>
+                <h1 class=" block">Outgoing Job Orders</h1>
             </a>
         </div>
 
@@ -520,6 +534,34 @@
                     <h1 class="block">Logout</h1>
                 </button>
             </form>
+        </div>
+
+    @elseif ($link == "supervisor")
+
+        <div class=" block px-6">
+            <a href="{{ url("/dashboard") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("dashboard", "dashboard/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("dashboard", "dashboard/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-dashboard-white.png"
+                    draggable="false"
+                    class=" p-2 rounded-lg w-10 h-10 {{ request()->is("dashboard", "dashboard/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="project Icon">
+                <h1 class=" block">Dashboard</h1>
+            </a>
+        </div>
+
+        <div class=" block px-6">
+            <a href="{{ url("/supervisor/joborder") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("supervisor/joborder", "supervisor/joborder/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("supervisor/joborder", "supervisor/joborder/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-projdev-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("supervisor/joborder", "supervisor/joborder/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="Project Development Icon">
+                <h1 class=" block">Job Orders</h1>
+            </a>
         </div>
     @endif
 </div>

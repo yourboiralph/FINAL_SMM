@@ -11,7 +11,7 @@ class SupervisorJobOrderController extends Controller
 {
     public function index()
     {
-        $supervisor_requests = ModelsRequest::with('issuer')->get();
+        $supervisor_requests = ModelsRequest::with('assignee')->get();
         return view('pages.supervisor.job_order.index', compact('supervisor_requests'));
     }
 
