@@ -113,6 +113,7 @@ Route::post('/supervisor/joborder/store', [SupervisorJobOrderController::class, 
 Route::get('/operation/requests', [AdminSupervisorRequestController::class, 'index'])->name('operation.request');
 Route::get('/operation/request/show/{id}', [AdminSupervisorRequestController::class, 'show'])->name('operation.show');
 Route::get('/operation/request/create/{id}', [AdminSupervisorRequestController::class, 'create'])->name('operation.create');
+Route::post('/operation/request/store', [AdminSupervisorRequestController::class, 'store'])->name('operation.store');
 
 use App\Http\Controllers\SignatureController;
 
