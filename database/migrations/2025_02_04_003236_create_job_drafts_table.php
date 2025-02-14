@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('job_order_id');
             $table->enum('type', ['content_writer', 'graphic_designer']);
-            $table->string('draft')->nullable();
+            $table->text('draft')->nullable();
             $table->date('date_started')->default(DB::raw('CURRENT_DATE'));
             $table->date('date_target');
             $table->longText('signature_admin')->nullable();
