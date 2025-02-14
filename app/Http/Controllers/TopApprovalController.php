@@ -67,6 +67,8 @@ class TopApprovalController extends Controller
             'status' => 'Revision',
             'signature_admin' => null,
             'admin_signed' => null,
+            'signature_supervisor' => null,
+            'supervisor_signed' => null
         ]);
         return redirect()->route('topmanager.approve')->with('Status', 'Job Order Declined Successfully');
     }
