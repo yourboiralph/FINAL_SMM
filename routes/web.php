@@ -5,9 +5,11 @@ use App\Http\Controllers\ClientApprovalController;
 use App\Http\Controllers\ClientHistoryController;
 use App\Http\Controllers\ClientRenewalController;
 use App\Http\Controllers\ContentApprovalController;
+use App\Http\Controllers\ContentHistoryController;
 use App\Http\Controllers\ContentRevisionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GraphicApprovalController;
+use App\Http\Controllers\GraphicHistoryController;
 use App\Http\Controllers\GraphicRevisionController;
 use App\Http\Controllers\JobOrderController;
 use App\Http\Controllers\OperationApprovalController;
@@ -103,6 +105,14 @@ Route::put('/graphic/revisions/update/{id}', [GraphicRevisionController::class, 
 Route::get('/client/history', [ClientHistoryController::class, 'index'])->name('client.history');
 Route::get('/client/history/show/{id}', [ClientHistoryController::class, 'show'])->name('client.history.show');
 Route::get('/client/history/download/{id}', [ClientHistoryController::class, 'downloadPDF'])->name('client.history.download');
+
+Route::get('/content/history', [ContentHistoryController::class, 'index'])->name('content.history');
+Route::get('/content/history/show/{id}', [ContentHistoryController::class, 'show'])->name('content.history.show');
+Route::get('/content/history/download/{id}', [ContentHistoryController::class, 'downloadPDF'])->name('content.history.download');
+
+Route::get('/graphic/history', [GraphicHistoryController::class, 'index'])->name('graphic.history');
+Route::get('/graphic/history/show/{id}', [GraphicHistoryController::class, 'show'])->name('graphic.history.show');
+Route::get('/graphic/history/download/{id}', [GraphicHistoryController::class, 'downloadPDF'])->name('graphic.history.download');
 
 Route::get('/operation/history', [OperationHistoryController::class, 'index'])->name('operation.history');
 Route::get('/operation/history/show/{id}', [OperationHistoryController::class, 'show'])->name('operation.history.show');
