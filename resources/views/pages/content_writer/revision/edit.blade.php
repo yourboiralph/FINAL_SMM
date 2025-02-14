@@ -74,7 +74,7 @@
                     <div class="col-span-4 h-fit w-full">
                         <p class="text-sm text-gray-600">Last Draft</p>
                         
-                        <!-- CKEditor 5 textarea -->
+                        <!-- Display last draft -->
                         <p class="max-h-96 overflow-y-auto">{!! $job_draft->draft !!}</p>
                     
                         @error('draft')
@@ -112,14 +112,14 @@
             .then(editor => {
                 console.log('CKEditor 5 initialized!', editor);
                 
-                // Load existing content
-                editor.setData();
+                // Load existing draft content from old input if available,
+                // otherwise use the job draft's existing draft content.
+                editor.setData(`{!! addslashes(old('draft', $job_draft->draft ?? '')) !!}`);
 
-                // Before form submission, update the textarea with editor data
+                // Before form submission, update the textarea with the editor's data
                 document.querySelector("form").addEventListener("submit", function () {
                     document.querySelector("#editor").value = editor.getData();
                 });
-
             })
             .catch(error => {
                 console.error('Error initializing CKEditor 5:', error);

@@ -1,4 +1,3 @@
-
 @extends('layouts.application')
 
 @section('title', 'Admin')
@@ -39,34 +38,36 @@
             <h1 class="text-xl font-bold mt-4">Create Job Order</h1>
             <div class="grid grid-cols-4 space-y-4">
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
+                    <!-- Title Input -->
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Title</p>
-                        <input type="text" name="title" class="w-full border-gray-200 rounded-lg">
+                        <input type="text" name="title" value="{{ old('title') }}" class="w-full border-gray-200 rounded-lg">
                         @error('title')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
+                    <!-- Operations Select -->
                     <div class="col-span-1 w-full">
                         <p class="text-sm text-gray-600">Operations</p>
                         <div class="relative">
-                            <select name="assigned_to" class="w-full border-gray-200 rounded-lg text-sm ">
-                                <option value="" disabled selected>Select A Operator</option>
+                            <select name="assigned_to" class="w-full border-gray-200 rounded-lg text-sm">
+                                <option value="" disabled {{ old('assigned_to') ? '' : 'selected' }}>Select A Operator</option>
                                 @foreach ($operators as $operation)
-                                    <option value="{{ $operation->id }}" class="text-black text-sm">{{ $operation->name }}</option>
+                                    <option value="{{ $operation->id }}" class="text-black text-sm" {{ old('assigned_to') == $operation->id ? 'selected' : '' }}>
+                                        {{ $operation->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
-                        @error('client_id')
+                        @error('assigned_to')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-
-                    
+                    <!-- Description CKEditor Textarea -->
                     <div class="col-span-2 h-fit w-full">
                         <p class="text-sm text-gray-600">Description</p>
                         
-                        <!-- CKEditor Textarea -->
-                        <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg"></textarea>
+                        <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg">{{ old('description') }}</textarea>
                     
                         @error('description')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
@@ -81,7 +82,6 @@
             </div>
         </form>
     </div>
-
 </div>
 
 <script>

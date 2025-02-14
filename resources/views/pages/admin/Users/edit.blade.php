@@ -30,8 +30,8 @@
                                 alt="Profile Picture">
                         </div>
                         <div class="text-center">
-                            <h1>{{ $user->name }}</h1>
-                            <h1>{{ $user->address }}</h1>
+                            <h1>{{ old('name', $user->name) }}</h1>
+                            <h1>{{ old('address', $user->address) }}</h1>
                         </div>
 
                         <div class="flex items-center justify-center gap-2 text-white mt-4">
@@ -62,15 +62,14 @@
                             </div>
                             <div class="gap-4 items-center">
                                 <h1 class="text-slate-500 font-bold">Role</h1>
-                                <select name="role_id" id="" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" required>
-                                    <option value="1" {{ $user->role_id == 1 ? 'selected' : '' }}>Client</option>
-                                    <option value="2" {{ $user->role_id == 2 ? 'selected' : '' }}>Operations Manager</option>
-                                    <option value="3" {{ $user->role_id == 3 ? 'selected' : '' }}>Content Writer</option>
-                                    <option value="4" {{ $user->role_id == 4 ? 'selected' : '' }}>Graphic Designer</option>
-                                    <option value="5" {{ $user->role_id == 5 ? 'selected' : '' }}>Top Manager</option>
+                                <select name="role_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" required>
+                                    <option value="1" {{ old('role_id', $user->role_id) == 1 ? 'selected' : '' }}>Client</option>
+                                    <option value="2" {{ old('role_id', $user->role_id) == 2 ? 'selected' : '' }}>Operations Manager</option>
+                                    <option value="3" {{ old('role_id', $user->role_id) == 3 ? 'selected' : '' }}>Content Writer</option>
+                                    <option value="4" {{ old('role_id', $user->role_id) == 4 ? 'selected' : '' }}>Graphic Designer</option>
+                                    <option value="5" {{ old('role_id', $user->role_id) == 5 ? 'selected' : '' }}>Top Manager</option>
                                 </select>
-                                
-                                @error('phone') <p class="text-sm text-red-700">{{ $message }}</p> @enderror
+                                @error('role_id') <p class="text-sm text-red-700">{{ $message }}</p> @enderror
                             </div>
 
                             <div class="gap-4 items-center">

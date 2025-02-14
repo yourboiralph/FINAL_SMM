@@ -52,8 +52,8 @@
                     <div class="col-span-1 w-full">
                         <p class="text-sm text-gray-600">Client</p>
                         <div class="relative">
-                            <input type="text" id="selected-client-name" value="Select a Client" class="w-full border-gray-200 rounded-lg cursor-pointer" readonly onclick="openModal()">
-                            <input type="hidden" name="client_id" id="selected-client-id">
+                            <input type="text" id="selected-client-name" value="{{ old('client_id') ? ($clients->firstWhere('id', old('client_id'))->name ?? 'Select a Client') : 'Select a Client' }}" class="w-full border-gray-200 rounded-lg cursor-pointer" readonly onclick="openModal()">
+                            <input type="hidden" name="client_id" id="selected-client-id" value="{{ old('client_id') }}">
                         </div>
                         @error('client_id')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
@@ -62,10 +62,10 @@
 
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Content Writer</p>
-                        <select name="content_writer_id" value="{{ old('content_writer_id') }}" class="w-full border-gray-200 rounded-lg text-sm ">
-                            <option value="" disabled selected>Select A Content Writer</option>
+                        <select name="content_writer_id" class="w-full border-gray-200 rounded-lg text-sm ">
+                            <option value="" disabled {{ old('content_writer_id') ? '' : 'selected' }}>Select A Content Writer</option>
                             @foreach ($content_writers as $content_writer)
-                                <option value="{{ $content_writer->id }}" class="text-black text-sm">{{ $content_writer->name }}</option>
+                                <option value="{{ $content_writer->id }}" {{ old('content_writer_id') == $content_writer->id ? 'selected' : '' }} class="text-black text-sm">{{ $content_writer->name }}</option>
                             @endforeach
                         </select>
                         @error('content_writer_id')
@@ -77,9 +77,9 @@
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Graphics Designer</p>
                         <select name="graphic_designer_id" class="w-full border-gray-200 rounded-lg text-sm ">
-                            <option value="" disabled selected>Select A Graphic Designer</option>
+                            <option value="" disabled {{ old('graphic_designer_id') ? '' : 'selected' }}>Select A Graphic Designer</option>
                             @foreach ($graphic_designers as $graphic_designer)
-                                <option value="{{ $graphic_designer->id }}">{{ $graphic_designer->name }}</option>
+                                <option value="{{ $graphic_designer->id }}" {{ old('graphic_designer_id') == $graphic_designer->id ? 'selected' : '' }}>{{ $graphic_designer->name }}</option>
                             @endforeach
                         </select>
                         @error('graphic_designer_id')
@@ -90,14 +90,14 @@
                     <div class="col-span-2 grid grid-cols-2 w-full gap-4 rounded-lg">
                         <div>
                             <p class="text-sm text-gray-600">Date Started</p>
-                            <input type="date" name="date_started" class="w-full rounded-lg border-gray-200 focus:ring-0">
+                            <input type="date" name="date_started" value="{{ old('date_started') }}" class="w-full rounded-lg border-gray-200 focus:ring-0">
                             @error('date_started')
                                 <p class="text-red-600 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
                         <div>
                             <p class="text-sm text-gray-600">Date Deadline</p>
-                            <input type="date" name="date_target" class="w-full rounded-lg border-gray-200 focus:ring-0">
+                            <input type="date" name="date_target" value="{{ old('date_target') }}" class="w-full rounded-lg border-gray-200 focus:ring-0">
                             @error('date_target')
                                 <p class="text-red-600 text-sm">{{ $message }}</p>
                             @enderror
@@ -108,7 +108,7 @@
                         <p class="text-sm text-gray-600">Description</p>
                         
                         <!-- CKEditor Textarea -->
-                        <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg"></textarea>
+                        <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg">{{ old('description') }}</textarea>
                     
                         @error('description')
                             <p class="text-red-600 text-sm">{{ $message }}</p>

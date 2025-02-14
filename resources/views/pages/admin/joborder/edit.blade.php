@@ -32,7 +32,7 @@
                 </div>
             </a>
         </div>
-        <form action="{{ url('/joborder/update/'. $job_draft->id ) }}" method="POST">
+        <form action="{{ url('/joborder/update/' . $job_draft->id) }}" method="POST">
             @csrf
             @method('PUT')
             <h1 class="text-xl font-bold mt-4">Edit Form</h1>
@@ -45,18 +45,19 @@
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
+                    
                     @if ($job_draft->type === 'graphic_designer')
                         <div class="w-full">
                             <p class="text-sm text-gray-600">Graphics Designer</p>
                             <select name="graphic_designer_id" class="w-full border-gray-200 rounded-lg">
                                 @foreach ($graphic_designers as $graphic_designer)
                                     <option value="{{ $graphic_designer->id }}" 
-                                        {{ $job_draft->graphicDesigner->id == $graphic_designer->id ? 'selected' : '' }}>
+                                        {{ old('graphic_designer_id', $job_draft->graphicDesigner->id) == $graphic_designer->id ? 'selected' : '' }}>
                                         {{ $graphic_designer->name }}
                                     </option>
                                 @endforeach
                             </select>
-                            @error('designer_id')
+                            @error('graphic_designer_id')
                                 <p class="text-red-600 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
@@ -66,21 +67,23 @@
                             <select name="content_writer_id" class="w-full border-gray-200 rounded-lg">
                                 @foreach ($content_writers as $content_writer)
                                     <option value="{{ $content_writer->id }}" 
-                                        {{ $job_draft->contentWriter->id == $content_writer->id ? 'selected' : '' }}>
+                                        {{ old('content_writer_id', $job_draft->contentWriter->id) == $content_writer->id ? 'selected' : '' }}>
                                         {{ $content_writer->name }}
                                     </option>
                                 @endforeach                
                             </select>
-                            @error('writer_id')
+                            @error('content_writer_id')
                                 <p class="text-red-600 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
                     @endif
+
                     <div class="col-span-1 w-full">
                         <p class="text-sm text-gray-600">Client</p>
                         <div class="relative">
                             <input type="text" id="selected-client-name" class="w-full border-gray-200 rounded-lg cursor-pointer" 
-       value="{{ old('title', $job_draft->client->name) }}" readonly onclick="openModal()">
+                            value="{{ old('client_id') ? ($clients->firstWhere('id', old('client_id'))->name ?? $job_draft->client->name) : $job_draft->client->name }}" 
+                            readonly onclick="openModal()">
                             <input type="hidden" name="client_id" id="selected-client-id" value="{{ old('client_id', $job_draft->client->id) }}">
                         </div>
                         @error('client')
@@ -91,24 +94,25 @@
                     <div class="col-span-1 grid grid-cols-2 w-full gap-4 rounded-lg">
                         <div>
                             <p class="text-sm text-gray-600">Date Started</p>
-                            <input type="date" name="date_started" class="w-full rounded-lg border-gray-200" value="{{ \Carbon\Carbon::parse($job_draft->date_started)->format('Y-m-d') }}">
+                            <input type="date" name="date_started" class="w-full rounded-lg border-gray-200" value="{{ old('date_started', \Carbon\Carbon::parse($job_draft->date_started)->format('Y-m-d')) }}">
                             @error('date_started')
                                 <p class="text-red-600 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
                         <div>
                             <p class="text-sm text-gray-600 text-nowrap">Date Deadline</p>
-                            <input type="date" name="date_target" class="w-full rounded-lg border-gray-200" value="{{ \Carbon\Carbon::parse($job_draft->date_target)->format('Y-m-d') }}">
+                            <input type="date" name="date_target" class="w-full rounded-lg border-gray-200" value="{{ old('date_target', \Carbon\Carbon::parse($job_draft->date_target)->format('Y-m-d')) }}">
                             @error('date_target')
                                 <p class="text-red-600 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
+                    
                     <div class="col-span-2 h-fit w-full">
                         <p class="text-sm text-gray-600">Description</p>
                         
                         <!-- CKEditor Textarea -->
-                        <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg">{{ $job_draft->jobOrder->description }}</textarea>
+                        <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg">{{ old('description', $job_draft->jobOrder->description) }}</textarea>
                     
                         @error('description')
                             <p class="text-red-600 text-sm">{{ $message }}</p>

@@ -58,10 +58,9 @@
                     </div>
 
                     <div class="col-span-4 h-fit w-full">
-
                         <p class="text-sm text-gray-600">Content Writer Draft</p>
                         
-                        <!-- CKEditor 5 textarea -->
+                        <!-- Display the parent draft -->
                         {!! $job_draft->parentDraft->draft !!}
                     
                         @error('draft')
@@ -70,7 +69,6 @@
                     </div>
 
                     <div class="col-span-2 h-fit w-full">
-
                         <p class="text-sm text-gray-600">Draft</p>
                         
                         <!-- CKEditor 5 textarea -->
@@ -98,10 +96,10 @@
             .then(editor => {
                 console.log('CKEditor 5 initialized!', editor);
                 
-                // Load existing content
-                editor.setData(`{!! addslashes($job_draft->draft ?? '') !!}`);
+                // Load existing content from old input if available, otherwise use the job draft's content.
+                editor.setData(`{!! addslashes(old('draft', $job_draft->draft ?? '')) !!}`);
 
-                // Before form submission, update the textarea with editor data
+                // Before form submission, update the textarea with the editor's data.
                 document.querySelector("form").addEventListener("submit", function () {
                     document.querySelector("#editor").value = editor.getData();
                 });
