@@ -32,7 +32,7 @@
                 </div>
             </a>
         </div>
-        <form action="{{ url('/joborder/store') }}" method="POST">
+        <form action="{{ url('/operation/request/store') }}" method="POST">
             @csrf
             
             <h1 class="text-xl font-bold mt-4 mb-10">Create Job Order</h1>
@@ -110,7 +110,7 @@
                         
                         <!-- CKEditor Textarea -->
                         <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg"></textarea>
-                    
+                        <input type="hidden" name="request_id" value="{{$supervisor_request->id}}">
                         @error('description')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
