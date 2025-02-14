@@ -24,7 +24,7 @@ class DashboardController extends Controller
             return view('dashboard', compact('job_drafts'));
         } elseif ($user_role == 2) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
-                ->whereNot('status', "pending")
+            ->whereNotIn('status', ["pending", "Revision"])
                 ->orderBy('id', 'desc') // Sort by id descending
                 ->limit(5) // Ensure a maximum of 5 records
                 ->get();
@@ -32,6 +32,7 @@ class DashboardController extends Controller
             return view('dashboard', compact('job_drafts'));
         } elseif ($user_role == 3) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
+                ->whereNot('status', 'Revision')
                 ->where('content_writer_id', $user->id)
                 ->where('type', 'content_writer')
                 ->orderBy('id', 'desc') // Sort by id descending
@@ -48,6 +49,7 @@ class DashboardController extends Controller
             return view('dashboard', compact('job_drafts', 'job_drafts_revisions'));
         } elseif ($user_role == 4) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
+                ->whereNot('status', 'Revision')
                 ->where('graphic_designer_id', $user->id)
                 ->where('type', 'graphic_designer')
                 ->orderBy('id', 'desc') // Sort by id descending
@@ -73,6 +75,7 @@ class DashboardController extends Controller
             return view('dashboard', compact('job_drafts'));
         } elseif ($user_role == 6) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
+            ->whereNotIn('status', ['pending', 'Submitted to Operations', 'Revision'])
                 ->orderBy('id', 'desc') // Sort by id descending
                 ->take(5) // Get the latest 5 data
                 ->get();

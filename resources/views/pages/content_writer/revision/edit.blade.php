@@ -55,9 +55,19 @@
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Date Target</p>
                             <p class="text-xl font-bold">{{ \Carbon\Carbon::parse($job_draft->date_target)->format('Y-m-d') }}</p>
                         </div>
-                        <div class="col-span-4 w-full">
-                            <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Revisions</p>
-                            <p class="text-xl font-bold">{!! $job_draft->revisions->last()->summary !!}</p>
+                        <div class="w-full col-span-4 grid grid-cols-4 justify-between">
+                            <div class="col-span-3 w-full mt-4">
+                                <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Revisions</p>
+                                <p class="text-xl font-bold">{!! $job_draft->revisions->last()->summary !!}</p>
+                            </div>
+                            <div class="col-span-1 w-full mt-4">
+                                <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Revision By</p>
+                                <p class="">{{ $job_draft->revisions->last()->declinedBy->name }}</p>
+                            </div>
+                        </div>
+                        <div class="col-span-4 w-full mt-4">
+                            <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Description</p>
+                            <p class="text-xl font-bold">{!! $job_draft->jobOrder->description !!}</p>
                         </div>
                     </div>
 
