@@ -42,8 +42,11 @@
             <h1 class="text-xl font-bold mt-4 mb-10">Create Job Order</h1>
             <div class="mb-4">
                 <p class="text-sm text-gray-600">Instructions</p>
-                <p class="text-sm text-gray-600 w-full">{!! $supervisor_request->description !!}</p>
+                <div class="border-b-2 w-[1050px] rounded-lg break-words max-h-[500px] border border-gray-400 p-2 overflow-y-auto">
+                    {!! $supervisor_request->description !!}
+                </div>
             </div>
+            
             <hr class="border border-gray-400" />
             <div class="grid grid-cols-4 space-y-4">
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">

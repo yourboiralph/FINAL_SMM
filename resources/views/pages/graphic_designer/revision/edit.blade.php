@@ -57,7 +57,10 @@
                         </div>
                         <div class="col-span-4 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Revisions</p>
-                            <p class="text-xl font-bold">{!! $job_draft->revisions->last()->summary !!}</p>
+                            <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
+                                
+                                {!! $job_draft->revisions->last()->summary !!}
+                            </div>
                         </div>
                     </div>
 

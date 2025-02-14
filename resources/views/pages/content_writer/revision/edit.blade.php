@@ -58,7 +58,10 @@
                         <div class="w-full col-span-4 grid grid-cols-4 justify-between">
                             <div class="col-span-3 w-full mt-4">
                                 <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Revisions</p>
-                                <p class="text-xl font-bold">{!! $job_draft->revisions->last()->summary !!}</p>
+                                <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
+                                    {!! $job_draft->revisions->last()->summary !!}
+                                    
+                                </div>
                             </div>
                             <div class="col-span-1 w-full mt-4">
                                 <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Revision By</p>
@@ -67,7 +70,9 @@
                         </div>
                         <div class="col-span-4 w-full mt-4">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Description</p>
-                            <p class="text-xl font-bold">{!! $job_draft->jobOrder->description !!}</p>
+                            <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
+                                {!! $job_draft->jobOrder->description !!}
+                            </div>
                         </div>
                     </div>
 
@@ -75,7 +80,10 @@
                         <p class="text-sm text-gray-600">Last Draft</p>
                         
                         <!-- Display last draft -->
-                        <p class="max-h-96 overflow-y-auto">{!! $job_draft->draft !!}</p>
+                        <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
+                            
+                            {!! $job_draft->draft !!}
+                        </div>
                     
                         @error('draft')
                             <p class="text-red-600 text-sm">{{ $message }}</p>

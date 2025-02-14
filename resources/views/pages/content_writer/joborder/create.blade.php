@@ -58,7 +58,10 @@
                     </div>
                     <div class="col-span-4 h-fit w-full">
                         <p class="text-sm text-gray-600 max-h-96 overflow-y-auto">Instructions</p>
-                        <p>{!! $job_draft->jobOrder->description !!}</p>
+                        <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
+                            {!! $job_draft->jobOrder->description !!}
+                        </div>
+                        
                         @error('draft')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -68,7 +71,7 @@
                     <div class="col-span-2 h-fit w-full">
                         <p class="text-sm text-gray-600">Draft</p>
                         <!-- CKEditor 5 textarea -->
-                        <textarea name="draft" id="editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-[300px]"></textarea>
+                        <textarea name="draft" id="editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-[300px] max-h-[500px] overflow-y-auto"></textarea>
                         @error('draft')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
