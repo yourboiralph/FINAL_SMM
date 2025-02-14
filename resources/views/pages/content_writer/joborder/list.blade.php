@@ -22,6 +22,10 @@
 
 <div class="container mx-auto p-6">
     <div class="h-[500px] max-h-[500px] overflow-auto bg-white">
+                {{-- Success Message Component --}}
+                @if(session('Status'))
+                <x-success />
+            @endif
         <table class="w-full text-left border-collapse" id="projectTable">
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
