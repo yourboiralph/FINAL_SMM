@@ -40,7 +40,7 @@
                 <div class="h-auto gap-8 m-10 p-10 relative bg-white "
                     style="box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.3); border-radius: 8px;">
                     <div class="rounded-md text-white flex justify-end mb-10">
-                        <a href="{{ url('/topmanager') }}"
+                        <a href="{{ url('/supervisor/approve') }}"
                             class="w-fit px-4 py-1 bg-[#fa7011] rounded hover:bg-[#d95f0a] transition duration-200">
                             Back
                         </a>
@@ -72,72 +72,76 @@
                             <tr>
                                 <td class="px-4 py-2"></td>
                                 <td class="px-4 py-2">
-                                    @if(!$job_draft->signature_top_manager)
+                                                
+                                    @php
+                                        $isDisabled = $job_draft->status != "Submitted to Supervisor";
+                                        $isSigned = !empty($job_draft->signature_supervisor);
+                                    @endphp
                                     {{-- Signature Upload Section --}}
-                                    <div class="mt-6  p-4 rounded-md w-fit">
-                                        {{-- <div class="flex">
+                                    <div class="mt-6 bg-white p-4 rounded-md shadow-md w-fit">
+                                        <div class="flex">
                                             <h1 class="text-sm font-semibold">Choose Signature Method:</h1>
                                             <div class="flex">
-                                                <button id="useUpload" class="px-2 border">File Upload</button>
-                                                <button id="usePad" class="px-2 border">Signature Pad</button>
+                                                <button id="useUpload" class="px-2 border disabled:opacity-50 disabled:cursor-not-allowed" {{ $isSigned ? 'disabled' : '' }}>File Upload</button>
+                                                <button id="usePad" class="px-2 border disabled:opacity-50 disabled:cursor-not-allowed" {{ $isSigned ? 'disabled' : '' }}>Signature Pad</button>
                                             </div>
-                                        </div> --}}
+                                        </div>
             
-                                        <form action="{{ url('/topmanager/update/' . $job_draft->id) }}" method="POST"
+                                        <form action="{{ url('/supervisor/approve/update/' . $job_draft->id) }}" method="POST"
                                             enctype="multipart/form-data" id="approvalForm">
                                             @csrf
                                             @method('PUT')
-            
-                                            @php
-                                                $isDisabled = $job_draft->status != "Submitted to Top Manager";
-                                            @endphp
-            
+
+
                                             {{-- File Upload (Default) --}}
-                                            {{-- <div id="uploadSection">
+                                            <div id="uploadSection">
                                                 <input type="file" name="signature_admin" accept="image/*"
-                                                    class="mt-2 border p-2 rounded-md" id="signatureInput" {{ $isDisabled ? 'disabled' : '' }}>
-                                                <div
-                                                    class="mt-4 w-52 h-32 border border-gray-300 rounded-md overflow-hidden flex items-center justify-center bg-gray-100">
-                                                    <img id="imagePreview" src="#" alt="Selected Image"
-                                                        class="hidden w-full h-full object-cover">
+                                                    class="mt-2 border p-2 rounded-md" id="signatureInput" {{ $isDisabled || $isSigned ? 'disabled' : '' }}>
+                                                <div class="mt-4 w-52 h-32 border border-gray-300 rounded-md overflow-hidden flex items-center justify-center bg-gray-100">
+                                                    <img id="imagePreview" src="{{ $isSigned ? asset($job_draft->signature_admin) : '' }}" 
+                                                        alt="Selected Image" class="{{ $isSigned ? 'block' : 'hidden' }} w-full h-full object-cover">
                                                 </div>
-                                            </div> --}}
-            
+                                            </div>
+
+
+
                                             {{-- Signature Pad --}}
-                                            {{-- <div id="padSection" class="hidden">
-                                                <canvas id="signature-pad" width="400" height="200"></canvas>
+                                            <div id="padSection" class="hidden">
+                                                <canvas id="signature-pad" width="400" height="200" {{ $isSigned ? 'style=pointer-events:none;opacity:0.5;' : '' }}></canvas>
                                                 <div class="mt-2 flex">
-                                                    <button type="button" id="clearPad"
-                                                        class="bg-gray-500 text-white px-2 py-1 rounded mr-2">Clear</button>
+                                                    <button type="button" id="clearPad" class="bg-gray-500 text-white px-2 py-1 rounded mr-2" {{ $isSigned ? 'disabled' : '' }}>
+                                                        Clear
+                                                    </button>
                                                 </div>
                                                 <input type="hidden" name="signature_pad" id="signaturePadData">
-                                            </div> --}}
-            
+                                            </div>
+
                                             {{-- Checkbox for Agreement --}}
-                                            {{-- <div class="mt-4 flex items-center space-x-2">
+                                            <div class="mt-4 flex items-center space-x-2">
                                                 <input type="checkbox" id="agree" required {{ $isDisabled ? 'disabled' : '' }}>
                                                 <label for="agree">I agree to the terms and conditions.</label>
-                                            </div> --}}
-            
-                                            <!-- Approve and Decline Buttons Side by Side -->
+                                            </div>
+
+                                            {{-- Approve and Decline Buttons --}}
                                             <div class="mt-4 flex space-x-4">
                                                 <button type="submit"
                                                     class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                                                    id="submitBtn" {{ $isDisabled ? 'disabled' : '' }}>
+                                                    id="submitBtn" {{ $isDisabled || $isSigned ? 'disabled' : '' }}>
                                                     Submit Approval
                                                 </button>
-            
-                                                <a href="{{ url('/topmanager/decline/' . $job_draft->id) }}">
+
+                                                <a href="{{ url('/supervisor/approve/decline/' . $job_draft->id) }}">
                                                     <button type="button"
                                                         class="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                                                        id="declineBtn" {{ $isDisabled ? 'disabled' : '' }}>
+                                                        id="declineBtn" {{ $isDisabled || $isSigned ? 'disabled' : '' }}>
                                                         Decline
                                                     </button>
                                                 </a>
                                             </div>
+
                                         </form>
                                     </div>
-                                @endif
+                                
                                 </td>
                             </tr>
                         </tbody>
