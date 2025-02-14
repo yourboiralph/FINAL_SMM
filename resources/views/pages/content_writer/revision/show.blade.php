@@ -61,7 +61,7 @@
                 <div id="quill-editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-fit max-h-[500px] overflow-y-auto">{!! json_encode($job_draft->jobOrder->description) !!}</div>
 
                 <!-- Hidden textarea to store Quill content -->
-                <textarea name="draft" id="description" class="hidden max-h-[300px]"></textarea>
+                <textarea name="draft" id="description" class="hidden min-h-[300px] max-h-[500px] overflow-y-auto"></textarea>
             </div>
             <div class="mt-10 flex gap-8 ">
                 <div class="flex items-center justify-center flex-col">

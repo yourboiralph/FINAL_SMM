@@ -56,7 +56,7 @@
                             <ul class="space-y-4">
                                 <li>{{ $job_draft->jobOrder->title }}</li>
                                 <li>{{ $job_draft->type }}</li>
-                                <li class="overflow-hidden text-ellipsis whitespace-nowrap">{!! $job_draft->draft !!}</li>
+                                <li class="min-h-[300px] max-h-[500px] overflow-y-auto">{!! $job_draft->draft !!}</li>
                                 <li>{{ $job_draft->date_target }}</li>
                                 <li>{{ $job_draft->client->name }}</li>
                             </ul>

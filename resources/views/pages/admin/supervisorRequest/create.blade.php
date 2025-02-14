@@ -124,7 +124,7 @@
                     <div class="col-span-2 h-fit w-full">
                         <p class="text-sm text-gray-600">Description</p>
                         <!-- CKEditor Textarea -->
-                        <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg">{{ old('description') }}</textarea>
+                        <textarea name="description" id="editor" class="w-full border-gray-200 max-h-[500px] overflow-y-auto rounded-lg">{{ old('description') }}</textarea>
                         <input type="hidden" name="request_id" value="{{ $supervisor_request->id }}">
                         @error('description')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
