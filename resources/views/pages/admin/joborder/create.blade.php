@@ -44,7 +44,7 @@
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Title</p>
-                        <input type="text" name="title" class="w-full border-gray-200 rounded-lg">
+                        <input type="text" name="title" value="{{ old('title') }}" class="w-full border-gray-200 rounded-lg">
                         @error('title')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -62,7 +62,7 @@
 
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Content Writer</p>
-                        <select name="content_writer_id" class="w-full border-gray-200 rounded-lg text-sm ">
+                        <select name="content_writer_id" value="{{ old('content_writer_id') }}" class="w-full border-gray-200 rounded-lg text-sm ">
                             <option value="" disabled selected>Select A Content Writer</option>
                             @foreach ($content_writers as $content_writer)
                                 <option value="{{ $content_writer->id }}" class="text-black text-sm">{{ $content_writer->name }}</option>

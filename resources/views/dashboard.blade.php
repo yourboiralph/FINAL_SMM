@@ -29,7 +29,7 @@
                                             <td class="px-4 py-2 text-sm flex items-center gap-8">
                                                 @if (auth()->user()->role_id == '1' and $job_draft->status == 'completed')
                                                     Approved
-                                                @elseif ((auth()->user()->role_id == '2' && ($job_draft->status == 'completed' || $job_draft->status == 'Submitted to Top Manager' || $job_draft->status == "Submitted to Client")) || (auth()->user()->role_id == '5' && ($job_draft->status == "Submitted to Client" || $job_draft->status == "completed" )))
+                                                @elseif ((auth()->user()->role_id == '2' && ($job_draft->status == 'completed' || $job_draft->status == 'Submitted to Top Manager' || $job_draft->status == "Submitted to Client" || $job_draft->status == "Submitted to Supervisor")) || (auth()->user()->role_id == '5' && ($job_draft->status == "Submitted to Client" || $job_draft->status == "completed" )) || (auth()->user()->role_id == '6' && ($job_draft->status == "Submitted to Client" || $job_draft->status == "completed" || $job_draft->status == "Submitted to Top Manager")))
                                                     Signed
                                                 @elseif ((auth()->user()->role_id == '3' && ($job_draft->status == 'Submitted to Operations' || $job_draft->status == 'completed' || $job_draft->status == 'Submitted to Top Manager' || $job_draft->status == "Submitted to Client")) || (auth()->user()->role_id == '4' && ($job_draft->status == 'Submitted to Operations' || $job_draft->status == 'completed' || $job_draft->status == 'Submitted to Top Manager' || $job_draft->status == "Submitted to Client")))
                                                     Created
@@ -53,8 +53,12 @@
                                                     <a href="{{url('topmanager/show/' . $job_draft->id)}}">
                                                         <p class="text-[#fa7011]">Sign</p>
                                                     </a>
+                                                    @elseif (auth()->user()->role_id == '6' and $job_draft->status == 'Submitted to Supervisor')
+                                                    <a href="{{url('supervisor/approve/show/' . $job_draft->id)}}">
+                                                        <p class="text-[#fa7011]">Sign</p>
+                                                    </a>
                                                 @endif
-                                                @if (($job_draft->status =='completed' && auth()->user()->role_id == '1') || (($job_draft->status =='Submitted to Operations' || $job_draft->status =='Submitted to Top Manager' || $job_draft->status =='Submitted to Client' || $job_draft->status =='completed')  && (auth()->user()->role_id == '3' || auth()->user()->role_id == '4')) || (auth()->user()->role_id == "2" &&  ($job_draft->status == "Submitted to Top Manager" || $job_draft->status == "Submitted to Client" || $job_draft->status == "completed")) || (auth()->user()->role_id == "5" &&  ($job_draft->status == "Submitted to Client" || $job_draft->status == "completed")))   
+                                                @if (($job_draft->status =='completed' && auth()->user()->role_id == '1') || (($job_draft->status =='Submitted to Operations' || $job_draft->status =='Submitted to Top Manager' || $job_draft->status =='Submitted to Client' || $job_draft->status =='completed')  && (auth()->user()->role_id == '3' || auth()->user()->role_id == '4')) || (auth()->user()->role_id == "2" &&  ($job_draft->status == "Submitted to Top Manager" || $job_draft->status == "Submitted to Client" || $job_draft->status == "completed")) || (auth()->user()->role_id == "5" &&  ($job_draft->status == "Submitted to Client" || $job_draft->status == "completed")) || (auth()->user()->role_id == '6' && ($job_draft->status == "Submitted to Client" || $job_draft->status == "completed" || $job_draft->status == "Submitted to Top Manager")))   
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                                 </svg>
@@ -69,62 +73,43 @@
                     
                 </div>
 
-                <h1 class="mx-6">Revision</h1>
-                <div class="px-6">
-                    <div class="w-full p-4 bg-white rounded-lg shadow-md">
-                        <table class="table-auto gap-8 text-left border-collapse w-full">
-                            <thead class="text-gray-700">
-                                <tr>
-                                    <th class="px-4 py-2 text-sm font-semibold">Project Development</th>
-                                    <th class="px-4 py-2 text-sm font-semibold">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($job_drafts as $job_draft )
+                @if (auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
+                    <h1 class="mx-6">Revision</h1>
+                    <div class="px-6">
+                        <div class="w-full p-4 bg-white rounded-lg shadow-md">
+                            <table class="table-auto gap-8 text-left border-collapse w-full">
+                                <thead class="text-gray-700">
                                     <tr>
-                                        <td class="px-4 py-2 text-sm">{{$job_draft->jobOrder->title}}</td>
-                                            <td class="px-4 py-2 text-sm flex items-center gap-8">
-                                                @if (auth()->user()->role_id == '1' and $job_draft->status == 'completed')
-                                                    Approved
-                                                @elseif ((auth()->user()->role_id == '2' && ($job_draft->status == 'completed' || $job_draft->status == 'Submitted to Top Manager' || $job_draft->status == "Submitted to Client")) || (auth()->user()->role_id == '5' && ($job_draft->status == "Submitted to Client" || $job_draft->status == "completed" )))
-                                                    Signed
-                                                @elseif ((auth()->user()->role_id == '3' && ($job_draft->status == 'Submitted to Operations' || $job_draft->status == 'completed' || $job_draft->status == 'Submitted to Top Manager' || $job_draft->status == "Submitted to Client")) || (auth()->user()->role_id == '4' && ($job_draft->status == 'Submitted to Operations' || $job_draft->status == 'completed' || $job_draft->status == 'Submitted to Top Manager' || $job_draft->status == "Submitted to Client")))
-                                                    Created
-                                                    @elseif (auth()->user()->role_id == '1' and $job_draft->status == 'Submitted to Client')
-                                                    <a href="{{url('client/show/' . $job_draft->id)}}">
-                                                        <p class="text-[#fa7011]">Approve</p>
+                                        <th class="px-4 py-2 text-sm font-semibold">Project Development</th>
+                                        <th class="px-4 py-2 text-sm font-semibold">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($job_drafts_revisions as $job_draft_revision )
+                                        <tr>
+                                            <td class="px-4 py-2 text-sm">{{$job_draft_revision->jobOrder->title}}</td>
+                                            <td class="px-4 py-2 text-sm">
+                                                @if (auth()->user()->role_id == 3)
+                                                    <a href="{{url('content/revisions/edit/' . $job_draft_revision->id)}}">
+                                                        <p class="text-[#fa7011]">Revise</p>
                                                     </a>
-                                                    @elseif (auth()->user()->role_id == '2' and $job_draft->status == 'Submitted to Operations')
-                                                    <a href="{{url('operation/show/' . $job_draft->id)}}">
-                                                        <p class="text-[#fa7011]">Sign</p>
+
+                                                @elseif (auth()->user()->role_id == 4)
+                                                    <a href="{{url('graphic/revisions/edit/' . $job_draft_revision->id)}}">
+                                                        <p class="text-[#fa7011]">Revise</p>
                                                     </a>
-                                                    @elseif (auth()->user()->role_id == '3' and $job_draft->status == 'pending')
-                                                    <a href="{{url('content/edit/' . $job_draft->id)}}">
-                                                        <p class="text-[#fa7011]">Create</p>
-                                                    </a>
-                                                    @elseif (auth()->user()->role_id == '4' and $job_draft->status == 'pending')
-                                                    <a href="{{url('graphic/edit/' . $job_draft->id)}}">
-                                                        <p class="text-[#fa7011]">Create</p>
-                                                    </a>
-                                                    @elseif (auth()->user()->role_id == '5' and $job_draft->status == 'Submitted to Top Manager')
-                                                    <a href="{{url('topmanager/show/' . $job_draft->id)}}">
-                                                        <p class="text-[#fa7011]">Sign</p>
-                                                    </a>
-                                                @endif
-                                                @if (($job_draft->status =='completed' && auth()->user()->role_id == '1') || (($job_draft->status =='Submitted to Operations' || $job_draft->status =='Submitted to Top Manager' || $job_draft->status =='Submitted to Client' || $job_draft->status =='completed')  && (auth()->user()->role_id == '3' || auth()->user()->role_id == '4')) || (auth()->user()->role_id == "2" &&  ($job_draft->status == "Submitted to Top Manager" || $job_draft->status == "Submitted to Client" || $job_draft->status == "completed")) || (auth()->user()->role_id == "5" &&  ($job_draft->status == "Submitted to Client" || $job_draft->status == "completed")))   
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                                </svg>
                                                 @endif
                                             </td>
-
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        
                     </div>
                     
-                </div>
+                @endif
             </div>
             <div class="flex flex-col items-center">
                 <div class="mt-10 w-full flex flex-col justify-center items-center shadow-lg">
