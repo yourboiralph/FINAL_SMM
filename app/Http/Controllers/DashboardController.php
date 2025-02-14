@@ -38,7 +38,14 @@ class DashboardController extends Controller
                 ->take(5) // Get the latest 5 data
                 ->get();
 
-            return view('dashboard', compact('job_drafts'));
+            $job_drafts_revisions = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
+                ->where('content_writer_id', $user->id)
+                ->where('type', 'content_writer')
+                ->where('status', 'Revision')
+                ->orderBy('id', 'desc') // Sort by id descending
+                ->take(5) // Get the latest 5 data
+                ->get();
+            return view('dashboard', compact('job_drafts', 'job_drafts_revisions'));
         } elseif ($user_role == 4) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
                 ->where('graphic_designer_id', $user->id)
@@ -47,7 +54,15 @@ class DashboardController extends Controller
                 ->take(5) // Get the latest 5 data
                 ->get();
 
-            return view('dashboard', compact('job_drafts'));
+            $job_drafts_revisions = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
+                ->where('graphic_designer_id', $user->id)
+                ->where('type', 'graphic_designer')
+                ->where('status', 'Revision')
+                ->orderBy('id', 'desc') // Sort by id descending
+                ->take(5) // Get the latest 5 data
+                ->get();
+
+            return view('dashboard', compact('job_drafts', 'job_drafts_revisions'));
         } elseif ($user_role == 5) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
                 ->whereIn('status', ['Submitted to Client', 'completed', 'Submitted to Top Manager'])
