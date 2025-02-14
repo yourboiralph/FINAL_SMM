@@ -39,9 +39,10 @@ class AdminSupervisorRequestController extends Controller
         return view('pages.admin.supervisorRequest.create', compact('content_writers', 'graphic_designers', 'clients', 'supervisor_request'));
     }
 
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         // Validate request before proceeding
+        
         $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
