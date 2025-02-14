@@ -21,7 +21,7 @@
 </style>
 
 <div class="container mx-auto p-4 sm:p-6">
-    <div class="overflow-x-auto h-96 overflow-y-auto bg-white shadow-md rounded-lg">
+    <div class="overflow-x-auto h-[500px] max-h-[500px] overflow-y-auto bg-white shadow-md rounded-lg">
         <table class="w-full text-left border-collapse min-w-full sm:min-w-max" id="projectTable">
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>

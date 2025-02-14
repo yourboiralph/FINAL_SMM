@@ -26,7 +26,7 @@
     </div>
 
     {{-- Table Wrapper --}}
-    <div class="overflow-x-auto overflow-y-auto bg-white shadow-md rounded-lg" style="max-height: 500px;">
+    <div class="overflow-x-auto overflow-y-auto bg-white shadow-md rounded-lg h-[500px]" style="max-height: 500px;">
         <table class="w-full text-left border-collapse min-w-[500px]">
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
