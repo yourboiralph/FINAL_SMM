@@ -114,7 +114,7 @@
                 </td>
                 <td class="signature">
                     <strong>Supervisor Signature:</strong><br>
-                    <img src="{{ public_path($job_draft->signature_top_manager) }}" alt="Supervisor Signature">
+                    <img src="{{ public_path($job_draft->signature_supervisor) }}" alt="Supervisor Signature">
                 </td>
             </tr>
         </table>

@@ -72,7 +72,7 @@
                             <tr>
                                 <td class="px-4 py-2"></td>
                                 <td class="px-4 py-2">
-                                    @if(!$job_draft->signature_top_manager)
+                                    @if(!$job_draft->signature_supervisor)
                                     {{-- Signature Upload Section --}}
                                     <div class="mt-6 bg-white p-4 rounded-md shadow-md w-fit">
                                         <div class="flex">

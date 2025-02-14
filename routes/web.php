@@ -14,6 +14,7 @@ use App\Http\Controllers\OperationApprovalController;
 use App\Http\Controllers\OperationHistoryController;
 use App\Http\Controllers\OperationRenewalController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SupervisorApprovalController;
 use App\Http\Controllers\SupervisorJobOrderController;
 use App\Http\Controllers\TopApprovalController;
 use Illuminate\Support\Facades\Route;
@@ -83,6 +84,13 @@ Route::put('/client/update/{id}', [ClientApprovalController::class, 'update'])->
 Route::get('/client/decline/{id}', [ClientApprovalController::class, 'declineForm']);
 Route::post('/client/decline/{id}', [ClientApprovalController::class, 'decline']);
 Route::put('/client/renew/{id}', [ClientApprovalController::class, 'renew'])->name('client.renew');
+
+Route::get('/supervisor/approve', [SupervisorApprovalController::class, 'index'])->name('supervisor.approve');
+Route::get('/supervisor/approve/show/{id}', [SupervisorApprovalController::class, 'show'])->name('supervisor.show');
+Route::get('/supervisor/approve/edit/{id}', [SupervisorApprovalController::class, 'edit'])->name('supervisor.edit');
+Route::put('/supervisor/approve/update/{id}', [SupervisorApprovalController::class, 'update'])->name('supervisor.update');
+Route::get('/supervisor/approve/declineForm/{id}', [SupervisorApprovalController::class, 'declineForm'])->name('supervisor.declineForm');
+Route::put('/supervisor/approve/decline/{id}', [SupervisorApprovalController::class, 'decline'])->name('supervisor.decline');
 
 Route::get('/content/revisions/', [ContentRevisionController::class, 'index'])->name('content.revisions');
 Route::get('/content/revisions/edit/{id}', [ContentRevisionController::class, 'edit']);

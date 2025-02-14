@@ -100,8 +100,8 @@ class ClientApprovalController extends Controller
             'status' => 'Revision',
             'signature_admin' => null,
             'admin_signed' => null,
-            'signature_top_manager' => null,
-            'top_manager_signed' => null
+            'signature_supervisor' => null,
+            'supervisor_signed' => null
         ]);
         return redirect()->route('client.approve')->with('Status', 'Job Order Declined Successfully');
     }
