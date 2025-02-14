@@ -54,7 +54,7 @@
                 <p class="text-sm font-bold text-gray-600">Description</p>
                 
                 <!-- CKEditor Read-Only -->
-                <p class="border-b-2 border-[#fa7011] w-fit">{!! $supervisor_request->description !!}</p>
+                <p class="border-b-2 border-[#fa7011] w-fit max-h-[500px] overflow-y-auto">{!! $supervisor_request->description !!}</p>
 
             </div>
 

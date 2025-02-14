@@ -59,7 +59,7 @@
                             </tr>
                             <tr class="align-top">
                                 <td class="px-4 py-2 font-semibold">Google Drive Link:</td>
-                                <td class="px-4 py-2">{!! $job_draft->draft !!}</td>
+                                <td class="px-4 py-2 max-h-[500px] overflow-y-auto">{!! $job_draft->draft !!}</td>
                             </tr>
                             <tr class="align-top">
                                 <td class="px-4 py-2 font-semibold">Date:</td>

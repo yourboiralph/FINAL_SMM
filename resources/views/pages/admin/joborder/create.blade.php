@@ -108,7 +108,7 @@
                         <p class="text-sm text-gray-600">Description</p>
                         
                         <!-- CKEditor Textarea -->
-                        <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg">{{ old('description') }}</textarea>
+                        <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg min-h-[300px] max-h-[500px] overflow-y-auto">{{ old('description') }}</textarea>
                     
                         @error('description')
                             <p class="text-red-600 text-sm">{{ $message }}</p>

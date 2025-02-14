@@ -72,7 +72,7 @@
                         <p class="text-sm text-gray-600">Draft</p>
                         
                         <!-- CKEditor 5 textarea -->
-                        <textarea name="draft" id="editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-[300px]"></textarea>
+                        <textarea name="draft" id="editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-[300px] max-h-[500px] overflow-y-auto"></textarea>
                     
                         @error('draft')
                             <p class="text-red-600 text-sm">{{ $message }}</p>

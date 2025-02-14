@@ -56,7 +56,7 @@
                 <p class="text-sm font-bold text-gray-600">Description</p>
                 
                 <!-- CKEditor Read-Only -->
-                <p class="border-b-2 border-[#fa7011] w-fit">{!! $job_draft->joborder->description !!}</p>
+                <p class="border-b-2 border-[#fa7011] w-fit min-h-[300px] max-h-[500px] overflow-y-auto">{!! $job_draft->joborder->description !!}</p>
 
                 {{-- Graphic Designer & Content Writer --}}
                 <div class="mt-8 flex sm:flex-row gap-8 justify-center sm:justify-normal">
