@@ -12,12 +12,15 @@ class AdminSupervisorRequestController extends Controller
 {
     public function index()
     {
+        // Get supervisor requests that are NOT used in any job orders or job drafts
         $supervisor_requests = ModelsRequest::where('assigned_to', auth()->user()->id)
-            ->whereDoesntHave('jobDrafts') // Ensure the request has no associated job drafts
+            ->whereDoesntHave('jobOrders') // Exclude requests already assigned to JobOrders
             ->get();
 
         return view('pages.admin.supervisorRequest.index', compact('supervisor_requests'));
     }
+
+
 
     public function show($id)
     {
