@@ -168,7 +168,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ]);
-        $this->call(JobOrderSeeder::class);
-        $this->call(JobDraftSeeder::class);
+        // $this->call(JobOrderSeeder::class);
+        // $this->call(JobDraftSeeder::class);
     }
 }
