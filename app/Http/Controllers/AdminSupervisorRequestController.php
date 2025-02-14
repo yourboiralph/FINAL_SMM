@@ -12,9 +12,14 @@ class AdminSupervisorRequestController extends Controller
 {
     public function index()
     {
-        $supervisor_requests = ModelsRequest::where('assigned_to', auth()->user()->id)->get();
+        $supervisor_requests = ModelsRequest::where('assigned_to', auth()->user()->id)
+            ->whereDoesntHave('jobOrders')
+            ->whereDoesntHave('jobDrafts') // Ensure the request has no associated job drafts
+            ->get();
+
         return view('pages.admin.supervisorRequest.index', compact('supervisor_requests'));
     }
+
 
     public function show($id)
     {
