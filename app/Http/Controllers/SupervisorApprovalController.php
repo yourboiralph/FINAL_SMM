@@ -6,42 +6,42 @@ use App\Models\JobDraft;
 use App\Models\Revision;
 use Illuminate\Http\Request;
 
-class OperationApprovalController extends Controller
+class SupervisorApprovalController extends Controller
 {
     public function index()
     {
-        $job_drafts = JobDraft::where('status', 'Submitted to Operations')
+        $job_drafts = JobDraft::where('status', 'Submitted to Supervisor')
             ->with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
             ->get();
 
-        return view('pages.admin.joborderapproval.list', compact('job_drafts'));
+        return view('pages.supervisor.joborderapproval.list', compact('job_drafts'));
     }
 
     public function show($id)
     {
         $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
-        return view('pages.admin.joborderapproval.show', compact('job_draft'));
+        return view('pages.supervisor.joborderapproval.show', compact('job_draft'));
     }
 
     public function edit($id)
     {
         $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
-        return view('pages.admin.joborderapproval.edit', compact('job_draft'));
+        return view('pages.supervisor.joborderapproval.edit', compact('job_draft'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'signature_admin' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'signature_supervisor' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'signature_pad' => 'nullable|string',
         ]);
 
         $job_draft = JobDraft::findOrFail($id);
-        $imagePath = $job_draft->signature_admin; // Keep existing signature if no new one is uploaded
+        $imagePath = $job_draft->signature_supervisor; // Keep existing signature if no new one is uploaded
 
         // Handle File Upload
-        if ($request->hasFile('signature_admin')) {
-            $file = $request->file('signature_admin');
+        if ($request->hasFile('signature_supervisor')) {
+            $file = $request->file('signature_supervisor');
             $imagePath = 'signatures/' . time() . '.' . $file->extension();
             $file->move(public_path('signatures'), $imagePath);
         }
@@ -55,18 +55,17 @@ class OperationApprovalController extends Controller
 
         // Update Database with Signature Path
         $job_draft->update([
-            'signature_admin' => $imagePath,
-            'admin_signed' => auth()->user()->id,
-            'status' => 'Submitted to Supervisor',
+            'signature_supervisor' => $imagePath,
+            'supervisor_signed' => auth()->user()->id,
+            'status' => 'Submitted to Top Manager',
         ]);
 
-        return redirect()->route('operation.approve')->with('Status', 'Job Order Approved Successfully');
+        return redirect()->route('supervisor.approve')->with('Status', 'Job Order Approved Successfully');
     }
-
     public function declineForm($id)
     {
         $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
-        return view('pages.admin.joborderapproval.declineform', compact('job_draft'));
+        return view('pages.supervisor.joborderapproval.declineform', compact('job_draft'));
     }
 
     public function decline(Request $request, $id)
@@ -88,6 +87,6 @@ class OperationApprovalController extends Controller
         $job_draft->update([
             'status' => 'Revision',
         ]);
-        return redirect()->route('operation.approve')->with('Status', 'Job Order Declined Successfully');
+        return redirect()->route('supervisor.approve')->with('Status', 'Job Order Declined Successfully');
     }
 }
