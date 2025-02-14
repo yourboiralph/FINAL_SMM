@@ -71,7 +71,7 @@
         <table class="w-full text-left border-collapse" id="projectTable">
             <thead class="sticky top-0 bg-[#fa7011] text-white z-50">
                 <tr>
-                    <th class="px-6 py-3">File Name</th>
+                    <th class="px-6 py-3">Title</th>
                     <th class="px-6 py-3 z-20">Renewable</th>
                 </tr>
             </thead>

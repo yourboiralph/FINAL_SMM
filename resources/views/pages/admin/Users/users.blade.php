@@ -15,7 +15,7 @@
 @endphp
 <div class="container mx-auto p-6">
     <a href="{{ url('joborder/create') }}">
-        <div class="bg-[#fa7011] w-fit block text-white px-4 py-2 rounded-lg shadow-md hover:bg-cyan-800 transition text-center md:w-auto lg:hidden">
+        <div class="bg-[#fa7011] w-fit block text-white px-4 py-2 rounded-lg shadow-md hover:bg-cyan-800 transition text-center lg:hidden">
             <i class="fa-solid fa-plus"></i>
         </div>
     </a>
