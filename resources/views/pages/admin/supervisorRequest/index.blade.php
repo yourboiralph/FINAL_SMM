@@ -16,9 +16,9 @@
     <div class="w-full h-fit flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
         <div class="flex items-center w-full md:w-auto relative">
             <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-500"></i>
-            <input type="text" id="searchInput"
-                class="w-full md:w-80 px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                placeholder="Search..." />
+            <input type="text" id="searchInput" class="w-full md:w-80 px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" 
+            placeholder="Search..." onkeyup="filterTable()" />
+
             <button class="absolute right-2 px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300">
                 <i class="fa-solid fa-filter"></i>
             </button>
@@ -26,7 +26,7 @@
     </div>
 
     {{-- Table Wrapper --}}
-    <div class="overflow-x-auto overflow-y-auto bg-white shadow-md rounded-lg" style="max-height: 500px;">
+    <div class="overflow-x-auto overflow-y-auto bg-white shadow-md rounded-lg h-[500px]" style="max-height: 500px;">
         <table class="w-full text-left border-collapse min-w-[500px]">
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
@@ -58,5 +58,25 @@
         {{-- {{ $list_of_projects->links('vendor.pagination.custom') }} --}}
     </div>
 </div>
+
+<script>
+    function filterTable() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let tableBody = document.getElementById("tableBody");
+        let rows = tableBody.getElementsByTagName("tr");
+
+        for (let row of rows) {
+            let title = row.getElementsByTagName("td")[0]?.textContent.toLowerCase();
+            let assignedBy = row.getElementsByTagName("td")[1]?.textContent.toLowerCase();
+
+            if (title.includes(input) || assignedBy.includes(input)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+</script>
+
 
 @endsection
