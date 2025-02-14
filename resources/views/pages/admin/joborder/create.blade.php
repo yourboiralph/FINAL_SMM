@@ -24,6 +24,10 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 
 <div class="container mx-auto p-6">
+    {{-- Success Message Component --}}
+    @if(session('Status'))
+        <x-success />
+    @endif
     <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow">
         <div>
             <a href="{{ url('/joborder') }}">
