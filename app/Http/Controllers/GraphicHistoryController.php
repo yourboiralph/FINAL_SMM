@@ -15,6 +15,7 @@ class GraphicHistoryController extends Controller
         // Fetch all job drafts for the authenticated user
         $job_drafts = JobDraft::where('graphic_designer_id', $authuser->id)
             ->where('status', 'completed')
+            ->where('type', 'graphic_designer')
             ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client') // Corrected ->with() usage
             ->get();
         return view('pages.graphic_designer.history.index', compact('job_drafts'));
