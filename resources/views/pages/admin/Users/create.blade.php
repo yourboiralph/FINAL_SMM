@@ -46,7 +46,7 @@
 <div class="container mx-auto p-6 ">
     <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow">
         <div>
-            <a href="{{url('users')}}">
+            <a href="{{ url('users') }}">
                 <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
                     Go Back
                 </div>
@@ -63,65 +63,72 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4 mt-4">
+                    <!-- Name -->
                     <div class="w-full col-span-1">
                         <p class="text-sm text-gray-600">Name</p>
-                        <input type="text" name="name" class="w-full border-gray-200 rounded-lg" required>
+                        <input type="text" name="name" value="{{ old('name') }}" class="w-full border-gray-200 rounded-lg" required>
                         @error('name')
-                            <p class="text-red-600 text-sm">{{$message}}</p>
+                            <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
+                    <!-- Email -->
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Email</p>
-                        <input type="email" name="email" class="w-full border-gray-200 rounded-lg" required>
+                        <input type="email" name="email" value="{{ old('email') }}" class="w-full border-gray-200 rounded-lg" required>
                         @error('email')
-                            <p class="text-red-600 text-sm">{{$message}}</p>
+                            <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
     
+                    <!-- Role -->
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Role</p>
                         <select name="role_id" class="w-full border-gray-200 rounded-lg" required>
                             <option value="">Select a role</option>
-                            <option value="1">Client</option>
-                            <option value="2">Operations Manager</option>
-                            <option value="3">Content Writer</option>
-                            <option value="4">Graphic Designer</option>
-                            <option value="5">Top Manager</option>
+                            <option value="1" {{ old('role_id') == 1 ? 'selected' : '' }}>Client</option>
+                            <option value="2" {{ old('role_id') == 2 ? 'selected' : '' }}>Operations Manager</option>
+                            <option value="3" {{ old('role_id') == 3 ? 'selected' : '' }}>Content Writer</option>
+                            <option value="4" {{ old('role_id') == 4 ? 'selected' : '' }}>Graphic Designer</option>
+                            <option value="5" {{ old('role_id') == 5 ? 'selected' : '' }}>Top Manager</option>
                         </select>
                         @error('role_id')
-                            <p class="text-red-600 text-sm">{{$message}}</p>
+                            <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
                     
+                    <!-- Phone -->
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Phone</p>
-                        <input type="text" name="phone" class="w-full border-gray-200 rounded-lg" required>
+                        <input type="text" name="phone" value="{{ old('phone') }}" class="w-full border-gray-200 rounded-lg" required>
                         @error('phone')
-                            <p class="text-red-600 text-sm">{{$message}}</p>
+                            <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
     
+                    <!-- Address -->
                     <div class="w-full col-span-2">
                         <p class="text-sm text-gray-600">Address</p>
-                        <input type="text" name="address" class="w-full border-gray-200 rounded-lg" required>
+                        <input type="text" name="address" value="{{ old('address') }}" class="w-full border-gray-200 rounded-lg" required>
                         @error('address')
-                            <p class="text-red-600 text-sm">{{$message}}</p>
+                            <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
                     
+                    <!-- Password -->
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Password</p>
                         <input type="password" name="password" class="w-full rounded-lg border-gray-200 focus:ring-0" required>
                         @error('password')
-                            <p class="text-red-600 text-sm">{{$message}}</p>
+                            <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
                     
+                    <!-- Confirm Password -->
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Confirm Password</p>
                         <input type="password" name="password_confirmation" class="w-full rounded-lg border-gray-200 focus:ring-0" required>
                         @error('password_confirmation')
-                            <p class="text-red-600 text-sm">{{$message}}</p>
+                            <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
     

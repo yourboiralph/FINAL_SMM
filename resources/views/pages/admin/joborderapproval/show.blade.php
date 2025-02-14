@@ -92,7 +92,6 @@
                                             @csrf
                                             @method('PUT')
 
-
                                             {{-- File Upload (Default) --}}
                                             <div id="uploadSection">
                                                 <input type="file" name="signature_admin" accept="image/*"
@@ -102,8 +101,9 @@
                                                         alt="Selected Image" class="{{ $isSigned ? 'block' : 'hidden' }} w-full h-full object-cover">
                                                 </div>
                                             </div>
-
-
+                                            @error('signature_admin')
+                                                <p class="text-sm text-red-600">{{$message}}</p>
+                                            @enderror
 
                                             {{-- Signature Pad --}}
                                             <div id="padSection" class="hidden">
@@ -113,8 +113,12 @@
                                                         Clear
                                                     </button>
                                                 </div>
-                                                <input type="hidden" name="signature_pad" id="signaturePadData">
+                                                <input type="hidden" name="signature_pad" id="signaturePadData" value="{{ old('signature_pad') }}">
                                             </div>
+                                            
+                                            @error('signature-pad')
+                                                <p class="text-sm text-red-600">{{$message}}</p>
+                                            @enderror
 
                                             {{-- Checkbox for Agreement --}}
                                             <div class="mt-4 flex items-center space-x-2">
@@ -157,6 +161,19 @@
 {{-- JS for Live Preview, Signature Pad, and Switching --}}
 <script>
     var signaturePad = new SignaturePad(document.getElementById("signature-pad"));
+
+    // Check if an old signature (Base64) exists and load it
+    var oldSignature = {!! json_encode(old('signature_pad')) !!};
+    if(oldSignature) {
+        try {
+            signaturePad.fromDataURL(oldSignature);
+            // Switch to Signature Pad view if an old signature exists
+            document.getElementById("uploadSection").classList.add("hidden");
+            document.getElementById("padSection").classList.remove("hidden");
+        } catch (e) {
+            console.error("Error loading old signature:", e);
+        }
+    }
 
     // Toggle between File Upload and Signature Pad
     document.getElementById("useUpload").addEventListener("click", function () {

@@ -58,10 +58,7 @@
                     </div>
                     <div class="col-span-4 h-fit w-full">
                         <p class="text-sm text-gray-600 max-h-96 overflow-y-auto">Instructions</p>
-                        
-                        
                         <p>{!! $job_draft->jobOrder->description !!}</p>
-                    
                         @error('draft')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -70,10 +67,8 @@
                     <hr class="col-span-4 border border-gray-200" />
                     <div class="col-span-2 h-fit w-full">
                         <p class="text-sm text-gray-600">Draft</p>
-                        
                         <!-- CKEditor 5 textarea -->
                         <textarea name="draft" id="editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-[300px]"></textarea>
-                    
                         @error('draft')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -83,7 +78,6 @@
                 <button type="submit" class="col-span-1 text-center py-4 w-full bg-[#fa7011] mt-10 rounded-lg custom-shadow custom-hover-shadow text-white font-bold">
                     Submit
                 </button>
-                
             </div>
         </form>
     </div>
@@ -96,10 +90,10 @@
             .then(editor => {
                 console.log('CKEditor 5 initialized!', editor);
                 
-                // Load existing content
-                editor.setData(`{!! addslashes($job_draft->draft ?? '') !!}`);
+                // Load existing draft content from old input if available, otherwise use the job draft's content
+                editor.setData(`{!! addslashes(old('draft', $job_draft->draft ?? '')) !!}`);
 
-                // Before form submission, update the textarea with editor data
+                // Before form submission, update the textarea with the editor's data
                 document.querySelector("form").addEventListener("submit", function () {
                     document.querySelector("#editor").value = editor.getData();
                 });
