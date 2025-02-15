@@ -92,7 +92,10 @@
         </table>
         <div class="section-remarks">
             <strong>Description:</strong>
-            <p>{!! $job_draft->jobOrder->description !!}</p>
+            <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
+                {!! $job_draft->jobOrder->description !!}
+            </div>
+
         </div>
         <div class="gray-bar"></div>
         <div class=""><strong> Complete Information </strong></div>

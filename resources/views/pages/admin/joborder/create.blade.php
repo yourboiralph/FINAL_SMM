@@ -18,6 +18,12 @@
         box-shadow: 0 0 0 1px #545454;
         transition: box-shadow 0.3s ease;
     }
+
+    /* Ensure CKEditor is scrollable with max height */
+    .ck-editor__editable {
+        max-height: 500px !important;
+        overflow-y: auto !important;
+    }
 </style>
 
 <!-- CKEditor 5 Classic CDN -->
@@ -73,7 +79,6 @@
                         @enderror
                     </div>
                     
-
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Graphics Designer</p>
                         <select name="graphic_designer_id" class="w-full border-gray-200 rounded-lg text-sm ">
@@ -108,7 +113,7 @@
                         <p class="text-sm text-gray-600">Description</p>
                         
                         <!-- CKEditor Textarea -->
-                        <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg min-h-[300px] max-h-[500px] overflow-y-auto">{{ old('description') }}</textarea>
+                        <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg">{{ old('description') }}</textarea>
                     
                         @error('description')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
@@ -122,21 +127,6 @@
                 </button>
             </div>
         </form>
-    </div>
-
-    <!-- Modal -->
-    <div id="client-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
-        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h2 class="text-lg font-semibold mb-4">Select a Client</h2>
-            <ul class="max-h-60 overflow-y-auto">
-                @foreach($clients as $client)
-                <li class="p-2 border-b cursor-pointer hover:bg-gray-100" onclick="selectClient('{{ $client->id }}', '{{ $client->name }}')">
-                    {{ $client->name }}
-                </li>
-                @endforeach
-            </ul>
-            <button onclick="closeModal()" class="mt-4 bg-[#fa7011] text-white px-4 py-2 rounded">Close</button>
-        </div>
     </div>
 </div>
 
@@ -153,11 +143,15 @@
         closeModal();
     }
 
-    // Initialize CKEditor
+    // Initialize CKEditor with scrollable height
     ClassicEditor
-        .create(document.querySelector('#editor'))
+        .create(document.querySelector('#editor'), {
+            height: 500, // Set height to 500px
+        })
         .then(editor => {
-            console.log('CKEditor initialized');
+            editor.ui.view.editable.element.style.maxHeight = "500px"; // Limit max height
+            editor.ui.view.editable.element.style.overflowY = "auto"; // Enable vertical scrolling
+            console.log('CKEditor initialized with max height and scrolling');
         })
         .catch(error => {
             console.error(error);

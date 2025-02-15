@@ -37,7 +37,7 @@
         <div class="">
             <div class="">
 
-                <div class="h-auto gap-8 m-10 p-10 relative bg-white "
+                <div class="h-auto gap-8 m-10 p-10 relative bg-white"
                     style="box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.3); border-radius: 8px;">
                     <div class="rounded-md text-white flex justify-end mb-10">
                         <a href="{{ url('/operation') }}"
@@ -47,7 +47,11 @@
                     </div>
 
                     <!-- Using a Table for Alignment -->
-                    <table class="w-full table-auto border-collapse border-none">
+                    <table class="w-full table-fixed border-collapse border-none">
+                        <colgroup>
+                            <col style="width: 20%;">
+                            <col style="width: 80%;">
+                        </colgroup>
                         <tbody>
                             <tr class="align-top">
                                 <td class="px-4 py-2 font-semibold">Project Name:</td>
@@ -55,11 +59,15 @@
                             </tr>
                             <tr class="align-top">
                                 <td class="px-4 py-2 font-semibold">Designation:</td>
-                                <td class="px-4 py-2">{{$job_draft->type}}</td>
+                                <td class="px-4 py-2">{{ $job_draft->type }}</td>
                             </tr>
                             <tr class="align-top">
                                 <td class="px-4 py-2 font-semibold">Google Drive Link:</td>
-                                <td class="px-4 py-2 max-h-[500px] overflow-y-auto">{!! $job_draft->draft !!}</td>
+                                <td class="px-4 py-2">
+                                    <div class="max-h-[300px] border border-gray-400 p-4 rounded-lg overflow-y-auto break-all">
+                                        {!! $job_draft->draft !!}
+                                    </div>
+                                </td>                                
                             </tr>
                             <tr class="align-top">
                                 <td class="px-4 py-2 font-semibold">Date:</td>
@@ -72,7 +80,6 @@
                             <tr>
                                 <td class="px-4 py-2"></td>
                                 <td class="px-4 py-2">
-                                                
                                     @php
                                         $isDisabled = $job_draft->status != "Submitted to Operations";
                                         $isSigned = !empty($job_draft->signature_admin);
@@ -102,7 +109,7 @@
                                                 </div>
                                             </div>
                                             @error('signature_admin')
-                                                <p class="text-sm text-red-600">{{$message}}</p>
+                                                <p class="text-sm text-red-600">{{ $message }}</p>
                                             @enderror
 
                                             {{-- Signature Pad --}}
@@ -117,7 +124,7 @@
                                             </div>
                                             
                                             @error('signature-pad')
-                                                <p class="text-sm text-red-600">{{$message}}</p>
+                                                <p class="text-sm text-red-600">{{ $message }}</p>
                                             @enderror
 
                                             {{-- Checkbox for Agreement --}}
@@ -150,7 +157,6 @@
                             </tr>
                         </tbody>
                     </table>
-
 
                 </div>
             </div>

@@ -61,7 +61,10 @@
                         <p class="text-sm text-gray-600">Content Writer Draft</p>
                         
                         <!-- Display the parent draft -->
-                        {!! $job_draft->parentDraft->draft !!}
+                        <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
+                            {!! $job_draft->parentDraft->draft !!}
+                        
+                        </div>
                     
                         @error('draft')
                             <p class="text-red-600 text-sm">{{ $message }}</p>

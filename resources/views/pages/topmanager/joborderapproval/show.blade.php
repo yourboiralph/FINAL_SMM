@@ -47,7 +47,11 @@
                     </div>
 
                     <!-- Using a Table for Alignment -->
-                    <table class="w-full table-auto border-collapse border-none">
+                    <table class="w-full table-fixed border-collapse border-none">
+                        <colgroup>
+                            <col style="width: 20%;">
+                            <col style="width: 80%;">
+                        </colgroup>
                         <tbody>
                             <tr class="align-top">
                                 <td class="px-4 py-2 font-semibold">Project Name:</td>
@@ -59,7 +63,11 @@
                             </tr>
                             <tr class="align-top">
                                 <td class="px-4 py-2 font-semibold">Google Drive Link:</td>
-                                <td class="px-4 py-2 max-h-[500px] overflow-y-auto">{!! $job_draft->draft !!}</td>
+                                <td class="px-4 py-2">
+                                    <div class="max-h-[300px] border border-gray-400 p-4 rounded-lg overflow-y-auto break-all">
+                                        {!! $job_draft->draft !!}
+                                    </div>
+                                </td>  
                             </tr>
                             <tr class="align-top">
                                 <td class="px-4 py-2 font-semibold">Date:</td>
@@ -71,7 +79,7 @@
                             </tr>
                             <tr>
                                 <td class="px-4 py-2"></td>
-                                <td class="px-4 py-2">
+                                <td class="px-4 py-2 flex justify-end w-full">
                                     @if(!$job_draft->signature_top_manager)
                                     {{-- Signature Upload Section --}}
                                     <div class="mt-6  p-4 rounded-md w-fit">

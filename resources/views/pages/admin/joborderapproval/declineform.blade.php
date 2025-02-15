@@ -35,34 +35,52 @@
         {{-- Middle Part --}}
         <div class="">
             <div class="">
-                <div class="h-auto gap-8 m-10 p-10 relative bg-white" style="box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.3); border-radius: 8px;">
+                <div class="h-auto gap-8 m-10 p-10 relative bg-white"
+                     style="box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.3); border-radius: 8px;">
+                     
+                    <!-- Back Button -->
                     <div class="rounded-md text-white flex justify-end mb-10">
-                        <a href="{{ url('/operation') }}" class="w-fit px-4 py-1 bg-[#fa7011] rounded hover:bg-[#d95f0a] transition duration-200">
+                        <a href="{{ url('/operation') }}"
+                           class="w-fit px-4 py-1 bg-[#fa7011] rounded hover:bg-[#d95f0a] transition duration-200">
                             Back
                         </a>
                     </div>
                     
-                    <div class="flex gap-8">
-                        <div>
-                            <ul class="space-y-4 font-semibold">
-                                <li>Project Name:</li>
-                                <li>Designation:</li>
-                                <li>Google Drive Link:</li>
-                                <li>Date:</li>
-                                <li>Client Name:</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <ul class="space-y-4">
-                                <li>{{ $job_draft->jobOrder->title }}</li>
-                                <li>{{ $job_draft->type }}</li>
-                                <li class="min-h-[300px] max-h-[500px] overflow-y-auto">{!! $job_draft->draft !!}</li>
-                                <li>{{ $job_draft->date_target }}</li>
-                                <li>{{ $job_draft->client->name }}</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
+                    <!-- Job Order Details using a Table Layout -->
+                    <table class="w-full table-fixed border-collapse border-none">
+                        <colgroup>
+                            <col style="width: 20%;">
+                            <col style="width: 80%;">
+                        </colgroup>
+                        <tbody>
+                            <tr class="align-top">
+                                <td class="px-4 py-2 font-semibold">Project Name:</td>
+                                <td class="px-4 py-2">{{ $job_draft->jobOrder->title }}</td>
+                            </tr>
+                            <tr class="align-top">
+                                <td class="px-4 py-2 font-semibold">Designation:</td>
+                                <td class="px-4 py-2">{{ $job_draft->type }}</td>
+                            </tr>
+                            <tr class="align-top">
+                                <td class="px-4 py-2 font-semibold">Google Drive Link:</td>
+                                <td class="px-4 py-2">
+                                    <div class="max-h-[300px] border border-gray-400 p-4 rounded-lg overflow-y-auto break-all">
+                                        {!! $job_draft->draft !!}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="align-top">
+                                <td class="px-4 py-2 font-semibold">Date:</td>
+                                <td class="px-4 py-2">{{ $job_draft->date_target }}</td>
+                            </tr>
+                            <tr class="align-top">
+                                <td class="px-4 py-2 font-semibold">Client Name:</td>
+                                <td class="px-4 py-2">{{ $job_draft->client->name }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Decline Form Section -->
                     <div class="mt-10">
                         <form action="{{ url('/operation/decline/' . $job_draft->id) }}" method="POST">
                             @csrf
@@ -76,12 +94,13 @@
                             @enderror
 
                             <button type="submit"
-                                class="px-4 py-2 mt-4 text-sm text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                                id="declineBtn">
+                                    class="px-4 py-2 mt-4 text-sm text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    id="declineBtn">
                                 Decline
                             </button>
                         </form>
                     </div>
+                    
                 </div>
             </div>
         </div>

@@ -30,8 +30,6 @@
 <!-- Include CKEditor 5 CDN -->
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 
-
-
 <div class="mx-auto max-w-screen-2xl">
     <div class="h-full mx-auto max-w-screen-xl">
         <div class="h-auto gap-8 m-10 p-10 relative bg-white" style="box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.3); border-radius: 8px;">
@@ -41,7 +39,7 @@
                 </a>
             </div>
 
-            <table class=" table-auto border-collapse border-none">
+            <table class="table-auto border-collapse border-none">
                 <tbody>
                     <tr class="align-top">
                         <td class="px-4 py-2 font-semibold">Project Name:</td>
@@ -49,11 +47,17 @@
                     </tr>
                     <tr class="align-top">
                         <td class="px-4 py-2 font-semibold">Designation:</td>
-                        <td class="px-4 py-2">{{$job_draft->type}}</td>
+                        <td class="px-4 py-2">{{ $job_draft->type }}</td>
                     </tr>
                     <tr class="align-top">
                         <td class="px-4 py-2 font-semibold">Google Drive Link:</td>
-                        <td class="px-4 py-2 max-h-[500px] overflow-y-auto">{!! $job_draft->draft !!}</td>
+                        <!-- Using break-all to ensure long URLs wrap properly -->
+                        <td class="px-4 py-2 max-h-[500px] overflow-y-auto break-all">
+                            <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
+                                
+                                {!! $job_draft->draft !!}
+                            </div>
+                        </td>
                     </tr>
                     <tr class="align-top">
                         <td class="px-4 py-2 font-semibold">Date:</td>
@@ -67,7 +71,7 @@
             </table>
 
             <div class="mt-10">
-                <form action="{{url('/client/update/' . $job_draft->id)}}" method="POST">
+                <form action="{{ url('/client/update/' . $job_draft->id) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <label for="feedback" class="block font-semibold">Feedback:</label>
