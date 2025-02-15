@@ -38,4 +38,13 @@ class SupervisorJobOrderController extends Controller
 
         return redirect()->route('supervisor.joborder')->with('status', 'Job Order Created Successfully');
     }
+
+    public function edit($id)
+    {
+        $supervisor_request = ModelsRequest::find(1);
+
+        return view('pages.supervisor.job_order.edit');
+    }
+
+    public function update($id) {}
 }
