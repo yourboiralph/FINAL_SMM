@@ -17,6 +17,7 @@ use App\Http\Controllers\OperationHistoryController;
 use App\Http\Controllers\OperationRenewalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupervisorApprovalController;
+use App\Http\Controllers\SupervisorDirectJobOrderController;
 use App\Http\Controllers\SupervisorJobOrderController;
 use App\Http\Controllers\TopApprovalController;
 use Illuminate\Support\Facades\Route;
@@ -132,6 +133,11 @@ Route::get('/operation/requests', [AdminSupervisorRequestController::class, 'ind
 Route::get('/operation/request/show/{id}', [AdminSupervisorRequestController::class, 'show'])->name('operation.show');
 Route::get('/operation/request/create/{id}', [AdminSupervisorRequestController::class, 'create'])->name('operation.create');
 Route::post('/operation/request/store', [AdminSupervisorRequestController::class, 'store'])->name('operation.store');
+
+Route::get('/supervisor/directjob', [SupervisorDirectJobOrderController::class, 'index'])->name('supervisor.directjob');
+Route::get('/supervisor/directjob/create', [SupervisorDirectJobOrderController::class, 'create'])->name('supervisor.directjob.create');
+Route::post('/supervisor/directjob/store', [SupervisorDirectJobOrderController::class, 'store'])->name('supervisor.directjob.create');
+
 
 use App\Http\Controllers\SignatureController;
 
