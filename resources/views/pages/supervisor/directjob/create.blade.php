@@ -4,7 +4,6 @@
 @section('header', "Create Job Order") 
 
 @section('content')
-
 <style>
     .custom-shadow {
         box-shadow: 0 2px 4px rgba(0, 0, 0, .3), 0 1px 3px rgba(0, 0, 0, .3);
@@ -65,13 +64,12 @@
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Content Writer</p>
                         <select name="content_writer_id" class="w-full border-gray-200 rounded-lg text-sm ">
                             <option value="" disabled {{ old('content_writer_id') ? '' : 'selected' }}>Select A Content Writer</option>
-                            @foreach ($users as $user)
-                                <option value="{{ $user->id }}" {{ old('content_writer_id') == $user->id ? 'selected' : '' }} class="text-black text-sm">{{ $user->name }}</option>
+                            @foreach ($workers as $worker)
+                                <option value="{{ $worker->id }}" {{ old('content_writer_id') == $worker->id ? 'selected' : '' }} class="text-black text-sm">{{ $worker->name }}</option>
                             @endforeach
                         </select>
                         @error('content_writer_id')
@@ -83,15 +81,15 @@
                         <p class="text-sm text-gray-600">Graphics Designer</p>
                         <select name="graphic_designer_id" class="w-full border-gray-200 rounded-lg text-sm ">
                             <option value="" disabled {{ old('graphic_designer_id') ? '' : 'selected' }}>Select A Graphic Designer</option>
-                            @foreach ($users as $user)
-                                <option value="{{ $user->id }}" {{ old('graphic_designer_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
+                            @foreach ($workers as $worker)
+                                <option value="{{ $worker->id }}" {{ old('graphic_designer_id') == $worker->id ? 'selected' : '' }}>{{ $worker->name }}</option>
                             @endforeach
                         </select>
                         @error('graphic_designer_id')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-
+                    
                     <div class="col-span-2 grid grid-cols-2 w-full gap-4 rounded-lg">
                         <div>
                             <p class="text-sm text-gray-600">Date Started</p>
@@ -111,39 +109,67 @@
                     
                     <div class="col-span-2 h-fit w-full">
                         <p class="text-sm text-gray-600">Description</p>
-                        
                         <!-- CKEditor Textarea -->
                         <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg">{{ old('description') }}</textarea>
-                    
                         @error('description')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-                    
                 </div>
-
                 <button type="submit" class="col-span-1 text-center py-4 w-full bg-[#fa7011] mt-10 rounded-lg custom-shadow custom-hover-shadow text-white font-bold">
                     Submit
                 </button>
             </div>
         </form>
     </div>
+    <!-- Modal -->
+    <div id="client-modal" class="fixed inset-0 z-50 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden" style="display: none;">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 class="text-lg font-semibold mb-4">Select a Client</h2>
+            <ul class="max-h-60 overflow-y-auto">
+                @foreach($clients as $client)
+                    <li class="p-2 border-b cursor-pointer hover:bg-gray-100" onclick="selectClient('{{ $client->id }}', '{{ $client->name }}')">
+                        {{ $client->name }}
+                    </li>
+                @endforeach
+            </ul>
+            <button onclick="closeModal()" class="mt-4 bg-[#fa7011] text-white px-4 py-2 rounded">Close</button>
+        </div>
+    </div>
 </div>
 
 <script>
-    function openModal() {
-        document.getElementById('client-modal').classList.remove('hidden');
-    }
-    function closeModal() {
-        document.getElementById('client-modal').classList.add('hidden');
-    }
-    function selectClient(clientId, clientName) {
+    // Global functions with debugging logs and inline style toggling.
+    window.openModal = function() {
+        console.log("openModal called");
+        var modal = document.getElementById('client-modal');
+        if(modal) {
+            modal.classList.remove('hidden');
+            modal.style.display = "flex";
+            console.log("Modal should now be visible.");
+        } else {
+            console.error("Modal element not found!");
+        }
+    };
+
+    window.closeModal = function() {
+        console.log("closeModal called");
+        var modal = document.getElementById('client-modal');
+        if(modal) {
+            modal.classList.add('hidden');
+            modal.style.display = "none";
+            console.log("Modal should now be hidden.");
+        }
+    };
+
+    window.selectClient = function(clientId, clientName) {
+        console.log("selectClient called with:", clientId, clientName);
         document.getElementById('selected-client-name').value = clientName;
         document.getElementById('selected-client-id').value = clientId;
         closeModal();
-    }
+    };
 
-    // Initialize CKEditor with scrollable height
+    // Initialize CKEditor
     ClassicEditor
         .create(document.querySelector('#editor'), {
             height: 500, // Set height to 500px
@@ -154,8 +180,7 @@
             console.log('CKEditor initialized with max height and scrolling');
         })
         .catch(error => {
-            console.error(error);
+            console.error("Error initializing CKEditor:", error);
         });
 </script>
-
 @endsection
