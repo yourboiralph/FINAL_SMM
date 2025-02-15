@@ -30,7 +30,7 @@
             <x-success />
         @endif
         <div>
-            <a href="{{ url('/joborder') }}">
+            <a href="{{ url('/operation/requests') }}">
                 <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
                     Back
                 </div>
