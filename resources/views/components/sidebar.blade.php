@@ -23,15 +23,28 @@
         </div>
 
         <div class=" block px-6">
-            <a href="{{ url("/operation/requests") }}"
+            <a href="{{ url("/operation/task") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
-                {{ request()->is("operation/requests", "operation/request/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is("operation/requests", "operation/request/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                {{ request()->is("operation/task", "operation/task/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("operation/task", "operation/task/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <img src="/Assets/icon-projdev-white.png"
                     draggable="false"
-                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/requests", "operation/request/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/task", "operation/task/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
-                <h1 class=" block">Incoming Job Orders</h1>
+                <h1 class=" block">My Tasks</h1>
+            </a>
+        </div>
+
+        <div class=" block px-6">
+            <a href="{{ url("/operation/revision") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("operation/revision", "operation/revision/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("operation/revision", "operation/revision/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-projdev-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/revision", "operation/revision/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="Project Development Icon">
+                <h1 class=" block">My Revisions</h1>
             </a>
         </div>
 
@@ -574,6 +587,32 @@
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("supervisor/directjob", "supervisor/directjob/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
                 <h1 class=" block">Direct Job Orders</h1>
+            </a>
+        </div>
+
+        <div class=" block px-6">
+            <a href="{{ url("/supervisor/task") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("supervisor/task", "supervisor/task/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("supervisor/task", "supervisor/task/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-projdev-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("supervisor/task", "supervisor/task/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="Project Development Icon">
+                <h1 class=" block">My Tasks</h1>
+            </a>
+        </div>
+
+        <div class=" block px-6">
+            <a href="{{ url("/supervisor/revision") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("supervisor/revision", "supervisor/revision/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("supervisor/revision", "supervisor/revision/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-projdev-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("supervisor/revision", "supervisor/revision/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="Project Development Icon">
+                <h1 class=" block">My Revisions</h1>
             </a>
         </div>
 

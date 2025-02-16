@@ -141,7 +141,7 @@
                                                     Submit Approval
                                                 </button>
 
-                                                <a href="{{ url('/supervisor/approve/decline/' . $job_draft->id) }}">
+                                                <a href="{{ url('/supervisor/approve/declineForm/' . $job_draft->id) }}">
                                                     <button type="button"
                                                         class="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
                                                         id="declineBtn" {{ $isDisabled || $isSigned ? 'disabled' : '' }}>
