@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\JobDraft;
 use Illuminate\Http\Request;
 
-class OperationTaskController extends Controller
+class SupervisorTaskController extends Controller
 {
     public function index()
     {
@@ -20,9 +20,8 @@ class OperationTaskController extends Controller
             ->with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client']) // Ensures relations are loaded
             ->get();
 
-        return view('pages.admin.task.list', compact('job_drafts'));
+        return view('pages.supervisor.task.list', compact('job_drafts'));
     }
-
 
     public function edit($id)
     {
@@ -30,7 +29,7 @@ class OperationTaskController extends Controller
         $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client', 'parentDraft')->find($id);
 
         // Pass both the job draft and the latest job draft to the view
-        return view('pages.admin.task.edit', compact('job_draft'));
+        return view('pages.supervisor.task.edit', compact('job_draft'));
     }
 
     public function update(Request $request, $id)
@@ -46,6 +45,6 @@ class OperationTaskController extends Controller
             'status' => 'Submitted to Operations',
         ]);
 
-        return redirect()->route('operation.task')->with('Status', 'Job Order Updated Successfully');
+        return redirect()->route('supervisor.task')->with('Status', 'Job Order Updated Successfully');
     }
 }
