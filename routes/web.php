@@ -144,22 +144,22 @@ Route::get('/supervisor/directjob', [SupervisorDirectJobOrderController::class, 
 Route::get('/supervisor/directjob/create', [SupervisorDirectJobOrderController::class, 'create'])->name('supervisor.directjob.create');
 Route::post('/supervisor/directjob/store', [SupervisorDirectJobOrderController::class, 'store'])->name('supervisor.directjob.create');
 
-//Create "My Tasks" tab for Admin
+//Create "My Tasks" tab for Admin DONE
 Route::get('/operation/task', [OperationTaskController::class, 'index'])->name('operation.task');
 Route::get('/operation/task/edit/{id}', [OperationTaskController::class, 'edit'])->name('operation.edit');
 Route::put('/operation/task/update/{id}', [OperationTaskController::class, 'update'])->name('operation.update');
 
-//Create "My Revisions" tab for Admin
+//Create "My Revisions" tab for Admin DONE
 Route::get('/operation/revision', [OperationRevisionController::class, 'index'])->name('operation.revision');
 Route::get('/operation/revision/edit/{id}', [OperationRevisionController::class, 'edit'])->name('operation.edit');
 Route::put('/operation/revision/update/{id}', [OperationRevisionController::class, 'update'])->name('operation.update');
 
-//Create "My Task" tab for Supervisor
+//Create "My Task" tab for Supervisor DONE
 Route::get('/supervisor/task', [SupervisorTaskController::class, 'index'])->name('supervisor.task');
 Route::get('/supervisor/task/edit/{id}', [SupervisorTaskController::class, 'edit'])->name('supervisor.edit');
 Route::put('/supervisor/task/update/{id}', [SupervisorTaskController::class, 'update'])->name('supervisor.update');
 
-//Create "My Revisions" tab for Supervisor
+//Create "My Revisions" tab for Supervisor  DONE
 Route::get('/supervisor/revision', [SupervisorRevisionController::class, 'index'])->name('supervisor.revision');
 Route::get('/supervisor/revision/edit/{id}', [SupervisorRevisionController::class, 'edit'])->name('supervisor.edit');
 Route::put('/supervisor/revision/update/{id}', [SupervisorRevisionController::class, 'update'])->name('supervisor.update');
