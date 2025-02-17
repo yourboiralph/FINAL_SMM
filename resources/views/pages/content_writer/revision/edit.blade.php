@@ -38,7 +38,7 @@
             <h1 class="text-xl font-bold mt-4">Create Draft</h1>
             <div class="grid grid-cols-4 space-y-4">
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
-                    <div class="col-span-4 grid grid-cols-4">
+                    <div class="col-span-4 grid grid-cols-5">
                         <div class="col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Title</p>
                             <p class="text-xl font-bold">{{ $job_draft->jobOrder->title }}</p>
@@ -55,20 +55,20 @@
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Date Target</p>
                             <p class="text-xl font-bold">{{ \Carbon\Carbon::parse($job_draft->date_target)->format('Y-m-d') }}</p>
                         </div>
-                        <div class="w-full col-span-4 grid grid-cols-4 justify-between">
-                            <div class="col-span-3 w-full mt-4">
+                        <div class="col-span-1 w-full">
+                            <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Revision By</p>
+                            <p class="text-xl font-bold">{{ $job_draft->revisions->last()->declinedBy->name }}</p>
+                        </div>
+                        <div class="w-full col-span-5 grid grid-cols-4 justify-between">
+                            <div class="col-span-5 w-full mt-4">
                                 <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Revisions</p>
                                 <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
                                     {!! $job_draft->revisions->last()->summary !!}
                                     
                                 </div>
                             </div>
-                            <div class="col-span-1 w-full mt-4">
-                                <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Revision By</p>
-                                <p class="">{{ $job_draft->revisions->last()->declinedBy->name }}</p>
-                            </div>
                         </div>
-                        <div class="col-span-4 w-full mt-4">
+                        <div class="col-span-5 w-full mt-4">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Description</p>
                             <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
                                 {!! $job_draft->jobOrder->description !!}
@@ -92,7 +92,7 @@
 
                     <hr class="border border-gray-200 col-span-4" />
 
-                    <div class="col-span-2 h-fit w-full">
+                    <div class="col-span-4 h-fit w-full">
                         <p class="text-sm text-gray-600">Draft</p>
                         
                         <!-- CKEditor 5 textarea -->
@@ -122,7 +122,7 @@
                 
                 // Load existing draft content from old input if available,
                 // otherwise use the job draft's existing draft content.
-                editor.setData(`{!! addslashes(old('draft', $job_draft->draft ?? '')) !!}`);
+                editor.setData(``);
 
                 // Before form submission, update the textarea with the editor's data
                 document.querySelector("form").addEventListener("submit", function () {
