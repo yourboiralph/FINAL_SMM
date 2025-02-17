@@ -26,7 +26,7 @@
 <div class="container mx-auto p-6">
     <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow">
         <div>
-            <a href="{{ url('/joborder') }}">
+            <a href="{{ url('/supervisor/joborder') }}">
                 <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
                     Back
                 </div>
@@ -51,16 +51,18 @@
                         <p class="text-sm text-gray-600">Operator</p>
                         <div class="relative">
                             <input type="text" id="selected-operator-name" 
-                                value="{{ old('assigned_to') ? ($operators->firstWhere('id', old('assigned_to'))->name ?? 'Select an Operator') : 'Select an Operator' }}" 
+                                value="{{ old('assigned_to') ? ($operators->firstWhere('id', old('assigned_to'))->name ?? 'Select an Operator') : ($supervisor_request->assignee->name ?? 'Select an Operator') }}" 
                                 class="w-full border-gray-200 rounded-lg cursor-pointer" readonly 
                                 onclick="openOperatorModal()">
+                            
                             <input type="hidden" name="assigned_to" id="selected-operator-id" 
-                                value="{{ old('assigned_to', $supervisor_request->assignee->name) }}">
+                                value="{{ old('assigned_to', $supervisor_request->assignee->id) }}">
                         </div>
                         @error('assigned_to')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
+
                 
                     
                     <div class="col-span-2 h-fit w-full">
@@ -119,51 +121,28 @@
 </div>
 
 <script>
-    function filterTable() {
-        let input = document.getElementById("searchInput").value.toLowerCase();
-        let tableBody = document.getElementById("tableBody");
-        let rows = tableBody.getElementsByTagName("tr");
-
-        for (let row of rows) {
-            let title = row.getElementsByTagName("td")[0]?.textContent.toLowerCase();
-            let assignedBy = row.getElementsByTagName("td")[1]?.textContent.toLowerCase();
-
-            if (title.includes(input) || assignedBy.includes(input)) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
-        }
+    function openOperatorModal() {
+        document.getElementById('operator-modal').classList.remove('hidden');
     }
 
-    // Open Content Writer Modal
-    function openContentWriterModal() {
-        document.getElementById('content-writer-modal').classList.remove('hidden');
+    function closeOperatorModal() {
+        document.getElementById('operator-modal').classList.add('hidden');
     }
 
-    // Close Content Writer Modal
-    function closeContentWriterModal() {
-        document.getElementById('content-writer-modal').classList.add('hidden');
+    function selectOperator(operatorId, operatorName) {
+        document.getElementById('selected-operator-name').value = operatorName;
+        document.getElementById('selected-operator-id').value = operatorId;
+        closeOperatorModal();
     }
 
-    // Select a Content Writer
-    function selectContentWriter(contentWriterId, contentWriterName) {
-        document.getElementById('selected-content-writer-name').value = contentWriterName;
-        document.getElementById('selected-content-writer-id').value = contentWriterId;
-        closeContentWriterModal();
-    }
-
-    // Filter Content Writer Table
-    function filterContentWriterTable() {
-        let input = document.getElementById("searchContentWriterInput").value.toLowerCase();
-        let tableBody = document.getElementById("contentWriterTableBody");
+    function filterOperatorTable() {
+        let input = document.getElementById("searchOperatorInput").value.toLowerCase();
+        let tableBody = document.getElementById("operatorTableBody");
         let rows = tableBody.getElementsByTagName("tr");
 
         for (let row of rows) {
             let name = row.getElementsByTagName("td")[0]?.textContent.toLowerCase();
-            let role = row.getElementsByTagName("td")[1]?.textContent.toLowerCase();
-
-            if (name.includes(input) || role.includes(input)) {
+            if (name.includes(input)) {
                 row.style.display = "";
             } else {
                 row.style.display = "none";
@@ -171,63 +150,9 @@
         }
     }
 
-    function openModal() {
-        document.getElementById('client-modal').classList.remove('hidden');
-    }
-    function closeModal() {
-        document.getElementById('client-modal').classList.add('hidden');
-    }
-    function selectClient(clientId, clientName) {
-        document.getElementById('selected-client-name').value = clientName;
-        document.getElementById('selected-client-id').value = clientId;
-        closeModal();
-    }
-
-    // Open Graphics Designer Modal
-    function openGraphicDesignerModal() {
-        document.getElementById('graphic-designer-modal').classList.remove('hidden');
-    }
-
-    // Close Graphics Designer Modal
-    function closeGraphicDesignerModal() {
-        document.getElementById('graphic-designer-modal').classList.add('hidden');
-    }
-
-    // Select a Graphics Designer
-    function selectGraphicDesigner(graphicDesignerId, graphicDesignerName) {
-        document.getElementById('selected-graphic-designer-name').value = graphicDesignerName;
-        document.getElementById('selected-graphic-designer-id').value = graphicDesignerId;
-        closeGraphicDesignerModal();
-    }
-
-    // Filter Graphics Designer Table
-    function filterGraphicDesignerTable() {
-        let input = document.getElementById("searchGraphicDesignerInput").value.toLowerCase();
-        let tableBody = document.getElementById("graphicDesignerTableBody");
-        let rows = tableBody.getElementsByTagName("tr");
-
-        for (let row of rows) {
-            let name = row.getElementsByTagName("td")[0]?.textContent.toLowerCase();
-            let role = row.getElementsByTagName("td")[1]?.textContent.toLowerCase();
-
-            if (name.includes(input) || role.includes(input)) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
-        }
-    }
-
-
-    // Initialize CKEditor
-    ClassicEditor
-        .create(document.querySelector('#editor'))
-        .then(editor => {
-            console.log('CKEditor initialized');
-        })
-        .catch(error => {
-            console.error(error);
-        });
+    ClassicEditor.create(document.querySelector('#editor'))
+        .then(editor => console.log('CKEditor initialized'))
+        .catch(error => console.error(error));
 </script>
 
 @endsection
