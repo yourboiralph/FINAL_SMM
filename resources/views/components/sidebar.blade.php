@@ -5,7 +5,7 @@
 
 @props(['link' => $user->role->position])
 
-<div class="space-y-4 z-10 overflow-y-auto">
+<div class="space-y-4 z-10 overflow-y-auto h-full">
     @if ($link === 'operations')
 
         {{-- Admin Sidebar Menu --}}
@@ -36,15 +36,15 @@
         </div>
 
         <div class=" block px-6">
-            <a href="{{ url("/operation/revision") }}"
+            <a href="{{ url("/operation/requests") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
-                {{ request()->is("operation/revision", "operation/revision/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is("operation/revision", "operation/revision/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                {{ request()->is("operation/requests", "operation/requests/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("operation/requests", "operation/requests/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <img src="/Assets/icon-projdev-white.png"
                     draggable="false"
-                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/revision", "operation/revision/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/requests", "operation/requests/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
-                <h1 class=" block">My Revisions</h1>
+                <h1 class=" block">Incoming Requests</h1>
             </a>
         </div>
 
@@ -57,9 +57,10 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("joborder", "joborder/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
-                <h1 class=" block">Outgoing Job Orders</h1>
+                <h1 class=" block">Outgoing Requests</h1>
             </a>
         </div>
+
 
         <div class=" block px-6">
             <a href="{{ url("/operation") }}"
@@ -70,7 +71,22 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation", "operation/show/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
-                <h1 class=" block">Approval</h1>
+                <h1 class=" block">Approvals</h1>
+            </a>
+        </div>
+
+
+
+        <div class=" block px-6">
+            <a href="{{ url("/operation/revision") }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md 
+                {{ request()->is("operation/revision", "operation/revision/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("operation/revision", "operation/revision/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <img src="/Assets/icon-projdev-white.png"
+                    draggable="false"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/revision", "operation/revision/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    alt="Project Development Icon">
+                <h1 class=" block">My Revisions</h1>
             </a>
         </div>
 

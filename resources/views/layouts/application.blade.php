@@ -27,7 +27,7 @@
 
             <!-- Sidebar -->
             <div id="sidebar"
-                class="fixed top-0 left-0 w-80 md:w-96 z-20 bg-white shadow-lg h-full lg:h-screen flex flex-col transition-transform transform -translate-x-full lg:translate-x-0 lg:sticky lg:block">
+                class="fixed top-0 left-0 w-80 md:w-96 z-20 bg-white shadow-lg h-full lg:h-full flex flex-col transition-transform transform -translate-x-full lg:translate-x-0 lg:sticky lg:block">
                 <div class="p-6 flex items-center justify-between">
                     <img class="w-48 sm:w-48 lg:w-64 lg:mx-auto" src="/Assets/logo.png" draggable="false" alt="Logo">
                     <i id="closeSidebar" class="text-2xl cursor-pointer fa-solid fa-xmark lg:hidden"></i>

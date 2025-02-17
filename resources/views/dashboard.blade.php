@@ -12,7 +12,7 @@
         <div class="grid grid-cols-1 md:grid md:grid-cols-3 md:px-2 mx-auto">
             <div class="col-span-1 md:col-span-2">
                 <img class="" src="/Assets/Banner.png" alt="" draggable="false">
-                <h1 class="mx-6">Documents</h1>
+                <h1 class="mx-6 mb-4">Approvals</h1>
                 <div class="px-6">
                     <div class="w-full p-4 bg-white rounded-lg shadow-md">
                         <table class="table-auto gap-8 text-left border-collapse w-full">
@@ -96,6 +96,16 @@
 
                                                 @elseif (auth()->user()->role_id == 4)
                                                     <a href="{{url('graphic/revisions/edit/' . $job_draft_revision->id)}}">
+                                                        <p class="text-[#fa7011]">Revise</p>
+                                                    </a>
+
+                                                @elseif (auth()->user()->role_id == 2)
+                                                    <a href="{{url('operation/revision/edit/' . $job_draft_revision->id)}}">
+                                                        <p class="text-[#fa7011]">Revise</p>
+                                                    </a>
+
+                                                @elseif (auth()->user()->role_id == 6)
+                                                    <a href="{{url('supervisor/revision/edit/' . $job_draft_revision->id)}}">
                                                         <p class="text-[#fa7011]">Revise</p>
                                                     </a>
                                                 @endif
