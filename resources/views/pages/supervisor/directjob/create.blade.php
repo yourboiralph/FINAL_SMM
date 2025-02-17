@@ -210,7 +210,7 @@
                     </tr>
                 </thead>
                 <tbody id="contentWriterTableBody" class="overflow-y-auto">
-                    @foreach ($workers as $content_writer)
+                    @foreach ($contentworkers as $content_writer)
                         <tr class="border-b">
                             <td class="px-6 py-3">{{ $content_writer->name }}</td>
                             <td class="px-6 py-3">{{ ucfirst($content_writer->role->position) }}</td>
@@ -259,7 +259,7 @@
                     </tr>
                 </thead>
                 <tbody id="graphicDesignerTableBody" class="overflow-y-auto">
-                    @foreach ($workers as $graphic_designer)
+                    @foreach ($graphicworkers as $graphic_designer)
                         <tr class="border-b">
                             <td class="px-6 py-3">{{ $graphic_designer->name }}</td>
                             <td class="px-6 py-3">{{ ucfirst($graphic_designer->role->position) }}</td>
