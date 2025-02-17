@@ -48,7 +48,8 @@ class SupervisorJobOrderController extends Controller
     public function edit($id)
     {
         $supervisor_request = ModelsRequest::with('issuer', 'assignee')->find(1);
-        return view('pages.supervisor.job_order.edit', compact('supervisor_request'));
+        $operators = User::where('role_id', 2)->get();
+        return view('pages.supervisor.job_order.edit', compact('supervisor_request', 'operators'));
     }
 
     public function update(Request $request, $id)
