@@ -45,73 +45,23 @@
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-                    
-                    @if ($supervisor_request->type === 'graphic_designer')
-                        <!-- Graphics Designer -->
-                        <div class="col-span-1 w-full">
-                            <p class="text-sm text-gray-600">Graphics Designer</p>
-                            <div class="relative">
-                                <input type="text" id="selected-graphic-designer-name"
-                                    value="{{ old('graphic_designer_id') ? ($graphic_designers->firstWhere('id', old('graphic_designer_id'))->name ?? 'Select a Graphics Designer') : 'Select a Graphics Designer' }}"
-                                    class="w-full border-gray-200 rounded-lg cursor-pointer" readonly
-                                    onclick="openGraphicDesignerModal()">
-                                <input type="hidden" name="graphic_designer_id" id="selected-graphic-designer-id"
-                                    value="{{ old('graphic_designer_id', $supervisor_request->graphicDesigner->id ?? '') }}">
-                            </div>
-                            @error('graphic_designer_id')
-                                <p class="text-red-600 text-sm">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    @elseif ($supervisor_request->type === 'content_writer')
-                        <div class="col-span-1 w-full">
-                            <p class="text-sm text-gray-600">Content Writer</p>
-                            <div class="relative">
-                                <input type="text" id="selected-content-writer-name"
-                                    value="{{ old('content_writer_id') ? ($content_writers->firstWhere('id', old('content_writer_id'))->name ?? 'Select a Content Writer') : ($supervisor_request->contentWriter->name ?? 'Select a Content Writer') }}"
-                                    class="w-full border-gray-200 rounded-lg cursor-pointer" readonly
-                                    onclick="openContentWriterModal()">
-                                <input type="hidden" name="content_writer_id" id="selected-content-writer-id"
-                                    value="{{ old('content_writer_id', $supervisor_request->contentWriter->id ?? '') }}">
-                            </div>
-                            @error('content_writer_id')
-                                <p class="text-red-600 text-sm">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    
-                    @endif
 
-                    <!-- Client -->
+                    <!-- Operator Selection Modal Trigger -->
                     <div class="col-span-1 w-full">
-                        <p class="text-sm text-gray-600">Client</p>
+                        <p class="text-sm text-gray-600">Operator</p>
                         <div class="relative">
-                            <input type="text" id="selected-client-name"
-                            value="{{ old('client_id') ? ($clients->firstWhere('id', old('client_id'))->name ?? 'Select a Client') : ($supervisor_request->client->name ?? 'Select a Client') }}"
-                            class="w-full border-gray-200 rounded-lg cursor-pointer" readonly onclick="openModal()">
-                            <input type="hidden" name="client_id" id="selected-client-id" value="{{ old('client_id', $supervisor_request->client->id ?? '') }}">
+                            <input type="text" id="selected-operator-name" 
+                                value="{{ old('assigned_to') ? ($operators->firstWhere('id', old('assigned_to'))->name ?? 'Select an Operator') : 'Select an Operator' }}" 
+                                class="w-full border-gray-200 rounded-lg cursor-pointer" readonly 
+                                onclick="openOperatorModal()">
+                            <input type="hidden" name="assigned_to" id="selected-operator-id" 
+                                value="{{ old('assigned_to', $supervisor_request->assignee->name) }}">
                         </div>
-                        @error('client_id')
+                        @error('assigned_to')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-
-
-    
-                    <div class="col-span-1 grid grid-cols-2 w-full gap-4 rounded-lg">
-                        <div>
-                            <p class="text-sm text-gray-600">Date Started</p>
-                            <input type="date" name="date_started" class="w-full rounded-lg border-gray-200" value="{{ old('date_started', \Carbon\Carbon::parse($supervisor_request->date_started)->format('Y-m-d')) }}">
-                            @error('date_started')
-                                <p class="text-red-600 text-sm">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-600 text-nowrap">Date Deadline</p>
-                            <input type="date" name="date_target" class="w-full rounded-lg border-gray-200" value="{{ old('date_target', \Carbon\Carbon::parse($supervisor_request->date_target)->format('Y-m-d')) }}">
-                            @error('date_target')
-                                <p class="text-red-600 text-sm">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
+                
                     
                     <div class="col-span-2 h-fit w-full">
                         <p class="text-sm text-gray-600">Description</p>
@@ -133,124 +83,14 @@
     </div>
 
     <!-- Modal -->
-    <div id="client-modal"
-        class="fixed inset-0  bg-gray-900 px-20 z-50 bg-opacity-50 flex flex-col items-center justify-center hidden">
-        <div class="bg-white w-full px-5 pb-10 pt-5 rounded-lg">
-            <div class="w-full h-fit flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
-                <div class="flex items-center w-full md:w-auto relative">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-500"></i>
-                    <input type="text" id="searchInput"
-                        class="w-full md:w-80 px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                        placeholder="Search..." onkeyup="filterTable()" />
-
-                    <button class="absolute right-2 px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300">
-                        <i class="fa-solid fa-filter"></i>
-                    </button>
-                </div>
-                <button onclick="closeModal()" class=" bg-[#fa7011] text-white px-4 py-2 rounded">Close</button>
-            </div>
-            {{-- Table Wrapper --}}
-            <div class="overflow-x-auto overflow-y-auto w-full bg-white shadow-md rounded-lg h-[500px]"
-                style="max-height: 500px;">
-                <table class="w-full text-left border-collapse min-w-[500px] ">
-                    <thead class="sticky top-0 bg-[#fa7011] text-white">
-                        <tr>
-                            <th class="px-6 py-3 w-32">Title</th>
-                            <th class="px-6 py-3 w-32">Role</th>
-                            <th class="px-6 py-3 w-32 text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody" class="overflow-y-auto">
-                        @foreach ($clients as $client)
-                            <tr class="border-b">
-                                <td class="px-6 py-3">{{$client->name}}</td>
-                                <td class="px-6 py-3">{{ ucfirst($client->role->position)}}</td>
-                                <td class="px-6 py-3 text-center">
-                                    <button onclick="selectClient('{{ $client->id }}', '{{ $client->name }}')" 
-                                            class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
-                                        Select Client
-                                    </button>
-                                </td>                                    
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-    </div>
-
-            <!-- Graphics Designer Modal -->
-            <div id="graphic-designer-modal"
-            class="fixed inset-0 bg-gray-900 px-20 z-50 bg-opacity-50 flex flex-col items-center justify-center hidden">
-            <div class="bg-white w-full px-5 pb-10 pt-5 rounded-lg">
-                <div class="w-full h-fit flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
-                    <div class="flex items-center w-full md:w-auto relative">
-                        <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-500"></i>
-                        <input type="text" id="searchGraphicDesignerInput"
-                            class="w-full md:w-80 px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                            placeholder="Search..." onkeyup="filterGraphicDesignerTable()" />
-                        <button class="absolute right-2 px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300">
-                            <i class="fa-solid fa-filter"></i>
-                        </button>
-                    </div>
-                    <button onclick="closeGraphicDesignerModal()"
-                        class=" bg-[#fa7011] text-white px-4 py-2 rounded">Close</button>
-                </div>
-
-                <!-- Table Wrapper -->
-                <div class="overflow-x-auto overflow-y-auto w-full bg-white shadow-md rounded-lg h-[500px]"
-                    style="max-height: 500px;">
-                    <table class="w-full text-left border-collapse min-w-[500px]">
-                        <thead class="sticky top-0 bg-[#fa7011] text-white">
-                            <tr>
-                                <th class="px-6 py-3 w-32">Name</th>
-                                <th class="px-6 py-3 w-32">Role</th>
-                                <th class="px-6 py-3 w-32 text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="graphicDesignerTableBody" class="overflow-y-auto">
-                            @foreach ($graphic_designers as $graphic_designer)
-                                <tr class="border-b">
-                                    <td class="px-6 py-3">{{ $graphic_designer->name }}</td>
-                                    <td class="px-6 py-3">{{ ucfirst($graphic_designer->role->position) }}</td>
-                                    <td class="px-6 py-3 text-center">
-                                        <button
-                                            onclick="selectGraphicDesigner('{{ $graphic_designer->id }}', '{{ $graphic_designer->name }}')"
-                                            class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
-                                            Select
-                                        </button>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Content Writer Modal -->
-    <div id="content-writer-modal"
-    class="fixed inset-0 bg-gray-900 px-20 z-50 bg-opacity-50 flex flex-col items-center justify-center hidden">
+    <!-- Operator Selection Modal -->
+<div id="operator-modal" class="fixed inset-0 bg-gray-900 px-20 z-50 bg-opacity-50 flex flex-col items-center justify-center hidden">
     <div class="bg-white w-full px-5 pb-10 pt-5 rounded-lg">
         <div class="w-full h-fit flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
-            <div class="flex items-center w-full md:w-auto relative">
-                <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-500"></i>
-                <input type="text" id="searchContentWriterInput"
-                    class="w-full md:w-80 px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                    placeholder="Search..." onkeyup="filterContentWriterTable()" />
-                <button class="absolute right-2 px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300">
-                    <i class="fa-solid fa-filter"></i>
-                </button>
-            </div>
-            <button onclick="closeContentWriterModal()"
-                class=" bg-[#fa7011] text-white px-4 py-2 rounded">Close</button>
+            <input type="text" id="searchOperatorInput" class="w-full md:w-80 px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Search..." onkeyup="filterOperatorTable()">
+            <button onclick="closeOperatorModal()" class=" bg-[#fa7011] text-white px-4 py-2 rounded">Close</button>
         </div>
-
-        <!-- Table Wrapper -->
-        <div class="overflow-x-auto overflow-y-auto w-full bg-white shadow-md rounded-lg h-[500px]"
-            style="max-height: 500px;">
+        <div class="overflow-x-auto overflow-y-auto w-full bg-white shadow-md rounded-lg h-[500px]" style="max-height: 500px;">
             <table class="w-full text-left border-collapse min-w-[500px]">
                 <thead class="sticky top-0 bg-[#fa7011] text-white">
                     <tr>
@@ -259,15 +99,13 @@
                         <th class="px-6 py-3 w-32 text-center">Actions</th>
                     </tr>
                 </thead>
-                <tbody id="contentWriterTableBody" class="overflow-y-auto">
-                    @foreach ($content_writers as $content_writer)
+                <tbody id="operatorTableBody">
+                    @foreach ($operators as $operator)
                         <tr class="border-b">
-                            <td class="px-6 py-3">{{ $content_writer->name }}</td>
-                            <td class="px-6 py-3">{{ ucfirst($content_writer->role->position) }}</td>
+                            <td class="px-6 py-3">{{ $operator->name }}</td>
+                            <td class="px-6 py-3">{{ ucfirst($operator->role->position) }}</td>
                             <td class="px-6 py-3 text-center">
-                                <button
-                                    onclick="selectContentWriter('{{ $content_writer->id }}', '{{ $content_writer->name }}')"
-                                    class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
+                                <button onclick="selectOperator('{{ $operator->id }}', '{{ $operator->name }}')" class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
                                     Select
                                 </button>
                             </td>
