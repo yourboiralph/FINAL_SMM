@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
 @section('title', 'Page Title')
-@section('header', "Job Order") 
+@section('header', "Create Job Order") 
 
 @section('content')
 
@@ -68,7 +68,7 @@
                     </div>
 
                     <hr class="col-span-4 border border-gray-200" />
-                    <div class="col-span-2 h-fit w-full">
+                    <div class="col-span-4 h-fit w-full">
                         <p class="text-sm text-gray-600">Draft</p>
                         <!-- CKEditor 5 textarea -->
                         <textarea name="draft" id="editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-[300px] max-h-[500px] overflow-y-auto"></textarea>
