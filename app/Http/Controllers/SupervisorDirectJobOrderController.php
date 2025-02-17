@@ -18,8 +18,8 @@ class SupervisorDirectJobOrderController extends Controller
     public function create()
     {
         $clients = User::with('role')->where('role_id', 1)->get();
-        $graphicworkers = User::with('role')->whereNot('role_id', [1, 3])->get();
-        $contentworkers = User::with('role')->whereNot('role_id', [1, 4])->get();
+        $graphicworkers = User::with('role')->whereNotIn('role_id', [1, 3])->get();
+        $contentworkers = User::with('role')->whereNotIn('role_id', [1, 4])->get();
 
         return view('pages/supervisor/directjob/create', compact('clients', 'graphicworkers', 'contentworkers'));
     }
@@ -67,8 +67,8 @@ class SupervisorDirectJobOrderController extends Controller
     public function edit($id)
     {
         $clients = User::with('role')->where('role_id', 1)->get();
-        $graphicworkers = User::with('role')->whereNot('role_id', [1, 3])->get();
-        $contentworkers = User::with('role')->whereNot('role_id', [1, 4])->get();
+        $graphicworkers = User::with('role')->whereNotIn('role_id', [1, 3])->get();
+        $contentworkers = User::with('role')->whereNotIn('role_id', [1, 4])->get();
         $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
 
         return view('pages/supervisor/directjob/edit', compact('job_draft', 'graphicworkers', 'contentworkers', 'clients'));
