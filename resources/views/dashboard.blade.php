@@ -64,7 +64,6 @@
                                                 </svg>
                                                 @endif
                                             </td>
-
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -73,7 +72,7 @@
                     
                 </div>
 
-                @if (auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
+                @if (auth()->user()->role_id == 3 || auth()->user()->role_id == 4 || auth()->user()->role_id == 2 || auth()->user()->role_id == 6)
                     <h1 class="mx-6">Revision</h1>
                     <div class="px-6">
                         <div class="w-full p-4 bg-white rounded-lg shadow-md">
@@ -108,6 +107,7 @@
                                                     <a href="{{url('supervisor/revision/edit/' . $job_draft_revision->id)}}">
                                                         <p class="text-[#fa7011]">Revise</p>
                                                     </a>
+
                                                 @endif
                                             </td>
                                 

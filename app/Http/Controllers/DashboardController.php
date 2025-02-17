@@ -24,12 +24,32 @@ class DashboardController extends Controller
             return view('dashboard', compact('job_drafts'));
         } elseif ($user_role == 2) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
-            ->whereNotIn('status', ["pending", "Revision"])
+                ->whereNotIn('status', ["pending", "Revision"])
                 ->orderBy('id', 'desc') // Sort by id descending
                 ->limit(5) // Ensure a maximum of 5 records
                 ->get();
 
-            return view('dashboard', compact('job_drafts'));
+            $job_drafts_revisions = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
+                ->where(function ($query) use ($user) {
+                    $query->where('content_writer_id', $user->id)
+                        ->orWhere('graphic_designer_id', $user->id);
+                })
+                ->where('status', 'Revision') // Removed `where('type', 'content_writer')` if not needed
+                ->orderBy('id', 'desc')
+                ->limit(5) // Use limit for consistency
+                ->get();
+
+            $my_tasks = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
+                ->where(function ($query) use ($user) {
+                    $query->where('content_writer_id', $user->id)
+                        ->orWhere('graphic_designer_id', $user->id);
+                })
+                ->where('status', 'pending')
+                ->orderBy('id', 'desc')
+                ->take(5) // Eloquent's alternative to limit()
+                ->get();
+
+            return view('dashboard', compact('job_drafts', 'job_drafts_revisions', 'my_tasks')); // Include both variables
         } elseif ($user_role == 3) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
                 ->whereNot('status', 'Revision')
@@ -75,11 +95,33 @@ class DashboardController extends Controller
             return view('dashboard', compact('job_drafts'));
         } elseif ($user_role == 6) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
-            ->whereNotIn('status', ['pending', 'Submitted to Operations', 'Revision'])
+                ->whereNotIn('status', ['pending', 'Submitted to Operations', 'Revision'])
                 ->orderBy('id', 'desc') // Sort by id descending
-                ->take(5) // Get the latest 5 data
+                ->limit(5) // Use limit for consistency
                 ->get();
-            return view('dashboard', compact('job_drafts'));
+
+            $job_drafts_revisions = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
+                ->where(function ($query) use ($user) {
+                    $query->where('content_writer_id', $user->id)
+                        ->orWhere('graphic_designer_id', $user->id);
+                })
+                ->where('status', 'Revision')
+                ->orderBy('id', 'desc')
+                ->limit(5) // Use limit for consistency
+                ->get();
+
+            $my_tasks = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
+                ->where(function ($query) use ($user) {
+                    $query->where('content_writer_id', $user->id)
+                        ->orWhere('graphic_designer_id', $user->id);
+                })
+                ->where('status', 'pending')
+                ->orderBy('id', 'desc')
+                ->take(5) // Eloquent's alternative to limit()
+                ->get();
+
+
+            return view('dashboard', compact('job_drafts', 'job_drafts_revisions', 'my_tasks')); // Include both variables
         }
     }
 }
