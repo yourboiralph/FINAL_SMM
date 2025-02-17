@@ -25,7 +25,7 @@
         <table class="w-full text-left border-collapse" id="projectTable">
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
-                    <th class="px-6 py-3">JO Name</th>
+                    <th class="px-6 py-3">Title</th>
                     <th class="px-6 py-3">Designated</th>
                     <th class="px-6 py-3">Deadline</th>
                     <th class="px-6 py-3">Actions</th>

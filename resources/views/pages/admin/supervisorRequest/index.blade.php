@@ -13,7 +13,7 @@
             <i class="fa-solid fa-plus"></i>
         </div>
     </a>
-    <div class="w-full h-fit flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
+    <div class="w-full h-fit flex flex-col md:flex-row justify-between items-center gap-4 mb-4 mt-4">
         <div class="flex items-center w-full md:w-auto relative">
             <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-500"></i>
             <input type="text" id="searchInput" class="w-full md:w-80 px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" 

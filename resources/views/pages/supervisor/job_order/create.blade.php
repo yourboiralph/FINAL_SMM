@@ -39,7 +39,7 @@
             <div class="grid grid-cols-4 space-y-4">
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
                     <!-- Title Input -->
-                    <div class="w-full">
+                    <div class="col-span-2 lg:col-span-1 w-full">
                         <p class="text-sm text-gray-600">Title</p>
                         <input type="text" name="title" value="{{ old('title') }}" class="w-full border-gray-200 rounded-lg">
                         @error('title')
@@ -48,7 +48,7 @@
                     </div>
                     
                     <!-- Operator Selection Modal Trigger -->
-                    <div class="col-span-1 w-full">
+                    <div class="col-span-2 lg:col-span-1 w-full">
                         <p class="text-sm text-gray-600">Operator</p>
                         <div class="relative">
                             <input type="text" id="selected-operator-name" 
@@ -73,7 +73,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="col-span-1 text-center py-4 w-full bg-[#fa7011] mt-10 rounded-lg custom-shadow custom-hover-shadow text-white font-bold">
+                <button type="submit" class="col-span-1 text-center py-2 lg:py-4 w-full bg-[#fa7011] mt-10 rounded-lg custom-shadow custom-hover-shadow text-white font-bold">
                     Submit
                 </button>
             </div>
@@ -82,28 +82,34 @@
 </div>
 
 <!-- Operator Selection Modal -->
-<div id="operator-modal" class="fixed inset-0 bg-gray-900 px-20 z-50 bg-opacity-50 flex flex-col items-center justify-center hidden">
-    <div class="bg-white w-full px-5 pb-10 pt-5 rounded-lg">
-        <div class="w-full h-fit flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
-            <input type="text" id="searchOperatorInput" class="w-full md:w-80 px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Search..." onkeyup="filterOperatorTable()">
-            <button onclick="closeOperatorModal()" class=" bg-[#fa7011] text-white px-4 py-2 rounded">Close</button>
+<div id="operator-modal" class="fixed inset-0 bg-gray-900 px-4 md:px-20 z-50 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white w-full max-w-sm md:max-w-lg lg:max-w-2xl px-5 pb-10 pt-5 rounded-lg">
+        <!-- Search & Close button -->
+        <div class="w-full flex md:flex-row justify-between items-center flex-col-reverse lg:flex-row gap-4 mb-4">
+            <input type="text" id="searchOperatorInput" class="w-full md:w-80 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Search..." onkeyup="filterOperatorTable()">
+            <div class="w-full flex justify-end md:w-auto">
+                <button onclick="closeOperatorModal()" class="bg-[#fa7011] text-white px-4 py-2 rounded w-fit">Close</button>
+            </div>
         </div>
-        <div class="overflow-x-auto overflow-y-auto w-full bg-white shadow-md rounded-lg h-[500px]" style="max-height: 500px;">
-            <table class="w-full text-left border-collapse min-w-[500px]">
+        
+        
+        <!-- Table Container -->
+        <div class="overflow-x-auto w-full bg-white shadow-md rounded-lg max-h-[500px]">
+            <table class="w-full text-left border-collapse min-w-[300px] md:min-w-[500px]">
                 <thead class="sticky top-0 bg-[#fa7011] text-white">
                     <tr>
-                        <th class="px-6 py-3 w-32">Name</th>
-                        <th class="px-6 py-3 w-32">Role</th>
-                        <th class="px-6 py-3 w-32 text-center">Actions</th>
+                        <th class="px-4 md:px-6 py-3 w-24 md:w-32">Name</th>
+                        <th class="px-4 md:px-6 py-3 w-24 md:w-32">Role</th>
+                        <th class="px-4 md:px-6 py-3 w-24 md:w-32 text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="operatorTableBody">
                     @foreach ($operators as $operator)
                         <tr class="border-b">
-                            <td class="px-6 py-3">{{ $operator->name }}</td>
-                            <td class="px-6 py-3">{{ ucfirst($operator->role->position) }}</td>
-                            <td class="px-6 py-3 text-center">
-                                <button onclick="selectOperator('{{ $operator->id }}', '{{ $operator->name }}')" class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
+                            <td class="px-4 md:px-6 py-3">{{ $operator->name }}</td>
+                            <td class="px-4 md:px-6 py-3">{{ ucfirst($operator->role->position) }}</td>
+                            <td class="px-4 md:px-6 py-3 text-center">
+                                <button onclick="selectOperator('{{ $operator->id }}', '{{ $operator->name }}')" class="px-2 py-1 md:px-4 md:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 w-full md:w-auto">
                                     Select
                                 </button>
                             </td>
@@ -114,6 +120,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     function openOperatorModal() {

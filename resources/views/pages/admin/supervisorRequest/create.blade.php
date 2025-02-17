@@ -45,7 +45,7 @@
                 <div class="mb-4">
                     <p class="text-sm text-gray-600">Instructions</p>
                     <div
-                        class="border-b-2 w-[1050px] rounded-lg break-words max-h-[500px] border border-gray-400 p-2 overflow-y-auto">
+                        class="border-b-2 rounded-lg break-words max-h-[500px] border border-gray-400 p-2 overflow-y-auto">
                         {!! $supervisor_request->description !!}
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                 <div class="grid grid-cols-4 space-y-4">
                     <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
                         <!-- Title -->
-                        <div class="w-full">
+                        <div class="w-full col-span-2 lg:col-span-1">
                             <p class="text-sm text-gray-600">Title</p>
                             <input type="text" name="title" value="{{ old('title') }}"
                                 class="w-full border-gray-200 rounded-lg">
@@ -64,7 +64,7 @@
                         </div>
 
                         <!-- Client -->
-                        <div class="col-span-1 w-full">
+                        <div class="w-full col-span-2 lg:col-span-1">
                             <p class="text-sm text-gray-600">Client</p>
                             <div class="relative">
                                 <input type="text" id="selected-client-name"
@@ -79,7 +79,7 @@
                         </div>
 
                         <!-- Content Writer -->
-                        <div class="col-span-1 w-full">
+                        <div class="w-full col-span-2 lg:col-span-1">
                             <p class="text-sm text-gray-600">Content Writer</p>
                             <div class="relative">
                                 <input type="text" id="selected-content-writer-name"
@@ -95,7 +95,7 @@
                         </div>
 
                         <!-- Graphics Designer -->
-                        <div class="col-span-1 w-full">
+                        <div class="w-full col-span-2 lg:col-span-1">
                             <p class="text-sm text-gray-600">Graphics Designer</p>
                             <div class="relative">
                                 <input type="text" id="selected-graphic-designer-name"

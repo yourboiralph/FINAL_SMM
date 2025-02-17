@@ -30,11 +30,11 @@ class AdminSupervisorRequestController extends Controller
 
     public function create($id)
     {
-        $supervisor_request = ModelsRequest::find($id);
+        $clients = User::with('role')->where('role_id', 1)->get();
+        $graphic_designers = User::with('role')->whereNotIn('role_id', [1, 3])->get();
+        $content_writers = User::with('role')->whereNotIn('role_id', [1, 4])->get();
 
-        $content_writers = User::where('role_id', 3)->get();
-        $graphic_designers = User::where('role_id', 4)->get();
-        $clients = User::where('role_id', 1)->get();
+        $supervisor_request = ModelsRequest::find($id);
 
         return view('pages.admin.supervisorRequest.create', compact('content_writers', 'graphic_designers', 'clients', 'supervisor_request'));
     }
@@ -42,7 +42,7 @@ class AdminSupervisorRequestController extends Controller
     public function store(Request $request)
     {
         // Validate request before proceeding
-        
+
         $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',

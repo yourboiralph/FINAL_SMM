@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
 @section('title', 'Admin')
-@section('header', "Job Order") 
+@section('header', "Direct Job Order") 
 
 @section('content')
 

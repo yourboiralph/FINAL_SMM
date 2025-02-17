@@ -38,7 +38,7 @@
             <h1 class="text-xl font-bold mt-4">Edit Form</h1>
             <div class="grid grid-cols-4 space-y-4">
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
-                    <div class="w-full">
+                    <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Title</p>
                         <input type="text" name="title" class="w-full border-gray-200 rounded-lg" value="{{ old('title', $job_draft->jobOrder->title) }}">
                         @error('title')
@@ -48,7 +48,7 @@
                     
                     @if ($job_draft->type === 'graphic_designer')
                     <!-- Graphics Designer -->
-                    <div class="col-span-1 w-full">
+                    <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Graphics Designer</p>
                         <div class="relative">
                             <input type="text" id="selected-graphic-designer-name"
@@ -63,7 +63,7 @@
                         @enderror
                     </div>
                     @elseif ($job_draft->type === 'content_writer')
-                        <div class="col-span-1 w-full">
+                    <div class="w-full col-span-2 lg:col-span-1">
                             <p class="text-sm text-gray-600">Content Writer</p>
                             <div class="relative">
                                 <input type="text" id="selected-content-writer-name"
@@ -81,7 +81,7 @@
                     @endif
 
                     <!-- Client -->
-                    <div class="col-span-1 w-full">
+                    <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Client</p>
                         <div class="relative">
                             <input type="text" id="selected-client-name"
@@ -96,7 +96,7 @@
 
 
     
-                    <div class="col-span-1 grid grid-cols-2 w-full gap-4 rounded-lg">
+                    <div class="col-span-2 lg:col-span-1 grid grid-cols-2 w-full gap-4 rounded-lg">
                         <div>
                             <p class="text-sm text-gray-600">Date Started</p>
                             <input type="date" name="date_started" class="w-full rounded-lg border-gray-200" value="{{ old('date_started', \Carbon\Carbon::parse($job_draft->date_started)->format('Y-m-d')) }}">
@@ -132,145 +132,135 @@
         </form>
     </div>
 
-    <!-- Modal -->
-    <div id="client-modal"
-        class="fixed inset-0  bg-gray-900 px-20 z-50 bg-opacity-50 flex flex-col items-center justify-center hidden">
-        <div class="bg-white w-full px-5 pb-10 pt-5 rounded-lg">
-            <div class="w-full h-fit flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
-                <div class="flex items-center w-full md:w-auto relative">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-500"></i>
-                    <input type="text" id="searchInput"
-                        class="w-full md:w-80 px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                        placeholder="Search..." onkeyup="filterTable()" />
-
-                    <button class="absolute right-2 px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300">
-                        <i class="fa-solid fa-filter"></i>
-                    </button>
-                </div>
-                <button onclick="closeModal()" class=" bg-[#fa7011] text-white px-4 py-2 rounded">Close</button>
-            </div>
-            {{-- Table Wrapper --}}
-            <div class="overflow-x-auto overflow-y-auto w-full bg-white shadow-md rounded-lg h-[500px]"
-                style="max-height: 500px;">
-                <table class="w-full text-left border-collapse min-w-[500px] ">
-                    <thead class="sticky top-0 bg-[#fa7011] text-white">
-                        <tr>
-                            <th class="px-6 py-3 w-32">Title</th>
-                            <th class="px-6 py-3 w-32">Role</th>
-                            <th class="px-6 py-3 w-32 text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody" class="overflow-y-auto">
-                        @foreach ($clients as $client)
-                            <tr class="border-b">
-                                <td class="px-6 py-3">{{$client->name}}</td>
-                                <td class="px-6 py-3">{{ ucfirst($client->role->position)}}</td>
-                                <td class="px-6 py-3 text-center">
-                                    <button onclick="selectClient('{{ $client->id }}', '{{ $client->name }}')" 
-                                            class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
-                                        Select Client
-                                    </button>
-                                </td>                                    
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-    </div>
-
-            <!-- Graphics Designer Modal -->
-            <div id="graphic-designer-modal"
-            class="fixed inset-0 bg-gray-900 px-20 z-50 bg-opacity-50 flex flex-col items-center justify-center hidden">
-            <div class="bg-white w-full px-5 pb-10 pt-5 rounded-lg">
-                <div class="w-full h-fit flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
-                    <div class="flex items-center w-full md:w-auto relative">
-                        <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-500"></i>
-                        <input type="text" id="searchGraphicDesignerInput"
-                            class="w-full md:w-80 px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                            placeholder="Search..." onkeyup="filterGraphicDesignerTable()" />
-                        <button class="absolute right-2 px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300">
-                            <i class="fa-solid fa-filter"></i>
-                        </button>
-                    </div>
-                    <button onclick="closeGraphicDesignerModal()"
-                        class=" bg-[#fa7011] text-white px-4 py-2 rounded">Close</button>
-                </div>
-
-                <!-- Table Wrapper -->
-                <div class="overflow-x-auto overflow-y-auto w-full bg-white shadow-md rounded-lg h-[500px]"
-                    style="max-height: 500px;">
-                    <table class="w-full text-left border-collapse min-w-[500px]">
-                        <thead class="sticky top-0 bg-[#fa7011] text-white">
-                            <tr>
-                                <th class="px-6 py-3 w-32">Name</th>
-                                <th class="px-6 py-3 w-32">Role</th>
-                                <th class="px-6 py-3 w-32 text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="graphicDesignerTableBody" class="overflow-y-auto">
-                            @foreach ($graphicworkers as $graphic_designer)
-                                <tr class="border-b">
-                                    <td class="px-6 py-3">{{ $graphic_designer->name }}</td>
-                                    <td class="px-6 py-3">{{ ucfirst($graphic_designer->role->position) }}</td>
-                                    <td class="px-6 py-3 text-center">
-                                        <button
-                                            onclick="selectGraphicDesigner('{{ $graphic_designer->id }}', '{{ $graphic_designer->name }}')"
-                                            class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
-                                            Select
-                                        </button>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Content Writer Modal -->
-    <div id="content-writer-modal"
-    class="fixed inset-0 bg-gray-900 px-20 z-50 bg-opacity-50 flex flex-col items-center justify-center hidden">
-    <div class="bg-white w-full px-5 pb-10 pt-5 rounded-lg">
-        <div class="w-full h-fit flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
+<!-- Client Selection Modal -->
+<div id="client-modal" class="fixed inset-0 bg-gray-900 px-4 md:px-20 z-50 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white w-full max-w-sm md:max-w-lg lg:max-w-2xl px-5 pb-10 pt-5 rounded-lg">
+        <!-- Search & Close button -->
+        <div class="w-full flex md:flex-row justify-between items-center flex-col-reverse lg:flex-row gap-4 mb-4">
             <div class="flex items-center w-full md:w-auto relative">
                 <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-500"></i>
-                <input type="text" id="searchContentWriterInput"
-                    class="w-full md:w-80 px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                    placeholder="Search..." onkeyup="filterContentWriterTable()" />
+                <input type="text" id="searchInput" class="w-full md:w-80 px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Search..." onkeyup="filterTable()">
                 <button class="absolute right-2 px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300">
                     <i class="fa-solid fa-filter"></i>
                 </button>
             </div>
-            <button onclick="closeContentWriterModal()"
-                class=" bg-[#fa7011] text-white px-4 py-2 rounded">Close</button>
+            <div class="w-full flex justify-end md:w-auto">
+                <button onclick="closeModal()" class="bg-[#fa7011] text-white px-4 py-2 rounded w-fit">Close</button>
+            </div>
         </div>
 
-        <!-- Table Wrapper -->
-        <div class="overflow-x-auto overflow-y-auto w-full bg-white shadow-md rounded-lg h-[500px]"
-            style="max-height: 500px;">
-            <table class="w-full text-left border-collapse min-w-[500px]">
+        <!-- Table Container -->
+        <div class="overflow-x-auto w-full bg-white shadow-md rounded-lg max-h-[500px]">
+            <table class="w-full text-left border-collapse min-w-[300px] md:min-w-[500px]">
                 <thead class="sticky top-0 bg-[#fa7011] text-white">
                     <tr>
-                        <th class="px-6 py-3 w-32">Name</th>
-                        <th class="px-6 py-3 w-32">Role</th>
-                        <th class="px-6 py-3 w-32 text-center">Actions</th>
+                        <th class="px-4 md:px-6 py-3 w-24 md:w-32">Title</th>
+                        <th class="px-4 md:px-6 py-3 w-24 md:w-32">Role</th>
+                        <th class="px-4 md:px-6 py-3 w-24 md:w-32 text-center">Actions</th>
                     </tr>
                 </thead>
-                <tbody id="contentWriterTableBody" class="overflow-y-auto">
+                <tbody id="tableBody">
+                    @foreach ($clients as $client)
+                        <tr class="border-b">
+                            <td class="px-4 md:px-6 py-3">{{ $client->name }}</td>
+                            <td class="px-4 md:px-6 py-3">{{ ucfirst($client->role->position) }}</td>
+                            <td class="px-4 md:px-6 py-3 text-center">
+                                <button onclick="selectClient('{{ $client->id }}', '{{ $client->name }}')" class="px-2 py-1 md:px-4 md:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 w-full md:w-auto">
+                                    Select Client
+                                </button>
+                            </td>                                    
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Content Writer Modal -->
+<div id="content-writer-modal" class="fixed inset-0 bg-gray-900 px-4 md:px-20 z-50 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white w-full max-w-sm md:max-w-lg lg:max-w-2xl px-5 pb-10 pt-5 rounded-lg">
+        <!-- Search & Close button -->
+        <div class="w-full flex md:flex-row justify-between items-center flex-col-reverse lg:flex-row gap-4 mb-4">
+            <div class="flex items-center w-full md:w-auto relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-500"></i>
+                <input type="text" id="searchContentWriterInput" class="w-full md:w-80 px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Search..." onkeyup="filterContentWriterTable()">
+                <button class="absolute right-2 px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300">
+                    <i class="fa-solid fa-filter"></i>
+                </button>
+            </div>
+            <div class="w-full flex justify-end md:w-auto">
+                <button onclick="closeContentWriterModal()" class="bg-[#fa7011] text-white px-4 py-2 rounded w-fit">Close</button>
+            </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="overflow-x-auto w-full bg-white shadow-md rounded-lg max-h-[500px]">
+            <table class="w-full text-left border-collapse min-w-[300px] md:min-w-[500px]">
+                <thead class="sticky top-0 bg-[#fa7011] text-white">
+                    <tr>
+                        <th class="px-4 md:px-6 py-3 w-24 md:w-32">Name</th>
+                        <th class="px-4 md:px-6 py-3 w-24 md:w-32">Role</th>
+                        <th class="px-4 md:px-6 py-3 w-24 md:w-32 text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="contentWriterTableBody">
                     @foreach ($contentworkers as $content_writer)
                         <tr class="border-b">
-                            <td class="px-6 py-3">{{ $content_writer->name }}</td>
-                            <td class="px-6 py-3">{{ ucfirst($content_writer->role->position) }}</td>
-                            <td class="px-6 py-3 text-center">
-                                <button
-                                    onclick="selectContentWriter('{{ $content_writer->id }}', '{{ $content_writer->name }}')"
-                                    class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
+                            <td class="px-4 md:px-6 py-3">{{ $content_writer->name }}</td>
+                            <td class="px-4 md:px-6 py-3">{{ ucfirst($content_writer->role->position) }}</td>
+                            <td class="px-4 md:px-6 py-3 text-center">
+                                <button onclick="selectContentWriter('{{ $content_writer->id }}', '{{ $content_writer->name }}')" class="px-2 py-1 md:px-4 md:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 w-full md:w-auto">
                                     Select
                                 </button>
-                            </td>
+                            </td>                                    
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Graphics Designer Modal -->
+<div id="graphic-designer-modal" class="fixed inset-0 bg-gray-900 px-4 md:px-20 z-50 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white w-full max-w-sm md:max-w-lg lg:max-w-2xl px-5 pb-10 pt-5 rounded-lg">
+        <!-- Search & Close button -->
+        <div class="w-full flex md:flex-row justify-between items-center flex-col-reverse lg:flex-row gap-4 mb-4">
+            <div class="flex items-center w-full md:w-auto relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-500"></i>
+                <input type="text" id="searchGraphicDesignerInput" class="w-full md:w-80 px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Search..." onkeyup="filterGraphicDesignerTable()">
+                <button class="absolute right-2 px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300">
+                    <i class="fa-solid fa-filter"></i>
+                </button>
+            </div>
+            <div class="w-full flex justify-end md:w-auto">
+                <button onclick="closeGraphicDesignerModal()" class="bg-[#fa7011] text-white px-4 py-2 rounded w-fit">Close</button>
+            </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="overflow-x-auto w-full bg-white shadow-md rounded-lg max-h-[500px]">
+            <table class="w-full text-left border-collapse min-w-[300px] md:min-w-[500px]">
+                <thead class="sticky top-0 bg-[#fa7011] text-white">
+                    <tr>
+                        <th class="px-4 md:px-6 py-3 w-24 md:w-32">Name</th>
+                        <th class="px-4 md:px-6 py-3 w-24 md:w-32">Role</th>
+                        <th class="px-4 md:px-6 py-3 w-24 md:w-32 text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="graphicDesignerTableBody">
+                    @foreach ($graphicworkers as $graphic_designer)
+                        <tr class="border-b">
+                            <td class="px-4 md:px-6 py-3">{{ $graphic_designer->name }}</td>
+                            <td class="px-4 md:px-6 py-3">{{ ucfirst($graphic_designer->role->position) }}</td>
+                            <td class="px-4 md:px-6 py-3 text-center">
+                                <button onclick="selectGraphicDesigner('{{ $graphic_designer->id }}', '{{ $graphic_designer->name }}')" class="px-2 py-1 md:px-4 md:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 w-full md:w-auto">
+                                    Select
+                                </button>
+                            </td>                                    
                         </tr>
                     @endforeach
                 </tbody>

@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
 @section('title', 'Clients')
-@section('header', 'List of Job Orders to Approve || Client')
+@section('header', 'Job Orders to Approve')
 
 @section('content')
 

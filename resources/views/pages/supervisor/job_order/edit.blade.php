@@ -38,7 +38,7 @@
             <h1 class="text-xl font-bold mt-4">Edit Form</h1>
             <div class="grid grid-cols-4 space-y-4">
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
-                    <div class="w-full">
+                    <div class="col-span-2 lg:col-span-1 w-full">
                         <p class="text-sm text-gray-600">Title</p>
                         <input type="text" name="title" class="w-full border-gray-200 rounded-lg" value="{{ old('title', $supervisor_request->title) }}">
                         @error('title')
@@ -47,7 +47,7 @@
                     </div>
 
                     <!-- Operator Selection Modal Trigger -->
-                    <div class="col-span-1 w-full">
+                    <div class="col-span-2 lg:col-span-1 w-full">
                         <p class="text-sm text-gray-600">Operator</p>
                         <div class="relative">
                             <input type="text" id="selected-operator-name" 

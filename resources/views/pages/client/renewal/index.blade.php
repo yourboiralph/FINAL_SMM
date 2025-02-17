@@ -69,7 +69,7 @@
 <div class="container mx-auto p-6">
     <div class="overflow-x-auto overflow-y-auto bg-white shadow-md rounded-lg h-[500px]" style="max-height: 500px;">
         <table class="w-full text-left border-collapse" id="projectTable">
-            <thead class="sticky top-0 bg-[#fa7011] text-white z-50">
+            <thead class="sticky top-0 bg-[#fa7011] text-white z-10">
                 <tr>
                     <th class="px-6 py-3">Title</th>
                     <th class="px-6 py-3 z-20">Renewable</th>

@@ -77,7 +77,7 @@
                     </div>
 
                     <div class="col-span-4 h-fit w-full">
-                        <p class="text-sm text-gray-600">Last Draft</p>
+                        <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Last Draft</p>
                         
                         <!-- Display last draft -->
                         <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">

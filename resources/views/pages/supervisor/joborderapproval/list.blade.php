@@ -29,7 +29,7 @@
         <table class="w-full text-left border-collapse min-w-full sm:min-w-max" id="projectTable">
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
-                    <th class="px-2 text-nowrap sm:px-4 py-2 sm:py-3 text-xs sm:text-base">JO Name</th>
+                    <th class="px-2 text-nowrap sm:px-4 py-2 sm:py-3 text-xs sm:text-base">Title</th>
                     
                     
                     <th class="px-2 text-nowrap sm:px-4 py-2 sm:py-3 text-xs sm:text-base">Status</th>

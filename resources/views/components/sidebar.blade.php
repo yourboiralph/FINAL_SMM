@@ -644,5 +644,16 @@
                 <h1 class=" block">Approvals</h1>
             </a>
         </div>
+
+        <div class=" block lg:hidden px-6">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit"
+                    class="p-2 flex items-center w-full gap-2 rounded-md bg-red-500 text-white font-bold hover:bg-red-600 transition duration-300">
+                    <i class="fa-solid fa-power-off"></i>
+                    <h1 class="block">Logout</h1>
+                </button>
+            </form>
+        </div>
     @endif
 </div>
