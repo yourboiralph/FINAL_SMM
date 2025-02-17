@@ -144,12 +144,12 @@
                                                     <td class="px-4 py-2 text-sm">
                                                         @if (auth()->user()->role_id == 2)
                                                             <a href="{{url('operation/task/edit/' . $my_task->id)}}">
-                                                                <p class="text-[#fa7011]">Revise</p>
+                                                                <p class="text-[#fa7011]">Create</p>
                                                             </a>
     
                                                         @elseif (auth()->user()->role_id == 6)
                                                             <a href="{{url('supervisor/task/edit/' . $my_task->id)}}">
-                                                                <p class="text-[#fa7011]">Revise</p>
+                                                                <p class="text-[#fa7011]">Create</p>
                                                             </a>
                                                         @endif
                                                     </td>

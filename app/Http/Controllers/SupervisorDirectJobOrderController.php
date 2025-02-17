@@ -18,9 +18,11 @@ class SupervisorDirectJobOrderController extends Controller
     public function create()
     {
         $clients = User::with('role')->where('role_id', 1)->get();
-        $workers = User::with('role')->whereNot('role_id', 1)->get();
+        $graphicworkers = User::with('role')->whereNot('role_id', [1, 3])->get();
+        $contentworkers = User::with('role')->whereNot('role_id', [1, 4])->get();
 
-        return view('pages/supervisor/directjob/create', compact('clients', 'workers'));
+
+        return view('pages/supervisor/directjob/create', compact('clients', 'graphicworkers', 'contentworkers'));
     }
 
     public function store(Request $request)
