@@ -589,7 +589,7 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("supervisor/joborder", "supervisor/joborder/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
-                <h1 class=" block">Job Orders</h1>
+                <h1 class=" block">Operation Job Orders</h1>
             </a>
         </div>
 
