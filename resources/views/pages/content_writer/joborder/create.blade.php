@@ -62,9 +62,6 @@
                             {!! $job_draft->jobOrder->description !!}
                         </div>
                         
-                        @error('draft')
-                            <p class="text-red-600 text-sm">{{ $message }}</p>
-                        @enderror
                     </div>
 
                     <hr class="col-span-4 border border-gray-200" />

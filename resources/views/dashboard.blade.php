@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="grid grid-cols-2 mt-4">
-                    <div>
+                    <div class="col-span-2 mb-4 lg:mb-0 lg:cols-span-1">
                         @if (auth()->user()->role_id == 3 || auth()->user()->role_id == 4 || auth()->user()->role_id == 2 || auth()->user()->role_id == 6)
                             <h1 class="mx-6">Revision</h1>
                             <div class="px-6">
@@ -125,7 +125,7 @@
                         @endif
                     </div>
     
-                    <div>
+                    <div class="col-span-2 lg:cols-span-1">
                         @if (auth()->user()->role_id == 2 || auth()->user()->role_id == 6)
                             <h1 class="mx-6">Tasks</h1>
                             <div class="px-6">
