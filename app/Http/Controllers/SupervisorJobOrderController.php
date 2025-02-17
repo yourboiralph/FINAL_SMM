@@ -39,6 +39,12 @@ class SupervisorJobOrderController extends Controller
         return redirect()->route('supervisor.joborder')->with('status', 'Job Order Created Successfully');
     }
 
+    public function show($id)
+    {
+        $supervisor_request = ModelsRequest::with('issuer', 'assignee')->find(1);
+        return view('pages.supervisor.job_order.show', compact('supervisor_request'));
+    }
+
     public function edit($id)
     {
         $supervisor_request = ModelsRequest::with('issuer', 'assignee')->find(1);
