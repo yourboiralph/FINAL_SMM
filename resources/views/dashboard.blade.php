@@ -64,7 +64,6 @@
                                                 </svg>
                                                 @endif
                                             </td>
-
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -73,7 +72,7 @@
                     
                 </div>
 
-                @if (auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
+                @if (auth()->user()->role_id == 3 || auth()->user()->role_id == 4 || auth()->user()->role_id == 2 || auth()->user()->role_id == 6)
                     <h1 class="mx-6">Revision</h1>
                     <div class="px-6">
                         <div class="w-full p-4 bg-white rounded-lg shadow-md">
@@ -96,6 +95,54 @@
 
                                                 @elseif (auth()->user()->role_id == 4)
                                                     <a href="{{url('graphic/revisions/edit/' . $job_draft_revision->id)}}">
+                                                        <p class="text-[#fa7011]">Revise</p>
+                                                    </a>
+
+                                                @elseif (auth()->user()->role_id == 2)
+                                                    <a href="{{url('operation/revision/edit/' . $job_draft_revision->id)}}">
+                                                        <p class="text-[#fa7011]">Revise</p>
+                                                    </a>
+
+                                                @elseif (auth()->user()->role_id == 6)
+                                                    <a href="{{url('supervisor/revision/edit/' . $job_draft_revision->id)}}">
+                                                        <p class="text-[#fa7011]">Revise</p>
+                                                    </a>
+                                                @endif
+                                            </td>
+                                
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                    
+                @endif
+
+                @if (auth()->user()->role_id == 2 || auth()->user()->role_id == 6)
+                    <h1 class="mx-6">Tasks</h1>
+                    <div class="px-6">
+                        <div class="w-full p-4 bg-white rounded-lg shadow-md">
+                            <table class="table-auto gap-8 text-left border-collapse w-full">
+                                <thead class="text-gray-700">
+                                    <tr>
+                                        <th class="px-4 py-2 text-sm font-semibold">Project Development</th>
+                                        <th class="px-4 py-2 text-sm font-semibold">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($my_tasks as $my_task )
+                                        <tr>
+                                            <td class="px-4 py-2 text-sm">{{$my_task->jobOrder->title}}</td>
+                                            <td class="px-4 py-2 text-sm">
+                                                @if (auth()->user()->role_id == 2)
+                                                    <a href="{{url('operation/task/edit/' . $my_task->id)}}">
+                                                        <p class="text-[#fa7011]">Revise</p>
+                                                    </a>
+
+                                                @elseif (auth()->user()->role_id == 6)
+                                                    <a href="{{url('supervisor/task/edit/' . $my_task->id)}}">
                                                         <p class="text-[#fa7011]">Revise</p>
                                                     </a>
                                                 @endif
