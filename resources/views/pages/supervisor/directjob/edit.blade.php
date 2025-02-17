@@ -52,7 +52,7 @@
                         <p class="text-sm text-gray-600">Graphics Designer</p>
                         <div class="relative">
                             <input type="text" id="selected-graphic-designer-name"
-                                value="{{ old('graphic_designer_id') ? ($graphicworkers->firstWhere('id', old('graphic_designer_id'))->name ?? 'Select a Graphics Designer') : 'Select a Graphics Designer' }}"
+                                value="{{ old('graphic_designer_id') ? ($graphicworkers->firstWhere('id', old('graphic_designer_id'))->name ?? 'Select a Graphics Designer') : ($job_draft->graphicDesigner->name ?? 'Select a Graphic Designer') }}"
                                 class="w-full border-gray-200 rounded-lg cursor-pointer" readonly
                                 onclick="openGraphicDesignerModal()">
                             <input type="hidden" name="graphic_designer_id" id="selected-graphic-designer-id"
