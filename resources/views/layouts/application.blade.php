@@ -21,13 +21,13 @@
     <div class="container mx-auto max-w-screen-2xl">
         <!-- Toggle Sidebar Button for Mobile -->
         <i id="toggleButton" class="sticky top-10 z-20 left-5 bg-[#fa7011] px-3 py-2 opacity-70 rounded-full  text-2xl cursor-pointer fa-solid fa-bars lg:hidden"></i>
-        <div class="flex min-h-screen overflow-hidden">
+        <div class="flex h-screen">
             <!-- Sidebar & Overlay -->
             <div id="sidebarBackdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden lg:hidden"></div>
 
             <!-- Sidebar -->
             <div id="sidebar"
-                class="fixed top-0 left-0 w-80 md:w-96 z-20 bg-white shadow-lg h-screen lg:h-screen flex flex-col transition-transform transform -translate-x-full lg:translate-x-0 lg:sticky lg:block">
+                class="fixed top-0 left-0 w-80 md:w-96 z-20 bg-white shadow-lg h-screen overflow-y-auto lg:sticky">
                 <div class="p-6 flex items-center justify-between">
                     <img class="w-48 sm:w-48 lg:w-64 lg:mx-auto" src="/Assets/logo.png" draggable="false" alt="Logo">
                     <i id="closeSidebar" class="text-2xl cursor-pointer fa-solid fa-xmark lg:hidden"></i>
@@ -35,9 +35,10 @@
                 <hr class="border border-[#EC690F] mb-10">
                 <x-sidebar />
             </div>
+        
 
              <!-- Main Content -->
-             <div class="flex-1 flex flex-col">
+             <div class="flex-1 overflow-y-auto bg-gray-100">
                 <div class="h-24">
                     <x-navbar :header="View::yieldContent('header')" />
                 </div>
