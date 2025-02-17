@@ -132,6 +132,7 @@ Route::post('/operation/update/{id}', [OperationRenewalController::class, 'updat
 Route::get('/supervisor/joborder', [SupervisorJobOrderController::class, 'index'])->name('supervisor.joborder');
 Route::get('/supervisor/joborder/create', [SupervisorJobOrderController::class, 'create'])->name('supervisor.create');
 Route::post('/supervisor/joborder/store', [SupervisorJobOrderController::class, 'store'])->name('supervisor.store');
+Route::get('/supervisor/joborder/show/{id}', [SupervisorJobOrderController::class, 'show'])->name('supervisor.show');
 Route::get('/supervisor/joborder/edit/{id}', [SupervisorJobOrderController::class, 'edit'])->name('supervisor.edit');
 Route::put('/supervisor/joborder/update/{id}', [SupervisorJobOrderController::class, 'update'])->name('supervisor.update');
 
