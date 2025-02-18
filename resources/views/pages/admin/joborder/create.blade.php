@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
 @section('title', 'Admin')
-@section('header', "Create Job Order") 
+@section('header', "Create Job Order")
 
 @section('content')
 
@@ -34,17 +34,17 @@
     @if(session('Status'))
         <x-success />
     @endif
-    <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow">
+    <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow bg-white">
         <div>
             <a href="{{ url('/joborder') }}">
-                <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
+                <div class="w-fit px-4 py-1 bg-gray-400 rounded-md text-white custom-shadow custom-hover-shadow">
                     Back
                 </div>
             </a>
         </div>
         <form action="{{ url('/joborder/store') }}" method="POST">
             @csrf
-            
+
             <h1 class="text-xl font-bold mt-4">Create Job Order</h1>
             <div class="grid grid-cols-4 space-y-4">
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
@@ -78,7 +78,7 @@
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-                    
+
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Graphics Designer</p>
                         <select name="graphic_designer_id" class="w-full border-gray-200 rounded-lg text-sm ">
@@ -108,18 +108,18 @@
                             @enderror
                         </div>
                     </div>
-                    
+
                     <div class="col-span-2 h-fit w-full">
                         <p class="text-sm text-gray-600">Description</p>
-                        
+
                         <!-- CKEditor Textarea -->
                         <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg">{{ old('description') }}</textarea>
-                    
+
                         @error('description')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-                    
+
                 </div>
 
                 <button type="submit" class="col-span-1 text-center py-4 w-full bg-[#fa7011] mt-10 rounded-lg custom-shadow custom-hover-shadow text-white font-bold">

@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
 @section('title', 'Revision')
-@section('header', "Content Revision") 
+@section('header', "Content Revision")
 
 @section('content')
 
@@ -27,7 +27,7 @@
     <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow bg-white">
         <div>
             <a href="{{ url('/content/revisions') }}">
-                <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
+                <div class="w-fit px-4 py-1 bg-gray-400 rounded-md text-white custom-shadow custom-hover-shadow">
                     Back
                 </div>
             </a>
@@ -64,7 +64,7 @@
                                 <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Revisions</p>
                                 <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
                                     {!! $job_draft->revisions->last()->summary !!}
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -78,13 +78,13 @@
 
                     <div class="col-span-4 h-fit w-full">
                         <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Last Draft</p>
-                        
+
                         <!-- Display last draft -->
                         <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
-                            
+
                             {!! $job_draft->draft !!}
                         </div>
-                    
+
                         @error('draft')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -94,10 +94,10 @@
 
                     <div class="col-span-4 h-fit w-full">
                         <p class="text-sm text-gray-600">Draft</p>
-                        
+
                         <!-- CKEditor 5 textarea -->
                         <textarea name="draft" id="editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-[300px] max-h-[500px] overflow-y-auto"></textarea>
-                    
+
                         @error('draft')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -107,7 +107,7 @@
                 <button type="submit" class="col-span-1 text-center py-4 w-full bg-[#fa7011] mt-10 rounded-lg custom-shadow custom-hover-shadow text-white font-bold">
                     Submit
                 </button>
-                
+
             </div>
         </form>
     </div>
@@ -119,7 +119,7 @@
             .create(document.querySelector('#editor'))
             .then(editor => {
                 console.log('CKEditor 5 initialized!', editor);
-                
+
                 // Load existing draft content from old input if available,
                 // otherwise use the job draft's existing draft content.
                 editor.setData(``);

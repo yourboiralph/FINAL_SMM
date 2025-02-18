@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
 @section('title', 'Admin')
-@section('header', "Create Job Order") 
+@section('header', "Create Job Order")
 
 @section('content')
 
@@ -189,13 +189,14 @@
                                 <button onclick="selectClient('{{ $client->id }}', '{{ $client->name }}')" class="px-2 py-1 md:px-4 md:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 w-full md:w-auto">
                                     Select Client
                                 </button>
-                            </td>                                    
+                            </td>
                         </tr>
-                        @empty
+                    @empty
                         <tr class="h-[400px]">
                             <td colspan="3" class="px-6 py-3">
                                 <div class="flex h-full items-center justify-center">
-                                    No Data Available
+                                    <i class="far fa-grin-beam-sweat"></i>
+                                    No Data Found
                                 </div>
                             </td>
                         </tr>
@@ -243,13 +244,14 @@
                                 <button onclick="selectContentWriter('{{ $content_writer->id }}', '{{ $content_writer->name }}')" class="px-2 py-1 md:px-4 md:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 w-full md:w-auto">
                                     Select
                                 </button>
-                            </td>                                    
+                            </td>
                         </tr>
-                        @empty
+                    @empty
                         <tr class="h-[400px]">
                             <td colspan="3" class="px-6 py-3">
                                 <div class="flex h-full items-center justify-center">
-                                    No Data Available
+                                    <i class="far fa-grin-beam-sweat"></i>
+                                    No Data Found
                                 </div>
                             </td>
                         </tr>
@@ -297,13 +299,14 @@
                                 <button onclick="selectGraphicDesigner('{{ $graphic_designer->id }}', '{{ $graphic_designer->name }}')" class="px-2 py-1 md:px-4 md:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 w-full md:w-auto">
                                     Select
                                 </button>
-                            </td>                                    
+                            </td>
                         </tr>
-                        @empty
+                    @empty
                         <tr class="h-[400px]">
                             <td colspan="3" class="px-6 py-3">
                                 <div class="flex h-full items-center justify-center">
-                                    No Data Available
+                                    <i class="far fa-grin-beam-sweat"></i>
+                                    No Data Found
                                 </div>
                             </td>
                         </tr>

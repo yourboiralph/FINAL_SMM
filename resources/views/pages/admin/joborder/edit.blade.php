@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
 @section('title', 'Admin')
-@section('header', "Edit Job Orders") 
+@section('header', "Edit Job Orders")
 
 @section('content')
 
@@ -24,10 +24,10 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 
 <div class="container mx-auto p-6">
-    <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow">
+    <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow bg-white">
         <div>
             <a href="{{ url('/joborder') }}">
-                <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
+                <div class="w-fit px-4 py-1 bg-gray-400 rounded-md text-white custom-shadow custom-hover-shadow">
                     Back
                 </div>
             </a>
@@ -45,7 +45,7 @@
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-                    
+
                     @if ($job_draft->type === 'graphic_designer')
                     <!-- Graphics Designer -->
                     <div class="w-full col-span-2 lg:col-span-1">
@@ -77,7 +77,7 @@
                                 <p class="text-red-600 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
-                    
+
                     @endif
 
                     <!-- Client -->
@@ -95,7 +95,7 @@
                     </div>
 
 
-    
+
                     <div class="col-span-2 lg:col-span-1 grid grid-cols-2 w-full gap-4 rounded-lg">
                         <div>
                             <p class="text-sm text-gray-600">Date Started</p>
@@ -112,13 +112,13 @@
                             @enderror
                         </div>
                     </div>
-                    
+
                     <div class="col-span-2 h-fit w-full">
                         <p class="text-sm text-gray-600">Description</p>
-                        
+
                         <!-- CKEditor Textarea -->
                         <textarea name="description" id="editor" class="w-full border-gray-200 rounded-lg">{{ old('description', $job_draft->jobOrder->description) }}</textarea>
-                    
+
                         @error('description')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -170,13 +170,14 @@
                                 <button onclick="selectClient('{{ $client->id }}', '{{ $client->name }}')" class="px-2 py-1 md:px-4 md:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 w-full md:w-auto">
                                     Select Client
                                 </button>
-                            </td>                                    
+                            </td>
                         </tr>
                     @empty
                         <tr class="h-[400px]">
                             <td colspan="3" class="px-6 py-3">
-                                <div class="flex h-full items-center justify-center">
-                                    No Data Available
+                                <div class="flex h-full items-center flex-col justify-center space-y-4">
+                                    <i class="far fa-grin-beam-sweat text-7xl" style="color: #fa7011;"></i>
+                                    <p class="text-[#fa7011]">No Data Found</p>
                                 </div>
                             </td>
                         </tr>
@@ -224,13 +225,14 @@
                                 <button onclick="selectContentWriter('{{ $content_writer->id }}', '{{ $content_writer->name }}')" class="px-2 py-1 md:px-4 md:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 w-full md:w-auto">
                                     Select
                                 </button>
-                            </td>                                    
+                            </td>
                         </tr>
                     @empty
                         <tr class="h-[400px]">
                             <td colspan="3" class="px-6 py-3">
-                                <div class="flex h-full items-center justify-center">
-                                    No Data Available
+                                <div class="flex h-full items-center flex-col justify-center space-y-4">
+                                    <i class="far fa-grin-beam-sweat text-7xl" style="color: #fa7011;"></i>
+                                    <p class="text-[#fa7011]">No Data Found</p>
                                 </div>
                             </td>
                         </tr>
@@ -278,7 +280,7 @@
                                 <button onclick="selectGraphicDesigner('{{ $graphic_designer->id }}', '{{ $graphic_designer->name }}')" class="px-2 py-1 md:px-4 md:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 w-full md:w-auto">
                                     Select
                                 </button>
-                            </td>                                    
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

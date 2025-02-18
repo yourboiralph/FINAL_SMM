@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
 @section('title', 'Admin')
-@section('header', "Create Job Order") 
+@section('header', "Create Job Order")
 
 @section('content')
 
@@ -24,17 +24,17 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 
 <div class="container mx-auto p-6">
-    <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow">
+    <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow bg-white">
         <div>
             <a href="{{ url('/supervisor/joborder') }}">
-                <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
+                <div class="w-fit px-4 py-1 bg-gray-400 rounded-md text-white custom-shadow custom-hover-shadow">
                     Back
                 </div>
             </a>
         </div>
         <form action="{{ url('/supervisor/joborder/store') }}" method="POST">
             @csrf
-            
+
             <h1 class="text-xl font-bold mt-4">Create Job Order</h1>
             <div class="grid grid-cols-4 space-y-4">
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
@@ -46,23 +46,23 @@
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-                    
+
                     <!-- Operator Selection Modal Trigger -->
                     <div class="col-span-2 lg:col-span-1 w-full">
                         <p class="text-sm text-gray-600">Operator</p>
                         <div class="relative">
-                            <input type="text" id="selected-operator-name" 
-                                value="{{ old('assigned_to') ? ($operators->firstWhere('id', old('assigned_to'))->name ?? 'Select an Operator') : 'Select an Operator' }}" 
-                                class="w-full border-gray-200 rounded-lg cursor-pointer" readonly 
+                            <input type="text" id="selected-operator-name"
+                                value="{{ old('assigned_to') ? ($operators->firstWhere('id', old('assigned_to'))->name ?? 'Select an Operator') : 'Select an Operator' }}"
+                                class="w-full border-gray-200 rounded-lg cursor-pointer" readonly
                                 onclick="openOperatorModal()">
-                            <input type="hidden" name="assigned_to" id="selected-operator-id" 
+                            <input type="hidden" name="assigned_to" id="selected-operator-id"
                                 value="{{ old('assigned_to') }}">
                         </div>
                         @error('assigned_to')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-                    
+
                     <!-- Description CKEditor Textarea -->
                     <div class="col-span-2 h-fit w-full">
                         <p class="text-sm text-gray-600">Description</p>
@@ -91,8 +91,8 @@
                 <button onclick="closeOperatorModal()" class="bg-[#fa7011] text-white px-4 py-2 rounded w-fit">Close</button>
             </div>
         </div>
-        
-        
+
+
         <!-- Table Container -->
         <div class="overflow-x-auto w-full bg-white shadow-md rounded-lg max-h-[500px]">
             <table class="w-full text-left border-collapse min-w-[300px] md:min-w-[500px]">
@@ -114,11 +114,12 @@
                                 </button>
                             </td>
                         </tr>
-                        @empty
+                    @empty
                         <tr class="h-[400px]">
                             <td colspan="3" class="px-6 py-3">
                                 <div class="flex h-full items-center justify-center">
-                                    No Data Available
+                                    <i class="far fa-grin-beam-sweat"></i>
+                                    No Data Found
                                 </div>
                             </td>
                         </tr>

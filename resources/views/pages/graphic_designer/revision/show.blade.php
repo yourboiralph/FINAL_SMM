@@ -30,7 +30,7 @@
     <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow bg-white">
         <div>
             <a href="{{ url('/graphic') }}">
-                <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
+                <div class="w-fit px-4 py-1 bg-gray-400 rounded-md text-white custom-shadow custom-hover-shadow">
                     Back
                 </div>
             </a>
@@ -92,14 +92,14 @@
         },
         scrollingContainer: '#quill-editor' // Add scrolling behavior
     });
-    
+
     // Set existing content in the Quill editor
     quill.root.innerHTML = {!! json_encode($job_draft->jobOrder->description) !!};
-    
+
     // Sync Quill content with the hidden textarea on form submission
     document.querySelector('form').onsubmit = function () {
         document.querySelector('#description').value = quill.root.innerHTML;
     };
-    
+
     </script>
 @endsection

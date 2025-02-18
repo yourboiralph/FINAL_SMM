@@ -44,7 +44,7 @@
 </style>
 
 <div class="container mx-auto p-6 ">
-    <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow">
+    <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow bg-white">
         <div>
             <a href="{{ url('users') }}">
                 <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
@@ -79,7 +79,7 @@
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-    
+
                     <!-- Role -->
                     <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Role</p>
@@ -95,7 +95,7 @@
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-                    
+
                     <!-- Phone -->
                     <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Phone</p>
@@ -104,7 +104,7 @@
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-    
+
                     <!-- Address -->
                     <div class="w-full col-span-2">
                         <p class="text-sm text-gray-600">Address</p>
@@ -113,7 +113,7 @@
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-                    
+
                     <!-- Password -->
                     <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Password</p>
@@ -122,7 +122,7 @@
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-                    
+
                     <!-- Confirm Password -->
                     <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Confirm Password</p>
@@ -131,7 +131,7 @@
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-    
+
                     <button type="submit" class="col-span-2 text-center py-4 w-full bg-[#fa7011] mt-10 rounded-lg custom-shadow custom-hover-shadow text-white font-bold">
                         Register
                     </button>

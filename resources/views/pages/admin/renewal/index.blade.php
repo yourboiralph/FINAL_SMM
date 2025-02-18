@@ -79,7 +79,7 @@
                 @forelse ($job_orders as $job_order)
                     <tr class="project-row border-b">
                         <td class="px-6 py-3">{{ $job_order->title }}</td>
-                        
+
                         <td class="px-6 py-3 border-b">
                             <label class="switch">
                                 <input type="checkbox" class="renew-toggle" data-id="{{ $job_order->id }}" {{ $job_order->renewable ? 'checked' : '' }}>
@@ -87,11 +87,12 @@
                             </label>
                         </td>
                     </tr>
-                    @empty
+                @empty
                     <tr class="h-[400px]">
                         <td colspan="3" class="px-6 py-3">
-                            <div class="flex h-full items-center justify-center">
-                                No Data Available
+                            <div class="flex h-full items-center flex-col justify-center space-y-4">
+                                <i class="far fa-grin-beam-sweat text-7xl" style="color: #fa7011;"></i>
+                                <p class="text-[#fa7011]">No Data Found</p>
                             </div>
                         </td>
                     </tr>
@@ -114,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ renewable: newStatus }) 
+                body: JSON.stringify({ renewable: newStatus })
             })
             .then(response => response.json())
             .then(data => {

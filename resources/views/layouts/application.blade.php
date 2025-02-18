@@ -27,7 +27,7 @@
 
             <!-- Sidebar -->
             <div id="sidebar"
-            class="fixed top-0 left-0 w-80 md:w-96 z-20 bg-white shadow-lg h-screen overflow-y-auto lg:sticky 
+            class="fixed top-0 left-0 w-80 md:w-96 z-20 bg-white shadow-lg h-screen overflow-y-auto lg:sticky
                 -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0">
 
                 <div class="p-6 flex items-center justify-between">
@@ -37,10 +37,10 @@
                 <hr class="border border-[#EC690F] mb-10">
                 <x-sidebar />
             </div>
-        
+
 
              <!-- Main Content -->
-             <div class="flex-1 overflow-y-auto bg-gray-100">
+             <div class="flex-1 overflow-y-auto scrollbar-hide bg-gray-100">
                 <div class="h-24">
                     <x-navbar :header="View::yieldContent('header')" />
                 </div>
@@ -75,3 +75,14 @@
     </script>
 </body>
 </html>
+
+<style>
+    .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+</style>

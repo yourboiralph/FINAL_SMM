@@ -30,8 +30,8 @@
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
                     <th class="px-2 text-nowrap sm:px-4 py-2 sm:py-3 text-xs sm:text-base">Title</th>
-                    
-                    
+
+
                     <th class="px-2 text-nowrap sm:px-4 py-2 sm:py-3 text-xs sm:text-base">Status</th>
                     <th class="px-2 text-nowrap sm:px-4 py-2 sm:py-3 text-xs sm:text-base">Actions</th>
                 </tr>
@@ -40,8 +40,8 @@
                 @forelse ($job_drafts as $job_draft)
                     <tr class="project-row border-b text-xs sm:text-sm">
                         <td class="px-2 sm:px-4 py-2 sm:py-3">{{ $job_draft->jobOrder->title }}</td>
-                        
-                        
+
+
                         <td class="px-2 sm:px-4 py-2 sm:py-3">{{$job_draft->status}}</td>
                         <td class="px-2 sm:px-4 py-2 sm:py-3 border-b">
                             <a href="{{url('supervisor/approve/show/' . $job_draft->id)}}">
@@ -51,11 +51,12 @@
                             </a>
                         </td>
                     </tr>
-                    @empty
+                @empty
                     <tr class="h-[400px]">
                         <td colspan="3" class="px-6 py-3">
-                            <div class="flex h-full items-center justify-center">
-                                No Data Available
+                            <div class="flex h-full items-center flex-col justify-center space-y-4">
+                                <i class="far fa-grin-beam-sweat text-7xl" style="color: #fa7011;"></i>
+                                <p class="text-[#fa7011]">No Data Found</p>
                             </div>
                         </td>
                     </tr>

@@ -27,7 +27,7 @@
     <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow bg-white">
         <div class="flex items-center justify-between">
             <a href="{{ url('/operation/requests') }}">
-                <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
+                <div class="w-fit px-4 py-1 bg-gray-400 rounded-md text-white custom-shadow custom-hover-shadow">
                     Back
                 </div>
             </a>
@@ -52,7 +52,7 @@
             </div>
             <div class="col-span-4 h-fit">
                 <p class="text-sm font-bold text-gray-600">Description</p>
-                
+
                 <!-- CKEditor Read-Only -->
                 <div class="border border-gray-400 rounded-lg break-words max-h-[500px] p-2 overflow-y-auto">
                     {!! $supervisor_request->description !!}

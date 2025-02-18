@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
 @section('title', 'Page Title')
-@section('header', "Create Job Order") 
+@section('header', "Create Job Order")
 
 @section('content')
 
@@ -27,7 +27,7 @@
     <div class="w-full px-6 py-10 mx-auto rounded-lg bg-white custom-shadow">
         <div>
             <a href="{{ url('/operation/task') }}">
-                <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
+                <div class="w-fit px-4 py-1 bg-gray-400 rounded-md text-white custom-shadow custom-hover-shadow">
                     Back
                 </div>
             </a>
@@ -61,7 +61,7 @@
                         <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
                             {!! $job_draft->jobOrder->description !!}
                         </div>
-                        
+
                     </div>
 
                     @if ($job_draft->type == 'graphic_designer')
@@ -70,7 +70,7 @@
                             <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
                                 {!! $job_draft->parentDraft->draft !!}
                             </div>
-                            
+
                         </div>
                     @endif
 
@@ -99,7 +99,7 @@
             .create(document.querySelector('#editor'))
             .then(editor => {
                 console.log('CKEditor 5 initialized!', editor);
-                
+
                 // Load existing draft content from old input if available, otherwise use the job draft's content
                 editor.setData(`{!! addslashes(old('draft', $job_draft->draft ?? '')) !!}`);
 
