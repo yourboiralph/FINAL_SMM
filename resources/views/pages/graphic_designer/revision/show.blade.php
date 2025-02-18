@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
 @section('title', 'Content Revision')
-@section('header', 'Show Graphic Revision')
+@section('header', 'Show Content Revision')
 
 @section('content')
 
@@ -27,7 +27,7 @@
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 
 <div class="container mx-auto p-6">
-    <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow">
+    <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow bg-white">
         <div>
             <a href="{{ url('/graphic') }}">
                 <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">

@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
 @section('title', 'Job Order')
-@section('header', 'Job Order')
+@section('header', 'Show Job Order')
 
 @section('content')
 
@@ -37,20 +37,20 @@
         </div>
         <h1 class="text-xl font-bold mt-4">Show</h1>
         <div class="mt-4 grid grid-cols-4">
-            <div class="col-span-4 flex  mb-10">
-                <div class="w-full">
+            <div class="col-span-4 grid grid-cols-4 space-y-4 lg:space-y-0 mb-10">
+                <div class="w-full col-span-4 lg:col-span-1">
                     <p class="text-sm font-bold text-gray-600">Title</p>
                     <p class="border-b-2 border-[#fa7011] w-fit">{{ $job_draft->jobOrder->title }}</p>
                 </div>
-                <div class="w-full">
+                <div class="w-full col-span-4 lg:col-span-1">
                     <p class="text-sm font-bold text-gray-600">Client</p>
                     <p class="border-b-2 border-[#fa7011] w-fit">{{$job_draft->client->name}}</p>
                 </div>
-                <div class="w-full">
+                <div class="w-full col-span-4 lg:col-span-1">
                     <p class="text-sm font-bold text-gray-600">Date Started</p>
                     <p class="border-b-2 border-[#fa7011] w-fit">{{$job_draft->date_started}}</p>
                 </div>
-                <div class="w-full ">
+                <div class="w-full col-span-4 lg:col-span-1">
                     <p class="text-sm font-bold text-gray-600">Deadline</p>
                     <p class="border-b-2 border-[#fa7011] w-fit">{{$job_draft->date_target}}</p>
                 </div>
@@ -61,9 +61,9 @@
                 <div id="quill-editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-fit max-h-[500px] overflow-y-auto">{!! json_encode($job_draft->jobOrder->description) !!}</div>
 
                 <!-- Hidden textarea to store Quill content -->
-                <textarea name="draft" id="description" class="hidden min-h-[300px] max-h-[500px] overflow-y-auto"></textarea>
+                <textarea name="description" id="description" class="hidden max-h-[300px]"></textarea>
             </div>
-            <div class="mt-10 flex gap-8 ">
+            <div class="mt-10 flex gap-8 w-full col-span-4">
                 <div class="flex items-center justify-center flex-col">
                     <img class="size-14" src="/Assets/user-profile-profilepage.png" alt="">
                     {{-- <img src="{{ asset('/Assets/' . $job_draft->content_writer->image) }}" alt="Content Writer Image"> --}}

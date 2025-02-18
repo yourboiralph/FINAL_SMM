@@ -38,7 +38,7 @@
             <h1 class="text-xl font-bold mt-4">Create Draft</h1>
             <div class="grid grid-cols-4 space-y-4">
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
-                    <div class="col-span-4 grid grid-cols-4">
+                    <div class="col-span-4 grid grid-cols-4 space-y-4 lg:space-y-0">
                         <div class="col-span-4 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Title</p>
                             <p class="text-xl font-bold">{{ $job_draft->jobOrder->title }}</p>
