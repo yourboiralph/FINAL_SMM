@@ -101,9 +101,6 @@
                                                  alt="Selected Image" class="{{ $isSigned ? 'block' : 'hidden' }} w-full h-full object-cover">
                                         </div>
                                     </div>
-                                    @error('signature_supervisor')
-                                        <p class="text-sm text-red-600">{{ $message }}</p>
-                                    @enderror
             
                                     {{-- Signature Pad --}}
                                     <div id="padSection" class="hidden">
@@ -115,10 +112,12 @@
                                         </div>
                                         <input type="hidden" name="signature_pad" id="signaturePadData" value="{{ old('signature_pad') }}">
                                     </div>
-                                    
-                                    @error('signature-pad')
-                                        <p class="text-sm text-red-600">{{ $message }}</p>
-                                    @enderror
+
+                                    @if($errors->has('signature_supervisor') || $errors->has('signature_pad'))
+                                        <p class="text-sm text-red-600">
+                                            {{ $errors->first('signature_supervisor') ?: $errors->first('signature_pad') }}
+                                        </p>
+                                    @endif
             
                                     {{-- Checkbox for Agreement --}}
                                     <div class="mt-4 flex items-center space-x-2">
