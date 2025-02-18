@@ -33,7 +33,7 @@
     @if(session('Status'))
         <x-success />
     @endif
-    <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow">
+    <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow bg-white">
         <div>
             <a href="{{ url('/supervisor/directjob') }}">
                 <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
@@ -73,7 +73,7 @@
                         <p class="text-sm text-gray-600">Content Writer</p>
                         <div class="relative">
                             <input type="text" id="selected-content-writer-name"
-                                value="{{ old('content_writer_id') ? ($content_writers->firstWhere('id', old('content_writer_id'))->name ?? 'Select a Content Writer') : 'Select a Content Writer' }}"
+                                value="{{ old('content_writer_id') ? ($contentworkers->firstWhere('id', old('content_writer_id'))->name ?? 'Select a Content Writer') : 'Select a Content Writer' }}"
                                 class="w-full border-gray-200 rounded-lg cursor-pointer" readonly
                                 onclick="openContentWriterModal()">
                             <input type="hidden" name="content_writer_id" id="selected-content-writer-id"
@@ -89,7 +89,7 @@
                         <p class="text-sm text-gray-600">Graphics Designer</p>
                         <div class="relative">
                             <input type="text" id="selected-graphic-designer-name"
-                                value="{{ old('graphic_designer_id') ? ($graphic_designers->firstWhere('id', old('graphic_designer_id'))->name ?? 'Select a Graphics Designer') : 'Select a Graphics Designer' }}"
+                                value="{{ old('graphic_designer_id') ? ($graphicworkers->firstWhere('id', old('graphic_designer_id'))->name ?? 'Select a Graphics Designer') : 'Select a Graphics Designer' }}"
                                 class="w-full border-gray-200 rounded-lg cursor-pointer" readonly
                                 onclick="openGraphicDesignerModal()">
                             <input type="hidden" name="graphic_designer_id" id="selected-graphic-designer-id"

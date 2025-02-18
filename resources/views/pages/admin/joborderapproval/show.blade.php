@@ -79,7 +79,7 @@
                                 $isDisabled = $job_draft->status != "Submitted to Operations";
                                 $isSigned = !empty($job_draft->signature_admin);
                             @endphp
-                            <div class="mt-6 bg-red-100 p-4 rounded-md shadow-md w-fit">
+                            <div class="mt-6 bg-white p-4 rounded-md shadow-md w-fit">
                                 <div class="flex">
                                     <h1 class="text-sm font-semibold">Choose Signature Method:</h1>
                                     <div class="flex">
