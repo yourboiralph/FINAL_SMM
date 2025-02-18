@@ -42,25 +42,30 @@
                 </tr>
             </thead>
             <tbody id="tableBody" class="overflow-y-auto">
-                @foreach ($supervisor_requests as $supervisor_request)
+                @forelse ($supervisor_requests as $supervisor_request)
                     <tr class="border-b">
                         <td class="px-6 py-3">{{ $supervisor_request->title }}</td>
                         <td class="px-6 py-3">{{ $supervisor_request->assignee->name }}</td>
                         <td class="px-6 py-3">
-                            <a href="{{url('/supervisor/joborder/edit/' . $supervisor_request->id)}}">
+                            <a href="{{ url('/supervisor/joborder/edit/' . $supervisor_request->id) }}">
                                 <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
                                     Edit
                                 </button>
                             </a>
-                            <a href="{{url('/supervisor/joborder/show/' . $supervisor_request->id)}}">
+                            <a href="{{ url('/supervisor/joborder/show/' . $supervisor_request->id) }}">
                                 <button class="px-2 py-1 lg:px-4 lg:py-2 text-sm text-white bg-gray-700 rounded hover:bg-gray-800">
                                     Show
                                 </button>
                             </a>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr class="">
+                        <td colspan="3" class="px-6 py-3 text-center">No Data Available</td>
+                    </tr>
+                @endforelse
             </tbody>
+            
         </table>
     </div>
 
