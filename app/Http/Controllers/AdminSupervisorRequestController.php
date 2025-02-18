@@ -31,8 +31,8 @@ class AdminSupervisorRequestController extends Controller
     public function create($id)
     {
         $clients = User::with('role')->where('role_id', 1)->get();
-        $graphic_designers = User::with('role')->whereNotIn('role_id', [1, 3])->get();
-        $content_writers = User::with('role')->whereNotIn('role_id', [1, 4])->get();
+        $graphic_designers = User::with('role')->whereNotIn('role_id', [1, 3, 5])->get();
+        $content_writers = User::with('role')->whereNotIn('role_id', [1, 4, 5])->get();
 
         $supervisor_request = ModelsRequest::find($id);
 
