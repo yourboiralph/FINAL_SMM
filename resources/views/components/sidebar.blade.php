@@ -80,11 +80,11 @@
         <div class=" block px-6">
             <a href="{{ url("/operation/revision") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
-                {{ request()->is("operation/revision", "operation/revision/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is("operation/revision", "operation/revision/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                {{ request()->is("operation/revision", "operation/revisions", "operation/revisions/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("operation/revision", "operation/revisions", "operation/revisions/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <img src="/Assets/icon-projdev-white.png"
                     draggable="false"
-                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/revision", "operation/revision/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/revision","operation/revisions", "operation/revisions/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
                 <h1 class=" block">My Revisions</h1>
             </a>
@@ -158,11 +158,11 @@
         <div class=" block px-6">
             <a href="{{ url("/users") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
-                {{ request()->is("users", "users/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is("users", "users/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                {{ request()->is("users", "register", "users/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("users", "register", "users/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <img src="/Assets/icon-projdev-white.png"
                     draggable="false"
-                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("users", "users/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("users", "register", "users/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="joborder Icon">
                 <h1 class=" block">Add users</h1>
             </a>

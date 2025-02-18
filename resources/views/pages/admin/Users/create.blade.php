@@ -64,7 +64,7 @@
                 </div>
                 <div class="grid grid-cols-2 gap-4 mt-4">
                     <!-- Name -->
-                    <div class="w-full col-span-1">
+                    <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Name</p>
                         <input type="text" name="name" value="{{ old('name') }}" class="w-full border-gray-200 rounded-lg" required>
                         @error('name')
@@ -72,7 +72,7 @@
                         @enderror
                     </div>
                     <!-- Email -->
-                    <div class="w-full">
+                    <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Email</p>
                         <input type="email" name="email" value="{{ old('email') }}" class="w-full border-gray-200 rounded-lg" required>
                         @error('email')
@@ -81,7 +81,7 @@
                     </div>
     
                     <!-- Role -->
-                    <div class="w-full">
+                    <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Role</p>
                         <select name="role_id" class="w-full border-gray-200 rounded-lg" required>
                             <option value="">Select a role</option>
@@ -97,7 +97,7 @@
                     </div>
                     
                     <!-- Phone -->
-                    <div class="w-full">
+                    <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Phone</p>
                         <input type="text" name="phone" value="{{ old('phone') }}" class="w-full border-gray-200 rounded-lg" required>
                         @error('phone')
@@ -115,7 +115,7 @@
                     </div>
                     
                     <!-- Password -->
-                    <div class="w-full">
+                    <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Password</p>
                         <input type="password" name="password" class="w-full rounded-lg border-gray-200 focus:ring-0" required>
                         @error('password')
@@ -124,7 +124,7 @@
                     </div>
                     
                     <!-- Confirm Password -->
-                    <div class="w-full">
+                    <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Confirm Password</p>
                         <input type="password" name="password_confirmation" class="w-full rounded-lg border-gray-200 focus:ring-0" required>
                         @error('password_confirmation')

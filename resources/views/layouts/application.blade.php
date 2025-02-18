@@ -23,7 +23,7 @@
         <i id="toggleButton" class="sticky top-10 z-20 left-5 bg-[#fa7011] px-3 py-2 opacity-70 rounded-full  text-2xl cursor-pointer fa-solid fa-bars lg:hidden"></i>
         <div class="flex h-screen">
             <!-- Sidebar & Overlay -->
-            <div id="sidebarBackdrop" class="fixed inset-0 bg-black bg-opacity-50 hidden lg:hidden"></div>
+            <div id="sidebarBackdrop" class="fixed inset-0 z-10 bg-black bg-opacity-50 hidden lg:hidden"></div>
 
             <!-- Sidebar -->
             <div id="sidebar"
