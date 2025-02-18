@@ -43,7 +43,13 @@
             </thead>
             <tbody id="tableBody" class="overflow-y-auto">
                 @forelse ($job_drafts as $job_draft)
-                    <tr class="border-b">
+                <tr class="border-b {{ 
+                    (($job_draft->type == 'content_writer' && $job_draft->contentWriter->name != Auth::user()->name) 
+                    || ($job_draft->type == 'graphic_designer' && $job_draft->graphicDesigner->name != Auth::user()->name))
+                    ? 'hidden' 
+                    : '' 
+                }}">
+                
                         <td class="px-6 py-3">{{ $job_draft->jobOrder->title }}</td>
                         <td class="px-6 py-3">
                             @if ($job_draft->type == "content_writer")
