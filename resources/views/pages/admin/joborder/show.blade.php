@@ -64,12 +64,12 @@
                 {{-- Graphic Designer & Content Writer --}}
                 <div class="mt-8 flex sm:flex-row gap-8 justify-center sm:justify-normal">
                     <div class="flex flex-col items-center">
-                        <img class="w-14 h-14 md:w-16 md:h-16 rounded-full" src="/Assets/user-profile-profilepage.png" alt="Graphic Designer">
+                        <img class="w-14 h-14 md:w-16 md:h-16 rounded-full" src="{{asset('/Assets/user-profile-profilepage.png')}}" alt="Graphic Designer">
                         <h1 class="text-sm mt-2">{{ $job_draft->graphicDesigner->name }}</h1>
                         <h1 class="text-xs border-b-2 border-[#fa7011] w-fit">Graphic Designer</h1>
                     </div>
                     <div class="flex flex-col items-center">
-                        <img class="w-14 h-14 md:w-16 md:h-16 rounded-full" src="/Assets/user-profile-profilepage.png" alt="Content Writer">
+                        <img class="w-14 h-14 md:w-16 md:h-16 rounded-full" src="{{asset('/Assets/user-profile-profilepage.png')}}" alt="Content Writer">
                         <h1 class="text-sm mt-2">{{ $job_draft->contentWriter->name }}</h1>
                         <h1 class="text-xs border-b-2 border-[#fa7011] w-fit">Content Writer</h1>
                     </div>

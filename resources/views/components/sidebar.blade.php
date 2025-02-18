@@ -14,7 +14,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("dashboard", "dashboard/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("dashboard", "dashboard/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-dashboard-white.png"
+                <img src="{{asset('/Assets/icon-dashboard-white.png')}}"
                     draggable="false"
                     class=" p-2 rounded-lg w-10 h-10 {{ request()->is("dashboard", "dashboard/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="project Icon">
@@ -27,7 +27,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("operation/task", "operation/task/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("operation/task", "operation/task/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-projdev-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/task", "operation/task/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
@@ -40,7 +40,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("operation/requests", "operation/request/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("operation/requests", "operation/request/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-projdev-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/requests", "operation/request/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
@@ -53,7 +53,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("joborder", "joborder/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("joborder", "joborder/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-projdev-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("joborder", "joborder/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
@@ -67,7 +67,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("operation", "operation/show/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("operation", "operation/show/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-projdev-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation", "operation/show/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
@@ -82,7 +82,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("operation/revision", "operation/revisions", "operation/revisions/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("operation/revision", "operation/revisions", "operation/revisions/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-projdev-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/revision","operation/revisions", "operation/revisions/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
@@ -95,7 +95,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("revisions", "revisions/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("revisions", "revisions/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("revisions", "revisions/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="joborder Icon">
@@ -108,7 +108,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("promotions", "promotions/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("promotions", "promotions/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("promotions", "promotions/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="joborder Icon">
@@ -121,7 +121,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("manual", "manual/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("manual", "manual/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("manual", "manual/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="joborder Icon">
@@ -134,7 +134,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("operation/renewal", "operation/renewal/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-profile-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/renewal", "operation/renewal/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
@@ -147,7 +147,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("profile", "profile/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("profile", "profile/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-profile-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("profile", "profile/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
@@ -160,7 +160,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("users", "register", "users/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("users", "register", "users/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("users", "register", "users/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="joborder Icon">
@@ -173,7 +173,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("operation/history", "operation/history/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("operation/history", "operation/history/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-profile-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/history", "operation/history/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
@@ -199,7 +199,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("dashboard", "/dashboard/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("dashboard", "/dashboard/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-dashboard-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class=" p-2 rounded-lg w-10 h-10 {{ request()->is("dashboard", "/dashboard/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Dashboard Icon">
@@ -212,7 +212,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("client", "client") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("client", "client") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("client", "client") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
@@ -225,7 +225,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("client/history", "client/history/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("client/history", "client/history/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-profile-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("client/history", "client/history/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
@@ -238,7 +238,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("profile", "profile/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("profile", "profile/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-profile-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("profile", "profile/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
@@ -251,7 +251,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("promotions", "promotions/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("promotions", "promotions/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-profile-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("promotions", "promotions/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
@@ -264,7 +264,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("client/renewal", "client/renewal/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("client/renewal", "client/renewal/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-profile-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("client/renewal", "client/renewal/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
@@ -277,7 +277,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("profile", "profile/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("profile", "profile/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-profile-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("profile", "profile/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
@@ -303,7 +303,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("dashboard", "dashboard/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("dashboard", "dashboard/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-dashboard-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class=" p-2 rounded-lg w-10 h-10 {{ request()->is("dashboard", "dashboard/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="project Icon">
@@ -316,7 +316,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("content", "content/edit/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("content", "content/edit/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-profile-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("content", "content/edit/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
@@ -329,7 +329,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("profile", "profile/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("profile", "profile/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-profile-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("profile", "profile/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
@@ -342,7 +342,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("content/revisions", "content/revisions/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("content/revisions", "content/revisions/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("content/revisions", "content/revisions/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="joborder Icon">
@@ -355,7 +355,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("content/history", "content/history/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("content/history", "content/history/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-profile-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("content/history", "content/history/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
@@ -379,7 +379,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("dashboard", "dashboard/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("dashboard", "dashboard/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-dashboard-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class=" p-2 rounded-lg w-10 h-10 {{ request()->is("dashboard", "dashboard/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="project Icon">
@@ -392,7 +392,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("graphic", "graphic") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("graphic", "graphic") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-profile-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("graphic", "graphic") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
@@ -404,7 +404,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("graphic/revisions", "graphic/revisions/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("graphic/revisions", "graphic/revisions/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("graphic/revisions", "graphic/revisions/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="joborder Icon">
@@ -417,7 +417,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("graphic/history", "graphic/history/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("graphic/history", "graphic/history/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-profile-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("graphic/history", "graphic/history/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
@@ -430,7 +430,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("profile", "profile/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("profile", "profile/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-profile-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("profile", "profile/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
@@ -455,7 +455,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("dashboard", "dashboard/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("dashboard", "dashboard/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-dashboard-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class=" p-2 rounded-lg w-10 h-10 {{ request()->is("dashboard", "dashboard/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="project Icon">
@@ -468,7 +468,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("topmanager", "topmanager/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("topmanager", "topmanager/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("topmanager", "topmanager/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
@@ -481,7 +481,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("profile", "profile/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("profile", "profile/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("profile", "profile/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="joborder Icon">
@@ -494,7 +494,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("revisions", "revisions/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("revisions", "revisions/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("revisions", "revisions/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="joborder Icon">
@@ -507,7 +507,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("promotions", "promotions/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("promotions", "promotions/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("promotions", "promotions/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="joborder Icon">
@@ -520,7 +520,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("manual", "manual/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("manual", "manual/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("manual", "manual/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="joborder Icon">
@@ -533,7 +533,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("profile", "profile/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("profile", "profile/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-profile-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("profile", "profile/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
@@ -546,7 +546,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("users", "users/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("users", "users/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("users", "users/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="joborder Icon">
@@ -572,7 +572,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("dashboard", "dashboard/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("dashboard", "dashboard/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-dashboard-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class=" p-2 rounded-lg w-10 h-10 {{ request()->is("dashboard", "dashboard/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="project Icon">
@@ -585,7 +585,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("supervisor/joborder", "supervisor/joborder/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("supervisor/joborder", "supervisor/joborder/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("supervisor/joborder", "supervisor/joborder/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
@@ -598,7 +598,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("supervisor/directjob", "supervisor/directjob/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("supervisor/directjob", "supervisor/directjob/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("supervisor/directjob", "supervisor/directjob/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
@@ -611,7 +611,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("supervisor/task", "supervisor/task/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("supervisor/task", "supervisor/task/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("supervisor/task", "supervisor/task/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
@@ -624,7 +624,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("supervisor/revision", "supervisor/revision/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("supervisor/revision", "supervisor/revision/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-projdev-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("supervisor/revision", "supervisor/revision/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
@@ -637,7 +637,7 @@
                 class="p-2 flex items-center w-full gap-2 rounded-md 
                 {{ request()->is("supervisor/approve", "supervisor/approve/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is("supervisor/approve", "supervisor/approve/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <img src="/Assets/icon-dashboard-white.png"
+                <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
                     class=" p-2 rounded-lg w-10 h-10 {{ request()->is("supervisor/approve", "supervisor/approve/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="project Icon">

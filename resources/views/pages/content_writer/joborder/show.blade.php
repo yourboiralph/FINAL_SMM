@@ -65,13 +65,13 @@
             </div>
             <div class="mt-10 flex gap-8 w-full col-span-4">
                 <div class="flex items-center justify-center flex-col">
-                    <img class="size-14" src="/Assets/user-profile-profilepage.png" alt="">
+                    <img class="size-14" src="{{asset('/Assets/user-profile-profilepage.png')}}" alt="">
                     {{-- <img src="{{ asset('/Assets/' . $job_draft->content_writer->image) }}" alt="Content Writer Image"> --}}
                     <h1 class="text-sm">{{$job_draft->graphicDesigner->name}}</h1>
                     <h1 class="text-[10px] border-b-2 border-[#fa7011] w-fit">Graphic Designer</h1>
                 </div>
                 <div class="flex items-center justify-center flex-col">
-                    <img class="size-14" src="/Assets/user-profile-profilepage.png" alt="">
+                    <img class="size-14" src="{{asset('/Assets/user-profile-profilepage.png')}}" alt="">
                     {{-- <img src="{{ asset('/Assets/' . $job_draft->content_writer->image) }}" alt="Content Writer Image"> --}}
                     <h1 class="text-sm">{{$job_draft->contentWriter->name}}</h1>
                     <h1 class="text-[10px] border-b-2 border-[#fa7011] w-fit">Content Writer</h1>
