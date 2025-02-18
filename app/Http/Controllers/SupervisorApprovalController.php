@@ -32,8 +32,8 @@ class SupervisorApprovalController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'signature_supervisor' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'signature_pad' => 'nullable|string',
+            'signature_admin' => 'required_without:signature_pad|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'signature_pad'   => 'required_without:signature_admin|string',
         ]);
 
         $job_draft = JobDraft::findOrFail($id);
