@@ -10,7 +10,8 @@
         2 => 'Operations Manager',
         3 => 'Content Writer',
         4 => 'Graphic Designer',
-        5 => 'Top Manager'
+        5 => 'Top Manager',
+        6 => 'Supervisor'
     ];
 @endphp
 <div class="container mx-auto p-6">
