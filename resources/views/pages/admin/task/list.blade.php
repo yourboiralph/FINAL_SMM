@@ -42,7 +42,7 @@
                 </tr>
             </thead>
             <tbody id="tableBody" class="overflow-y-auto">
-                @foreach ($job_drafts as $job_draft)
+                @forelse ($job_drafts as $job_draft)
                     <tr class="border-b">
                         <td class="px-6 py-3">{{ $job_draft->jobOrder->title }}</td>
                         <td class="px-6 py-3">
@@ -55,7 +55,7 @@
                         <td class="px-6 py-3 text-right">
                             <a href="{{url('operation/task/edit/' . $job_draft->id)}}">
                                 <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
-                                    Edit
+                                    Create
                                 </button>
                             </a>
                             <a href="{{url('operation/task/edit/' . $job_draft->id)}}">
@@ -65,7 +65,15 @@
                             </a>
                         </td>
                     </tr>
-                @endforeach
+                    @empty
+                    <tr class="h-[400px]">
+                        <td colspan="3" class="px-6 py-3">
+                            <div class="flex h-full items-center justify-center">
+                                No Data Available
+                            </div>
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

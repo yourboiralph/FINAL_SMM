@@ -181,7 +181,7 @@
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    @foreach ($clients as $client)
+                    @forelse ($clients as $client)
                         <tr class="border-b">
                             <td class="px-4 md:px-6 py-3">{{ $client->name }}</td>
                             <td class="px-4 md:px-6 py-3">{{ ucfirst($client->role->position) }}</td>
@@ -191,7 +191,15 @@
                                 </button>
                             </td>                                    
                         </tr>
-                    @endforeach
+                        @empty
+                        <tr class="h-[400px]">
+                            <td colspan="3" class="px-6 py-3">
+                                <div class="flex h-full items-center justify-center">
+                                    No Data Available
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
@@ -227,7 +235,7 @@
                     </tr>
                 </thead>
                 <tbody id="contentWriterTableBody">
-                    @foreach ($content_writers as $content_writer)
+                    @forelse ($content_writers as $content_writer)
                         <tr class="border-b">
                             <td class="px-4 md:px-6 py-3">{{ $content_writer->name }}</td>
                             <td class="px-4 md:px-6 py-3">{{ ucfirst($content_writer->role->position) }}</td>
@@ -237,7 +245,15 @@
                                 </button>
                             </td>                                    
                         </tr>
-                    @endforeach
+                        @empty
+                        <tr class="h-[400px]">
+                            <td colspan="3" class="px-6 py-3">
+                                <div class="flex h-full items-center justify-center">
+                                    No Data Available
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
@@ -273,7 +289,7 @@
                     </tr>
                 </thead>
                 <tbody id="graphicDesignerTableBody">
-                    @foreach ($graphic_designers as $graphic_designer)
+                    @forelse ($graphic_designers as $graphic_designer)
                         <tr class="border-b">
                             <td class="px-4 md:px-6 py-3">{{ $graphic_designer->name }}</td>
                             <td class="px-4 md:px-6 py-3">{{ ucfirst($graphic_designer->role->position) }}</td>
@@ -283,7 +299,15 @@
                                 </button>
                             </td>                                    
                         </tr>
-                    @endforeach
+                        @empty
+                        <tr class="h-[400px]">
+                            <td colspan="3" class="px-6 py-3">
+                                <div class="flex h-full items-center justify-center">
+                                    No Data Available
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

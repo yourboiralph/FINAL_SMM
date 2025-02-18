@@ -39,19 +39,19 @@
             <div class="grid grid-cols-4 space-y-4">
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
                     <div class="col-span-4 grid grid-cols-4">
-                        <div class="col-span-1 w-full">
+                        <div class="col-span-4 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Title</p>
                             <p class="text-xl font-bold">{{ $job_draft->jobOrder->title }}</p>
                         </div>
-                        <div class="col-span-1 w-full">
+                        <div class="col-span-4 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Client</p>
                             <p class="text-xl font-bold">{{ $job_draft->client->name }}</p>
                         </div>
-                        <div class="col-span-1 w-full">
+                        <div class="col-span-4 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Date Started</p>
                             <p class="text-xl font-bold">{{ \Carbon\Carbon::parse($job_draft->date_started)->format('Y-m-d') }}</p>
                         </div>
-                        <div class="col-span-1 w-full">
+                        <div class="col-span-4 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Date Target</p>
                             <p class="text-xl font-bold">{{ \Carbon\Carbon::parse($job_draft->date_target)->format('Y-m-d') }}</p>
                         </div>

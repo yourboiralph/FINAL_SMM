@@ -76,7 +76,7 @@
                 </tr>
             </thead>
             <tbody id="tableBody">
-                @foreach ($job_orders as $job_order)
+                @forelse ($job_orders as $job_order)
                     <tr class="project-row border-b">
                         <td class="px-6 py-3">{{ $job_order->title }}</td>
                         
@@ -87,7 +87,15 @@
                             </label>
                         </td>
                     </tr>
-                @endforeach
+                    @empty
+                    <tr class="h-[400px]">
+                        <td colspan="3" class="px-6 py-3">
+                            <div class="flex h-full items-center justify-center">
+                                No Data Available
+                            </div>
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
