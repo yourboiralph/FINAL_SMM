@@ -189,31 +189,30 @@
             <div class="max-w-screen-xl pt-10">
                 <div class="carousel">
                     <div class="carousel-track flex">
-                        <a href="https://link1.com" class="carousel-item">
-                            <img src="/Assets/ads1.png" alt="Image 1" draggable="false">
+                        <a class="carousel-item">
+                            <img src="{{asset('/Assets/ads1.png')}}" alt="Image 1" draggable="false">
                         </a>
-                        <a href="https://link2.com" class="carousel-item">
-                            <img src="/Assets/ads2.png" alt="Image 2" draggable="false">
+                        <a class="carousel-item">
+                            <img src="{{asset('/Assets/ads2.png')}}" alt="Image 2" draggable="false">
                         </a>
-                        <a href="https://link3.com" class="carousel-item">
-                            <img src="/Assets/ads3.png" alt="Image 3" draggable="false">
+                        <a class="carousel-item">
+                            <img src="{{asset('/Assets/ads3.png')}}" alt="Image 3" draggable="false">
                         </a>
-                        <a href="https://link4.com" class="carousel-item">
-                            <img src="/Assets/ads4.png" alt="Image 4" draggable="false">
+                        <a class="carousel-item">
+                            <img src="{{asset('/Assets/ads4.png')}}" alt="Image 4" draggable="false">
                         </a>
-                        <a href="https://link1.com" class="carousel-item">
-                            <img src="/Assets/ads1.png" alt="Image 1" draggable="false">
+                        <a class="carousel-item">
+                            <img src="{{asset('/Assets/ads1.png')}}" alt="Image 1" draggable="false">
                         </a>
-                        <a href="https://link2.com" class="carousel-item">
-                            <img src="/Assets/ads2.png" alt="Image 2" draggable="false">
+                        <a class="carousel-item">
+                            <img src="{{asset('/Assets/ads2.png')}}" alt="Image 2" draggable="false">
                         </a>
-                        <a href="https://link3.com" class="carousel-item">
-                            <img src="/Assets/ads3.png" alt="Image 3" draggable="false">
+                        <a class="carousel-item">
+                            <img src="{{asset('/Assets/ads3.png')}}" alt="Image 3" draggable="false">
                         </a>
-                        <a href="https://link4.com" class="carousel-item">
-                            <img src="/Assets/ads4.png" alt="Image 4" draggable="false">
+                        <a class="carousel-item">
+                            <img src="{{asset('/Assets/ads4.png')}}" alt="Image 4" draggable="false">
                         </a>
-                        
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Scripts -->
@@ -31,7 +31,7 @@
                 -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0">
 
                 <div class="p-6 flex items-center justify-between">
-                    <img class="w-48 sm:w-48 lg:w-64 lg:mx-auto" src="/Assets/logo.png" draggable="false" alt="Logo">
+                    <img class="w-48 sm:w-48 lg:w-64 lg:mx-auto" src="{{asset('/Assets/logo.png')}}" draggable="false" alt="Logo">
                     <i id="closeSidebar" class="text-2xl cursor-pointer fa-solid fa-xmark lg:hidden"></i>
                 </div>
                 <hr class="border border-[#EC690F] mb-10">
