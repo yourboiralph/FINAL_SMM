@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
 @section('title', 'Page Title')
-@section('header', "Job Order") 
+@section('header', "Create Job Order") 
 
 @section('content')
 
@@ -38,45 +38,37 @@
             <h1 class="text-xl font-bold mt-4">Create Draft</h1>
             <div class="grid grid-cols-4 space-y-4">
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
-                    <div class="col-span-4 grid grid-cols-4">
-                        <div class="col-span-1 w-full">
+                    <div class="col-span-4 grid grid-cols-4 space-y-4 lg:space-y-0">
+                        <div class="col-span-4 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Title</p>
                             <p class="text-xl font-bold">{{ $job_draft->jobOrder->title }}</p>
                         </div>
-                        <div class="col-span-1 w-full">
+                        <div class="col-span-4 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Client</p>
                             <p class="text-xl font-bold">{{ $job_draft->client->name }}</p>
                         </div>
-                        <div class="col-span-1 w-full">
+                        <div class="col-span-4 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Date Started</p>
                             <p class="text-xl font-bold">{{ \Carbon\Carbon::parse($job_draft->date_started)->format('Y-m-d') }}</p>
                         </div>
-                        <div class="col-span-1 w-full">
+                        <div class="col-span-4 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Date Target</p>
                             <p class="text-xl font-bold">{{ \Carbon\Carbon::parse($job_draft->date_target)->format('Y-m-d') }}</p>
                         </div>
                     </div>
-
                     <div class="col-span-4 h-fit w-full">
-                        <p class="text-sm text-gray-600">Content Writer Draft</p>
-                        
-                        <!-- Display the parent draft -->
+                        <p class="text-sm text-gray-600 max-h-96 overflow-y-auto">Instructions</p>
                         <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
-                            {!! $job_draft->parentDraft->draft !!}
-                        
+                            {!! $job_draft->jobOrder->description !!}
                         </div>
-                    
-                        @error('draft')
-                            <p class="text-red-600 text-sm">{{ $message }}</p>
-                        @enderror
+                        
                     </div>
 
-                    <div class="col-span-2 h-fit w-full">
+                    <hr class="col-span-4 border border-gray-200" />
+                    <div class="col-span-4 h-fit w-full">
                         <p class="text-sm text-gray-600">Draft</p>
-                        
                         <!-- CKEditor 5 textarea -->
                         <textarea name="draft" id="editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-[300px] max-h-[500px] overflow-y-auto"></textarea>
-                    
                         @error('draft')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -86,7 +78,6 @@
                 <button type="submit" class="col-span-1 text-center py-4 w-full bg-[#fa7011] mt-10 rounded-lg custom-shadow custom-hover-shadow text-white font-bold">
                     Submit
                 </button>
-                
             </div>
         </form>
     </div>
@@ -99,10 +90,10 @@
             .then(editor => {
                 console.log('CKEditor 5 initialized!', editor);
                 
-                // Load existing content from old input if available, otherwise use the job draft's content.
+                // Load existing draft content from old input if available, otherwise use the job draft's content
                 editor.setData(`{!! addslashes(old('draft', $job_draft->draft ?? '')) !!}`);
 
-                // Before form submission, update the textarea with the editor's data.
+                // Before form submission, update the textarea with the editor's data
                 document.querySelector("form").addEventListener("submit", function () {
                     document.querySelector("#editor").value = editor.getData();
                 });

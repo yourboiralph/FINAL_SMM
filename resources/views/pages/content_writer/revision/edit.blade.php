@@ -24,7 +24,7 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 
 <div class="container mx-auto p-6">
-    <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow">
+    <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow bg-white">
         <div>
             <a href="{{ url('/content/revisions') }}">
                 <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
@@ -38,24 +38,24 @@
             <h1 class="text-xl font-bold mt-4">Create Draft</h1>
             <div class="grid grid-cols-4 space-y-4">
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
-                    <div class="col-span-4 grid grid-cols-5">
-                        <div class="col-span-1 w-full">
+                    <div class="col-span-4 grid grid-cols-5 space-y-2 lg:space-y-0">
+                        <div class="col-span-5 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Title</p>
                             <p class="text-xl font-bold">{{ $job_draft->jobOrder->title }}</p>
                         </div>
-                        <div class="col-span-1 w-full">
+                        <div class="col-span-5 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Client</p>
                             <p class="text-xl font-bold">{{ $job_draft->client->name }}</p>
                         </div>
-                        <div class="col-span-1 w-full">
+                        <div class="col-span-5 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Date Started</p>
                             <p class="text-xl font-bold">{{ \Carbon\Carbon::parse($job_draft->date_started)->format('Y-m-d') }}</p>
                         </div>
-                        <div class="col-span-1 w-full">
+                        <div class="col-span-5 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Date Target</p>
                             <p class="text-xl font-bold">{{ \Carbon\Carbon::parse($job_draft->date_target)->format('Y-m-d') }}</p>
                         </div>
-                        <div class="col-span-1 w-full">
+                        <div class="col-span-5 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Revision By</p>
                             <p class="text-xl font-bold">{{ $job_draft->revisions->last()->declinedBy->name }}</p>
                         </div>

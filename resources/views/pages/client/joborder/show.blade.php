@@ -39,36 +39,24 @@
                 </a>
             </div>
 
-            <table class="table-auto border-collapse border-none">
-                <tbody>
-                    <tr class="align-top">
-                        <td class="px-4 py-2 font-semibold">Project Name:</td>
-                        <td class="px-4 py-2">{{ $job_draft->jobOrder->title }}</td>
-                    </tr>
-                    <tr class="align-top">
-                        <td class="px-4 py-2 font-semibold">Designation:</td>
-                        <td class="px-4 py-2">{{ $job_draft->type }}</td>
-                    </tr>
-                    <tr class="align-top">
-                        <td class="px-4 py-2 font-semibold">Google Drive Link:</td>
-                        <!-- Using break-all to ensure long URLs wrap properly -->
-                        <td class="px-4 py-2 max-h-[500px] overflow-y-auto break-all">
-                            <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
-                                
-                                {!! $job_draft->draft !!}
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="align-top">
-                        <td class="px-4 py-2 font-semibold">Date:</td>
-                        <td class="px-4 py-2">{{ $job_draft->date_target }}</td>
-                    </tr>
-                    <tr class="align-top">
-                        <td class="px-4 py-2 font-semibold">Client Name:</td>
-                        <td class="px-4 py-2">{{ $job_draft->client->name }}</td>
-                    </tr>
-                </tbody>
-            </table>
+                                <!-- Responsive Grid for Details -->
+                                <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
+                                    <!-- Project Name -->
+                                    <div class="lg:col-span-1 font-semibold">Project Name:</div>
+                                    <div class="lg:col-span-4">{{ $job_draft->jobOrder->title }}</div>
+            
+                                    <!-- Designation -->
+                                    <div class="lg:col-span-1 font-semibold">Designation:</div>
+                                    <div class="lg:col-span-4">{{ $job_draft->type }}</div>
+            
+                                    <!-- Google Drive Link -->
+                                    <div class="lg:col-span-1 font-semibold">Google Drive Link:</div>
+                                    <div class="lg:col-span-5">
+                                        <div class="max-h-[300px] border border-gray-200 p-4 rounded-lg overflow-y-auto break-all">
+                                            {!! $job_draft->draft !!}
+                                        </div>
+                                    </div>
+                                </div>
 
             <div class="mt-10">
                 <form action="{{ url('/client/update/' . $job_draft->id) }}" method="POST">
