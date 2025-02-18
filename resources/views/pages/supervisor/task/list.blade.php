@@ -62,7 +62,7 @@
                         <td class="px-6 py-3 text-right">
                             <a href="{{url('supervisor/task/edit/' . $job_draft->id)}}">
                                 <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
-                                    Edit
+                                    Create
                                 </button>
                             </a>
                             <a href="{{url('supervisor/task/edit/' . $job_draft->id)}}">
