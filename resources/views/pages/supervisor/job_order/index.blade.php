@@ -60,10 +60,15 @@
                         </td>
                     </tr>
                 @empty
-                    <tr class="">
-                        <td colspan="3" class="px-6 py-3 text-center">No Data Available</td>
+                    <tr class="h-[400px]">
+                        <td colspan="3" class="px-6 py-3">
+                            <div class="flex h-full items-center justify-center">
+                                No Data Available
+                            </div>
+                        </td>
                     </tr>
                 @endforelse
+
             </tbody>
             
         </table>

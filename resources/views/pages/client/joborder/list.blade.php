@@ -37,7 +37,7 @@
                 </tr>
             </thead>
             <tbody id="tableBody">
-                @foreach ($job_drafts as $job_draft)
+                @forelse ($job_drafts as $job_draft)
                     <tr class="project-row border-b text-sm sm:text-base">
                         <td class="px-4 sm:px-6 py-3">{{ $job_draft->jobOrder->title }}</td>
                         @if ($job_draft->type == "content_writer")
@@ -55,7 +55,15 @@
                             </a>
                         </td>
                     </tr>
-                @endforeach
+                    @empty
+                    <tr class="h-[400px]">
+                        <td colspan="3" class="px-6 py-3">
+                            <div class="flex h-full items-center justify-center">
+                                No Data Available
+                            </div>
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

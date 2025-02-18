@@ -102,7 +102,7 @@
                     </tr>
                 </thead>
                 <tbody id="operatorTableBody">
-                    @foreach ($operators as $operator)
+                    @forelse ($operators as $operator)
                         <tr class="border-b">
                             <td class="px-6 py-3">{{ $operator->name }}</td>
                             <td class="px-6 py-3">{{ ucfirst($operator->role->position) }}</td>
@@ -112,7 +112,15 @@
                                 </button>
                             </td>
                         </tr>
-                    @endforeach
+                        @empty
+                        <tr class="h-[400px]">
+                            <td colspan="3" class="px-6 py-3">
+                                <div class="flex h-full items-center justify-center">
+                                    No Data Available
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
