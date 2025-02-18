@@ -63,9 +63,10 @@ class JobOrderController extends Controller
 
     public function edit($id)
     {
-        $content_writers = User::where('role_id', 3)->get();
-        $graphic_designers = User::where('role_id', 4)->get();
-        $clients = User::where('role_id', 1)->get();
+        $clients = User::with('role')->where('role_id', 1)->get();
+        $graphic_designers = User::with('role')->whereNotIn('role_id', [1, 3, 5])->get();
+        $content_writers = User::with('role')->whereNotIn('role_id', [1, 4, 5])->get();
+
         $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
 
         return view('pages.admin.joborder.edit', compact('job_draft', 'content_writers', 'graphic_designers', 'clients'));
