@@ -73,6 +73,20 @@ class ProfileController extends Controller
             $user->image = 'uploads/' . $file_name; // Update image path
         }
 
+        // Handle File Upload
+        if ($request->hasFile('signature')) {
+            $file = $request->file('signature');
+            $user->signature = 'signatures/' . time() . '.' . $file->extension();
+            $file->move(public_path('signatures'), $user->signature);
+        }
+
+        // Handle Signature Pad Input
+        elseif ($request->signature_pad) {
+            $image = str_replace('data:image/png;base64,', '', $request->signature_pad);
+            $user->signature = 'signatures/signature_' . time() . '.png';
+            file_put_contents(public_path($user->signature), base64_decode($image));
+        }
+
         $user->save();
 
         return Redirect::route('profile.edit')->with('Status', 'Profile Updated Successfully!');

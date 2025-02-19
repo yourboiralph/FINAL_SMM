@@ -52,6 +52,10 @@ class OperationApprovalController extends Controller
             $image = str_replace('data:image/png;base64,', '', $request->signature_pad);
             $imagePath = 'signatures/signature_' . time() . '.png';
             file_put_contents(public_path($imagePath), base64_decode($image));
+        } elseif ($request->new_signature_pad) {
+            $image = str_replace('data:image/png;base64,', '', $request->new_signature_pad);
+            $imagePath = 'signatures/signature_' . time() . '.png';
+            file_put_contents(public_path($imagePath), base64_decode($image));
         }
 
         // Update Database with Signature Path
