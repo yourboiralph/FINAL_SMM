@@ -108,6 +108,18 @@
                         <div class="text-slate-500">
                             <h1 class="text-sm">Password</h1>
                         </div>
+                        <div class="gap-4 items-center text-slate-500 font-bold">
+                            <div class="flex space-x-2 items-center">
+                              <h1>Current Password</h1>
+                            </div>
+                            <input type="password" name="current_password"
+                              class="pl-4 col-span-2 w-full border rounded-md py-1 border-[#e1e1e1]">
+                            @if(session('errors'))
+                              @if(session('errors')->has('current_password'))
+                                <span class="text-red-700">{{ session('errors')->first('current_password') }}</span>
+                              @endif
+                            @endif
+                          </div>
                         <div class="gap-4 items-center">
                             <h1 class="text-slate-500 font-bold">New Password</h1>
                             <input type="password" name="password" class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]">

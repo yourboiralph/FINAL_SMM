@@ -50,7 +50,7 @@ class ProfileController extends Controller
             if ($request->filled('password')) {
                 $user->password = Hash::make($request->input('password'));
             } else {
-                return Redirect::route('client.profile.edit')
+                return Redirect::route('profile.edit')
                     ->withErrors(['password' => 'New password and confirmation are required if you provide the current password.']);
             }
         }
