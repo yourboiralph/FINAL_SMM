@@ -35,6 +35,7 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        dd($request->all());
         $user = $request->user();
 
         // Update validated attributes except the password and image.

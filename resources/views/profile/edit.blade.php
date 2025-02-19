@@ -39,32 +39,41 @@
     
                             <div class="flex items-center justify-center gap-2 text-white mt-4">
                                 <div id="changeProfileBtn" class="px-4 py-1 bg-[#fa7011] rounded-md cursor-pointer text-nowrap text-sm">Change Profile</div>
-                                {{-- <div id="removeProfileBtn" class="px-4 py-1 bg-red-500 rounded-md cursor-pointer text-nowrap text-sm">Remove Profile</div> --}}
                             </div>
                             <input type="file" name="image" id="profileImageInput" accept="image/*" class="hidden">
                         </div>
-    
-                        <div class="px-10 col-span-3 w-full lg:col-span-3 bg-white shadow-md rounded-md pt-10 py-10">
-                            <div class="w-full h-full flex justify-center items-center border-2 border-gray-300">
-                                {{-- <img class="rounded-full w-32 h-32 object-cover"
-                                    src="{{ file_exists(public_path($user->image)) && $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}"
-                                    alt="User Image"> --}}
-                                @if ($user->signature)
-                                    <img class="object-fill w-full"
-                                    src="{{asset($user->signature)}}"
-                                    alt="User Image">
 
+                        {{-- Signature Implementation --}}
+                        <div class="px-10 col-span-3 w-full lg:col-span-3 bg-white shadow-md rounded-md pt-10 py-10">
+                            <div class="text-center">
+                                <h1 class="text-[#fa7011] font-bold">Signature</h1>
+                            </div>
+                            <div class="w-full h-full flex justify-center items-center border-2 border-gray-300">
+                                @if ($user->signature)
+                                    <img class="object-fill w-full" src="{{ asset($user->signature) }}" alt="User Signature">
                                 @else
                                     <p>No Signature Saved</p>
                                 @endif
                             </div>
-                            <div class="text-center w-full flex items-center justify-center">
-                                <h1 class="text-[#fa7011] font-bold">Signature</h1>
+                            <div class="flex items-center justify-center gap-2 text-white mt-4">
+                                <button type="button" id="usePad" class="px-4 py-1 bg-[#fa7011] rounded-md text-sm">Draw Signature</button>
+                                <button type="button" id="useUpload" class="px-4 py-1 bg-[#fa7011] rounded-md text-sm">Upload Signature</button>
                             </div>
-                            <div class="flex items-center justify-center gap-2 text-white">
-                                <div id="changeSignatureBtn" class="px-4 py-1 bg-[#fa7011] rounded-md cursor-pointer text-nowrap text-sm">Change Signature</div>
+
+                            <div id="padSection" class="hidden mt-4">
+                                <canvas id="signature-pad" class="w-[300px] lg:w-[400px]" style="height:200px;"></canvas>
+                                <div class="mt-2 flex">
+                                    <button type="button" id="clearPad" class="bg-gray-500 text-white px-2 py-1 rounded mr-2">Clear</button>
+                                </div>
+                                <input type="hidden" name="signature_pad" id="signaturePadData">
                             </div>
-                            <input type="file" name="image" id="signatureImageInput" accept="image/*" class="hidden">
+
+                            <div id="uploadSection" class="hidden mt-4">
+                                <input type="file" name="signature" id="signatureInput" accept="image/*" class="border p-2 w-full rounded-md">
+                                <div class="mt-4 w-52 h-32 border border-gray-300 rounded-md overflow-hidden flex items-center justify-center bg-gray-100">
+                                    <img id="imagePreview" src="#" alt="Selected Image" class="hidden w-full h-full object-cover">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -141,100 +150,54 @@
     </div>
 </div>
 
-    {{-- Include the signature modal (hidden by default) --}}
-    <x-signature id="signatureModal" class="hidden" />
-
+<script src="https://cdn.jsdelivr.net/npm/signature_pad"></script>
 <script>
-    // Function to display toast notifications
-    function showToast(message, type = 'success') {
-        let toastContainer = document.getElementById('toast-container');
-        if (!toastContainer) {
-            toastContainer = document.createElement('div');
-            toastContainer.id = 'toast-container';
-            toastContainer.className = 'fixed top-20 right-4 z-50 space-y-2';
-            document.body.appendChild(toastContainer);
-        }
-        let toast = document.createElement('div');
-        toast.className = 'p-4 rounded shadow-lg text-white ' + (type === 'error' ? 'bg-red-500' : 'bg-green-500');
-        toast.innerText = message;
-        toastContainer.appendChild(toast);
-        // Auto-remove toast after 3 seconds
-        setTimeout(() => {
-            toast.style.transition = 'opacity 0.5s';
-            toast.style.opacity = '0';
-            setTimeout(() => {
-                toast.remove();
-            }, 500);
-        }, 3000);
-    }
+    const canvas = document.getElementById("signature-pad");
+    const signaturePad = new SignaturePad(canvas);
 
-    // Auto-hide the session toast (if present) after 3 seconds
-    setTimeout(function() {
-        var toast = document.getElementById('toast');
-        if (toast) {
-            toast.style.transition = "opacity 0.5s";
-            toast.style.opacity = "0";
-            setTimeout(() => toast.style.display = "none", 500);
-        }
-    }, 3000);
-
-    // Trigger file input when "Change Profile" is clicked
-    document.getElementById("changeProfileBtn").addEventListener("click", function() {
-        document.getElementById("profileImageInput").click();
+    document.getElementById("usePad").addEventListener("click", () => {
+        document.getElementById("padSection").classList.remove("hidden");
+        document.getElementById("uploadSection").classList.add("hidden");
     });
 
-    // Trigger file input when "Change Signature" is clicked
-    document.getElementById("changeSignatureBtn").addEventListener("click", function () {
-        document.getElementById("signatureModal").classList.remove("hidden");
+    document.getElementById("useUpload").addEventListener("click", () => {
+        document.getElementById("uploadSection").classList.remove("hidden");
+        document.getElementById("padSection").classList.add("hidden");
     });
-    
 
-    // Preview the selected signature image and validate its file size
-    document.getElementById("signatureImageInput").addEventListener("change", function(event) {
-        let file = event.target.files[0];
-        const maxFileSize = 2097152; // 2MB in bytes
+    document.getElementById("clearPad").addEventListener("click", () => {
+        signaturePad.clear();
+    });
+
+    document.getElementById("signatureInput").addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        const preview = document.getElementById("imagePreview");
         if (file) {
-            if (file.size > maxFileSize) {
-                showToast("File size is too big. Maximum allowed is 2MB.", "error");
-                // Clear the file input
-                document.getElementById("signatureImageInput").value = "";
-                return;
-            }
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                const signatureImage = document.querySelector('.w-full.object-fill');
-                if (signatureImage) {
-                    signatureImage.src = e.target.result;
-                }
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                preview.src = e.target.result;
+                preview.classList.remove("hidden");
             };
             reader.readAsDataURL(file);
         }
     });
 
-
-    // Preview the selected image and validate its file size
-    document.getElementById("profileImageInput").addEventListener("change", function(event) {
-        let file = event.target.files[0];
-        const maxFileSize = 2097152; // 2MB in bytes
-        if (file) {
-            if (file.size > maxFileSize) {
-                showToast("File size is too big. Maximum allowed is 2MB.", "error");
-                // Clear the file input
-                document.getElementById("profileImageInput").value = "";
-                return;
+    document.querySelector("form").addEventListener("submit", () => {
+        if (!document.getElementById("uploadSection").classList.contains("hidden")) {
+            // Upload signature
+            if (!document.getElementById("signatureInput").value) {
+                alert("Please upload an image before submitting.");
+                event.preventDefault();
             }
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById("profileImage").src = e.target.result;
-            };
-            reader.readAsDataURL(file);
+        } else if (!document.getElementById("padSection").classList.contains("hidden")) {
+            // Drawn signature
+            if (signaturePad.isEmpty()) {
+                alert("Please sign before submitting.");
+                event.preventDefault();
+            } else {
+                document.getElementById("signaturePadData").value = signaturePad.toDataURL("image/png");
+            }
         }
-    });
-
-    // Remove profile image and reset to default when "Remove Profile" is clicked
-    document.getElementById("removeProfileBtn").addEventListener("click", function() {
-        document.getElementById("profileImageInput").value = "";
-        document.getElementById("profileImage").src = "{{ asset('/Assets/user-profile-profilepage.png') }}";
     });
 </script>
 @endsection
