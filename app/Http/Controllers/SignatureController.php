@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JobDraft;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -11,16 +13,20 @@ class SignatureController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'signature' => 'required',
+            'new_signature_pad' => 'required_without:signature_admin|string',
         ]);
 
-        $image = $request->input('signature');
-        $image = str_replace('data:image/png;base64,', '', $image);
-        $image = str_replace(' ', '+', $image);
-        $imageName = 'signature_' . time() . '.png';
+        $user = User::findOrFail(auth()->user()->id);
+        if ($request->new_signature_pad) {
+            $image = str_replace('data:image/png;base64,', '', $request->signature_pad);
+            $imagePath = 'signatures/signature_' . time() . '.png';
+            file_put_contents(public_path($imagePath), base64_decode($image));
+        }
 
-        Storage::disk('public')->put("signatures/$imageName", base64_decode($image));
+        $user->update([
+            'signature' => $imagePath,
+        ]);
 
-        return response()->json(['message' => 'Signature saved successfully!', 'path' => asset("storage/signatures/$imageName")]);
+        return redirect()->route('supervisor.approve')->with('Status', 'Job Order Approved Successfully');
     }
 }
