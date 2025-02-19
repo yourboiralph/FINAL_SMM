@@ -32,7 +32,6 @@ class SupervisorApprovalController extends Controller
     public function update(Request $request, $id)
     {
 
-        dd($request->all());
         $validated = $request->validate([
             'signature_supervisor'  => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'signature_pad'    => 'nullable|string',
