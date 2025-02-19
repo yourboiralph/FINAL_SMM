@@ -60,8 +60,8 @@
 </head>
 <body>
     <div class="header">
-        {{-- <img src="{{ public_path('/Assets/doc_header.png') }}" alt="Header"> --}}
-        <img src="{{ asset('/Assets/doc_header.png') }}" alt="Header">
+        <img src="{{ public_path('/Assets/doc_header.png') }}" alt="Header">
+        {{-- <img src="{{ asset('/Assets/doc_header.png') }}" alt="Header"> --}}
         <h2>Operation Job Order Form</h2>
     </div>
 
@@ -117,21 +117,21 @@
             <tr>
                 <td class="signature">
                     <strong>Assigned Personnel Signature:</strong><br>
-                    {{-- <img src="{{ public_path($job_draft->signature_admin) }}" alt="Admin Signature"> --}}
-                    <img src="{{ asset($job_draft->signature_admin) }}" alt="Admin Signature">
+                    <img src="{{ public_path($job_draft->signature_admin) }}" alt="Admin Signature">
+                    {{-- <img src="{{ asset($job_draft->signature_admin) }}" alt="Admin Signature"> --}}
                 </td>
                 <td class="signature">
                     <strong>Supervisor Signature:</strong><br>
-                    {{-- <img src="{{ public_path($job_draft->signature_supervisor) }}" alt="Supervisor Signature"> --}}
-                    <img src="{{ asset($job_draft->signature_supervisor) }}" alt="Supervisor Signature">
+                    <img src="{{ public_path($job_draft->signature_supervisor) }}" alt="Supervisor Signature">
+                    {{-- <img src="{{ asset($job_draft->signature_supervisor) }}" alt="Supervisor Signature"> --}}
                 </td>
             </tr>
         </table>
     </div>
 
     <div class="footer">
-        {{-- <img src="{{ public_path('/Assets/doc_footer.png') }}" alt="Footer"> --}}
-        <img src="{{ asset('/Assets/doc_footer.png') }}" alt="Footer">
+        <img src="{{ public_path('/Assets/doc_footer.png') }}" alt="Footer">
+        {{-- <img src="{{ asset('/Assets/doc_footer.png') }}" alt="Footer"> --}}
     </div>
 </body>
 </html>
