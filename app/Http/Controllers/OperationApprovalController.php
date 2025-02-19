@@ -32,10 +32,32 @@ class OperationApprovalController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'signature_admin' => 'required_without:signature_pad|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'signature_pad'   => 'required_without:signature_admin|string',
+            'signature_admin'  => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'signature_pad'    => 'nullable|string',
+            'new_signature_pad' => 'nullable|string',
         ]);
 
+        $signatureCount = 0;
+
+        if ($request->hasFile('signature_admin')) {
+            $signatureCount++;
+        }
+        if (!empty($request->signature_pad)) {
+            $signatureCount++;
+        }
+        if (!empty($request->new_signature_pad)) {
+            $signatureCount++;
+        }
+
+        // If no signature was provided, return an error.
+        if ($signatureCount === 0) {
+            return redirect()->back()->withErrors(['signature' => 'A signature is required.']);
+        }
+
+        // If more than one signature was provided, return an error.
+        if ($signatureCount > 1) {
+            return redirect()->back()->withErrors(['signature' => 'Only one signature is allowed.']);
+        }
 
         $job_draft = JobDraft::findOrFail($id);
         $imagePath = $job_draft->signature_admin; // Keep existing signature if no new one is uploaded
