@@ -41,23 +41,23 @@
                     <div class="col-span-4 grid grid-cols-5 space-y-4 lg:space-y-0">
                         <div class="col-span-5 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Title</p>
-                            <p class="text-xl font-bold">{{ $job_draft->jobOrder->title }}</p>
+                            <p class="text-xl">{{ $job_draft->jobOrder->title }}</p>
                         </div>
                         <div class="col-span-5 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Client</p>
-                            <p class="text-xl font-bold">{{ $job_draft->client->name }}</p>
+                            <p class="text-xl">{{ $job_draft->client->name }}</p>
                         </div>
                         <div class="col-span-5 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Date Started</p>
-                            <p class="text-xl font-bold">{{ \Carbon\Carbon::parse($job_draft->date_started)->format('Y-m-d') }}</p>
+                            <p class="text-xl">{{ \Carbon\Carbon::parse($job_draft->date_started)->format('Y-m-d') }}</p>
                         </div>
                         <div class="col-span-5 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Date Target</p>
-                            <p class="text-xl font-bold">{{ \Carbon\Carbon::parse($job_draft->date_target)->format('Y-m-d') }}</p>
+                            <p class="text-xl">{{ \Carbon\Carbon::parse($job_draft->date_target)->format('Y-m-d') }}</p>
                         </div>
                         <div class="col-span-5 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Revision By</p>
-                            <p class="text-xl font-bold">{{ $job_draft->revisions->last()->declinedBy->name }}</p>
+                            <p class="text-xl">{{ $job_draft->revisions->last()->declinedBy->name }}</p>
                         </div>
                         <div class="w-full col-span-5 grid grid-cols-4 justify-between">
                             <div class="col-span-5 w-full mt-4">

@@ -63,7 +63,7 @@
                                     Create
                                 </button>
                             </a>
-                            <a href="{{url('supervisor/task/edit/' . $job_draft->id)}}">
+                            <a href="{{url('supervisor/task/show/' . $job_draft->id)}}">
                                 <button class="px-2 py-1 lg:px-4 lg:py-2 text-sm text-white bg-gray-700 rounded hover:bg-gray-800">
                                     Show
                                 </button>
