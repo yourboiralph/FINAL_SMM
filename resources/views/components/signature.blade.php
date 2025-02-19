@@ -31,47 +31,56 @@
 
     <!-- Modal Script -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const modal = document.getElementById('signatureModal');
-        const canvas = document.getElementById('new-signature-pad');
-        const saveButton = document.getElementById('saveNewSignature');
-        const closeButton = document.getElementById('closeSignatureModal');
-        const hiddenInput = document.getElementById('savedSignaturePadData');
-        
-        // Initialize the signature pad for the modal canvas
-        const signaturePad = new SignaturePad(canvas);
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('signatureModal');
+    const canvas = document.getElementById('new-signature-pad');
+    const saveButton = document.getElementById('saveNewSignature');
+    const closeButton = document.getElementById('closeSignatureModal');
+    const hiddenInput = document.getElementById('savedSignaturePadData');
+    
+    // Initialize the signature pad for the modal canvas
+    const signaturePad = new SignaturePad(canvas);
 
-        // Resize canvas function
-        function resizeCanvas() {
-          const ratio = Math.max(window.devicePixelRatio || 1, 1);
-          canvas.width = canvas.offsetWidth * ratio;
-          canvas.height = canvas.offsetHeight * ratio;
-          canvas.getContext("2d").scale(ratio, ratio);
-          signaturePad.clear();
+    // Resize canvas function
+    function resizeCanvas() {
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        canvas.width = canvas.offsetWidth * ratio;
+        canvas.height = 200 * ratio; // Fixed height
+        canvas.getContext("2d").scale(ratio, ratio);
+        signaturePad.clear();
+    }
+
+    // Show modal and resize canvas
+    document.getElementById("useSavedSignature").addEventListener("click", function () {
+        const userSignature = "{{ Auth::user()->signature }}";
+
+        if (!userSignature) {
+            // Show modal and resize canvas when it's displayed
+            modal.classList.remove('hidden');
+            setTimeout(resizeCanvas, 100); // Delay to allow modal rendering
         }
-
-        // Call resize on load and on window resize
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        // Save button: if pad not empty, set hidden input (the form will submit)
-        saveButton.addEventListener('click', function(e) {
-            if(signaturePad.isEmpty()){
-                alert("Please provide a signature first.");
-                e.preventDefault(); // Prevent submission if empty
-            } else {
-                // Set the hidden input value to the signature data URL
-                hiddenInput.value = signaturePad.toDataURL("image/png");
-                // Optionally, close the modal after saving
-                modal.classList.add('hidden');
-                // The form will now submit with the signature data
-            }
-        });
-
-        // Close button simply hides the modal
-        closeButton.addEventListener('click', function(){
-            modal.classList.add('hidden');
-        });
     });
+
+    // Save button: if pad not empty, set hidden input (the form will submit)
+    saveButton.addEventListener('click', function(e) {
+        if(signaturePad.isEmpty()){
+            alert("Please provide a signature first.");
+            e.preventDefault(); // Prevent submission if empty
+        } else {
+            // Set the hidden input value to the signature data URL
+            hiddenInput.value = signaturePad.toDataURL("image/png");
+            modal.classList.add('hidden'); // Optionally, close the modal after saving
+        }
+    });
+
+    // Close button simply hides the modal
+    closeButton.addEventListener('click', function(){
+        modal.classList.add('hidden');
+    });
+
+    // Resize canvas on window resize
+    window.addEventListener('resize', resizeCanvas);
+});
+
     </script>
 @endif
