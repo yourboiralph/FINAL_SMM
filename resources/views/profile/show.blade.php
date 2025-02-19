@@ -23,9 +23,7 @@
             <div class="w-fit px-4 py-1 bg-[#f68e12] rounded-md">Go Back</div>
         </div>
         <div class="grid mt-10 grid-cols-3 h-80 gap-6 text-black">
-
-
-            <div class="space-y-10">
+            <div class="space-y-10 col-span-3 lg:col-span-1">
                 <div class="px-10 col-span-3 lg:col-span-1 bg-white shadow-md rounded-md pt-10 py-10">
                     <div class="w-full flex justify-center items-center">
                         {{-- <img class="rounded-full w-32 h-32 object-cover"
@@ -52,9 +50,13 @@
                         {{-- <img class="rounded-full w-32 h-32 object-cover"
                             src="{{ file_exists(public_path($user->image)) && $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}"
                             alt="User Image"> --}}
-                        <img class="object-fill w-full"
-                            src="{{asset($user->signature)}}"
-                            alt="User Image">
+                            @if ($user->signature)
+                                <img class="object-fill w-full"
+                                src="{{asset($user->signature)}}"
+                                alt="User Image">
+                            @else
+                                <p>No Signature Added.</p>
+                            @endif
                     </div>
                     <div class="text-center w-full flex items-center justify-center">
                         <h1 class="text-[#fa7011] font-bold">Signature</h1>

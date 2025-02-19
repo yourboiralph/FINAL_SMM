@@ -32,15 +32,15 @@ class SupervisorApprovalController extends Controller
     public function update(Request $request, $id)
     {
 
-        
+        dd($request->all());
         $validated = $request->validate([
             'signature_supervisor'  => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'signature_pad'    => 'nullable|string',
             'new_signature_pad' => 'nullable|string',
         ]);
-    
+
         $signatureCount = 0;
-    
+
         if ($request->hasFile('signature_supervisor')) {
             $signatureCount++;
         }
@@ -50,21 +50,21 @@ class SupervisorApprovalController extends Controller
         if (!empty($request->new_signature_pad)) {
             $signatureCount++;
         }
-    
+
         // If no signature was provided, return an error.
         if ($signatureCount === 0) {
             return redirect()->back()->withErrors(['signature' => 'A signature is required.'])->withInput();
         }
-    
+
         // If more than one signature was provided, return an error.
         if ($signatureCount > 1) {
             return redirect()->back()->withErrors(['signature' => 'Only one signature is allowed.'])->withInput();
         }
-    
+
         // Process the valid signature
         $job_draft = JobDraft::findOrFail($id);
         $imagePath = $job_draft->signature_supervisor; // Keep existing signature if no new one is uploaded
-    
+
         if ($request->hasFile('signature_supervisor')) {
             $file = $request->file('signature_supervisor');
             $imagePath = 'signatures/signature_' . time() . '.' . $file->extension();
@@ -74,19 +74,19 @@ class SupervisorApprovalController extends Controller
             $imagePath = 'signatures/signature_' . time() . '.png';
             file_put_contents(public_path($imagePath), base64_decode($image));
         } elseif ($request->new_signature_pad) {
-            
+
             $imagePath = auth()->user()->signature;
         }
-    
+
         $job_draft->update([
             'signature_supervisor' => $imagePath,
             'supervisor_signed' => auth()->user()->id,
             'status' => 'Submitted to Top Manager',
         ]);
-    
+
         return redirect()->route('supervisor.approve')->with('Status', 'Job Order Approved Successfully');
     }
-    
+
     public function declineForm($id)
     {
         $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);

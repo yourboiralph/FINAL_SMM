@@ -20,23 +20,23 @@
                 <div class="w-fit px-4 py-1 bg-[#f68e12] rounded-md">Go Back</div>
             </div>
 
-            <form action="{{ url('profile/update/') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('profile/update/') }}" method="POST" enctype="multipart/form-data" id="userForm">
                 @csrf
                 @method('PATCH')
 
                 <div class="grid grid-cols-3 h-auto gap-6 text-black">
-                    <div class="space-y-10">
+                    <div class="space-y-10 col-span-3 lg:col-span-1">
                         <div class="col-span-3 px-4 lg:col-span-1 h-fit pb-10 bg-white shadow-md rounded-md pt-10 border border-[#e1e1e1]">
                             <div class="w-full flex justify-center items-center">
-                                <img id="profileImage" class="rounded-full w-32 h-32 object-cover" 
-                                    src="{{ $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}" 
+                                <img id="profileImage" class="rounded-full w-32 h-32 object-cover"
+                                    src="{{ $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}"
                                     alt="Profile Picture">
                             </div>
                             <div class="text-center">
                                 <h1>{{ $user->name }}</h1>
                                 <h1>{{ $user->address }}</h1>
                             </div>
-    
+
                             <div class="flex items-center justify-center gap-2 text-white mt-4">
                                 <div id="changeProfileBtn" class="px-4 py-1 bg-[#fa7011] rounded-md cursor-pointer text-nowrap text-sm">Change Profile</div>
                             </div>
@@ -52,7 +52,7 @@
                                 @if ($user->signature)
                                     <img class="object-fill w-full" src="{{ asset($user->signature) }}" alt="User Signature">
                                 @else
-                                    <p>No Signature Saved</p>
+                                    <p>No Signature Added</p>
                                 @endif
                             </div>
                             <div class="flex items-center justify-center gap-2 text-white mt-4">
@@ -61,7 +61,7 @@
                             </div>
 
                             <div id="padSection" class="hidden mt-4">
-                                <canvas id="signature-pad" class="w-[300px] lg:w-[400px]" style="height:200px;"></canvas>
+                                <canvas id="signature-pad" class="w-full col-span-1 border-2 border-red-400" style="height:200px;"></canvas>
                                 <div class="mt-2 flex">
                                     <button type="button" id="clearPad" class="bg-gray-500 text-white px-2 py-1 rounded mr-2">Clear</button>
                                 </div>
@@ -85,28 +85,28 @@
                         <div class="space-y-2">
                             <div class="gap-4 items-center">
                                 <h1 class="text-slate-500 font-bold">Name</h1>
-                                <input class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]" 
+                                <input class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]"
                                     value="{{ old('name', $user->name) }}" name="name" required>
                                 @error('name') <p class="text-sm text-red-700">{{ $message }}</p> @enderror
                             </div>
 
                             <div class="gap-4 items-center">
                                 <h1 class="text-slate-500 font-bold">Email</h1>
-                                <input class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]" 
+                                <input class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]"
                                     value="{{ old('email', $user->email) }}" name="email" required>
                                 @error('email') <p class="text-sm text-red-700">{{ $message }}</p> @enderror
                             </div>
 
                             <div class="gap-4 items-center">
                                 <h1 class="text-slate-500 font-bold">Phone</h1>
-                                <input class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]" 
+                                <input class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]"
                                     value="{{ old('phone', $user->phone) }}" name="phone" required>
                                 @error('phone') <p class="text-sm text-red-700">{{ $message }}</p> @enderror
                             </div>
 
                             <div class="gap-4 items-center pb-4">
                                 <h1 class="text-slate-500 font-bold">Address</h1>
-                                <input class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]" 
+                                <input class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]"
                                     value="{{ old('address', $user->address) }}" name="address" required>
                                 @error('address') <p class="text-sm text-red-700">{{ $message }}</p> @enderror
                             </div>
@@ -139,7 +139,7 @@
                             <input type="password" name="password_confirmation" class="pl-4 w-full border rounded-md py-1 border-[#e1e1e1]">
                             @error('password_confirmation') <p class="text-sm text-red-700">{{ $message }}</p> @enderror
                         </div>
-                        
+
                         <div class="pt-4">
                             <button type="submit" class="px-4 py-1 bg-[#f68e12] w-fit cursor-pointer text-white">Update</button>
                         </div>
@@ -152,23 +152,44 @@
 
 <script src="https://cdn.jsdelivr.net/npm/signature_pad"></script>
 <script>
+document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById("signature-pad");
     const signaturePad = new SignaturePad(canvas);
 
+    // ✅ Set Canvas Width and Height Correctly
+    function resizeCanvas() {
+        const ratio = Math.max(window.devicePixelRatio || 1, 1); // Handle high DPI screens
+        canvas.width = canvas.offsetWidth * ratio;  // Scale width
+        canvas.height = canvas.offsetHeight * ratio; // Scale height
+        canvas.getContext("2d").scale(ratio, ratio); // Scale context
+        signaturePad.clear(); // Clear canvas on resize
+    }
+
+    // Call resizeCanvas() once page loads
+    resizeCanvas();
+
+    // Re-adjust on window resize
+    window.addEventListener("resize", resizeCanvas);
+
+    // Show signature pad section
     document.getElementById("usePad").addEventListener("click", () => {
         document.getElementById("padSection").classList.remove("hidden");
         document.getElementById("uploadSection").classList.add("hidden");
+        resizeCanvas(); // Ensure correct size when toggled
     });
 
+    // Show upload section
     document.getElementById("useUpload").addEventListener("click", () => {
         document.getElementById("uploadSection").classList.remove("hidden");
         document.getElementById("padSection").classList.add("hidden");
     });
 
+    // Clear signature pad
     document.getElementById("clearPad").addEventListener("click", () => {
         signaturePad.clear();
     });
 
+    // Preview uploaded image
     document.getElementById("signatureInput").addEventListener("change", (event) => {
         const file = event.target.files[0];
         const preview = document.getElementById("imagePreview");
@@ -182,22 +203,32 @@
         }
     });
 
-    document.querySelector("form").addEventListener("submit", () => {
-        if (!document.getElementById("uploadSection").classList.contains("hidden")) {
-            // Upload signature
+    // Form submission with validation
+    document.getElementById("userForm").addEventListener("submit", (event) => {
+        event.preventDefault(); // Prevent default form submission
+
+        const uploadSection = document.getElementById("uploadSection");
+        const padSection = document.getElementById("padSection");
+
+        if (!uploadSection.classList.contains("hidden")) {
+            // Validate upload section
             if (!document.getElementById("signatureInput").value) {
                 alert("Please upload an image before submitting.");
-                event.preventDefault();
+                return;
             }
-        } else if (!document.getElementById("padSection").classList.contains("hidden")) {
-            // Drawn signature
+        } else if (!padSection.classList.contains("hidden")) {
+            // Validate signature pad
             if (signaturePad.isEmpty()) {
                 alert("Please sign before submitting.");
-                event.preventDefault();
+                return;
             } else {
                 document.getElementById("signaturePadData").value = signaturePad.toDataURL("image/png");
             }
         }
+
+        event.target.submit(); // Submit form after validation
     });
+});
+
 </script>
 @endsection

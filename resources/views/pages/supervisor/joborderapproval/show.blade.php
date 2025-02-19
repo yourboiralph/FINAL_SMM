@@ -183,120 +183,114 @@
     {{-- JS for Live Preview, Signature Pad, and Modal Switching --}}
     <script>
         // Main Signature Pad
-        var canvas = document.getElementById("signature-pad");
-        var signaturePad = new SignaturePad(canvas);
+var canvas = document.getElementById("signature-pad");
+var signaturePad = new SignaturePad(canvas);
 
-        function resizeCanvas() {
-            var ratio = Math.max(window.devicePixelRatio || 1, 1);
-            canvas.width = canvas.offsetWidth * ratio;
-            canvas.height = canvas.offsetHeight * ratio;
-            canvas.getContext("2d").scale(ratio, ratio);
-            signaturePad.clear(); // Clear canvas after resizing
+// Resize canvas for better drawing experience
+function resizeCanvas() {
+    var ratio = Math.max(window.devicePixelRatio || 1, 1);
+    canvas.width = canvas.offsetWidth * ratio;
+    canvas.height = canvas.offsetHeight * ratio;
+    canvas.getContext("2d").scale(ratio, ratio);
+    signaturePad.clear(); // Clear canvas after resizing
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas(); // Call on page load
+
+// Signature Method Buttons
+document.getElementById("useUpload").addEventListener("click", function () {
+    toggleSection("upload");
+});
+document.getElementById("usePad").addEventListener("click", function () {
+    toggleSection("pad");
+});
+document.getElementById("useSavedSignature").addEventListener("click", function () {
+    const userSignature = "{{ Auth::user()->signature }}";
+    if (!userSignature) {
+        document.getElementById("signatureModal").classList.remove("hidden");
+    } else {
+        toggleSection("saved");
+    }
+});
+
+function toggleSection(method) {
+    const sections = ["uploadSection", "padSection", "savedPadSection"];
+    sections.forEach(section => document.getElementById(section).classList.add("hidden"));
+
+    if (method === "upload") {
+        document.getElementById("uploadSection").classList.remove("hidden");
+    } else if (method === "pad") {
+        document.getElementById("padSection").classList.remove("hidden");
+        setTimeout(() => resizeCanvas(), 100);
+    } else if (method === "saved") {
+        document.getElementById("savedPadSection").classList.remove("hidden");
+    }
+
+    // Highlight the selected button
+    ["useUpload", "usePad", "useSavedSignature"].forEach(btn => {
+        document.getElementById(btn).classList.remove("bg-gray-200");
+    });
+    document.getElementById("use" + method.charAt(0).toUpperCase() + method.slice(1)).classList.add("bg-gray-200");
+
+    // Reset hidden inputs
+    document.getElementById("signaturePadData").value = "";
+    document.getElementById("savedSignatureData").value = method === "saved" ? "{{ asset(Auth::user()->signature) }}" : "";
+}
+
+// Signature Pad Clear
+document.getElementById("clearPad").addEventListener("click", function () {
+    signaturePad.clear();
+});
+
+// Live Preview for File Upload
+document.getElementById('signatureInput').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('imagePreview');
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+            preview.classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = '#';
+        preview.classList.add('hidden');
+    }
+});
+
+// Enable Submit Button on Agreement
+document.getElementById('agree').addEventListener('change', function () {
+    document.getElementById('submitBtn').disabled = !this.checked;
+});
+
+// ✅ Form Submission - Correctly capture signaturePad value
+document.getElementById("approvalForm").addEventListener("submit", function (event) {
+    // Capture Signature Pad data before submitting
+    if (!document.getElementById("uploadSection").classList.contains("hidden")) {
+        if (!document.getElementById("signatureInput").value) {
+            alert("Please upload an image before submitting.");
+            event.preventDefault();
+            return;
         }
-
-        window.addEventListener("resize", resizeCanvas);
-
-        // Signature Method Buttons
-        document.getElementById("useUpload").addEventListener("click", function () {
-            toggleSection("upload");
-        });
-        document.getElementById("usePad").addEventListener("click", function () {
-            toggleSection("pad");
-        });
-        // Signature Method Buttons
-        document.getElementById("useSavedSignature").addEventListener("click", function () {
-            const userSignature = "{{ Auth::user()->signature }}";
-
-            if (!userSignature) {
-                // Open the modal if no signature is found
-                document.getElementById("signatureModal").classList.remove("hidden");
-            } else {
-                // If signature exists, toggle the saved signature section
-                toggleSection("saved");
-            }
-        });
-
-        function toggleSection(method) {
-            const sections = ["uploadSection", "padSection", "savedPadSection"];
-            sections.forEach(section => document.getElementById(section).classList.add("hidden"));
-
-            if (method === "upload") {
-                document.getElementById("uploadSection").classList.remove("hidden");
-            } else if (method === "pad") {
-                document.getElementById("padSection").classList.remove("hidden");
-                setTimeout(() => resizeCanvas(), 100);
-            } else if (method === "saved") {
-                document.getElementById("savedPadSection").classList.remove("hidden");
-            }
-
-            // Highlight the selected button
-            ["useUpload", "usePad", "useSavedSignature"].forEach(btn => {
-                document.getElementById(btn).classList.remove("bg-gray-200");
-            });
-            document.getElementById("use" + method.charAt(0).toUpperCase() + method.slice(1)).classList.add("bg-gray-200");
-
-            // Reset hidden inputs
-            document.getElementById("signaturePadData").value = "";
-            document.getElementById("savedSignatureData").value = method === "saved" ? "{{ asset(Auth::user()->signature) }}" : "";
+    } else if (!document.getElementById("padSection").classList.contains("hidden")) {
+        if (!signaturePad || signaturePad.isEmpty()) {
+            alert("Please sign before submitting.");
+            event.preventDefault();
+            return;
+        } else {
+            // ✅ Set signaturePad value into hidden input
+            const signatureData = signaturePad.toDataURL("image/png");
+            document.getElementById("signaturePadData").value = signatureData;
         }
-
-        // Signature Pad Clear
-        document.getElementById("clearPad").addEventListener("click", function () {
-            signaturePad.clear();
-        });
-
-        // Saved Signature Clear
-        document.getElementById("clearSavedPad").addEventListener("click", function () {
-            document.getElementById("new-signature-pad-main").src = "";
-            document.getElementById("savedSignatureData").value = "";
-        });
-
-        // Live Preview for File Upload
-        document.getElementById('signatureInput').addEventListener('change', function (event) {
-            const file = event.target.files[0];
-            const preview = document.getElementById('imagePreview');
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    preview.src = e.target.result;
-                    preview.classList.remove('hidden');
-                };
-                reader.readAsDataURL(file);
-            } else {
-                preview.src = '#';
-                preview.classList.add('hidden');
-            }
-        });
-
-        // Enable Submit Button on Agreement
-        document.getElementById('agree').addEventListener('change', function () {
-            document.getElementById('submitBtn').disabled = !this.checked;
-        });
-
-        // Form Submission Validation
-        document.getElementById("approvalForm").addEventListener("submit", function (event) {
-            if (!document.getElementById("uploadSection").classList.contains("hidden")) {
-                if (!document.getElementById("signatureInput").value) {
-                    alert("Please upload an image before submitting.");
-                    event.preventDefault();
-                    return;
-                }
-            } else if (!document.getElementById("padSection").classList.contains("hidden")) {
-                if (signaturePad.isEmpty()) {
-                    alert("Please sign before submitting.");
-                    event.preventDefault();
-                    return;
-                } else {
-                    document.getElementById("signaturePadData").value = signaturePad.toDataURL("image/png");
-                }
-            } else if (!document.getElementById("savedPadSection").classList.contains("hidden")) {
-                if (!document.getElementById("savedSignatureData").value) {
-                    alert("Please select your saved signature before submitting.");
-                    event.preventDefault();
-                    return;
-                }
-            }
-        });
+    } else if (!document.getElementById("savedPadSection").classList.contains("hidden")) {
+        if (!document.getElementById("savedSignatureData").value) {
+            alert("Please select your saved signature before submitting.");
+            event.preventDefault();
+            return;
+        }
+    }
+});
 
     </script>
 @endsection
