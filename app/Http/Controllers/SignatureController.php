@@ -18,15 +18,17 @@ class SignatureController extends Controller
 
         $user = User::findOrFail(auth()->user()->id);
         if ($request->new_signature_pad) {
-            $image = str_replace('data:image/png;base64,', '', $request->signature_pad);
+            $image = str_replace('data:image/png;base64,', '', $request->new_signature_pad);
             $imagePath = 'signatures/signature_' . time() . '.png';
             file_put_contents(public_path($imagePath), base64_decode($image));
         }
 
-        $user->update([
-            'signature' => $imagePath,
-        ]);
 
-        return redirect()->route('supervisor.approve')->with('Status', 'Job Order Approved Successfully');
+        $user->update([
+            'signature' => $imagePath
+        ]);
+        
+
+        return redirect()->back();
     }
 }
