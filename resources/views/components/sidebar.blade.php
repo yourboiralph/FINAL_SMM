@@ -103,6 +103,17 @@
         </div>
 
         <div class="block px-6">
+            <a href="{{ url('/track') }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('track', 'track/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is('track', 'track/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('track', 'track/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
+                    <i class="fa-regular fa-map" style="color: #ffffff;"></i>
+                </div>
+                <h1 class="block">Track Job Orders</h1>
+            </a>
+        </div>
+
+        <div class="block px-6">
             <a href="{{ url('/profile/show') }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('profile', 'profile/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is('profile', 'profile/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
@@ -196,6 +207,17 @@
         </div>
 
         <div class="block px-6">
+            <a href="{{ url('/track') }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('track', 'track/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is('track', 'track/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('track', 'track/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
+                    <i class="fa-regular fa-map" style="color: #ffffff;"></i>
+                </div>
+                <h1 class="block">Track Job Orders</h1>
+            </a>
+        </div>
+
+        <div class="block px-6">
             <a href="{{ url('/profile/show') }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('profile', 'profile/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is('profile', 'profile/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
@@ -241,6 +263,17 @@
                     <p class="block">My Tasks</p>
                     <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ $operationRevisionCount < 1 ? 'hidden' : '' }}">{{ $operationRevisionCount }}</p>
                 </div>
+            </a>
+        </div>
+
+        <div class="block px-6">
+            <a href="{{ url('/track') }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('track', 'track/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is('track', 'track/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('track', 'track/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
+                    <i class="fa-regular fa-map" style="color: #ffffff;"></i>
+                </div>
+                <h1 class="block">Track Job Orders</h1>
             </a>
         </div>
 
@@ -344,6 +377,17 @@
         </div>
 
         <div class="block px-6">
+            <a href="{{ url('/track') }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('track', 'track/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is('track', 'track/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('track', 'track/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
+                    <i class="fa-regular fa-map" style="color: #ffffff;"></i>
+                </div>
+                <h1 class="block">Track Job Orders</h1>
+            </a>
+        </div>
+
+        <div class="block px-6">
             <a href="{{ url('/profile/show') }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('profile', 'profile/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is('profile', 'profile/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
@@ -386,6 +430,17 @@
                     <i class="fa-solid fa-list-check text-sm" style="color: #ffffff;"></i>
                 </div>
                 <h1 class="block">Approval</h1>
+            </a>
+        </div>
+
+        <div class="block px-6">
+            <a href="{{ url('/track') }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('track', 'track/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is('track', 'track/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('track', 'track/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
+                    <i class="fa-regular fa-map" style="color: #ffffff;"></i>
+                </div>
+                <h1 class="block">Track Job Orders</h1>
             </a>
         </div>
 
@@ -500,6 +555,18 @@
                     <p class="block">Approvals</p>
                     <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ $supervisorApprovalCount < 1 ? 'hidden' : '' }}">{{ $supervisorApprovalCount }}</p>
                 </div>
+            </a>
+        </div>
+
+
+        <div class="block px-6">
+            <a href="{{ url('/track') }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('track', 'track/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is('track', 'track/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('track', 'track/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
+                    <i class="fa-regular fa-map" style="color: #ffffff;"></i>
+                </div>
+                <h1 class="block">Track Job Orders</h1>
             </a>
         </div>
 

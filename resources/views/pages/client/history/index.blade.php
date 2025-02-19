@@ -5,6 +5,7 @@
 
 @section('content')
 
+
 <style>
     .custom-shadow {
         box-shadow: 0 4px 6px rgba(0, 0, 0, .3), 0 1px 3px rgba(0, 0, 0, .3);
@@ -42,11 +43,12 @@
                             <td class="px-2 sm:px-4 py-2 sm:py-3">Graphic Designer - {{ $job_draft->graphicDesigner->name }}</td>
                         @endif
                         <td class="px-2 sm:px-4 py-2 sm:py-3 whitespace-nowrap">{{$job_draft->date_target}}</td>
-                        <td class="px-2 sm:px-4 py-2 sm:py-3">{{$job_draft->status}}</td>
+                        <td class="px-2 sm:px-4 py-2 sm:py-3 "><p class="px-2 py-1 bg-green-400 w-fit rounded-lg">{{ ucfirst($job_draft->status)}}</p></td>
                         <td class="px-2 sm:px-4 py-2 sm:py-3 border-b">
                             <a href="{{ route('client.history.download', $job_draft->id) }}">
                                 <button class="px-2 sm:px-3 py-1 sm:py-2 text-xs sm:text-sm text-white bg-orange-500 rounded hover:bg-orange-600 whitespace-nowrap">
-                                    Download PDF
+                                    <span><i class="fa-solid fa-download" style="color: #ffffff;"></i></span>
+                                     Download PDF
                                 </button>
                             </a>
                         </td>

@@ -7,9 +7,11 @@
 <div class="mx-auto max-w-screen-2xl">
 
     @if (session('Status'))
-        <div id="success-message" class="bg-green-500 text-white p-4 rounded-md mb-4">
+    <div id="toast" class="fixed top-4 right-4 z-50">
+        <div id="success-message" class="bg-green-500 text-white p-4 rounded-md shadow-lg">
             {{ session('Status') }}
         </div>
+    </div>
     @endif
 
     <div class="h-auto">
@@ -103,31 +105,67 @@
 </div>
 
 <script>
+    // Function to display toast notifications
+    function showToast(message, type = 'success') {
+        let toastContainer = document.getElementById('toast-container');
+        if (!toastContainer) {
+            toastContainer = document.createElement('div');
+            toastContainer.id = 'toast-container';
+            toastContainer.className = 'fixed top-20 right-4 z-50 space-y-2';
+            document.body.appendChild(toastContainer);
+        }
+        let toast = document.createElement('div');
+        toast.className = 'p-4 rounded shadow-lg text-white ' + (type === 'error' ? 'bg-red-500' : 'bg-green-500');
+        toast.innerText = message;
+        toastContainer.appendChild(toast);
+        // Auto-remove toast after 3 seconds
+        setTimeout(() => {
+            toast.style.transition = 'opacity 0.5s';
+            toast.style.opacity = '0';
+            setTimeout(() => {
+                toast.remove();
+            }, 500);
+        }, 3000);
+    }
+
+    // Auto-hide the session toast (if present) after 3 seconds
     setTimeout(function() {
-        var message = document.getElementById('success-message');
-        if (message) {
-            message.style.transition = "opacity 0.5s";
-            message.style.opacity = "0";
-            setTimeout(() => message.style.display = "none", 500);
+        var toast = document.getElementById('toast');
+        if (toast) {
+            toast.style.transition = "opacity 0.5s";
+            toast.style.opacity = "0";
+            setTimeout(() => toast.style.display = "none", 500);
         }
     }, 3000);
 
+    // Trigger file input when "Change Profile" is clicked
     document.getElementById("changeProfileBtn").addEventListener("click", function() {
         document.getElementById("profileImageInput").click();
     });
+
+    // Preview the selected image and validate its file size
     document.getElementById("profileImageInput").addEventListener("change", function(event) {
         let file = event.target.files[0];
+        const maxFileSize = 2097152; // 2MB in bytes
         if (file) {
+            if (file.size > maxFileSize) {
+                showToast("File size is too big. Maximum allowed is 2MB.", "error");
+                // Clear the file input
+                document.getElementById("profileImageInput").value = "";
+                return;
+            }
             let reader = new FileReader();
             reader.onload = function(e) {
-                document.querySelector("img.rounded-full").src = e.target.result;
+                document.getElementById("profileImage").src = e.target.result;
             };
             reader.readAsDataURL(file);
         }
     });
+
+    // Remove profile image and reset to default when "Remove Profile" is clicked
     document.getElementById("removeProfileBtn").addEventListener("click", function() {
         document.getElementById("profileImageInput").value = "";
-        document.querySelector("img.rounded-full").src = "{{ asset('/Assets/user-profile-profilepage.png') }}";
+        document.getElementById("profileImage").src = "{{ asset('/Assets/user-profile-profilepage.png') }}";
     });
 </script>
 @endsection
