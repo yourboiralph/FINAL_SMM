@@ -31,7 +31,10 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/task", "operation/task/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
-                <h1 class=" block">My Tasks</h1>
+                <div class="flex justify-between w-full">
+                    <p class=" block">My Tasks</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{$operationTaskCount < 1 ? "hidden" : ""}}">{{ $operationTaskCount }}</p>
+                </div>
             </a>
         </div>
 
@@ -44,7 +47,10 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/requests", "operation/request/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
-                <h1 class=" block">Incoming Requests</h1>
+                <div class="flex justify-between w-full">
+                    <p class=" block">Incoming Requests</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{$operationIncomingRequestCount < 1 ? "hidden" : ""}}">{{ $operationIncomingRequestCount }}</p>
+                </div>
             </a>
         </div>
 
@@ -71,7 +77,10 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation", "operation/show/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
-                <h1 class=" block">Approvals</h1>
+                <div class="flex justify-between w-full">
+                    <p class=" block">Approvals</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{$operationApprovalCount < 1 ? "hidden" : ""}}">{{ $operationApprovalCount }}</p>
+                </div>
             </a>
         </div>
 
@@ -86,7 +95,10 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/revision","operation/revisions", "operation/revisions/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
-                <h1 class=" block">My Revisions</h1>
+                <div class="flex justify-between w-full">
+                    <p class=" block">My Revisions</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{$operationRevisionCount < 1 ? "hidden" : ""}}">{{ $operationRevisionCount }}</p>
+                </div>
             </a>
         </div>
 
@@ -177,7 +189,7 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("operation/history", "operation/history/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
-                <h1 class=" block">History</h1>
+                <h1 class=" block">Downloadables</h1>
             </a>
         </div>
 
@@ -210,13 +222,16 @@
         <div class=" block px-6">
             <a href="{{ url("/client") }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md 
-                {{ request()->is("client", "client") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is("client", "client") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                {{ request()->is("client", "client/show/*") ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is("client", "client/show/*") ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <img src="{{asset('/Assets/icon-profile-white.png')}}"
                     draggable="false"
-                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("client", "client") ? 'bg-black' : 'bg-[#f66d11]' }}"
+                    class="p-2 rounded-lg w-10 h-10 {{ request()->is("client", "client/show/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
-                <h1 class=" block">Approvals</h1>
+                <div class="flex justify-between w-full">
+                    <p class=" block">Approvals</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{$clientDraftCount < 1 ? "hidden" : ""}}">{{ $clientDraftCount }}</p>
+                </div>
             </a>
         </div>
 
@@ -229,7 +244,10 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("client/history", "client/history/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
-                <h1 class=" block">History</h1>
+                <div class="flex justify-between w-full">
+                    <p class=" block">Downloadables</p>
+                    {{-- <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600">{{ $clientCompletedCount }}</p> --}}
+                </div>
             </a>
         </div>
 
@@ -320,7 +338,10 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("content", "content/edit/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
-                <h1 class=" block">List of Job Orders</h1>
+                <div class="flex justify-between w-full">
+                    <p class=" block">My Tasks</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{$operationRevisionCount < 1 ? "hidden" : ""}}">{{ $operationRevisionCount }}</p>
+                </div>
             </a>
         </div>
 
@@ -346,7 +367,10 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("content/revisions", "content/revisions/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="joborder Icon">
-                <h1 class=" block">Revision Checklist</h1>
+                <div class="flex justify-between w-full">
+                    <p class=" block">Revision Checklist</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{$contentRevisionCount < 1 ? "hidden" : ""}}">{{ $contentRevisionCount }}</p>
+                </div>
             </a>
         </div>
 
@@ -359,7 +383,7 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("content/history", "content/history/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
-                <h1 class=" block">History</h1>
+                <h1 class=" block">Downloadables</h1>
             </a>
         </div>
 
@@ -396,7 +420,10 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("graphic", "graphic") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
-                <h1 class=" block">List of Job Orders</h1>
+                <div class="flex justify-between w-full">
+                    <p class=" block">My Tasks</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{$graphicDraftCount < 1 ? "hidden" : ""}}">{{ $graphicDraftCount }}</p>
+                </div>
             </a>
         </div>
         <div class=" block px-6">
@@ -408,7 +435,10 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("graphic/revisions", "graphic/revisions/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="joborder Icon">
-                <h1 class=" block">Revision Checklist</h1>
+                <div class="flex justify-between w-full">
+                    <p class=" block">Revision Checklist</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{$graphicRevisionCount < 1 ? "hidden" : ""}}">{{ $graphicRevisionCount }}</p>
+                </div>
             </a>
         </div>
 
@@ -421,7 +451,7 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("graphic/history", "graphic/history/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Profile Icon">
-                <h1 class=" block">History</h1>
+                <h1 class=" block">Downloadables</h1>
             </a>
         </div>
 
@@ -589,7 +619,10 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("supervisor/joborder", "supervisor/joborder/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
-                <h1 class=" block">Operation Job Orders</h1>
+                <div class="flex justify-between w-full">
+                    <p class=" block">Operation Job Order</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{$supervisorDraftCount < 1 ? "hidden" : ""}}">{{ $supervisorDraftCount }}</p>
+                </div>
             </a>
         </div>
 
@@ -615,7 +648,10 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("supervisor/task", "supervisor/task/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
-                <h1 class=" block">My Tasks</h1>
+                <div class="flex justify-between w-full">
+                    <p class=" block">My Tasks</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{$supervisorTaskCount < 1 ? "hidden" : ""}}">{{ $supervisorTaskCount }}</p>
+                </div>
             </a>
         </div>
 
@@ -628,7 +664,10 @@
                     draggable="false"
                     class="p-2 rounded-lg w-10 h-10 {{ request()->is("supervisor/revision", "supervisor/revision/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="Project Development Icon">
-                <h1 class=" block">My Revisions</h1>
+                <div class="flex justify-between w-full">
+                    <p class=" block">Revisions</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{$supervisorRevisionCount < 1 ? "hidden" : ""}}">{{ $supervisorRevisionCount }}</p>
+                </div>
             </a>
         </div>
 
@@ -641,7 +680,10 @@
                     draggable="false"
                     class=" p-2 rounded-lg w-10 h-10 {{ request()->is("supervisor/approve", "supervisor/approve/*") ? 'bg-black' : 'bg-[#f66d11]' }}"
                     alt="project Icon">
-                <h1 class=" block">Approvals</h1>
+                <div class="flex justify-between w-full">
+                    <p class=" block">Approvals</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{$supervisorApprovalCount < 1 ? "hidden" : ""}}">{{ $supervisorApprovalCount }}</p>
+                </div>
             </a>
         </div>
 
