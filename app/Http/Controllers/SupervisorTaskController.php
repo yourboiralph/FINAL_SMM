@@ -23,6 +23,15 @@ class SupervisorTaskController extends Controller
         return view('pages.supervisor.task.list', compact('job_drafts'));
     }
 
+    public function show($id)
+    {
+        // Fetch the job draft with related models
+        $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client', 'parentDraft')->find($id);
+
+        // Pass both the job draft and the latest job draft to the view
+        return view('pages.supervisor.task.show', compact('job_draft'));
+    }
+
     public function edit($id)
     {
         // Fetch the job draft with related models
