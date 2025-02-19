@@ -49,9 +49,14 @@
                                 {{-- <img class="rounded-full w-32 h-32 object-cover"
                                     src="{{ file_exists(public_path($user->image)) && $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}"
                                     alt="User Image"> --}}
-                                <img class="object-fill w-full"
+                                @if ($user->signature)
+                                    <img class="object-fill w-full"
                                     src="{{asset($user->signature)}}"
                                     alt="User Image">
+
+                                @else
+                                    <p>No Signature Saved</p>
+                                @endif
                             </div>
                             <div class="text-center w-full flex items-center justify-center">
                                 <h1 class="text-[#fa7011] font-bold">Signature</h1>
@@ -59,11 +64,11 @@
                             <div class="flex items-center justify-center gap-2 text-white">
                                 <div id="changeSignatureBtn" class="px-4 py-1 bg-[#fa7011] rounded-md cursor-pointer text-nowrap text-sm">Change Signature</div>
                             </div>
-                            <input type="file" name="image" id="profileImageInput" accept="image/*" class="hidden">
+                            <input type="file" name="image" id="signatureImageInput" accept="image/*" class="hidden">
                         </div>
                     </div>
 
-                    <div class="col-span-3 lg:col-span-2 bg-white shadow-md rounded-md p-5 border border-[#e1e1e1]">
+                    <div class="col-span-3 lg:col-span-2 bg-white shadow-md h-fit rounded-md p-5 border border-[#e1e1e1]">
                         <div class="text-slate-500">
                             <h1 class="text-sm">User Information</h1>
                         </div>
@@ -124,6 +129,9 @@
     </div>
 </div>
 
+    {{-- Include the signature modal (hidden by default) --}}
+    <x-signature id="signatureModal" class="hidden" />
+
 <script>
     // Function to display toast notifications
     function showToast(message, type = 'success') {
@@ -162,6 +170,35 @@
     document.getElementById("changeProfileBtn").addEventListener("click", function() {
         document.getElementById("profileImageInput").click();
     });
+
+    // Trigger file input when "Change Signature" is clicked
+    document.getElementById("changeSignatureBtn").addEventListener("click", function () {
+        document.getElementById("signatureModal").classList.remove("hidden");
+    });
+    
+
+    // Preview the selected signature image and validate its file size
+    document.getElementById("signatureImageInput").addEventListener("change", function(event) {
+        let file = event.target.files[0];
+        const maxFileSize = 2097152; // 2MB in bytes
+        if (file) {
+            if (file.size > maxFileSize) {
+                showToast("File size is too big. Maximum allowed is 2MB.", "error");
+                // Clear the file input
+                document.getElementById("signatureImageInput").value = "";
+                return;
+            }
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                const signatureImage = document.querySelector('.w-full.object-fill');
+                if (signatureImage) {
+                    signatureImage.src = e.target.result;
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
 
     // Preview the selected image and validate its file size
     document.getElementById("profileImageInput").addEventListener("change", function(event) {
