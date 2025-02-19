@@ -31,7 +31,7 @@ class OperationApprovalController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validated = $request->validate([
             'signature_admin'  => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'signature_pad'    => 'nullable|string',
             'new_signature_pad' => 'nullable|string',
@@ -51,33 +51,27 @@ class OperationApprovalController extends Controller
 
         // If no signature was provided, return an error.
         if ($signatureCount === 0) {
-            return redirect()->back()->withErrors(['signature' => 'A signature is required.']);
+            return redirect()->back()->withErrors(['signature' => 'A signature is required.'])->withInput();
         }
 
         // If more than one signature was provided, return an error.
         if ($signatureCount > 1) {
-            return redirect()->back()->withErrors(['signature' => 'Only one signature is allowed.']);
+            return redirect()->back()->withErrors(['signature' => 'Only one signature is allowed.'])->withInput();
         }
 
         $job_draft = JobDraft::findOrFail($id);
         $imagePath = $job_draft->signature_admin; // Keep existing signature if no new one is uploaded
 
-        // Handle File Upload
         if ($request->hasFile('signature_admin')) {
             $file = $request->file('signature_admin');
-            $imagePath = 'signatures/' . time() . '.' . $file->extension();
+            $imagePath = 'signatures/signature_' . time() . '.' . $file->extension();
             $file->move(public_path('signatures'), $imagePath);
-        }
-
-        // Handle Signature Pad Input
-        elseif ($request->signature_pad) {
+        } elseif ($request->signature_pad) {
             $image = str_replace('data:image/png;base64,', '', $request->signature_pad);
             $imagePath = 'signatures/signature_' . time() . '.png';
             file_put_contents(public_path($imagePath), base64_decode($image));
         } elseif ($request->new_signature_pad) {
-            $image = str_replace('data:image/png;base64,', '', $request->new_signature_pad);
-            $imagePath = 'signatures/signature_' . time() . '.png';
-            file_put_contents(public_path($imagePath), base64_decode($image));
+            $imagePath = auth()->user()->signature;
         }
 
         // Update Database with Signature Path
