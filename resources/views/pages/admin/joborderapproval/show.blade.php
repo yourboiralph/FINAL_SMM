@@ -128,10 +128,6 @@
                             src="{{ asset(Auth::user()->signature) }}" alt="Your Saved Signature">
                             @endif
                             <div class="mt-2 flex">
-                                <button type="button" id="clearSavedPad"
-                                    class="bg-gray-500 text-white px-2 py-1 rounded mr-2" {{ $isSigned ? 'disabled' : '' }}>
-                                    Clear
-                                </button>
                                 <input type="hidden" name="new_signature_pad" id="savedSignatureData"
                                     value="{{ asset(Auth::user()->signature) }}">
                             </div>
