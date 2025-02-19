@@ -12,6 +12,7 @@ use App\Http\Controllers\GraphicApprovalController;
 use App\Http\Controllers\GraphicHistoryController;
 use App\Http\Controllers\GraphicRevisionController;
 use App\Http\Controllers\JobOrderController;
+use App\Http\Controllers\JobOrderTrackerController;
 use App\Http\Controllers\OperationApprovalController;
 use App\Http\Controllers\OperationHistoryController;
 use App\Http\Controllers\OperationRenewalController;
@@ -168,6 +169,8 @@ Route::put('/supervisor/task/update/{id}', [SupervisorTaskController::class, 'up
 Route::get('/supervisor/revision', [SupervisorRevisionController::class, 'index'])->name('supervisor.revision');
 Route::get('/supervisor/revision/edit/{id}', [SupervisorRevisionController::class, 'edit'])->name('supervisor.edit');
 Route::put('/supervisor/revision/update/{id}', [SupervisorRevisionController::class, 'update'])->name('supervisor.update');
+
+Route::resource('/track', JobOrderTrackerController::class);
 
 use App\Http\Controllers\SignatureController;
 
