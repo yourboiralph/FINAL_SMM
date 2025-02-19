@@ -19,6 +19,7 @@ use App\Http\Controllers\OperationRenewalController;
 use App\Http\Controllers\OperationRevisionController;
 use App\Http\Controllers\OperationTaskController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SignatureController;
 use App\Http\Controllers\SupervisorApprovalController;
 use App\Http\Controllers\SupervisorDirectJobOrderController;
 use App\Http\Controllers\SupervisorJobOrderController;
@@ -173,12 +174,6 @@ Route::get('/supervisor/revision/edit/{id}', [SupervisorRevisionController::clas
 Route::put('/supervisor/revision/update/{id}', [SupervisorRevisionController::class, 'update'])->name('supervisor.update');
 
 Route::resource('/track', JobOrderTrackerController::class);
-
-use App\Http\Controllers\SignatureController;
-
-Route::get('/signature', function () {
-    return view('signature');
-});
 
 Route::post('/signature/store', [SignatureController::class, 'store'])->name('signature.store');
 
