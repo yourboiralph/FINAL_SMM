@@ -62,18 +62,20 @@
 
 
                 {{-- Graphic Designer & Content Writer --}}
-                <div class="mt-8 flex sm:flex-row gap-8 justify-center sm:justify-normal">
-                    <div class="flex flex-col items-center">
-                        <img class="w-14 h-14 md:w-16 md:h-16 rounded-full" src="{{asset('/Assets/user-profile-profilepage.png')}}" alt="Graphic Designer">
-                        <h1 class="text-sm mt-2">{{ $job_draft->graphicDesigner->name }}</h1>
-                        <h1 class="text-xs border-b-2 border-[#fa7011] w-fit">Graphic Designer</h1>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <img class="w-14 h-14 md:w-16 md:h-16 rounded-full" src="{{asset('/Assets/user-profile-profilepage.png')}}" alt="Content Writer">
-                        <h1 class="text-sm mt-2">{{ $job_draft->contentWriter->name }}</h1>
-                        <h1 class="text-xs border-b-2 border-[#fa7011] w-fit">Content Writer</h1>
-                    </div>
+            <div class="mt-10 flex gap-8 w-full col-span-4">
+                <div class="flex items-center justify-center flex-col">
+                    <img class="size-14 border-2 rounded-full border-[#fa7011]" src="{{ $job_draft->graphicDesigner->image ? asset($job_draft->graphicDesigner->image) : asset('/Assets/user-profile-profilepage.png')}}" alt="">
+                    {{-- <img src="{{ asset('/Assets/' . $job_draft->content_writer->image) }}" alt="Content Writer Image"> --}}
+                    <h1 class="text-sm">{{$job_draft->graphicDesigner->name}}</h1>
+                    <h1 class="text-[10px] border-b-2 border-[#fa7011] w-fit">Graphic Designer</h1>
                 </div>
+                <div class="flex items-center justify-center flex-col">
+                    <img class="size-14 border-2 rounded-full border-[#fa7011]" src="{{ $job_draft->contentWriter->image ? asset($job_draft->contentWriter->image) : asset('/Assets/user-profile-profilepage.png')}}" alt="">
+                    {{-- <img src="{{ asset('/Assets/' . $job_draft->content_writer->image) }}" alt="Content Writer Image"> --}}
+                    <h1 class="text-sm">{{$job_draft->contentWriter->name}}</h1>
+                    <h1 class="text-[10px] border-b-2 border-[#fa7011] w-fit">Content Writer</h1>
+                </div>
+            </div>
             </div>
 
         </div>
