@@ -175,7 +175,7 @@ Route::put('/supervisor/revision/update/{id}', [SupervisorRevisionController::cl
 
 Route::resource('/track', JobOrderTrackerController::class);
 
-Route::post('/signature/store', [SignatureController::class, 'store'])->name('signature.store');
+Route::put('/signature/store', [SignatureController::class, 'store'])->name('signature.store');
 
 
 require __DIR__ . '/auth.php';

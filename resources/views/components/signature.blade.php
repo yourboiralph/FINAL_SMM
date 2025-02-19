@@ -1,24 +1,77 @@
-<div {{ $attributes->merge(['class' => 'fixed inset-0 flex items-center justify-center z-50 hidden']) }}>
-    <!-- Overlay -->
-    <div class="fixed inset-0 bg-black opacity-50"></div>
-    <!-- Modal Content -->
-    <div class="bg-white p-6 rounded z-10 max-w-md mx-auto">
-        @if(Auth::user()->signature)
-            <h1 class="text-xl font-bold mb-4">This is your saved signature</h1>
-            <div class="mb-4">
-                <img src="{{ asset(Auth::user()->signature) }}" alt="Saved Signature" class="max-w-full">
+@if(!Auth::user()->signature)
+    <!-- Modal Form (within your Blade component or page) -->
+    <form action="{{ url('signature/store') }}" method="POST" id="modalSignatureForm">
+        @csrf
+        @method('PUT')
+        <div id="signatureModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+            <!-- Overlay -->
+            <div class="fixed inset-0 bg-black opacity-50"></div>
+            <!-- Modal Content -->
+            <div class="bg-white p-6 rounded z-10 max-w-md mx-auto">
+                <h1 class="text-xl font-bold mb-4">Add a Signature</h1>
+                <p class="mb-4">No signature found. Please create your signature below.</p>
+                
+                <!-- New Signature Pad -->
+                <div id="newSignaturePadContainer">
+                    <canvas id="new-signature-pad" class="w-full" style="height:200px;"></canvas>
+                    <!-- Hidden input to store the signature data -->
+                    <input type="hidden" name="new_signature_pad" id="savedSignaturePadData" value="">
+                    <button type="submit" id="saveNewSignature" class="mt-2 px-4 py-2 bg-green-500 text-white rounded">
+                        Save and Use Signature
+                    </button>
+                </div>
+                
+                <!-- Close Modal Button -->
+                <button type="button" id="closeSignatureModal" class="mt-4 px-4 py-2 bg-red-500 text-white rounded">
+                    Close
+                </button>
             </div>
-        @else
-            <h1 class="text-xl font-bold mb-4">Add a Signature</h1>
-            <p class="mb-4">No signature found. Please create your signature below.</p>
-            <!-- New Signature Pad -->
-            <div id="newSignaturePadContainer">
-                <canvas id="new-signature-pad" class="w-full" style="height:200px; border: 2px solid #000; background-color:#fff;"></canvas>
-                <button id="saveNewSignature" class="mt-2 px-4 py-2 bg-green-500 text-white rounded">Save and Use Signature</button>
-            </div>
-        @endif
-        <button id="closeSignatureModal" class="mt-4 px-4 py-2 bg-red-500 text-white rounded">
-            Close
-        </button>
-    </div>
-</div>
+        </div>
+    </form>
+
+    <!-- Modal Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('signatureModal');
+        const canvas = document.getElementById('new-signature-pad');
+        const saveButton = document.getElementById('saveNewSignature');
+        const closeButton = document.getElementById('closeSignatureModal');
+        const hiddenInput = document.getElementById('savedSignaturePadData');
+        
+        // Initialize the signature pad for the modal canvas
+        const signaturePad = new SignaturePad(canvas);
+
+        // Resize canvas function
+        function resizeCanvas() {
+          const ratio = Math.max(window.devicePixelRatio || 1, 1);
+          canvas.width = canvas.offsetWidth * ratio;
+          canvas.height = canvas.offsetHeight * ratio;
+          canvas.getContext("2d").scale(ratio, ratio);
+          signaturePad.clear();
+        }
+
+        // Call resize on load and on window resize
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Save button: if pad not empty, set hidden input (the form will submit)
+        saveButton.addEventListener('click', function(e) {
+            if(signaturePad.isEmpty()){
+                alert("Please provide a signature first.");
+                e.preventDefault(); // Prevent submission if empty
+            } else {
+                // Set the hidden input value to the signature data URL
+                hiddenInput.value = signaturePad.toDataURL("image/png");
+                // Optionally, close the modal after saving
+                modal.classList.add('hidden');
+                // The form will now submit with the signature data
+            }
+        });
+
+        // Close button simply hides the modal
+        closeButton.addEventListener('click', function(){
+            modal.classList.add('hidden');
+        });
+    });
+    </script>
+@endif

@@ -4,7 +4,6 @@
 @section('header', 'Job Order')
 
 @section('content')
-
 <style>
     .custom-shadow {
         box-shadow: 0 4px 6px rgba(0, 0, 0, .3), 0 1px 3px rgba(0, 0, 0, .3);
@@ -78,13 +77,13 @@
                                 <div class="flex justify-between">
                                     <h1 class="text-sm font-semibold">Choose Signature Method:</h1>
                                     <div class="flex space-x-2">
-                                        <button id="useUpload" class="px-2 border disabled:opacity-50 disabled:cursor-not-allowed" {{ $isSigned ? 'disabled' : '' }}>
+                                        <button id="useUpload" class="{{Auth::user()->signature ? "" : "bg-gray-200"}} px-2 border disabled:opacity-50 disabled:cursor-not-allowed" {{ $isSigned ? 'disabled' : '' }}>
                                             <i class="fa-solid fa-file-arrow-up" style="color: #fa7011;"></i>
                                         </button>
                                         <button id="usePad" class="px-2 border disabled:opacity-50 disabled:cursor-not-allowed" {{ $isSigned ? 'disabled' : '' }}>
                                             <i class="fa-solid fa-file-signature" style="color: #fa7011;"></i>
                                         </button>
-                                        <button id="useSavedSignature" class="px-2 border disabled:opacity-50 disabled:cursor-not-allowed" {{ $isSigned ? 'disabled' : '' }}>
+                                        <button id="useSavedSignature" class="{{Auth::user()->signature ? "bg-gray-200" : ""}} px-2 border disabled:opacity-50 disabled:cursor-not-allowed" {{ $isSigned ? 'disabled' : '' }}>
                                             <i class="fa-solid fa-cloud-arrow-up" style="color: #fa7011;"></i>
                                         </button>
                                     </div>
@@ -96,7 +95,7 @@
                                     @method('PUT')
             
                                     {{-- File Upload (Default) --}}
-                                    <div id="uploadSection">
+                                    <div id="uploadSection" class="{{Auth::user()->signature ? "hidden" : ""}}">
                                         <input type="file" name="signature_supervisor" accept="image/*"
                                                class="mt-2 border p-2 w-full rounded-md" id="signatureInput" {{ $isDisabled || $isSigned ? 'disabled' : '' }}>
                                         <div class="mt-4 w-52 h-32 border border-gray-300 rounded-md overflow-hidden flex items-center justify-center bg-gray-100">
@@ -117,16 +116,18 @@
                                         <input type="hidden" name="signature_pad" id="signaturePadData" value="{{ old('signature_pad') }}">
                                     </div>
 
-                                    <div id="savedPadSection" class="hidden">
-                                        <!-- The canvas now has its height set via CSS. Its internal dimensions will be set by JS -->
-                                        <img id="new-signature-pad-main" class="w-[300px] lg:w-[400px]" style="height:200px;" src="{{asset(Auth::user()->signature)}}" alt="">
+                                    {{-- Saved Signature Section --}}
+                                    <div id="savedPadSection" class="{{Auth::user()->signature ? "" : "hidden"}}">
+                                        <!-- The image will be updated with the new signature URL -->
+                                        <img id="new-signature-pad-main" class="w-[300px] lg:w-[400px]" style="height:200px;" src="{{ asset(Auth::user()->signature) }}" alt="Your Saved Signature">
                                         <div class="mt-2 flex">
-                                            <button type="button" id="clearPad" class="bg-gray-500 text-white px-2 py-1 rounded mr-2" {{ $isSigned ? 'disabled' : '' }}>
+                                            <button type="button" id="clearSavedPad" class="bg-gray-500 text-white px-2 py-1 rounded mr-2" {{ $isSigned ? 'disabled' : '' }}>
                                                 Clear
                                             </button>
                                         </div>
-                                        <input type="hidden" name="new_signature_pad" id="signaturePadData" value="{{ old('signature_pad') }}">
+                                        
                                     </div>
+                                    
             
                                     @if($errors->has('signature_supervisor') || $errors->has('signature_pad'))
                                         <p class="text-sm text-red-600">
@@ -167,7 +168,6 @@
     </div>
 </div>
 
-
 {{-- Include the signature modal (hidden by default) --}}
 <x-signature id="signatureModal" class="hidden" />
 
@@ -196,6 +196,9 @@
     // Toggle between File Upload and Signature Pad views.
     document.getElementById("useUpload").addEventListener("click", function () {
         document.getElementById("uploadSection").classList.remove("hidden");
+        document.getElementById("useUpload").classList.add("bg-gray-200");
+        document.getElementById("useSavedSignature").classList.remove("bg-gray-200");
+        document.getElementById("usePad").classList.remove("bg-gray-200");
         document.getElementById("padSection").classList.add("hidden");
         document.getElementById("savedPadSection").classList.add("hidden");
         document.getElementById("signaturePadData").value = "";
@@ -205,6 +208,9 @@
         document.getElementById("uploadSection").classList.add("hidden");
         document.getElementById("savedPadSection").classList.add("hidden");
         document.getElementById("padSection").classList.remove("hidden");
+        document.getElementById("useUpload").classList.remove("bg-gray-200");
+        document.getElementById("useSavedSignature").classList.remove("bg-gray-200");
+        document.getElementById("usePad").classList.add("bg-gray-200");
         document.getElementById("signatureInput").value = "";
         // Wait a short moment to ensure the canvas is visible before resizing.
         setTimeout(function(){ resizeCanvas(canvas); }, 100);
@@ -215,10 +221,10 @@
         document.getElementById("uploadSection").classList.add("hidden");
         document.getElementById("padSection").classList.add("hidden");
         document.getElementById("savedPadSection").classList.remove("hidden");
-    })
-
-    // Open the saved signature modal when the cloud icon is clicked.
-    document.getElementById("useSavedSignature").addEventListener("click", function () {
+        document.getElementById("useUpload").classList.remove("bg-gray-200");
+        document.getElementById("usePad").classList.remove("bg-gray-200");
+        document.getElementById("useSavedSignature").classList.add("bg-gray-200");
+        // Open the saved signature modal
         var modal = document.getElementById("signatureModal");
         modal.classList.remove("hidden");
 
@@ -276,18 +282,6 @@
         document.getElementById('submitBtn').disabled = !this.checked;
     });
     
-    // (Optional) Initialize the new signature pad inside the modal if needed.
-    var newCanvas = document.getElementById("new-signature-pad");
-    if(newCanvas) {
-        var newSignaturePad = new SignaturePad(newCanvas);
-        document.getElementById("saveNewSignature").addEventListener("click", function(){
-            if(newSignaturePad.isEmpty()){
-                alert("Please provide a signature first.");
-            } else {
-                // Implement your logic to save newSignaturePad.toDataURL("image/png")
-                alert("Signature saved! (Implement your saving logic here.)");
-            }
-        });
-    }
+
 </script>
 @endsection
