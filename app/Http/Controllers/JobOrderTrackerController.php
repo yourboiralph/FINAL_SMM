@@ -18,22 +18,22 @@ class JobOrderTrackerController extends Controller
 
         if ($authuser->role_id == "1") {
             $job_drafts = JobDraft::where('client_id', $authuser->id)
-                ->where('status', '!=', 'completed')
                 ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')
+                ->orderby('date_started', 'desc')
                 ->get();
         } elseif ($authuser->role_id == "2" || $authuser->role_id == "5" || $authuser->role_id == "6") {
-            $job_drafts = JobDraft::where('status', '!=', 'completed')
-                ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')
+            $job_drafts = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')
+                ->orderBy('date_started', 'desc')
                 ->get();
         } elseif ($authuser->role_id == "3") {
             $job_drafts = JobDraft::where('content_writer_id', $authuser->id)
-                ->where('status', '!=', 'completed')
                 ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')
+                ->orderBy('date_started', 'desc')
                 ->get();
         } elseif ($authuser->role_id == "4") {
             $job_drafts = JobDraft::where('graphic_designer_id', $authuser->id)
-                ->where('status', '!=', 'completed')
                 ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')
+                ->orderBy('date_started', 'desc')
                 ->get();
         }
 
