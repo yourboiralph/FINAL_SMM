@@ -14,7 +14,7 @@
         6 => 'Supervisor'
     ];
 @endphp
-<div class="mx-auto max-w-screen-2xl">
+<div class="mx-auto max-w-screen-2xl h-screen">
     {{-- Middle Part --}}
 
     <div class="px-10 text-white">
@@ -23,27 +23,46 @@
             <div class="w-fit px-4 py-1 bg-[#f68e12] rounded-md">Go Back</div>
         </div>
         <div class="grid mt-10 grid-cols-3 h-80 gap-6 text-black">
-            <div class="px-10 col-span-3 lg:col-span-1 bg-white shadow-md rounded-md pt-10 py-10">
-                <div class="w-full flex justify-center items-center">
-                    {{-- <img class="rounded-full w-32 h-32 object-cover"
-                        src="{{ file_exists(public_path($user->image)) && $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}"
-                        alt="User Image"> --}}
-                    <img class="rounded-full w-32 h-32 object-cover"
-                        src="{{ file_exists(asset($user->image)) && $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}"
-                        alt="User Image">
+
+
+            <div class="space-y-10">
+                <div class="px-10 col-span-3 lg:col-span-1 bg-white shadow-md rounded-md pt-10 py-10">
+                    <div class="w-full flex justify-center items-center">
+                        {{-- <img class="rounded-full w-32 h-32 object-cover"
+                            src="{{ file_exists(public_path($user->image)) && $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}"
+                            alt="User Image"> --}}
+                        <img class="rounded-full w-32 h-32 object-cover"
+                            src="{{ file_exists(asset($user->image)) && $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}"
+                            alt="User Image">
+                    </div>
+                    <div class="text-center mt-4">
+                        <h1 class="font-semibold">{{ $user->name }}</h1>
+                    </div>
+                    <div class="text-center">
+                        <h1 class="text-gray-500">{{ $user->address }}</h1>
+                    </div>
+                    <div class="text-center w-full flex items-center justify-center">
+                        <h1 class="text-[#fa7011] font-bold">{{ $roles[$user->role_id] }}</h1>
+                    </div>
                 </div>
-                <div class="text-center mt-4">
-                    <h1 class="font-semibold">{{ $user->name }}</h1>
-                </div>
-                <div class="text-center">
-                    <h1 class="text-gray-500">{{ $user->address }}</h1>
-                </div>
-                <div class="text-center w-full flex items-center justify-center">
-                    <h1 class="text-[#fa7011] font-bold">{{ $roles[$user->role_id] }}</h1>
+
+
+                <div class="px-10 col-span-3 w-full lg:col-span-3 bg-white shadow-md rounded-md pt-10 py-10">
+                    <div class="w-full h-56 flex justify-center items-center border-2 border-[#fa7011]">
+                        {{-- <img class="rounded-full w-32 h-32 object-cover"
+                            src="{{ file_exists(public_path($user->image)) && $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}"
+                            alt="User Image"> --}}
+                        <img class="object-fill"
+                            src="{{asset($user->signature)}}"
+                            alt="User Image">
+                    </div>
+                    <div class="text-center w-full flex items-center justify-center">
+                        <h1 class="text-[#fa7011] font-bold">Signature</h1>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-span-3 lg:col-span-2 bg-white shadow-md rounded-md p-5">
+            <div class="col-span-3 lg:col-span-2 h-fit bg-white shadow-md rounded-md p-5">
                 <div class="flex justify-between">
                     <h1 class="text-sm font-semibold">User Information</h1>
                     <div class="px-4 py-1 bg-[#f68e12] cursor-pointer text-white rounded-md hover:bg-[#e57f0f]"
