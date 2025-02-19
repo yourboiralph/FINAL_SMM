@@ -12,14 +12,14 @@
             <h1 class="text-white hidden lg:block truncate max-w-[150px] sm:max-w-[200px] md:max-w-[250px] lg:max-w-[300px] xl:max-w-[350px] break-words">
                 Hi, {{ $user->name ?? 'Guest' }}
             </h1>
-            
-            
+
+
             {{-- Proper way to check if user has an image --}}
-            <img src="{{ $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}" 
-                 class="w-14 h-14 rounded-full" 
-                 alt="User Profile" 
+            <img src="{{ $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}"
+                 class="w-14 h-14 rounded-full object-cover"
+                 alt="User Profile"
                  draggable="false">
-            
+
             {{-- Logout Button --}}
             <form method="POST" action="{{ route('logout') }}">
                 @csrf

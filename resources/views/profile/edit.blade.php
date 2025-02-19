@@ -152,6 +152,62 @@
 
 <script src="https://cdn.jsdelivr.net/npm/signature_pad"></script>
 <script>
+    // Function to display toast notifications
+    function showToast(message, type = 'success') {
+        let toastContainer = document.getElementById('toast-container');
+        if (!toastContainer) {
+            toastContainer = document.createElement('div');
+            toastContainer.id = 'toast-container';
+            toastContainer.className = 'fixed top-20 right-4 z-50 space-y-2';
+            document.body.appendChild(toastContainer);
+        }
+        let toast = document.createElement('div');
+        toast.className = 'p-4 rounded shadow-lg text-white ' + (type === 'error' ? 'bg-red-500' : 'bg-green-500');
+        toast.innerText = message;
+        toastContainer.appendChild(toast);
+        // Auto-remove toast after 3 seconds
+        setTimeout(() => {
+            toast.style.transition = 'opacity 0.5s';
+            toast.style.opacity = '0';
+            setTimeout(() => {
+                toast.remove();
+            }, 500);
+        }, 3000);
+    }
+
+    // Auto-hide the session toast (if present) after 3 seconds
+    setTimeout(function() {
+        var toast = document.getElementById('toast');
+        if (toast) {
+            toast.style.transition = "opacity 0.5s";
+            toast.style.opacity = "0";
+            setTimeout(() => toast.style.display = "none", 500);
+        }
+    }, 3000);
+
+    // Trigger file input when "Change Profile" is clicked
+    document.getElementById("changeProfileBtn").addEventListener("click", function() {
+        document.getElementById("profileImageInput").click();
+    });
+
+        // Preview the selected image and validate its file size
+        document.getElementById("profileImageInput").addEventListener("change", function(event) {
+        let file = event.target.files[0];
+        const maxFileSize = 2097152; // 2MB in bytes
+        if (file) {
+            if (file.size > maxFileSize) {
+                showToast("File size is too big. Maximum allowed is 2MB.", "error");
+                // Clear the file input
+                document.getElementById("profileImageInput").value = "";
+                return;
+            }
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById("profileImage").src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById("signature-pad");
     const signaturePad = new SignaturePad(canvas);
