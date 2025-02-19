@@ -25,22 +25,42 @@
                 @method('PATCH')
 
                 <div class="grid grid-cols-3 h-auto gap-6 text-black">
-                    <div class="col-span-3 px-4 lg:col-span-1 h-fit pb-10 bg-white shadow-md rounded-md pt-10 border border-[#e1e1e1]">
-                        <div class="w-full flex justify-center items-center">
-                            <img id="profileImage" class="rounded-full w-32 h-32 object-cover" 
-                                src="{{ $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}" 
-                                alt="Profile Picture">
+                    <div class="space-y-10">
+                        <div class="col-span-3 px-4 lg:col-span-1 h-fit pb-10 bg-white shadow-md rounded-md pt-10 border border-[#e1e1e1]">
+                            <div class="w-full flex justify-center items-center">
+                                <img id="profileImage" class="rounded-full w-32 h-32 object-cover" 
+                                    src="{{ $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}" 
+                                    alt="Profile Picture">
+                            </div>
+                            <div class="text-center">
+                                <h1>{{ $user->name }}</h1>
+                                <h1>{{ $user->address }}</h1>
+                            </div>
+    
+                            <div class="flex items-center justify-center gap-2 text-white mt-4">
+                                <div id="changeProfileBtn" class="px-4 py-1 bg-[#fa7011] rounded-md cursor-pointer text-nowrap text-sm">Change Profile</div>
+                                {{-- <div id="removeProfileBtn" class="px-4 py-1 bg-red-500 rounded-md cursor-pointer text-nowrap text-sm">Remove Profile</div> --}}
+                            </div>
+                            <input type="file" name="image" id="profileImageInput" accept="image/*" class="hidden">
                         </div>
-                        <div class="text-center">
-                            <h1>{{ $user->name }}</h1>
-                            <h1>{{ $user->address }}</h1>
+    
+                        <div class="px-10 col-span-3 w-full lg:col-span-3 bg-white shadow-md rounded-md pt-10 py-10">
+                            <div class="w-full h-full flex justify-center items-center border-2 border-gray-300">
+                                {{-- <img class="rounded-full w-32 h-32 object-cover"
+                                    src="{{ file_exists(public_path($user->image)) && $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}"
+                                    alt="User Image"> --}}
+                                <img class="object-fill w-full"
+                                    src="{{asset($user->signature)}}"
+                                    alt="User Image">
+                            </div>
+                            <div class="text-center w-full flex items-center justify-center">
+                                <h1 class="text-[#fa7011] font-bold">Signature</h1>
+                            </div>
+                            <div class="flex items-center justify-center gap-2 text-white">
+                                <div id="changeSignatureBtn" class="px-4 py-1 bg-[#fa7011] rounded-md cursor-pointer text-nowrap text-sm">Change Signature</div>
+                            </div>
+                            <input type="file" name="image" id="profileImageInput" accept="image/*" class="hidden">
                         </div>
-
-                        <div class="flex items-center justify-center gap-2 text-white mt-4">
-                            <div id="changeProfileBtn" class="px-4 py-1 bg-[#fa7011] rounded-md cursor-pointer text-nowrap text-sm">Change Profile</div>
-                            <div id="removeProfileBtn" class="px-4 py-1 bg-red-500 rounded-md cursor-pointer text-nowrap text-sm">Remove Profile</div>
-                        </div>
-                        <input type="file" name="image" id="profileImageInput" accept="image/*" class="hidden">
                     </div>
 
                     <div class="col-span-3 lg:col-span-2 bg-white shadow-md rounded-md p-5 border border-[#e1e1e1]">
