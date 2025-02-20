@@ -22,13 +22,16 @@ class RegisteredUserController extends Controller
 
     public function index()
     {
+        $authuser = auth()->user();
         $users = User::all();
-        return view('pages.admin.users.users', ['users' => $users]);
+
+
+        return view('pages.users.users', ['users' => $users]);
     }
 
     public function create(): View
     {
-        return view('pages.admin.users.create');
+        return view('pages.users.create');
     }
 
     /**
@@ -74,13 +77,13 @@ class RegisteredUserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id); // Fetch user or return 404 if not found
-        return view('pages.admin.users.show', compact('user'));
+        return view('pages.users.show', compact('user'));
     }
 
     public function edit($id)
     {
         $user = User::with('role')->find($id);
-        return view('pages.admin.users.edit', compact('user'));
+        return view('pages.users.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
