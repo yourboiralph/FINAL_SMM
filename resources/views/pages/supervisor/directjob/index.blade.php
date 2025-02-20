@@ -31,28 +31,37 @@
 
     {{-- Table Wrapper --}}
     <div class="overflow-x-auto overflow-y-auto bg-white shadow-md rounded-lg h-[500px]" style="max-height: 500px;">
-        <table class="w-full text-left border-collapse min-w-[500px]">
+        <table class="w-full table-fixed text-left border-collapse min-w-[500px]">
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
-                    <th class="px-6 py-3">Title</th>
-                    <th class="px-6 py-3">Designated</th>
-                    <th class="px-6 py-3">Actions</th>
+                    <th class="w-[30%] px-4 py-3">Title</th>
+                    <th class="w-[35%] px-4 py-3">Designated</th>
+                    <th class="w-[15%] px-4 py-3 text-center">Status</th>
+                    <th class="w-[20%] px-4 py-3 text-center">Actions</th>
                 </tr>
             </thead>
             <tbody id="tableBody" class="overflow-y-auto">
                 @forelse ($job_drafts as $job_draft)
                     <tr class="border-b">
-                        <td class="px-6 py-3">{{ $job_draft->jobOrder->title }}</td>
-                        <td class="px-6 py-3">
+                        <td class="w-[30%] px-4 py-3 truncate">{{ $job_draft->jobOrder->title }}</td>
+                        <td class="w-[35%] px-4 py-3 truncate">
                             @if ($job_draft->type == "content_writer")
                                 Content Writer - {{ $job_draft->contentWriter->name }}
                             @else
                                 Graphic Designer - {{ $job_draft->graphicDesigner->name }}
                             @endif
                         </td>
-                        <td class="px-6 py-3">
+                        <td class="w-[15%] px-4 text-center py-3 text-white">
+                            <p class="w-full px-2 py-1 rounded-lg text-wrap
+                                {{$job_draft->status == 'completed' ? "bg-green-400" : 
+                                ($job_draft->status == 'pending' ? "bg-gray-400" : "bg-[#fa7011]")}}
+                            ">
+                                {{ ucfirst($job_draft->status) }}
+                            </p>
+                        </td>
+                        <td class="w-[20%] px-4 py-3 text-center">
                             <a href="{{url('supervisor/directjob/edit/' . $job_draft->id)}}">
-                                <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
+                                <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white {{$job_draft->status !== 'pending' ? "bg-gray-400 cursor-not-allowed" : "bg-orange-500 hover:bg-orange-600"}} rounded " {{$job_draft->status !== 'pending' ? "disabled" : ""}}>
                                     Edit
                                 </button>
                             </a>
@@ -65,7 +74,7 @@
                     </tr>
                 @empty
                     <tr class="h-[400px]">
-                        <td colspan="3" class="px-6 py-3">
+                        <td colspan="4" class="px-6 py-3">
                             <div class="flex h-full items-center flex-col justify-center space-y-4">
                                 <i class="far fa-grin-beam-sweat text-7xl" style="color: #fa7011;"></i>
                                 <p class="text-[#fa7011]">No Data Found</p>
@@ -76,6 +85,7 @@
             </tbody>
         </table>
     </div>
+    
 
     {{-- Pagination Links --}}
     <div class="mt-4">

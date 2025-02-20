@@ -36,7 +36,7 @@
                 <tr>
                     <th class="px-6 py-3">Title</th>
                     <th class="px-6 py-3">Designated</th>
-                    <th class="text-right px-6">Actions</th>
+                    <th class="px-6 py-3">Actions</th>
                 </tr>
             </thead>
             <tbody id="tableBody" class="overflow-y-auto">
@@ -57,7 +57,7 @@
                                 Graphic Designer - {{ $job_draft->graphicDesigner->name }}
                             @endif
                         </td>
-                        <td class="px-6 py-3 text-right">
+                        <td class="px-6 py-3">
                             <a href="{{url('supervisor/task/edit/' . $job_draft->id)}}">
                                 <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
                                     Create

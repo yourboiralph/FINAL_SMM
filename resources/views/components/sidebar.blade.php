@@ -429,7 +429,10 @@
                 <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('topmanager', 'topmanager/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
                     <i class="fa-solid fa-list-check text-sm" style="color: #ffffff;"></i>
                 </div>
-                <h1 class="block">Approval</h1>
+                <div class="flex justify-between w-full">
+                    <p class="block">Approval</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ $topmanagerApprovalCount < 1 ? 'hidden' : '' }}">{{ $topmanagerApprovalCount }}</p>
+                </div>
             </a>
         </div>
 
