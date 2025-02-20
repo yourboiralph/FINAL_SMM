@@ -1,6 +1,6 @@
 @extends('layouts.application')
 
-@section('title', 'Clients')
+@section('title', 'Operations')
 @section('header', 'Download PDF')
 
 @section('content')
@@ -48,7 +48,7 @@
                         <td class="px-2 sm:px-4 py-2 sm:py-3 whitespace-nowrap">{{$job_draft->date_target}}</td>
                         <td class="px-2 sm:px-4 py-2 sm:py-3">{{$job_draft->status}}</td>
                         <td class="px-2 sm:px-4 py-2 sm:py-3 border-b">
-                            <a href="{{ route('client.history.download', $job_draft->id) }}">
+                            <a href="{{ route('admin.history.download', $job_draft->id) }}">
                                 <button class="px-2 sm:px-3 py-1 sm:py-2 text-xs sm:text-sm text-white bg-orange-500 rounded hover:bg-orange-600 whitespace-nowrap">
                                     <span><i class="fa-solid fa-download" style="color: #ffffff;"></i></span>
                                      Download PDF
