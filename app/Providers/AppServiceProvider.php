@@ -123,9 +123,13 @@ class AppServiceProvider extends ServiceProvider
                     ->where('type', 'graphic_designer')
                     ->where('graphic_designer_id', auth()->user()->id) // Cleaner way to get the authenticated user's ID
                     ->count(); // Retrieve all records
+
+                $topmanagerApprovalCount = JobDraft::where('status', 'Submitted to Top Manager')
+                    ->with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
+                    ->count();
             }
 
-            $view->with(compact('clientDraftCount', 'supervisorDraftCount', 'supervisorTaskCountContent', 'supervisorTaskCountGraphic', 'supervisorRevisionCount', 'operationTaskCountGraphic', 'supervisorApprovalCount', 'operationTaskCountContent', 'operationIncomingRequestCount', 'operationApprovalCount', 'operationRevisionCount', 'contentDraftCount', 'contentRevisionCount', 'graphicDraftCount', 'graphicRevisionCount'));
+            $view->with(compact('clientDraftCount', 'supervisorDraftCount', 'supervisorTaskCountContent', 'supervisorTaskCountGraphic', 'supervisorRevisionCount', 'operationTaskCountGraphic', 'supervisorApprovalCount', 'operationTaskCountContent', 'operationIncomingRequestCount', 'operationApprovalCount', 'operationRevisionCount', 'contentDraftCount', 'contentRevisionCount', 'graphicDraftCount', 'graphicRevisionCount', 'topmanagerApprovalCount'));
         });
     }
 }
