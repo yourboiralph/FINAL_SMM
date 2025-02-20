@@ -20,31 +20,29 @@
             </div>
         </a>
 
-
         <div class="flex items-center w-full md:w-auto relative">
             <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-500"></i>
             <input type="text" id="searchInput" class="w-full md:w-80 px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
             placeholder="Search..." onkeyup="filterTable()" />
-
         </div>
     </div>
 
     {{-- Table Wrapper --}}
     <div class="overflow-x-auto overflow-y-auto bg-white shadow-md rounded-lg h-[500px]" style="max-height: 500px;">
-        <table class="w-full text-left border-collapse min-w-[500px]">
+        <table class="w-full table-fixed text-left border-collapse min-w-[600px]">
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
-                    <th class="px-6 py-3">Title</th>
-                    <th class="px-6 py-3">Issued To</th>
-                    <th class="px-6 py-3">Actions</th>
+                    <th class="w-[40%] px-4 py-3">Title</th>
+                    <th class="w-[40%] px-4 py-3">Issued To</th>
+                    <th class="w-[20%] px-4 py-3 text-center">Actions</th>
                 </tr>
             </thead>
             <tbody id="tableBody" class="overflow-y-auto">
                 @forelse ($supervisor_requests as $supervisor_request)
                     <tr class="border-b">
-                        <td class="px-6 py-3">{{ $supervisor_request->title }}</td>
-                        <td class="px-6 py-3">{{ $supervisor_request->assignee->name }}</td>
-                        <td class="px-6 py-3">
+                        <td class="w-[40%] px-4 py-3 truncate">{{ $supervisor_request->title }}</td>
+                        <td class="w-[40%] px-4 py-3 truncate">{{ $supervisor_request->assignee->name }}</td>
+                        <td class="w-[20%] px-4 py-3 text-center">
                             <a href="{{ url('/supervisor/joborder/edit/' . $supervisor_request->id) }}">
                                 <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
                                     Edit
@@ -67,10 +65,7 @@
                         </td>
                     </tr>
                 @endforelse
-
-
             </tbody>
-
         </table>
     </div>
 
@@ -79,6 +74,7 @@
         {{-- {{ $list_of_projects->links('vendor.pagination.custom') }} --}}
     </div>
 </div>
+
 <script>
     function filterTable() {
         let input = document.getElementById("searchInput").value.toLowerCase();
@@ -97,4 +93,5 @@
         }
     }
 </script>
+
 @endsection

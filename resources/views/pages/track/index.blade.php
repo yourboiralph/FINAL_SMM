@@ -27,13 +27,13 @@
             <x-success />
         @endif
 
-        <table class="w-full table-fixed text-left border-collapse" id="projectTable">
+        <table class="w-full table-fixed text-left border-collapse min-w-[700px]" id="projectTable">
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
                     <th class="w-[30%] px-4 py-3">Title</th>
                     <th class="w-[35%] px-4 py-3">Designated</th>
-                    <th class="w-[20%] text-center py-3">Status</th>
-                    <th class="w-[15%] px-4 py-3 text-center">Show</th>
+                    <th class="w-[20%] text-center px-4 py-3">Status</th>
+                    <th class="w-[15%] px-4 py-3 text-center">Actions</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
@@ -47,16 +47,16 @@
                                 Graphic Designer - {{ $job_draft->graphicDesigner->name }}
                             @endif
                         </td>
-                        <td class="w-[20%] text-center py-3 text-white">
+                        <td class="w-[20%] text-center px-4 py-3 text-white">
                             <p class="w-full px-2 py-1 rounded-lg text-wrap
-                                {{$job_draft->status == 'completed' ? "bg-green-400" : 
-                                ($job_draft->status == 'pending' ? "bg-gray-400" : "bg-[#fa7011]")}}
+                                {{ $job_draft->status == 'completed' ? 'bg-green-400' : 
+                                ($job_draft->status == 'pending' ? 'bg-gray-400' : 'bg-[#fa7011]') }}
                             ">
                                 {{ ucfirst($job_draft->status) }}
                             </p>
                         </td>
                         <td class="w-[15%] px-4 py-3 text-center">
-                            <a href="{{url('track/' . $job_draft->id)}}">
+                            <a href="{{ url('track/' . $job_draft->id) }}">
                                 <button class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
                                     Show
                                 </button>
@@ -77,6 +77,7 @@
         </table>
     </div>
 </div>
+
 
 
 @endsection
