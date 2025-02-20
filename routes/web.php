@@ -24,6 +24,7 @@ use App\Http\Controllers\SupervisorApprovalController;
 use App\Http\Controllers\SupervisorDirectJobOrderController;
 use App\Http\Controllers\SupervisorHistoryController;
 use App\Http\Controllers\SupervisorJobOrderController;
+use App\Http\Controllers\SupervisorRenewalController;
 use App\Http\Controllers\SupervisorRevisionController;
 use App\Http\Controllers\SupervisorTaskController;
 use App\Http\Controllers\TopApprovalController;
@@ -135,6 +136,9 @@ Route::post('/client/update/{id}', [ClientRenewalController::class, 'update'])->
 
 Route::get('/operation/renewal', [OperationRenewalController::class, 'index'])->name('operation.renewal');
 Route::post('/operation/update/{id}', [OperationRenewalController::class, 'update'])->name('operation.update');
+
+Route::get('/supervisor/renewal', [SupervisorRenewalController::class, 'index'])->name('supervisor.renewal');
+Route::post('/supervisor/update/{id}', [SupervisorRenewalController::class, 'update'])->name('supervisor.update');
 
 Route::get('/supervisor/joborder', [SupervisorJobOrderController::class, 'index'])->name('supervisor.joborder');
 Route::get('/supervisor/joborder/create', [SupervisorJobOrderController::class, 'create'])->name('supervisor.create');
