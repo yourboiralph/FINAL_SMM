@@ -125,21 +125,25 @@
     }, 3000);
 
     document.getElementById("changeProfileBtn").addEventListener("click", function() {
-        document.getElementById("profileImageInput").click();
-    });
-    document.getElementById("profileImageInput").addEventListener("change", function(event) {
-        let file = event.target.files[0];
-        if (file) {
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                document.querySelector("img.rounded-full").src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-    document.getElementById("removeProfileBtn").addEventListener("click", function() {
-        document.getElementById("profileImageInput").value = "";
-        document.querySelector("img.rounded-full").src = "{{ asset('/Assets/user-profile-profilepage.png') }}";
-    });
+    document.getElementById("profileImageInput").click();
+});
+
+document.getElementById("profileImageInput").addEventListener("change", function(event) {
+    let file = event.target.files[0];
+    if (file) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            // Update only the image inside the form
+            document.getElementById("profileImage").src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+document.getElementById("removeProfileBtn").addEventListener("click", function() {
+    document.getElementById("profileImageInput").value = "";
+    document.getElementById("profileImage").src = "{{ asset('/Assets/user-profile-profilepage.png') }}";
+});
+
 </script>
 @endsection
