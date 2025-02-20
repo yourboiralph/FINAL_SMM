@@ -139,11 +139,13 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($my_tasks as $my_task )
-                                                @if ($my_task->contentWriter->name == Auth::user()->name || $my_task->graphicDesigner->name == Auth::user()->name)
+                                                @if ($my_task->contentWriter->name == Auth::user()->name && $my_task->type == "content_writer" || $my_task->graphicDesigner->name == Auth::user()->name && $my_task->type == "graphic_designer")
                                                     <tr>
-                                                        <td class="px-4 py-2 text-sm" id="taskType-{{$my_task->id}}">
-                                                            {{$my_task->jobOrder->title}} - {{$my_task->type}}
-                                                        </td>
+                                                        <td class="px-4 py-2 text-sm" 
+                                                        id="taskType-{{$my_task->id}}" 
+                                                        data-type="{{$my_task->type}}">
+                                                        {{$my_task->jobOrder->title}} - {{$my_task->type}}
+                                                    </td>
                                                         <td class="px-4 py-2 text-sm">
                                                             @if (auth()->user()->role_id == 2)
                                                                 <a href="{{url('operation/task/edit/' . $my_task->id)}}">
@@ -158,6 +160,7 @@
                                                         </td>
 
                                                     </tr>
+                                                
                                                 @endif
                         
                                             @endforeach
@@ -261,12 +264,14 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const element = document.getElementById('taskType-{{$my_task->id}}');
-            if (element) {
-                element.textContent = element.textContent
-                    .replace(/_/g, ' ')                // Replace underscores with spaces
-                    .replace(/\b\w/g, char => char.toUpperCase()); // Capitalize each word
+            document.querySelectorAll('td[id^="taskType-"]').forEach(element => {
+            const type = element.getAttribute('data-type');
+            if (type) {
+                const formatted = type.replace(/_/g, ' ') // Replace underscores with spaces
+                                     .replace(/\b\w/g, char => char.toUpperCase()); // Capitalize each word
+                element.textContent = element.textContent.split('-')[0] + '- ' + formatted;
             }
+        });
 
             // Get the carousel track
             const carouselTrack = document.querySelector('.carousel-track');
