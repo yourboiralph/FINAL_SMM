@@ -139,7 +139,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($my_tasks as $my_task )
-                                                @if ($my_task->contentWriter->name == Auth::user()->name)
+                                                @if ($my_task->contentWriter->name == Auth::user()->name || $my_task->graphicDesigner->name == Auth::user()->name)
                                                     <tr>
                                                         <td class="px-4 py-2 text-sm" id="taskType-{{$my_task->id}}">
                                                             {{$my_task->jobOrder->title}} - {{$my_task->type}}
