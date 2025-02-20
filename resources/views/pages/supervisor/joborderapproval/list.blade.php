@@ -22,29 +22,33 @@
 
 <div class="container mx-auto p-4 sm:p-6">
     <div class="overflow-x-auto overflow-y-auto bg-white shadow-md rounded-lg h-[500px] max-h-[500px]">
-                {{-- Success Message Component --}}
-                @if(session('Status'))
-                <x-success />
-            @endif
-        <table class="w-full text-left border-collapse min-w-full sm:min-w-max" id="projectTable">
+        {{-- Success Message Component --}}
+        @if(session('Status'))
+            <x-success />
+        @endif
+
+        <table class="w-full table-fixed text-left border-collapse min-w-[600px]" id="projectTable">
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
-                    <th class="px-2 text-nowrap sm:px-4 py-2 sm:py-3 text-xs sm:text-base">Title</th>
-
-
-                    <th class="px-2 text-nowrap sm:px-4 py-2 sm:py-3 text-xs sm:text-base">Status</th>
-                    <th class="px-2 text-nowrap sm:px-4 py-2 sm:py-3 text-xs sm:text-base">Actions</th>
+                    <th class="w-[60%] px-4 py-3 text-xs sm:text-base">Title</th>
+                    <th class="w-[20%] px-4 py-3 text-center text-xs sm:text-base">Status</th>
+                    <th class="w-[20%] px-4 py-3 text-center text-xs sm:text-base">Actions</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
                 @forelse ($job_drafts as $job_draft)
                     <tr class="project-row border-b text-xs sm:text-sm">
-                        <td class="px-2 sm:px-4 py-2 sm:py-3">{{ $job_draft->jobOrder->title }}</td>
-
-
-                        <td class="px-2 sm:px-4 py-2 sm:py-3">{{$job_draft->status}}</td>
-                        <td class="px-2 sm:px-4 py-2 sm:py-3 border-b">
-                            <a href="{{url('supervisor/approve/show/' . $job_draft->id)}}">
+                        <td class="w-[60%] px-4 py-3 truncate">{{ $job_draft->jobOrder->title }}</td>
+                        <td class="w-[20%] px-4 py-3 text-center text-white">
+                            <p class="w-full px-2 py-1 rounded-lg text-wrap
+                                {{ $job_draft->status == 'completed' ? 'bg-green-400' : 
+                                ($job_draft->status == 'pending' ? 'bg-gray-400' : 'bg-[#fa7011]') }}
+                            ">
+                                {{ ucfirst($job_draft->status) }}
+                            </p>
+                        </td>
+                        <td class="w-[20%] px-4 py-3 text-center border-b">
+                            <a href="{{ url('supervisor/approve/show/' . $job_draft->id) }}">
                                 <button class="px-2 sm:px-3 py-1 sm:py-2 text-xs sm:text-sm text-white bg-orange-500 rounded hover:bg-orange-600 whitespace-nowrap">
                                     View Form
                                 </button>
@@ -65,5 +69,6 @@
         </table>
     </div>
 </div>
+
 
 @endsection

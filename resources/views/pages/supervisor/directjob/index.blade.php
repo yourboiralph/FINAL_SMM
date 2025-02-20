@@ -20,18 +20,16 @@
             </div>
         </a>
 
-
         <div class="flex items-center w-full md:w-auto relative">
             <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-500"></i>
             <input type="text" id="searchInput" class="w-full md:w-80 px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
             placeholder="Search..." onkeyup="filterTable()" />
-
         </div>
     </div>
 
     {{-- Table Wrapper --}}
     <div class="overflow-x-auto overflow-y-auto bg-white shadow-md rounded-lg h-[500px]" style="max-height: 500px;">
-        <table class="w-full table-fixed text-left border-collapse min-w-[500px]">
+        <table class="w-full table-fixed text-left border-collapse min-w-[600px]">
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
                     <th class="w-[30%] px-4 py-3">Title</th>
@@ -85,7 +83,6 @@
             </tbody>
         </table>
     </div>
-    
 
     {{-- Pagination Links --}}
     <div class="mt-4">
@@ -111,5 +108,6 @@
         }
     }
 </script>
+
 
 @endsection
