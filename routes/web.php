@@ -22,6 +22,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SignatureController;
 use App\Http\Controllers\SupervisorApprovalController;
 use App\Http\Controllers\SupervisorDirectJobOrderController;
+use App\Http\Controllers\SupervisorHistoryController;
 use App\Http\Controllers\SupervisorJobOrderController;
 use App\Http\Controllers\SupervisorRevisionController;
 use App\Http\Controllers\SupervisorTaskController;
@@ -124,6 +125,10 @@ Route::get('/graphic/history/download/{id}', [GraphicHistoryController::class, '
 Route::get('/operation/history', [OperationHistoryController::class, 'index'])->name('operation.history');
 Route::get('/operation/history/show/{id}', [OperationHistoryController::class, 'show'])->name('operation.history.show');
 Route::get('/operation/history/download/{id}', [OperationHistoryController::class, 'downloadPDF'])->name('operation.history.download');
+
+Route::get('/supervisor/history', [SupervisorHistoryController::class, 'index'])->name('supervisor.history');
+Route::get('/supervisor/history/show/{id}', [SupervisorHistoryController::class, 'show'])->name('supervisor.history.show');
+Route::get('/supervisor/history/download/{id}', [SupervisorHistoryController::class, 'downloadPDF'])->name('supervisor.history.download');
 
 Route::get('/client/renewal', [ClientRenewalController::class, 'index'])->name('client.renewal');
 Route::post('/client/update/{id}', [ClientRenewalController::class, 'update'])->name('client.update');
