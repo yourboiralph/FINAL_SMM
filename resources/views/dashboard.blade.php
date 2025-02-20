@@ -139,22 +139,27 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($my_tasks as $my_task )
-                                                <tr>
-                                                    <td class="px-4 py-2 text-sm">{{$my_task->jobOrder->title}}</td>
-                                                    <td class="px-4 py-2 text-sm">
-                                                        @if (auth()->user()->role_id == 2)
-                                                            <a href="{{url('operation/task/edit/' . $my_task->id)}}">
-                                                                <p class="text-[#fa7011]">Create</p>
-                                                            </a>
+                                                @if ($my_task->contentWriter->name == Auth::user()->name)
+                                                    <tr>
+                                                        <td class="px-4 py-2 text-sm" id="taskType-{{$my_task->id}}">
+                                                            {{$my_task->jobOrder->title}} - {{$my_task->type}}
+                                                        </td>
+                                                        <td class="px-4 py-2 text-sm">
+                                                            @if (auth()->user()->role_id == 2)
+                                                                <a href="{{url('operation/task/edit/' . $my_task->id)}}">
+                                                                    <p class="text-[#fa7011]">Create</p>
+                                                                </a>
 
-                                                        @elseif (auth()->user()->role_id == 6)
-                                                            <a href="{{url('supervisor/task/edit/' . $my_task->id)}}">
-                                                                <p class="text-[#fa7011]">Create</p>
-                                                            </a>
-                                                        @endif
-                                                    </td>
+                                                            @elseif (auth()->user()->role_id == 6)
+                                                                <a href="{{url('supervisor/task/edit/' . $my_task->id)}}">
+                                                                    <p class="text-[#fa7011]">Create</p>
+                                                                </a>
+                                                            @endif
+                                                        </td>
 
-                                                </tr>
+                                                    </tr>
+                                                @endif
+                        
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -255,21 +260,32 @@
     </style>
 
     <script>
-        // Get the carousel track
-        const carouselTrack = document.querySelector('.carousel-track');
+        document.addEventListener('DOMContentLoaded', function () {
+            const element = document.getElementById('taskType-{{$my_task->id}}');
+            if (element) {
+                element.textContent = element.textContent
+                    .replace(/_/g, ' ')                // Replace underscores with spaces
+                    .replace(/\b\w/g, char => char.toUpperCase()); // Capitalize each word
+            }
 
-        // Duplicate images logic
-        const items = [...carouselTrack.children];
-        const firstSetWidth = items.length / 2 * items[0].offsetWidth;
+            // Get the carousel track
+            const carouselTrack = document.querySelector('.carousel-track');
 
-        // Reset scroll on animation end
-        carouselTrack.addEventListener('animationiteration', () => {
-            carouselTrack.style.transform = 'translateX(0)';
+            // Duplicate images logic
+            const items = [...carouselTrack.children];
+            const firstSetWidth = items.length / 2 * items[0].offsetWidth;
+
+            // Reset scroll on animation end
+            carouselTrack.addEventListener('animationiteration', () => {
+                carouselTrack.style.transform = 'translateX(0)';
+            });
+
+            // Restart animation
+            carouselTrack.style.animation = 'none';
+            setTimeout(() => {
+                carouselTrack.style.animation = '';
+            }, 10);
+
         });
-
-        // Restart animation
-        carouselTrack.style.animation = 'none';
-        setTimeout(() => {
-            carouselTrack.style.animation = '';
-        }, 10);
     </script>
+
