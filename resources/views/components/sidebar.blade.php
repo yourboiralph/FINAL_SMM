@@ -503,7 +503,7 @@
                 </div>
                 <div class="flex justify-between w-full">
                     <p class="block">Operation Job Order</p>
-                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ $supervisorDraftCount < 1 ? 'hidden' : '' }}">{{ $supervisorDraftCount }}</p>
+                    {{-- <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ $supervisorDraftCount < 1 ? 'hidden' : '' }}">{{ $supervisorDraftCount }}</p> --}}
                 </div>
             </a>
         </div>

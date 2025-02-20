@@ -46,7 +46,7 @@
 
 
                 <div class="px-10 col-span-3 w-full lg:col-span-3 bg-white shadow-md rounded-md pt-10 py-10">
-                    <div class="w-full h-full flex justify-center items-center border-2 border-gray-300">
+                    <div class="w-full h-full flex justify-center items-center ">
                         {{-- <img class="rounded-full w-32 h-32 object-cover"
                             src="{{ file_exists(public_path($user->image)) && $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}"
                             alt="User Image"> --}}

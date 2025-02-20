@@ -48,7 +48,7 @@
                             <div class="text-center">
                                 <h1 class="text-[#fa7011] font-bold">Signature</h1>
                             </div>
-                            <div class="w-full h-full flex justify-center items-center border-2 border-gray-300">
+                            <div class="w-full h-full flex justify-center items-center">
                                 @if ($user->signature)
                                     <img class="object-fill w-full" src="{{ asset($user->signature) }}" alt="User Signature">
                                 @else
