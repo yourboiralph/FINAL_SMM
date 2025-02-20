@@ -31,7 +31,7 @@
                 </div>
                 <div class="flex justify-between w-full">
                     <p class="block">My Tasks</p>
-                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ $operationTaskCount < 1 ? 'hidden' : '' }}">{{ $operationTaskCount }}</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ $operationTaskCountContent + $operationTaskCountGraphic < 1 ? 'hidden' : '' }}">{{ $operationTaskCountContent + $operationTaskCountGraphic }}</p>
                 </div>
             </a>
         </div>
@@ -528,7 +528,7 @@
                 </div>
                 <div class="flex justify-between w-full">
                     <p class="block">My Tasks</p>
-                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ $supervisorTaskCount < 1 ? 'hidden' : '' }}">{{ $supervisorTaskCount }}</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ ($supervisorTaskCountContent + $supervisorTaskCountGraphic) < 1 ? 'hidden' : '' }}">{{ $supervisorTaskCountContent + $supervisorTaskCountGraphic}}</p>
                 </div>
             </a>
         </div>
