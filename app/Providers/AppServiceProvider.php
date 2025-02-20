@@ -119,6 +119,13 @@ class AppServiceProvider extends ServiceProvider
                     ->count();
 
                 $graphicRevisionCount = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client', 'revisions'])
+                    ->where('status', 'Revision')
+                    ->where('type', 'graphic_designer')
+                    ->where('graphic_designer_id', auth()->user()->id) // Cleaner way to get the authenticated user's ID
+                    ->count(); // Retrieve all records
+            }
+
+            $view->with(compact('clientDraftCount', 'supervisorDraftCount', 'supervisorTaskCountContent', 'supervisorTaskCountGraphic', 'supervisorRevisionCount', 'operationTaskCountGraphic', 'supervisorApprovalCount', 'operationTaskCountContent', 'operationIncomingRequestCount', 'operationApprovalCount', 'operationRevisionCount', 'contentDraftCount', 'contentRevisionCount', 'graphicDraftCount', 'graphicRevisionCount'));
         });
     }
 }
