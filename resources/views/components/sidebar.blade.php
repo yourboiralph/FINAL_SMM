@@ -261,7 +261,7 @@
                 </div>
                 <div class="flex justify-between w-full">
                     <p class="block">My Tasks</p>
-                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ $operationRevisionCount < 1 ? 'hidden' : '' }}">{{ $operationRevisionCount }}</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ $contentDraftCount < 1 ? 'hidden' : '' }}">{{ $contentDraftCount }}</p>
                 </div>
             </a>
         </div>

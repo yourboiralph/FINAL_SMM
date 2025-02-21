@@ -45,12 +45,24 @@
                         </td>
 
 
-                        <td class="px-6 py-3 border-b">
-                            <a href="{{url('content/revisions/edit/' . $job_draft->id)}}">
-                                <button class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
-                                    Edit Draft
-                                </button>
-                            </a>
+                        <td class="px-6 py-3 border-b flex space-x-3">
+
+                            <div>
+                                <a href="{{url('content/revisions/edit/' . $job_draft->id)}}">
+                                    <button class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
+                                        Edit Draft
+                                    </button>
+                                </a>
+                            </div>
+
+                            <div>
+                                <a href="{{url('content/revisions/show/' . $job_draft->id)}}">
+                                    <button class="px-4 py-2 text-sm text-white bg-blue-500 rounded hover:bg-blue-600">
+                                        Show
+                                    </button>
+                                </a>
+                            </div>
+
                         </td>
                     </tr>
                 @empty
