@@ -107,7 +107,7 @@ Route::get('/content/revisions/', [ContentRevisionController::class, 'index'])->
 Route::get('/content/revisions/edit/{id}', [ContentRevisionController::class, 'edit']);
 Route::put('/content/revisions/update/{id}', [ContentRevisionController::class, 'update']);
 
-Route::get('/graphic/revisions', [GraphicRevisionController::class, 'index']);
+Route::get('/graphic/revisions', [GraphicRevisionController::class, 'index'])->name('graphic.revisions');
 Route::get('/graphic/revisions/edit/{id}', [GraphicRevisionController::class, 'edit']);
 Route::put('/graphic/revisions/update/{id}', [GraphicRevisionController::class, 'update']);
 

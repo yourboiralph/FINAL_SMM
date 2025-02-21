@@ -37,7 +37,9 @@ class ClientApprovalController extends Controller
 
     public function update(Request $request, $id)
     {
-
+        $request->validate([
+            'feedback' => 'required',
+        ]);
 
         $job_draft_id = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
 
@@ -51,6 +53,7 @@ class ClientApprovalController extends Controller
             JobDraft::create([
                 'job_order_id' => $job_draft_id->job_order_id,
                 'type' => 'graphic_designer',
+                'date_started' => Carbon::now()->toDateString(), // Set date_started to today
                 'date_target' => Carbon::now()->addDays(3)->toDateString(),
                 'status' => 'pending',
                 'content_writer_id' => $job_draft_id->content_writer_id,
@@ -65,6 +68,7 @@ class ClientApprovalController extends Controller
                 JobDraft::create([
                     'job_order_id' => $job_draft_id->job_order_id,
                     'type' => 'content_writer',
+                    'date_started' => Carbon::now()->toDateString(), // Set date_started to today
                     'date_target' => Carbon::now()->addDays(3)->toDateString(),
                     'status' => 'pending',
                     'content_writer_id' => $job_draft_id->content_writer_id,
@@ -127,6 +131,7 @@ class ClientApprovalController extends Controller
         JobDraft::create([
             'job_order_id' => $job_draft->job_order_id, // Correct reference
             'type' => 'content_writer',
+            'date_started' => Carbon::now()->toDateString(), // Set date_started to today
             'date_target' => Carbon::now()->addDays(3)->toDateString(),
             'status' => 'pending',
             'content_writer_id' => $job_draft->content_writer_id,

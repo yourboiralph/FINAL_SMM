@@ -41,6 +41,7 @@ class OperationRenewalController extends Controller
                 JobDraft::create([
                     'job_order_id' => $jobDraft->job_order_id,
                     'type' => 'content_writer',
+                    'date_started' => Carbon::now()->toDateString(), // Set date_started to today
                     'date_target' => Carbon::now()->addDays(3)->toDateString(),
                     'status' => 'pending',
                     'content_writer_id' => $jobDraft->content_writer_id,

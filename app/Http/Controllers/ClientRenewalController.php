@@ -20,31 +20,32 @@ class ClientRenewalController extends Controller
     public function update(Request $request, $id)
     {
         $jobOrder = JobOrder::find($id);
-    
+
         if (!$jobOrder) {
             return response()->json(['success' => false, 'message' => 'Job Order not found'], 404);
         }
-    
+
         // Update the renewable status
         $jobOrder->renewable = $request->input('renewable');
         $jobOrder->save();
 
 
-    
+
         // Check if renewal is required
         if ($request->input('renewable')) {
             $jobDraft = JobDraft::where('job_order_id', $id)->orderBy('id', 'desc')->first();
 
-    
+
             if (!$jobDraft) {
                 return response()->json(['success' => false, 'message' => 'Job Draft not found'], 404);
             }
-    
+
             if ($jobDraft->status == 'completed') {
                 // Create a new JobDraft entry for renewal
                 JobDraft::create([
                     'job_order_id' => $jobDraft->job_order_id,
                     'type' => 'content_writer',
+                    'date_started' => Carbon::now()->toDateString(), // Set date_started to today
                     'date_target' => Carbon::now()->addDays(3)->toDateString(),
                     'status' => 'pending',
                     'content_writer_id' => $jobDraft->content_writer_id,
@@ -55,5 +56,4 @@ class ClientRenewalController extends Controller
         }
         return response()->json(['success' => true, 'message' => 'Job Order updated successfully']);
     }
-    
 }

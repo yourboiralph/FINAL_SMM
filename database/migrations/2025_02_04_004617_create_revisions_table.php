@@ -19,7 +19,11 @@ return new class extends Migration
             $table->unsignedBigInteger('job_draft_id');
             $table->unsignedBigInteger('declined_by');
             $table->text('summary');
+            $table->text('last_draft');
+            $table->text('submitted_draft')->nullable();
+            $table->timestamp('date_submitted')->nullable();
             $table->timestamp('revision_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('status');
 
             // Foreign Key Constraint
             $table->foreign('job_draft_id')->references('id')->on('job_drafts')->onDelete('cascade');

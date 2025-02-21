@@ -28,11 +28,13 @@ class JobOrderTrackerController extends Controller
         } elseif ($authuser->role_id == "3") {
             $job_drafts = JobDraft::where('content_writer_id', $authuser->id)
                 ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')
+                ->where('type', 'content_writer')
                 ->orderBy('date_started', 'desc')
                 ->get();
         } elseif ($authuser->role_id == "4") {
             $job_drafts = JobDraft::where('graphic_designer_id', $authuser->id)
                 ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')
+                ->where('type', 'graphic_designer')
                 ->orderBy('date_started', 'desc')
                 ->get();
         }
