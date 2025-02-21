@@ -26,40 +26,63 @@
 <div class="container mx-auto p-6">
     <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow bg-white">
         <div>
-            <a href="{{ url('operation/revision/') }}">
+            <a href="{{ url('supervisor/revision/') }}">
                 <div class="w-fit px-4 py-1 bg-gray-400 rounded-md text-white custom-shadow custom-hover-shadow">
                     Back
                 </div>
             </a>
         </div>
-        <form action="{{ url('operation/revision/update/' . $job_draft->id) }}" method="POST">
+        <form action="{{ url('supervisor/revision/update/' . $job_draft->id) }}" method="POST">
             @csrf
             @method('PUT')
             <h1 class="text-xl font-bold mt-4">Create Draft</h1>
             <div class="grid grid-cols-4 space-y-4">
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
-                    <div class="col-span-4 grid grid-cols-4">
-                        <div class="col-span-1 w-full">
+                    <div class="col-span-4 grid grid-cols-5 space-y-4 lg:space-y-0">
+                        <div class="col-span-5 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Title</p>
                             <p class="text-xl">{{ $job_draft->jobOrder->title }}</p>
                         </div>
-                        <div class="col-span-1 w-full">
+                        <div class="col-span-5 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Client</p>
                             <p class="text-xl">{{ $job_draft->client->name }}</p>
                         </div>
-                        <div class="col-span-1 w-full">
+                        <div class="col-span-5 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Date Started</p>
                             <p class="text-xl">{{ \Carbon\Carbon::parse($job_draft->date_started)->format('Y-m-d') }}</p>
                         </div>
-                        <div class="col-span-1 w-full">
+                        <div class="col-span-5 lg:col-span-1 w-full">
                             <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Date Target</p>
                             <p class="text-xl">{{ \Carbon\Carbon::parse($job_draft->date_target)->format('Y-m-d') }}</p>
                         </div>
+                        <div class="col-span-5 lg:col-span-1 w-full">
+                            <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Revision By</p>
+                            <p class="text-xl">{{ $job_draft->revisions->last()->declinedBy->name }}</p>
+                        </div>
+                        <div class="w-full col-span-5 grid grid-cols-4 justify-between">
+                            <div class="col-span-5 w-full mt-4">
+                                <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Revisions</p>
+                                <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
+                                    {!! $job_draft->revisions->last()->summary !!}
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-span-5 w-full mt-4">
+                            <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Description</p>
+                            <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
+                                {!! $job_draft->jobOrder->description !!}
+                            </div>
+                        </div>
                     </div>
+
                     <div class="col-span-4 h-fit w-full">
-                        <p class="text-sm text-gray-600 max-h-96 overflow-y-auto">Instructions</p>
+                        <p class="text-sm text-gray-600 border-[#fa7011] border-b-2 w-fit">Last Draft</p>
+
+                        <!-- Display last draft -->
                         <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
-                            {!! $job_draft->jobOrder->description !!}
+
+                            {!! $job_draft->draft !!}
                         </div>
 
                         @error('draft')
@@ -94,7 +117,7 @@
                 console.log('CKEditor 5 initialized!', editor);
 
                 // Load existing draft content from old input if available, otherwise use the job draft's content
-                editor.setData(`{!! addslashes(old('draft', $job_draft->draft ?? '')) !!}`);
+                editor.setData();
 
                 // Before form submission, update the textarea with the editor's data
                 document.querySelector("form").addEventListener("submit", function () {
