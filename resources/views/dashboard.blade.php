@@ -13,7 +13,7 @@
     <div>
         <div class="grid grid-cols-1 md:grid md:grid-cols-3 md:px-2 mx-auto">
             <div class="col-span-1 md:col-span-2">
-                <img class="" src="/Assets/Banner.png" alt="" draggable="false">
+                <img class="" src="{{asset('/Assets/Banner.png')}}" alt="" draggable="false">
                 <h1 class="mx-6 border-b-2 border-[#fa7011] w-fit">Approvals</h1>
                 <div class="px-6 mt-2">
                     <div class="w-full p-4 bg-white rounded-lg shadow-md">
@@ -178,7 +178,7 @@
                 <div class="mt-10 w-full flex flex-col justify-center items-center shadow-lg">
                     <div class="w-full h-full">
                         <iframe width="100%" height="100%"
-                            src="https://www.youtube.com/embed/QF-HFO7Uop0?si=APB2sG6Xrdm-C-ct"
+                            src="{{url('https://www.youtube.com/embed/QF-HFO7Uop0?si=APB2sG6Xrdm-C-ct')}}"
                             title="YouTube video player" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
