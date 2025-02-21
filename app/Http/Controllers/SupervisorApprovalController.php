@@ -110,7 +110,7 @@ class SupervisorApprovalController extends Controller
 
         $job_draft->update([
             'status' => 'Revision',
-            'signature_supervisor' => null,
+            'signature_admin' => null,
             'admin_signed' => null,
         ]);
         return redirect()->route('supervisor.approve')->with('Status', 'Job Order Declined Successfully');
