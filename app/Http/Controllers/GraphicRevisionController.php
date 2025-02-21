@@ -40,5 +40,7 @@ class GraphicRevisionController extends Controller
             'status' => 'Submitted to Operation',
             'draft' => $request->draft
         ]);
+
+        return redirect()->route('graphic.revisions')->with('Status', 'Job Order Updated Successfully');
     }
 }

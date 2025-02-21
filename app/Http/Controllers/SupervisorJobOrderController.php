@@ -67,5 +67,6 @@ class SupervisorJobOrderController extends Controller
             'description' => $request->description,
             'assigned_to' => $request->assigned_to
         ]);
+        return redirect()->route('supervisor.joborder')->with('Status', 'Job Order Updated Successfully');
     }
 }
