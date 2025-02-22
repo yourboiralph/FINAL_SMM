@@ -184,6 +184,10 @@ Route::get('/supervisor/revision/edit/{id}', [SupervisorRevisionController::clas
 Route::put('/supervisor/revision/update/{id}', [SupervisorRevisionController::class, 'update'])->name('supervisor.update');
 
 Route::get('/revision', [RevisionController::class, 'index'])->name('revision');
+Route::get('/revision/show/{id}', [RevisionController::class, 'show'])->name('revision.show');
+Route::get('/revision/edit/{id}', [RevisionController::class, 'edit'])->name('revision.edit');
+Route::put('/revision/update/{id}', [RevisionController::class, 'update'])->name('revision.update');
+
 
 Route::resource('/track', JobOrderTrackerController::class);
 

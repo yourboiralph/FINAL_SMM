@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\JobDraft;
 use App\Models\JobOrder;
+use App\Models\Revision;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class RevisionController extends Controller
@@ -46,5 +48,36 @@ class RevisionController extends Controller
         }
 
         return view('pages.revision.index', compact('job_drafts'));
+    }
+
+    public function show($id)
+    {
+        $revisions = Revision::with('jobDraft')->where('job_draft_id', $id);
+        return view('pages.revision.show', compact('revisions'));
+    }
+
+    public function edit($id)
+    {
+        $revisions = Revision::with('jobDraft')->where('job_draft_id', $id)->where('status', 'pending');
+        return view('pages.revision.edit', compact('revisions'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'draft' => 'required',
+        ]);
+        $job_draft = JobDraft::find($id);
+        $revision = Revision::where('job_draft_id', $id)->where('status', 'pending');
+        $job_draft->update([
+            'submitted_draft' => $request->draft,
+            'date_submitted' => Carbon::now()->toDateString(), // Set date_started to today,
+            'status' => 'complete'
+        ]);
+        $job_draft->update([
+            'status' => 'Submitted to Operations',
+            'draft' => $request->draft
+        ]);
+        return redirect()->route('revision', compact('job_draft'));
     }
 }
