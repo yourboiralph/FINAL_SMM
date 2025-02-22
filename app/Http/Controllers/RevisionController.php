@@ -52,13 +52,13 @@ class RevisionController extends Controller
 
     public function show($id)
     {
-        $revisions = Revision::with('jobDraft')->where('job_draft_id', $id);
+        $revisions = Revision::with('jobDraft')->where('job_draft_id', $id)->get();
         return view('pages.revision.show', compact('revisions'));
     }
 
     public function edit($id)
     {
-        $revisions = Revision::with('jobDraft')->where('job_draft_id', $id)->where('status', 'pending');
+        $revisions = Revision::with(['jobDraft.jobOrder', 'jobDraft.client'])->where('job_draft_id', $id)->where('status', 'pending')->first();
         return view('pages.revision.edit', compact('revisions'));
     }
 
@@ -68,8 +68,8 @@ class RevisionController extends Controller
             'draft' => 'required',
         ]);
         $job_draft = JobDraft::find($id);
-        $revision = Revision::where('job_draft_id', $id)->where('status', 'pending');
-        $job_draft->update([
+        $revision = Revision::where('job_draft_id', $id)->where('status', 'pending')->first();
+        $revision->update([
             'submitted_draft' => $request->draft,
             'date_submitted' => Carbon::now()->toDateString(), // Set date_started to today,
             'status' => 'complete'

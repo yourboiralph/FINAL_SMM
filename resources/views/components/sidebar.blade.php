@@ -78,10 +78,10 @@
         </div>
 
         <div class="block px-6">
-            <a href="{{ url('/operation/revision') }}"
-                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('operation/revision', 'operation/revisions', 'operation/revisions/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is('operation/revision', 'operation/revisions', 'operation/revisions/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('operation/revision', 'operation/revision/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
+            <a href="{{ url('/revision') }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('revision', 'revisions', 'revisions/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is('revision', 'revisions', 'revisions/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('revision', 'revision/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
                     <i class="fa-solid fa-pencil-alt text-sm" style="color: #ffffff;"></i>
                 </div>
                 <div class="flex justify-between w-full">
@@ -289,14 +289,14 @@
         </div>
 
         <div class="block px-6">
-            <a href="{{ url('/content/revisions') }}"
-                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('content/revisions', 'content/revisions/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is('content/revisions', 'content/revisions/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('content/revisions', 'content/revisions/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
+            <a href="{{ url('/revision') }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('revision', 'revisions', 'revisions/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is('revision', 'revisions', 'revisions/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('revision', 'revision/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
                     <i class="fa-solid fa-pencil-alt text-sm" style="color: #ffffff;"></i>
                 </div>
                 <div class="flex justify-between w-full">
-                    <p class="block">Revision Checklist</p>
+                    <p class="block">My Revisions</p>
                     <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ $contentRevisionCount < 1 ? 'hidden' : '' }}">{{ $contentRevisionCount }}</p>
                 </div>
             </a>
@@ -352,14 +352,14 @@
         </div>
 
         <div class="block px-6">
-            <a href="{{ url('/graphic/revisions') }}"
-                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('graphic/revisions', 'graphic/revisions/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is('graphic/revisions', 'graphic/revisions/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('graphic/revisions', 'graphic/revisions/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
+            <a href="{{ url('/revision') }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('revision', 'revisions', 'revisions/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is('revision', 'revisions', 'revisions/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('revision', 'revision/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
                     <i class="fa-solid fa-pencil-alt text-sm" style="color: #ffffff;"></i>
                 </div>
                 <div class="flex justify-between w-full">
-                    <p class="block">Revision Checklist</p>
+                    <p class="block">My Revisions</p>
                     <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ $graphicRevisionCount < 1 ? 'hidden' : '' }}">{{ $graphicRevisionCount }}</p>
                 </div>
             </a>
@@ -534,14 +534,14 @@
         </div>
 
         <div class="block px-6">
-            <a href="{{ url('/supervisor/revision') }}"
-                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('supervisor/revision', 'supervisor/revision/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is('supervisor/revision', 'supervisor/revision/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('supervisor/revision', 'supervisor/revision/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
+            <a href="{{ url('/revision') }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('revision', 'revisions', 'revisions/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is('revision', 'revisions', 'revisions/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('revision', 'revision/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
                     <i class="fa-solid fa-pencil-alt text-sm" style="color: #ffffff;"></i>
                 </div>
                 <div class="flex justify-between w-full">
-                    <p class="block">Revisions</p>
+                    <p class="block">My Revisions</p>
                     <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ $supervisorRevisionCount < 1 ? 'hidden' : '' }}">{{ $supervisorRevisionCount }}</p>
                 </div>
             </a>
