@@ -15,6 +15,11 @@ class Revision extends Model
         'job_draft_id',
         'declined_by',
         'summary',
+        'last_draft',
+        'submitted_draft',
+        'date_submitted',
+        'revision_date',
+        'status'
     ];
 
     /**

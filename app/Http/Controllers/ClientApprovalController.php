@@ -91,14 +91,17 @@ class ClientApprovalController extends Controller
             'summary' => 'required',
         ]);
 
+        $job_draft = JobDraft::find($id);
+
         // Update Database with Signature Path
         Revision::create([
             'job_draft_id' => $id,
             'declined_by' => auth()->user()->id,
             'summary' => $request->summary,
+            'last_draft' => $job_draft->draft,
+            'revision_date' => Carbon::now()->toDateString(), // Set date_started to today
+            'status' => 'pending'
         ]);
-
-        $job_draft = JobDraft::find($id);
 
         $job_draft->update([
             'status' => 'Revision',
