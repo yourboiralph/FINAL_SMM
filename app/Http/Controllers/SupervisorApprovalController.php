@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JobDraft;
 use App\Models\Revision;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SupervisorApprovalController extends Controller
@@ -99,14 +100,16 @@ class SupervisorApprovalController extends Controller
             'summary' => 'required',
         ]);
 
-        // Update Database with Signature Path
+        $job_draft = JobDraft::find($id);
+
         Revision::create([
             'job_draft_id' => $id,
             'declined_by' => auth()->user()->id,
             'summary' => $request->summary,
+            'last_draft' => $job_draft->draft,
+            'revision_date' => Carbon::now()->toDateString(), // Set date_started to today
+            'status' => 'pending'
         ]);
-
-        $job_draft = JobDraft::find($id);
 
         $job_draft->update([
             'status' => 'Revision',
