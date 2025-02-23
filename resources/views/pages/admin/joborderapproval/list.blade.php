@@ -52,8 +52,7 @@
                         <td class="w-[15%] px-2 sm:px-4 py-2 sm:py-3 text-center text-white">
                             <p class="w-full px-2 py-1 rounded-lg text-wrap
                                 {{ $job_draft->status == 'completed' ? 'bg-green-400' : 
-                                ($job_draft->status == 'pending' ? 'bg-gray-400' : 'bg-[#fa7011]') }}
-                            ">
+                                ($job_draft->status == 'Revision' ? 'bg-red-600' : 'bg-[#fa6e117e]') }} ">
                                 {{ ucfirst($job_draft->status) }}
                             </p>
                         </td>

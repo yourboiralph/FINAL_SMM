@@ -55,13 +55,23 @@ class AppServiceProvider extends ServiceProvider
                     ->with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client']) // Ensures relations are loaded
                     ->count();
 
-                $supervisorRevisionCount = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client', 'revisions'])
-                    ->where('status', 'Revision')
-                    ->where(function ($query) {
-                        $query->where('content_writer_id', auth()->user()->id)
-                            ->orWhere('graphic_designer_id', auth()->user()->id);
-                    })
-                    ->count(); // Retrieve all records
+                $job_drafts_content = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')
+                    ->whereHas('revisions')
+                    ->where('type', 'content_writer')
+                    ->where('content_writer_id', $authuser->id)
+                    ->get();
+    
+                $job_drafts_graphic = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')
+                    ->whereHas('revisions')
+                    ->where('type', 'graphic_designer')
+                    ->where('graphic_designer_id', $authuser->id)
+                    ->get();
+    
+                // Merge both collections into one
+                $revisionCollection = $job_drafts_content->merge($job_drafts_graphic);
+
+                // Count total items if needed
+                $revisionCount = $revisionCollection->count();
 
                 $supervisorApprovalCount = JobDraft::where('status', 'Submitted to Supervisor')
                     ->with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
@@ -106,11 +116,11 @@ class AppServiceProvider extends ServiceProvider
                     ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client') // Corrected ->with() usage
                     ->count();
 
-                $contentRevisionCount = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client', 'revisions'])
-                    ->where('status', 'Revision')
+                $contentRevisionCount = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')
+                    ->whereHas('revisions')
                     ->where('type', 'content_writer')
-                    ->where('content_writer_id', auth()->user()->id) // Cleaner way to get the authenticated user's ID
-                    ->count(); // Retrieve all records
+                    ->where('content_writer_id', $authuser->id)
+                    ->count();
 
                 $graphicDraftCount = JobDraft::where('graphic_designer_id', $authuser->id)
                     ->where('status', 'pending')
@@ -118,18 +128,18 @@ class AppServiceProvider extends ServiceProvider
                     ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client') // Corrected ->with() usage
                     ->count();
 
-                $graphicRevisionCount = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client', 'revisions'])
-                    ->where('status', 'Revision')
+                $graphicRevisionCount = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')
+                    ->whereHas('revisions')
                     ->where('type', 'graphic_designer')
-                    ->where('graphic_designer_id', auth()->user()->id) // Cleaner way to get the authenticated user's ID
-                    ->count(); // Retrieve all records
+                    ->where('graphic_designer_id', $authuser->id)
+                    ->count();
 
                 $topmanagerApprovalCount = JobDraft::where('status', 'Submitted to Top Manager')
                     ->with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
                     ->count();
             }
 
-            $view->with(compact('clientDraftCount', 'supervisorDraftCount', 'supervisorTaskCountContent', 'supervisorTaskCountGraphic', 'supervisorRevisionCount', 'operationTaskCountGraphic', 'supervisorApprovalCount', 'operationTaskCountContent', 'operationIncomingRequestCount', 'operationApprovalCount', 'operationRevisionCount', 'contentDraftCount', 'contentRevisionCount', 'graphicDraftCount', 'graphicRevisionCount', 'topmanagerApprovalCount'));
+            $view->with(compact('clientDraftCount', 'supervisorDraftCount', 'supervisorTaskCountContent', 'supervisorTaskCountGraphic', 'operationTaskCountGraphic', 'supervisorApprovalCount', 'operationTaskCountContent', 'operationIncomingRequestCount', 'operationApprovalCount', 'operationRevisionCount', 'contentDraftCount', 'contentRevisionCount', 'graphicDraftCount', 'graphicRevisionCount', 'topmanagerApprovalCount', 'revisionCount'));
         });
     }
 }
