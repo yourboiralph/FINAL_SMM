@@ -86,7 +86,7 @@
                 </div>
                 <div class="flex justify-between w-full">
                     <p class="block">My Revisions</p>
-                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ $operationRevisionCount < 1 ? 'hidden' : '' }}">{{ $operationRevisionCount }}</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ $revisionCount < 1 ? 'hidden' : '' }}">{{ $revisionCount }}</p>
                 </div>
             </a>
         </div>
@@ -542,7 +542,7 @@
                 </div>
                 <div class="flex justify-between w-full">
                     <p class="block">My Revisions</p>
-                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ $supervisorRevisionCount < 1 ? 'hidden' : '' }}">{{ $supervisorRevisionCount }}</p>
+                    <p class="mr-10 text-[.8rem] py-1 text-white px-2 rounded-lg bg-red-600 {{ $revisionCount < 1 ? 'hidden' : '' }}">{{ $revisionCount }}</p>
                 </div>
             </a>
         </div>

@@ -20,28 +20,30 @@
             </div>
         </a>
 
+
         <div class="flex items-center w-full md:w-auto relative">
             <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-500"></i>
             <input type="text" id="searchInput" class="w-full md:w-80 px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
             placeholder="Search..." onkeyup="filterTable()" />
+
         </div>
     </div>
 
     {{-- Table Wrapper --}}
     <div class="overflow-x-auto overflow-y-auto bg-white shadow-md rounded-lg h-[500px]" style="max-height: 500px;">
-        <table class="w-full table-fixed text-left border-collapse min-w-[600px]">
+        <table class="w-full table-fixed text-left border-collapse min-w-[500px]">
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
-                    <th class="w-[30%] px-4 py-3">Title</th>
+                    <th class="w-[25%] px-4 py-3">Title</th>
                     <th class="w-[35%] px-4 py-3">Designated</th>
-                    <th class="w-[15%] px-4 py-3 text-center">Status</th>
+                    <th class="w-[20%] px-4 py-3 text-center">Status</th>
                     <th class="w-[20%] px-4 py-3 text-center">Actions</th>
                 </tr>
             </thead>
             <tbody id="tableBody" class="overflow-y-auto">
                 @forelse ($job_drafts as $job_draft)
                     <tr class="border-b">
-                        <td class="w-[30%] px-4 py-3 truncate">{{ $job_draft->jobOrder->title }}</td>
+                        <td class="w-[25%] px-4 py-3 truncate">{{ $job_draft->jobOrder->title }}</td>
                         <td class="w-[35%] px-4 py-3 truncate">
                             @if ($job_draft->type == "content_writer")
                                 Content Writer - {{ $job_draft->contentWriter->name }}
@@ -49,11 +51,10 @@
                                 Graphic Designer - {{ $job_draft->graphicDesigner->name }}
                             @endif
                         </td>
-                        <td class="w-[15%] px-4 text-center py-3 text-white">
+                        <td class="w-[20%] px-6 py-3 text-white text-center">
                             <p class="w-full px-2 py-1 rounded-lg text-wrap
-                                {{$job_draft->status == 'completed' ? "bg-green-400" : 
-                                ($job_draft->status == 'pending' ? "bg-gray-400" : "bg-[#fa7011]")}}
-                            ">
+                                {{ $job_draft->status == 'completed' ? 'bg-green-400' : 
+                                ($job_draft->status == 'Revision' ? 'bg-red-600' : 'bg-[#fa6e117e]') }} ">
                                 {{ ucfirst($job_draft->status) }}
                             </p>
                         </td>
@@ -83,6 +84,7 @@
             </tbody>
         </table>
     </div>
+    
 
     {{-- Pagination Links --}}
     <div class="mt-4">
@@ -108,6 +110,5 @@
         }
     }
 </script>
-
 
 @endsection
