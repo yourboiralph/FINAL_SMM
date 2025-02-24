@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="col-span-4 h-fit">
-                <p class="text-sm font-bold text-gray-600">Description</p>
+                <p class="text-sm font-bold text-gray-600">Instructions</p>
 
                 <!-- CKEditor Read-Only -->
                 <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">

@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="col-span-4 h-fit">
-                <p class="text-sm font-bold text-gray-600">Description</p>
+                <p class="text-sm font-bold text-gray-600">Instructions</p>
                 <!-- Quill Editor -->
                 <div id="quill-editor" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring min-h-fit max-h-[500px] overflow-y-auto">{!! json_encode($job_draft->jobOrder->description) !!}</div>
 
