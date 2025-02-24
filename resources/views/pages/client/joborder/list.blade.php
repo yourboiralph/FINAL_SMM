@@ -57,7 +57,7 @@
                         </td>
                         <td class="w-[10%] px-4 sm:px-6 py-3 text-center border-b">
                             <a href="{{ url('client/show/' . $job_draft->id) }}">
-                                <button class="px-3 sm:px-4 py-2 text-xs sm:text-sm text-white bg-orange-500 rounded hover:bg-orange-600 whitespace-nowrap">
+                                <button class="px-3 sm:px-4 py-2 text-xs sm:text-sm text-white bg-green-500 rounded hover:bg-green-600 whitespace-nowrap">
                                     View Form
                                 </button>
                             </a>

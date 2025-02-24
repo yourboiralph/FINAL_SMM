@@ -48,7 +48,7 @@
                         <td class="w-[40%] px-4 py-3 truncate">{{ $supervisor_request->assignee->name }}</td>
                         <td class="w-[20%] px-4 py-3 text-center">
                             <a href="{{ url('/supervisor/joborder/edit/' . $supervisor_request->id) }}">
-                                <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
+                                <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
                                     Edit
                                 </button>
                             </a>
