@@ -29,16 +29,25 @@ class DashboardController extends Controller
                 ->limit(5) // Ensure a maximum of 5 records
                 ->get();
 
-            $job_drafts_revisions = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
-                ->where(function ($query) use ($user) {
-                    $query->where('content_writer_id', $user->id)
-                        ->orWhere('graphic_designer_id', $user->id);
-                })
-                ->where('status', 'Revision') // Removed `where('type', 'content_writer')` if not needed
+            $job_drafts_revisions_content = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
+                ->where('type', 'content_writer')
+                ->where('content_writer_id', auth()->user()->id) // <-- Fixed parentheses
+                ->where('status', 'Revision')
                 ->orderBy('id', 'desc')
-                ->limit(5) // Use limit for consistency
+                ->limit(5)
                 ->get();
 
+            $job_drafts_revisions_graphic = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
+                ->where('type', 'graphic_designer')
+                ->where('graphic_designer_id', auth()->user()->id) // <-- Fixed parentheses
+                ->where('status', 'Revision')
+                ->orderBy('id', 'desc')
+                ->limit(5)
+                ->get();
+
+            $job_drafts_revisions = $job_drafts_revisions_graphic->merge($job_drafts_revisions_content); // Formatting fix
+
+            dd($job_drafts_revisions);
             $my_tasks = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
                 ->where(function ($query) use ($user) {
                     $query->where('content_writer_id', $user->id)
@@ -100,15 +109,23 @@ class DashboardController extends Controller
                 ->limit(5) // Use limit for consistency
                 ->get();
 
-            $job_drafts_revisions = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
-                ->where(function ($query) use ($user) {
-                    $query->where('content_writer_id', $user->id)
-                        ->orWhere('graphic_designer_id', $user->id);
-                })
+            $job_drafts_revisions_content = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
+                ->where('type', 'content_writer')
+                ->where('content_writer_id', auth()->user()->id) // <-- Fixed parentheses
                 ->where('status', 'Revision')
                 ->orderBy('id', 'desc')
-                ->limit(5) // Use limit for consistency
+                ->limit(5)
                 ->get();
+
+            $job_drafts_revisions_graphic = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
+                ->where('type', 'graphic_designer')
+                ->where('graphic_designer_id', auth()->user()->id) // <-- Fixed parentheses
+                ->where('status', 'Revision')
+                ->orderBy('id', 'desc')
+                ->limit(5)
+                ->get();
+
+            $job_drafts_revisions = $job_drafts_revisions_graphic->merge($job_drafts_revisions_content); // Formatting fix
 
             $my_tasks = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
                 ->where(function ($query) use ($user) {
