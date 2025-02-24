@@ -7,6 +7,11 @@
 
 <div class="container mx-auto p-6">
 
+            {{-- Success Message Component --}}
+            @if(session('Status'))
+            <x-success />
+        @endif
+
     {{-- Search Bar --}}
     <a href="{{ url('joborder/create') }}">
         <div class="bg-[#fa7011] w-fit block text-white px-4 py-2 rounded-lg shadow-md hover:bg-[#D95F0E] transition text-center lg:hidden">

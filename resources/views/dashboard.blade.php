@@ -27,7 +27,7 @@
                             <tbody>
                                 @foreach ($job_drafts as $job_draft )
                                     <tr>
-                                        <td class="px-4 py-2 text-sm">{{$job_draft->jobOrder->title}}</td>
+                                        <td class="px-4 py-2 text-sm">{{$job_draft->jobOrder->title}} -  {{Str::title(str_replace('_', ' ', $job_draft->type)) }}</td>
                                             <td class="px-4 py-2 text-sm flex items-center gap-8">
                                                 @if (auth()->user()->role_id == '1' and $job_draft->status == 'completed')
                                                     Approved
@@ -90,25 +90,25 @@
                                         <tbody>
                                             @foreach ($job_drafts_revisions as $job_draft_revision )
                                                 <tr>
-                                                    <td class="px-4 py-2 text-sm">{{$job_draft_revision->jobOrder->title}}</td>
+                                                    <td class="px-4 py-2 text-sm">{{$job_draft_revision->jobOrder->title}} - {{Str::title(str_replace('_', ' ', $job_draft_revision->type))}}</td>
                                                     <td class="px-4 py-2 text-sm">
                                                         @if (auth()->user()->role_id == 3)
-                                                            <a href="{{url('content/revisions/edit/' . $job_draft_revision->id)}}">
+                                                            <a href="{{url('revision/edit/' . $job_draft_revision->id)}}">
                                                                 <p class="text-[#fa7011]">Revise</p>
                                                             </a>
 
                                                         @elseif (auth()->user()->role_id == 4)
-                                                            <a href="{{url('graphic/revisions/edit/' . $job_draft_revision->id)}}">
+                                                            <a href="{{url('revision/edit/' . $job_draft_revision->id)}}">
                                                                 <p class="text-[#fa7011]">Revise</p>
                                                             </a>
 
                                                         @elseif (auth()->user()->role_id == 2)
-                                                            <a href="{{url('operation/revision/edit/' . $job_draft_revision->id)}}">
+                                                            <a href="{{url('revision/edit/' . $job_draft_revision->id)}}">
                                                                 <p class="text-[#fa7011]">Revise</p>
                                                             </a>
 
                                                         @elseif (auth()->user()->role_id == 6)
-                                                            <a href="{{url('supervisor/revision/edit/' . $job_draft_revision->id)}}">
+                                                            <a href="{{url('revision/edit/' . $job_draft_revision->id)}}">
                                                                 <p class="text-[#fa7011]">Revise</p>
                                                             </a>
                                                         @endif
@@ -142,10 +142,10 @@
                                                 @if ($my_task->contentWriter->name == Auth::user()->name && $my_task->type == "content_writer" || $my_task->graphicDesigner->name == Auth::user()->name && $my_task->type == "graphic_designer")
                                                     <tr>
                                                         <td class="px-4 py-2 text-sm" 
-                                                        id="taskType-{{$my_task->id}}" 
-                                                        data-type="{{$my_task->type}}">
-                                                        {{$my_task->jobOrder->title}} - {{$my_task->type}}
-                                                    </td>
+                                                            id="taskType-{{$my_task->id}}" 
+                                                            data-type="{{$my_task->type}}">
+                                                            {{$my_task->jobOrder->title}} - {{$my_task->type}}
+                                                        </td>
                                                         <td class="px-4 py-2 text-sm">
                                                             @if (auth()->user()->role_id == 2)
                                                                 <a href="{{url('operation/task/edit/' . $my_task->id)}}">

@@ -54,7 +54,7 @@
 
                         <!-- Designation -->
                         <div class="lg:col-span-1 font-semibold">Designation:</div>
-                        <div class="lg:col-span-4">{{ $job_draft->type }}</div>
+                        <div class="lg:col-span-4">{{ Str::title(str_replace('_', ' ', $job_draft->type)) }}</div>
 
                         <!-- Google Drive Link -->
                         <div class="lg:col-span-1 font-semibold">Google Drive Link:</div>

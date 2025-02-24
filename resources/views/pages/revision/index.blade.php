@@ -43,7 +43,7 @@
                             @endif
                         </td>
                         <td class="w-[20%] px-6 py-3 text-white text-center">
-                            <p class="w-full px-2 py-1 rounded-lg text-wrap
+                            <p class="w-full px-2 py-1 rounded-lg text-nowrap
                                 {{ $job_draft->status == 'completed' ? 'bg-green-400' : 
                                 ($job_draft->status == 'Revision' ? 'bg-red-600' : 'bg-[#fa6e117e]') }} ">
                                 {{ ucfirst($job_draft->status) }}
@@ -51,10 +51,10 @@
                         </td>
 
 
-                        <td class="w-[20%] px-4 py-3 text-center">
+                        <td class="w-[20%] px-4 py-3">
                                 <a href="{{ $job_draft->status === 'Revision' ? url('revision/edit/' . $job_draft->id) : '#' }}">
                                     <button class="px-4 py-2 text-sm text-white rounded {{ $job_draft->status === 'Revision' ? 'bg-orange-500 hover:bg-orange-600' : 'bg-gray-400 cursor-not-allowed pointer-events-none' }}">
-                                        Edit
+                                        Revise
                                     </button>
                                 </a>
                                                             
