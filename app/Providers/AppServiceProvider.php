@@ -59,12 +59,14 @@ class AppServiceProvider extends ServiceProvider
                     ->whereHas('revisions')
                     ->where('type', 'content_writer')
                     ->where('content_writer_id', $authuser->id)
+                    ->where('status', 'Revision')
                     ->get();
     
                 $job_drafts_graphic = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')
                     ->whereHas('revisions')
                     ->where('type', 'graphic_designer')
                     ->where('graphic_designer_id', $authuser->id)
+                    ->where('status', 'Revision')
                     ->get();
     
                 // Merge both collections into one

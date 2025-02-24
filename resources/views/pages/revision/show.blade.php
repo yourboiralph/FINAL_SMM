@@ -4,6 +4,7 @@
 @section('header', 'Show Content Revision')
 
 @section('content')
+<script src="https://cdn.tailwindcss.com"></script>
 
 <style>
     .custom-shadow {
@@ -44,6 +45,7 @@
 
         <div class="mt-10 grid grid-cols-3 gap-8">
             @foreach ($revisions as $revision)
+            {{-- {{$revision}} --}}
                 <div class="rounded-lg shadow-lg {{$revision->status == 'complete' ? 'bg-green-500' : 'bg-gray-400'}} col-span-1 text-white p-10 mb-10">
                     <div class="mb-10">
                         <p>Revision By:</p>
@@ -52,7 +54,7 @@
                     </div>
 
                     <div class="flex items-center justify-center cursor-pointer">
-                        <div class="bg-[#fa7011] w-fit px-2 py-1 rounded-md" onclick="showDetails('{{ $revision->declinedBy->name }}', '{{ $revision->revision_date }}', `{!! $revision->summary !!}`)">
+                        <div class="bg-[#fa7011] w-fit px-2 py-1 rounded-md" onclick="showDetails('{{ $revision->declinedBy->name }}', '{{ $revision->revision_date }}', `{!! $revision->summary !!}`, `{!! $revision->last_draft !!}`)">
                             Show Details
                         </div>
                     </div>
@@ -70,7 +72,15 @@
                 <div class="mt-4">
                     <p><strong>Revision By:</strong> <span id="modalRevisionBy"></span></p>
                     <p><strong>Revision Date:</strong> <span id="modalRevisionDate"></span></p>
-                    <div class="max-h-[200px] overflow-y-auto border rounded p-2 mt-4" id="modalSummary"></div>
+                    
+                    <div class="max-h-[200px] overflow-y-auto border rounded p-2 mt-4">
+                        <p><strong>Summary:</strong></p>
+                        <div id="modalSummary"></div>
+                    </div>
+                    <div class="max-h-[200px] overflow-y-auto border rounded p-2 mt-4">
+                        <p><strong>Last Draft:</strong></p>
+                        <div id="modalLastDraft"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -78,10 +88,11 @@
 </div>
 
 <script>
-    function showDetails(revisionBy, revisionDate, summary) {
+    function showDetails(revisionBy, revisionDate, summary, last_draft) {
         document.getElementById('modalRevisionBy').textContent = revisionBy;
         document.getElementById('modalRevisionDate').textContent = revisionDate;
         document.getElementById('modalSummary').innerHTML = summary;
+        document.getElementById('modalLastDraft').innerHTML = last_draft;
 
         document.getElementById('modal').classList.remove('hidden');
     }

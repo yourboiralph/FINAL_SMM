@@ -4,6 +4,7 @@
 @section('header', 'Show User')
 
 @section('content')
+<script src="https://cdn.tailwindcss.com"></script>
 @php
     $roles = [
         1 => 'Client',

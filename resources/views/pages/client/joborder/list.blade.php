@@ -4,6 +4,7 @@
 @section('header', 'Job Orders to Approve')
 
 @section('content')
+<script src="https://cdn.tailwindcss.com"></script>
 
 <style>
     .custom-shadow {

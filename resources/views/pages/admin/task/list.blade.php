@@ -4,8 +4,14 @@
 @section('header', "My Task")
 
 @section('content')
+<script src="https://cdn.tailwindcss.com"></script>
 
 <div class="container mx-auto p-6">
+
+        {{-- Success Message Component --}}
+        @if(session('Status'))
+        <x-success />
+    @endif
 
     {{-- Search Bar --}}
     {{-- <a href="{{ url('joborder/create') }}">

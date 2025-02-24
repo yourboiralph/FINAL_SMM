@@ -4,6 +4,7 @@
 @section('header', 'Download PDF')
 
 @section('content')
+<script src="https://cdn.tailwindcss.com"></script>
 
 
 <style>

@@ -11,7 +11,10 @@ class SupervisorJobOrderController extends Controller
 {
     public function index()
     {
-        $supervisor_requests = ModelsRequest::with('assignee')->get();
+        $supervisor_requests = ModelsRequest::with('assignee')
+        ->doesntHave('jobOrders') // Requests that have no job orders
+        ->get();
+
         return view('pages.supervisor.job_order.index', compact('supervisor_requests'));
     }
 
@@ -41,13 +44,13 @@ class SupervisorJobOrderController extends Controller
 
     public function show($id)
     {
-        $supervisor_request = ModelsRequest::with('issuer', 'assignee')->find(1);
+        $supervisor_request = ModelsRequest::with('issuer', 'assignee')->find($id);
         return view('pages.supervisor.job_order.show', compact('supervisor_request'));
     }
 
     public function edit($id)
     {
-        $supervisor_request = ModelsRequest::with('issuer', 'assignee')->find(1);
+        $supervisor_request = ModelsRequest::with('issuer', 'assignee')->find($id);
         $operators = User::where('role_id', 2)->get();
         return view('pages.supervisor.job_order.edit', compact('supervisor_request', 'operators'));
     }
