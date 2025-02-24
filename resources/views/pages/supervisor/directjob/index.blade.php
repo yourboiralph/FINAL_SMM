@@ -4,6 +4,7 @@
 @section('header', "Direct Job Order")
 
 @section('content')
+<script src="https://cdn.tailwindcss.com"></script>
 
 <div class="container mx-auto p-6">
             {{-- Success Message Component --}}

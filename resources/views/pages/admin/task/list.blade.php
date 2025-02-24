@@ -4,6 +4,7 @@
 @section('header', "My Task")
 
 @section('content')
+<script src="https://cdn.tailwindcss.com"></script>
 
 <div class="container mx-auto p-6">
 

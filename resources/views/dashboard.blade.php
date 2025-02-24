@@ -9,6 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 @section('content')
+<script src="https://cdn.tailwindcss.com"></script>
 <div class="container mx-auto p-6 max-w-screen-xl overflow-hidden">
     <div>
         <div class="grid grid-cols-1 md:grid md:grid-cols-3 md:px-2 mx-auto">

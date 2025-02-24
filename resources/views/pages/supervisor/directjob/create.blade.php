@@ -4,6 +4,7 @@
 @section('header', "Create Direct Job Order")
 
 @section('content')
+<script src="https://cdn.tailwindcss.com"></script>
 <style>
     .custom-shadow {
         box-shadow: 0 2px 4px rgba(0, 0, 0, .3), 0 1px 3px rgba(0, 0, 0, .3);

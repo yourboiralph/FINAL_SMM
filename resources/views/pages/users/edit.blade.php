@@ -4,6 +4,7 @@
 @section('header', 'Edit User')
 
 @section('content')
+<script src="https://cdn.tailwindcss.com"></script>
 <div class="mx-auto max-w-screen-2xl">
 
     @if (session('status'))

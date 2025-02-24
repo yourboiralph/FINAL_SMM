@@ -5,6 +5,7 @@
 @section('header', "Revision")
 
 @section('content')
+<script src="https://cdn.tailwindcss.com"></script>
 
 <style>
     .custom-shadow {
