@@ -47,7 +47,7 @@
 
                         <td class="px-6 py-3 border-b">
                             <a href="{{url('content/revisions/edit/' . $job_draft->id)}}">
-                                <button class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600">
+                                <button class="px-4 py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
                                     Edit Draft
                                 </button>
                             </a>
