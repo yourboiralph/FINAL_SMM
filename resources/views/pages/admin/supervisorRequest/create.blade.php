@@ -133,7 +133,7 @@
 
                         <!-- Description -->
                         <div class="col-span-2 h-fit w-full">
-                            <p class="text-sm text-gray-600">Description</p>
+                            <p class="text-sm text-gray-600">Instructions</p>
                             <!-- CKEditor Textarea -->
                             <textarea name="description" id="editor"
                                 class="w-full border-gray-200 max-h-[500px] overflow-y-auto rounded-lg">{{ old('description') }}</textarea>
