@@ -6,6 +6,10 @@
 @section('content')
 
 <div class="container mx-auto p-6">
+            {{-- Success Message Component --}}
+            @if(session('Status'))
+            <x-success />
+        @endif
 
     {{-- Search Bar --}}
     <a href="{{ url('supervisor/directjob/create') }}">
