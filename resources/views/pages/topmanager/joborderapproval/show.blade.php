@@ -58,7 +58,7 @@
                         <!-- Google Drive Link -->
                         <div class="lg:col-span-1 font-semibold">Google Drive Link:</div>
                         <div class="lg:col-span-4">
-                            <div class="max-h-[300px] border border-gray-400 p-4 rounded-lg overflow-y-auto break-all">
+                            <div id="draftContent" class="max-h-[300px] rounded-lg overflow-y-auto break-all">
                                 {!! $job_draft->draft !!}
                             </div>
                         </div>
@@ -185,5 +185,13 @@
             });
         }
     }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const element = document.getElementById('draftContent');
+        if (element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth) {
+            element.classList.add('border', 'border-gray-200', 'p-4');
+        }
+    });
 </script>
 @endsection
