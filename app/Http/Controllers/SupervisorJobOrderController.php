@@ -36,7 +36,7 @@ class SupervisorJobOrderController extends Controller
             'issued_by' => auth()->user()->id,
         ]);
 
-        return redirect()->route('supervisor.joborder')->with('status', 'Job Order Created Successfully');
+        return redirect()->route('supervisor.joborder')->with('Status', 'Job Order Created Successfully');
     }
 
     public function show($id)
