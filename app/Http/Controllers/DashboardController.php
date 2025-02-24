@@ -47,7 +47,6 @@ class DashboardController extends Controller
 
             $job_drafts_revisions = $job_drafts_revisions_graphic->merge($job_drafts_revisions_content); // Formatting fix
 
-            dd($job_drafts_revisions);
             $my_tasks = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
                 ->where(function ($query) use ($user) {
                     $query->where('content_writer_id', $user->id)
