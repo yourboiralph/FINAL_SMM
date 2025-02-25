@@ -33,7 +33,7 @@
                 </div>
             </a>
         </div>
-        <form action="{{ url('/operation/task/update/' . $job_draft->id) }}" method="POST">
+        <form action="{{ url('/operation/task/store/' . $job_draft->id) }}" method="POST">
             @csrf
             @method('PUT')
             <h1 class="text-xl font-bold mt-4">Create Draft</h1>
@@ -102,7 +102,7 @@
                 console.log('CKEditor 5 initialized!', editor);
 
                 // Load existing draft content from old input if available, otherwise use the job draft's content
-                editor.setData(`{!! addslashes(old('draft', $job_draft->draft ?? '')) !!}`);
+
 
                 // Before form submission, update the textarea with the editor's data
                 document.querySelector("form").addEventListener("submit", function () {
