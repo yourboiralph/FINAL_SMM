@@ -52,7 +52,7 @@
                             {{ $job_draft->date_target }}
                         </td>
                         <td class="w-[20%] px-4 py-3 text-center border-b">
-                            <a href="{{ url('content/edit/' . $job_draft->id) }}">
+                            <a href="{{ url('content/create/' . $job_draft->id) }}">
                                 <button class="px-2 py-1 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
                                     Create
                                 </button>

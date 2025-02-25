@@ -67,6 +67,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/content', [ContentApprovalController::class, 'index'])->name('content.approve');
 Route::get('/content/show/{id}', [ContentApprovalController::class, 'show'])->name('content.show');
+Route::get('/content/create/{id}', [ContentApprovalController::class, 'create'])->name('content.create');
+Route::put('/content/store/{id}', [ContentApprovalController::class, 'store'])->name('content.store');
 Route::get('/content/edit/{id}', [ContentApprovalController::class, 'edit'])->name('content.edit');
 Route::put('/content/update/{id}', [ContentApprovalController::class, 'update'])->name('content.update');
 
