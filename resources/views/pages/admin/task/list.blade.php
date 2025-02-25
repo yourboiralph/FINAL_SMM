@@ -33,6 +33,13 @@
             placeholder="Search..." onkeyup="filterTable()" />
 
         </div>
+
+        <div class="flex justify-between items-center gap-4 px-10">
+            <a class="cursor-pointer" id="pendingBtn" onclick="filterByStatus('pending')">Pending</a>
+            <a class="cursor-pointer" id="submittedBtn" onclick="filterByStatus('submitted to operations')">Submitted</a>
+            <a class="cursor-pointer" id="allBtn" onclick="filterByStatus('all')">All</a>
+        </div>
+        
     </div>
 
     {{-- Table Wrapper --}}
@@ -42,7 +49,8 @@
                 <tr>
                     <th class="px-6 py-3">Title</th>
                     <th class="px-6 py-3">Designated</th>
-                    <th class="text-right px-6">Actions</th>
+                    <th class="px-6 py-3">Status</th>
+                    <th class="px-6 py-3">Actions</th>
                 </tr>
             </thead>
             <tbody id="tableBody" class="overflow-y-auto">
@@ -52,8 +60,8 @@
                     || ($job_draft->type == 'graphic_designer' && $job_draft->graphicDesigner->name != Auth::user()->name))
                     ? 'hidden'
                     : ''
-                }}">
-
+                }}" data-status="{{ strtolower($job_draft->status) }}">
+            
                         <td class="px-6 py-3">{{ $job_draft->jobOrder->title }}</td>
                         <td class="px-6 py-3">
                             @if ($job_draft->type == "content_writer")
@@ -62,17 +70,44 @@
                                 Graphic Designer - {{ $job_draft->graphicDesigner->name }}
                             @endif
                         </td>
-                        <td class="px-6 py-3 text-right">
-                            <a href="{{url('operation/task/create/' . $job_draft->id)}}">
-                                <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
-                                    Create
-                                </button>
-                            </a>
-                            <a href="{{url('operation/task/show/' . $job_draft->id)}}">
-                                <button class="px-2 py-1 lg:px-4 lg:py-2 text-sm text-white bg-gray-700 rounded hover:bg-gray-800">
-                                    Show
-                                </button>
-                            </a>
+                        <td class="px-6 py-3">{{ $job_draft->status }}</td>
+                        <td class="px-6 py-3">
+                            @if ($job_draft->status == 'pending')
+                                <a href="{{url('operation/task/create/' . $job_draft->id)}}">
+                                    <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
+                                        Create
+                                    </button>
+                                </a>
+                                <a href="{{url('operation/task/show/' . $job_draft->id)}}">
+                                    <button class="px-2 py-1 lg:px-4 lg:py-2 text-sm text-white bg-gray-700 rounded hover:bg-gray-800">
+                                        Show
+                                    </button>
+                                </a>
+
+                            @elseif ($job_draft->status == "Submitted to Operations")
+                                <a href="{{url('operation/task/edit/' . $job_draft->id)}}">
+                                    <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-blue-500 rounded hover:bg-blue-600">
+                                        Edit
+                                    </button>
+                                </a>
+                                <a href="{{url('operation/task/show/' . $job_draft->id)}}">
+                                    <button class="px-2 py-1 lg:px-4 lg:py-2 text-sm text-white bg-gray-700 rounded hover:bg-gray-800">
+                                        Show
+                                    </button>
+                                </a>
+
+                            @else
+                                <a href="{{url('operation/task/create/' . $job_draft->id)}}">
+                                    <button disabled class="px-2 py-1 mb-2 cursor-not-allowed lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-gray-500 rounded hover:bg-gray-600">
+                                        Edit
+                                    </button>
+                                </a>
+                                <a href="{{url('operation/task/show/' . $job_draft->id)}}">
+                                    <button class="px-2 py-1 lg:px-4 lg:py-2 text-sm text-white bg-gray-700 rounded hover:bg-gray-800">
+                                        Show
+                                    </button>
+                                </a>
+                            @endif
                         </td>
                     </tr>
                 @empty
@@ -86,6 +121,7 @@
                     </tr>
                 @endforelse
             </tbody>
+            
         </table>
     </div>
 
@@ -113,5 +149,43 @@
         }
     }
 </script>
+
+
+<script>
+    function filterByStatus(status) {
+        let tableBody = document.getElementById("tableBody");
+        let rows = tableBody.getElementsByTagName("tr");
+
+        let buttons = document.querySelectorAll('.flex a'); // Select all buttons
+
+        // Reset the active class for all buttons
+        buttons.forEach(button => button.classList.remove('border-b', 'border-[#fa7011]'));
+
+        // Loop through rows and filter
+        for (let row of rows) {
+            let rowStatus = row.getAttribute("data-status");
+            if (status === 'all') {
+                row.style.display = ""; // Show all rows
+            } else {
+                row.style.display = (rowStatus === status) ? "" : "none";
+            }
+        }
+
+        // Add active class to the clicked button
+        if (status === 'pending') {
+            document.getElementById('pendingBtn').classList.add('border-b', 'border-[#fa7011]');
+        } else if (status === 'submitted to operations') {
+            document.getElementById('submittedBtn').classList.add('border-b', 'border-[#fa7011]');
+        } else if (status === 'all') {
+            document.getElementById('allBtn').classList.add('border-b', 'border-[#fa7011]');
+        }
+    }
+
+    // ✅ Set default active tab to "Pending" when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        filterByStatus('pending');
+    });
+</script>
+
 
 @endsection

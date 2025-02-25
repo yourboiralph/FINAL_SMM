@@ -123,7 +123,7 @@
 
                 // Load existing draft content from old input if available,
                 // otherwise use the job draft's existing draft content.
-                editor.setData(``);
+
 
                 // Before form submission, update the textarea with the editor's data
                 document.querySelector("form").addEventListener("submit", function () {
