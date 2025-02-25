@@ -79,8 +79,8 @@
 
         <div class="block px-6">
             <a href="{{ url('/revision') }}"
-                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('revision', 'revisions', 'revisions/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is('revision', 'revisions', 'revisions/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('revision', 'revisions', 'revision/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is('revision', 'revisions', 'revision/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('revision', 'revision/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
                     <i class="fa-solid fa-pencil-alt text-sm" style="color: #ffffff;"></i>
                 </div>
@@ -290,8 +290,8 @@
 
         <div class="block px-6">
             <a href="{{ url('/revision') }}"
-                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('revision', 'revisions', 'revisions/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is('revision', 'revisions', 'revisions/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('revision', 'revisions', 'revision/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is('revision', 'revisions', 'revision/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('revision', 'revision/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
                     <i class="fa-solid fa-pencil-alt text-sm" style="color: #ffffff;"></i>
                 </div>
@@ -353,8 +353,8 @@
 
         <div class="block px-6">
             <a href="{{ url('/revision') }}"
-                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('revision', 'revisions', 'revisions/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is('revision', 'revisions', 'revisions/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('revision', 'revisions', 'revision/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is('revision', 'revisions', 'revision/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('revision', 'revision/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
                     <i class="fa-solid fa-pencil-alt text-sm" style="color: #ffffff;"></i>
                 </div>
@@ -535,8 +535,8 @@
 
         <div class="block px-6">
             <a href="{{ url('/revision') }}"
-                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('revision', 'revisions', 'revisions/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is('revision', 'revisions', 'revisions/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('revision', 'revisions', 'revision/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is('revision', 'revisions', 'revision/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('revision', 'revision/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
                     <i class="fa-solid fa-pencil-alt text-sm" style="color: #ffffff;"></i>
                 </div>
