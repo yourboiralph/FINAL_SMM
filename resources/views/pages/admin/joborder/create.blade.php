@@ -51,7 +51,7 @@
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
                     <div class="w-full">
                         <p class="text-sm text-gray-600">Title</p>
-                        <input type="text" name="title" value="{{ old('title') }}" class="w-full border-gray-200 rounded-lg">
+                        <input type="text" name="title" value="{{ old('title') }}" class="w-full border px-3 py-2  border-gray-200 rounded-lg">
                         @error('title')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -59,7 +59,7 @@
                     <div class="col-span-1 w-full">
                         <p class="text-sm text-gray-600">Client</p>
                         <div class="relative">
-                            <input type="text" id="selected-client-name" value="{{ old('client_id') ? ($clients->firstWhere('id', old('client_id'))->name ?? 'Select a Client') : 'Select a Client' }}" class="w-full border-gray-200 rounded-lg cursor-pointer" readonly onclick="openModal()">
+                            <input type="text" id="selected-client-name" value="{{ old('client_id') ? ($clients->firstWhere('id', old('client_id'))->name ?? 'Select a Client') : 'Select a Client' }}" class="w-full border px-3 py-2  border-gray-200 rounded-lg cursor-pointer" readonly onclick="openModal()">
                             <input type="hidden" name="client_id" id="selected-client-id" value="{{ old('client_id') }}">
                         </div>
                         @error('client_id')
@@ -96,14 +96,14 @@
                     <div class="col-span-2 grid grid-cols-2 w-full gap-4 rounded-lg">
                         <div>
                             <p class="text-sm text-gray-600">Date Started</p>
-                            <input type="date" name="date_started" value="{{ old('date_started') }}" class="w-full rounded-lg border-gray-200 focus:ring-0">
+                            <input type="date" name="date_started" value="{{ old('date_started') }}" class="w-full rounded-lg border px-3 py-2  border-gray-200 focus:ring-0">
                             @error('date_started')
                                 <p class="text-red-600 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
                         <div>
                             <p class="text-sm text-gray-600">Date Deadline</p>
-                            <input type="date" name="date_target" value="{{ old('date_target') }}" class="w-full rounded-lg border-gray-200 focus:ring-0">
+                            <input type="date" name="date_target" value="{{ old('date_target') }}" class="w-full rounded-lg border px-3 py-2  border-gray-200 focus:ring-0">
                             @error('date_target')
                                 <p class="text-red-600 text-sm">{{ $message }}</p>
                             @enderror

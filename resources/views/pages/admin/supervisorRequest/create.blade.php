@@ -58,7 +58,7 @@
                         <div class="w-full col-span-2 lg:col-span-1">
                             <p class="text-sm text-gray-600">Title</p>
                             <input type="text" name="title" value="{{ old('title') }}"
-                                class="w-full border-gray-200 rounded-lg">
+                                class="w-full border px-3 py-2  border-gray-200 rounded-lg">
                             @error('title')
                                 <p class="text-red-600 text-sm">{{ $message }}</p>
                             @enderror
@@ -70,7 +70,7 @@
                             <div class="relative">
                                 <input type="text" id="selected-client-name"
                                     value="{{ old('client_id') ? ($clients->firstWhere('id', old('client_id'))->name ?? 'Select a Client') : 'Select a Client' }}"
-                                    class="w-full border-gray-200 rounded-lg cursor-pointer" readonly onclick="openModal()">
+                                    class="w-full border px-3 py-2  border-gray-200 rounded-lg cursor-pointer" readonly onclick="openModal()">
                                 <input type="hidden" name="client_id" id="selected-client-id"
                                     value="{{ old('client_id') }}">
                             </div>
@@ -85,7 +85,7 @@
                             <div class="relative">
                                 <input type="text" id="selected-content-writer-name"
                                     value="{{ old('content_writer_id') ? ($content_writers->firstWhere('id', old('content_writer_id'))->name ?? 'Select a Content Writer') : 'Select a Content Writer' }}"
-                                    class="w-full border-gray-200 rounded-lg cursor-pointer" readonly
+                                    class="w-full border px-3 py-2  border-gray-200 rounded-lg cursor-pointer" readonly
                                     onclick="openContentWriterModal()">
                                 <input type="hidden" name="content_writer_id" id="selected-content-writer-id"
                                     value="{{ old('content_writer_id') }}">
@@ -101,7 +101,7 @@
                             <div class="relative">
                                 <input type="text" id="selected-graphic-designer-name"
                                     value="{{ old('graphic_designer_id') ? ($graphic_designers->firstWhere('id', old('graphic_designer_id'))->name ?? 'Select a Graphics Designer') : 'Select a Graphics Designer' }}"
-                                    class="w-full border-gray-200 rounded-lg cursor-pointer" readonly
+                                    class="w-full border px-3 py-2  border-gray-200 rounded-lg cursor-pointer" readonly
                                     onclick="openGraphicDesignerModal()">
                                 <input type="hidden" name="graphic_designer_id" id="selected-graphic-designer-id"
                                     value="{{ old('graphic_designer_id') }}">
@@ -117,7 +117,7 @@
                             <div>
                                 <p class="text-sm text-gray-600">Date Started</p>
                                 <input type="date" name="date_started" value="{{ old('date_started') }}"
-                                    class="w-full rounded-lg border-gray-200 focus:ring-0">
+                                    class="w-full rounded-lg border px-3 py-2  border-gray-200 focus:ring-0">
                                 @error('date_started')
                                     <p class="text-red-600 text-sm">{{ $message }}</p>
                                 @enderror
@@ -125,7 +125,7 @@
                             <div>
                                 <p class="text-sm text-gray-600">Date Deadline</p>
                                 <input type="date" name="date_target" value="{{ old('date_target') }}"
-                                    class="w-full rounded-lg border-gray-200 focus:ring-0">
+                                    class="w-full rounded-lg border px-3 py-2  border-gray-200 focus:ring-0">
                                 @error('date_target')
                                     <p class="text-red-600 text-sm">{{ $message }}</p>
                                 @enderror

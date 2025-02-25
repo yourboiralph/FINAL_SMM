@@ -41,7 +41,7 @@
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
                     <div class="col-span-2 lg:col-span-1 w-full">
                         <p class="text-sm text-gray-600">Title</p>
-                        <input type="text" name="title" class="w-full border-gray-200 rounded-lg" value="{{ old('title', $supervisor_request->title) }}">
+                        <input type="text" name="title" class="w-full border px-3 py-2  border-gray-200 rounded-lg" value="{{ old('title', $supervisor_request->title) }}">
                         @error('title')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -53,7 +53,7 @@
                         <div class="relative">
                             <input type="text" id="selected-operator-name"
                                 value="{{ old('assigned_to') ? ($operators->firstWhere('id', old('assigned_to'))->name ?? 'Select an Operator') : ($supervisor_request->assignee->name ?? 'Select an Operator') }}"
-                                class="w-full border-gray-200 rounded-lg cursor-pointer" readonly
+                                class="w-full border px-3 py-2  border-gray-200 rounded-lg cursor-pointer" readonly
                                 onclick="openOperatorModal()">
 
                             <input type="hidden" name="assigned_to" id="selected-operator-id"
