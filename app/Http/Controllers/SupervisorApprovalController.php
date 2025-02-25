@@ -11,12 +11,13 @@ class SupervisorApprovalController extends Controller
 {
     public function index()
     {
-        $job_drafts = JobDraft::where('status', 'Submitted to Supervisor')
+        $job_drafts = JobDraft::whereNotIn('status', ['pending', 'Submitted to Operations'])
             ->with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
             ->get();
 
         return view('pages.supervisor.joborderapproval.list', compact('job_drafts'));
     }
+
 
     public function show($id)
     {
