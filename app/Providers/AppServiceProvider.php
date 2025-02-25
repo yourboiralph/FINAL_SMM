@@ -61,14 +61,14 @@ class AppServiceProvider extends ServiceProvider
                     ->where('content_writer_id', $authuser->id)
                     ->where('status', 'Revision')
                     ->get();
-    
+
                 $job_drafts_graphic = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')
                     ->whereHas('revisions')
                     ->where('type', 'graphic_designer')
                     ->where('graphic_designer_id', $authuser->id)
                     ->where('status', 'Revision')
                     ->get();
-    
+
                 // Merge both collections into one
                 $revisionCollection = $job_drafts_content->merge($job_drafts_graphic);
 
@@ -120,6 +120,7 @@ class AppServiceProvider extends ServiceProvider
 
                 $contentRevisionCount = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')
                     ->whereHas('revisions')
+                    ->where('status', 'revision')
                     ->where('type', 'content_writer')
                     ->where('content_writer_id', $authuser->id)
                     ->count();
