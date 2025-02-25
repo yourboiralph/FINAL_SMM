@@ -63,7 +63,7 @@
                             @endif
                         </td>
                         <td class="px-6 py-3 text-right">
-                            <a href="{{url('operation/task/edit/' . $job_draft->id)}}">
+                            <a href="{{url('operation/task/create/' . $job_draft->id)}}">
                                 <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
                                     Create
                                 </button>

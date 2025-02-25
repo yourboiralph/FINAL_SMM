@@ -164,6 +164,8 @@ Route::put('/supervisor/directjob/update/{id}', [SupervisorDirectJobOrderControl
 //Create "My Tasks" tab for Admin DONE
 Route::get('/operation/task', [OperationTaskController::class, 'index'])->name('operation.task');
 Route::get('/operation/task/show/{id}', [OperationTaskController::class, 'show'])->name('operation.show');
+Route::get('/operation/task/create/{id}', [OperationTaskController::class, 'create'])->name('operation.create');
+Route::put('/operation/task/store/{id}', [OperationTaskController::class, 'store'])->name('operation.store');
 Route::get('/operation/task/edit/{id}', [OperationTaskController::class, 'edit'])->name('operation.edit');
 Route::put('/operation/task/update/{id}', [OperationTaskController::class, 'update'])->name('operation.update');
 
@@ -175,6 +177,8 @@ Route::put('/operation/revision/update/{id}', [OperationRevisionController::clas
 //Create "My Task" tab for Supervisor DONE
 Route::get('/supervisor/task', [SupervisorTaskController::class, 'index'])->name('supervisor.task');
 Route::get('/supervisor/task/show/{id}', [SupervisorTaskController::class, 'show'])->name('supervisor.show');
+Route::get('/supervisor/task/create/{id}', [SupervisorTaskController::class, 'create'])->name('supervisor.create');
+Route::put('/supervisor/task/store/{id}', [SupervisorTaskController::class, 'store'])->name('supervisor.store');
 Route::get('/supervisor/task/edit/{id}', [SupervisorTaskController::class, 'edit'])->name('supervisor.edit');
 Route::put('/supervisor/task/update/{id}', [SupervisorTaskController::class, 'update'])->name('supervisor.update');
 
