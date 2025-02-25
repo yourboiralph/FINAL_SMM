@@ -12,8 +12,8 @@ class SupervisorJobOrderController extends Controller
     public function index()
     {
         $supervisor_requests = ModelsRequest::with('assignee')
-        ->doesntHave('jobOrders') // Requests that have no job orders
-        ->get();
+            ->doesntHave('jobOrders') // Requests that have no job orders
+            ->get();
 
         return view('pages.supervisor.job_order.index', compact('supervisor_requests'));
     }
