@@ -45,10 +45,10 @@
         <table class="w-full text-left border-collapse min-w-[500px]">
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
-                    <th class="px-6 py-3">Title</th>
-                    <th class="px-6 py-3">Designated</th>
-                    <th class="px-6 py-3">Status</th>
-                    <th class="px-6 py-3">Actions</th>
+                    <th class="px-6 py-3 w-[35%]">Title</th>
+                    <th class="px-6 py-3 w-[25]">Designated</th>
+                    <th class="px-6 py-3 w-[20%] text-center">Status</th>
+                    <th class="px-6 py-3 w-[20%] ">Actions</th>
                 </tr>
             </thead>
             <tbody id="tableBody" class="overflow-y-auto">
@@ -68,7 +68,13 @@
                                 Graphic Designer - {{ $job_draft->graphicDesigner->name }}
                             @endif
                         </td>
-                        <td class="px-6 py-3">{{ $job_draft->status }}</td>
+                        <td>
+                                                    <p class="w-full text-center text-white px-2 py-1 rounded-lg text-wrap
+                                {{ $job_draft->status == 'completed' ? 'bg-green-400' : 
+                                ($job_draft->status == 'Revision' ? 'bg-red-600' : 'bg-[#fa6e117e]') }} ">
+                                {{ ucfirst($job_draft->status) }}
+                            </p>
+                        </td>
                         <td class="px-6 py-3">
                             @if ($job_draft->status == 'pending')
                                 <a href="{{url('graphic/create/' . $job_draft->id)}}">
