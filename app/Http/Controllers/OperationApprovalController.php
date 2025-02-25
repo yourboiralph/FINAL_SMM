@@ -11,9 +11,11 @@ class OperationApprovalController extends Controller
 {
     public function index()
     {
-        $job_drafts = JobDraft::where('status', 'Submitted to Operations')
+
+        $job_drafts = JobDraft::whereNot('status', 'pending')
             ->with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
             ->get();
+
 
         return view('pages.admin.joborderapproval.list', compact('job_drafts'));
     }
