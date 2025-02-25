@@ -61,7 +61,19 @@
                     {!! $job_draft->jobOrder->description !!}
                 </div>
 
+            </div>
 
+            <div class="col-span-4 h-fit mt-4">
+                <p class="text-sm font-bold text-gray-600">Draft</p>
+
+                <!-- CKEditor Read-Only -->
+                <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
+                    {!! $job_draft->draft !!}
+                </div>
+
+            </div>
+
+            
                 {{-- Graphic Designer & Content Writer --}}
             <div class="mt-10 flex gap-8 w-full col-span-4">
                 <div class="flex items-center justify-center flex-col">
@@ -77,7 +89,7 @@
                     <h1 class="text-[10px] border-b-2 border-[#fa7011] w-fit">Content Writer</h1>
                 </div>
             </div>
-            </div>
+
 
         </div>
     </div>
