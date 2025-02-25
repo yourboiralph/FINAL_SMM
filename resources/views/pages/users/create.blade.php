@@ -67,7 +67,7 @@
                     <!-- Name -->
                     <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Name</p>
-                        <input type="text" name="name" value="{{ old('name') }}" class="w-full border-gray-200 rounded-lg" required>
+                        <input type="text" name="name" value="{{ old('name') }}" class="w-full border px-3 py-2  border-gray-200 rounded-lg" required>
                         @error('name')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -75,7 +75,7 @@
                     <!-- Email -->
                     <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Email</p>
-                        <input type="email" name="email" value="{{ old('email') }}" class="w-full border-gray-200 rounded-lg" required>
+                        <input type="email" name="email" value="{{ old('email') }}" class="w-full border px-3 py-2  border-gray-200 rounded-lg" required>
                         @error('email')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -100,7 +100,7 @@
                     <!-- Phone -->
                     <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Phone</p>
-                        <input type="text" name="phone" value="{{ old('phone') }}" class="w-full border-gray-200 rounded-lg" required>
+                        <input type="text" name="phone" value="{{ old('phone') }}" class="w-full border px-3 py-2  border-gray-200 rounded-lg" required>
                         @error('phone')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -109,7 +109,7 @@
                     <!-- Address -->
                     <div class="w-full col-span-2">
                         <p class="text-sm text-gray-600">Address</p>
-                        <input type="text" name="address" value="{{ old('address') }}" class="w-full border-gray-200 rounded-lg" required>
+                        <input type="text" name="address" value="{{ old('address') }}" class="w-full border px-3 py-2  border-gray-200 rounded-lg" required>
                         @error('address')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -118,7 +118,7 @@
                     <!-- Password -->
                     <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Password</p>
-                        <input type="password" name="password" class="w-full rounded-lg border-gray-200 focus:ring-0" required>
+                        <input type="password" name="password" class="w-full rounded-lg border px-3 py-2  border-gray-200 focus:ring-0" required>
                         @error('password')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -127,7 +127,7 @@
                     <!-- Confirm Password -->
                     <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Confirm Password</p>
-                        <input type="password" name="password_confirmation" class="w-full rounded-lg border-gray-200 focus:ring-0" required>
+                        <input type="password" name="password_confirmation" class="w-full rounded-lg border px-3 py-2  border-gray-200 focus:ring-0" required>
                         @error('password_confirmation')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror

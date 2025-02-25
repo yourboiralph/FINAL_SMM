@@ -41,7 +41,7 @@
                 <div class="col-span-4 grid grid-cols-2 gap-4 mt-4">
                     <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Title</p>
-                        <input type="text" name="title" class="w-full border-gray-200 rounded-lg" value="{{ old('title', $job_draft->jobOrder->title) }}">
+                        <input type="text" name="title" class="w-full border px-3 py-2  border-gray-200 rounded-lg" value="{{ old('title', $job_draft->jobOrder->title) }}">
                         @error('title')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -54,7 +54,7 @@
                         <div class="relative">
                             <input type="text" id="selected-graphic-designer-name"
                                 value="{{ old('graphic_designer_id') ? ($graphicworkers->firstWhere('id', old('graphic_designer_id'))->name ?? 'Select a Graphics Designer') : ($job_draft->graphicDesigner->name ?? 'Select a Graphic Designer') }}"
-                                class="w-full border-gray-200 rounded-lg cursor-pointer" readonly
+                                class="w-full border px-3 py-2  border-gray-200 rounded-lg cursor-pointer" readonly
                                 onclick="openGraphicDesignerModal()">
                             <input type="hidden" name="graphic_designer_id" id="selected-graphic-designer-id"
                                 value="{{ old('graphic_designer_id', $job_draft->graphicDesigner->id ?? '') }}">
@@ -69,7 +69,7 @@
                             <div class="relative">
                                 <input type="text" id="selected-content-writer-name"
                                     value="{{ old('content_writer_id') ? ($contentworkers->firstWhere('id', old('content_writer_id'))->name ?? 'Select a Content Writer') : ($job_draft->contentWriter->name ?? 'Select a Content Writer') }}"
-                                    class="w-full border-gray-200 rounded-lg cursor-pointer" readonly
+                                    class="w-full border px-3 py-2  border-gray-200 rounded-lg cursor-pointer" readonly
                                     onclick="openContentWriterModal()">
                                 <input type="hidden" name="content_writer_id" id="selected-content-writer-id"
                                     value="{{ old('content_writer_id', $job_draft->contentWriter->id ?? '') }}">
@@ -87,7 +87,7 @@
                         <div class="relative">
                             <input type="text" id="selected-client-name"
                             value="{{ old('client_id') ? ($clients->firstWhere('id', old('client_id'))->name ?? 'Select a Client') : ($job_draft->client->name ?? 'Select a Client') }}"
-                            class="w-full border-gray-200 rounded-lg cursor-pointer" readonly onclick="openModal()">
+                            class="w-full border px-3 py-2  border-gray-200 rounded-lg cursor-pointer" readonly onclick="openModal()">
                             <input type="hidden" name="client_id" id="selected-client-id" value="{{ old('client_id', $job_draft->client->id ?? '') }}">
                         </div>
                         @error('client_id')
@@ -100,14 +100,14 @@
                     <div class="col-span-2 lg:col-span-1 grid grid-cols-2 w-full gap-4 rounded-lg">
                         <div>
                             <p class="text-sm text-gray-600">Date Started</p>
-                            <input type="date" name="date_started" class="w-full rounded-lg border-gray-200" value="{{ old('date_started', \Carbon\Carbon::parse($job_draft->date_started)->format('Y-m-d')) }}">
+                            <input type="date" name="date_started" class="w-full rounded-lg border px-3 py-2  border-gray-200" value="{{ old('date_started', \Carbon\Carbon::parse($job_draft->date_started)->format('Y-m-d')) }}">
                             @error('date_started')
                                 <p class="text-red-600 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
                         <div>
                             <p class="text-sm text-gray-600 text-nowrap">Date Deadline</p>
-                            <input type="date" name="date_target" class="w-full rounded-lg border-gray-200" value="{{ old('date_target', \Carbon\Carbon::parse($job_draft->date_target)->format('Y-m-d')) }}">
+                            <input type="date" name="date_target" class="w-full rounded-lg border px-3 py-2  border-gray-200" value="{{ old('date_target', \Carbon\Carbon::parse($job_draft->date_target)->format('Y-m-d')) }}">
                             @error('date_target')
                                 <p class="text-red-600 text-sm">{{ $message }}</p>
                             @enderror
