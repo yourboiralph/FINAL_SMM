@@ -13,7 +13,6 @@ class ContentApprovalController extends Controller
 
         // Fetch all job drafts for the authenticated user
         $job_drafts = JobDraft::where('content_writer_id', $authuser->id)
-            ->where('status', 'pending')
             ->where('type', 'content_writer')
             ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client') // Corrected ->with() usage
             ->get();
@@ -27,10 +26,32 @@ class ContentApprovalController extends Controller
         return view('pages.content_writer.joborder.show', compact('job_draft'));
     }
 
-    public function edit($id)
+    public function create($id)
     {
         $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
         return view('pages.content_writer.joborder.create', compact('job_draft'));
+    }
+
+    public function store(Request $request, $id)
+    {
+        $request->validate([
+            'draft' => 'required'
+        ]);
+
+        $job_draft = JobDraft::findOrFail($id);
+
+        $job_draft->update([
+            'draft' => $request->draft,
+            'status' => 'Submitted to Operations',
+        ]);
+
+        return redirect()->route('content.approve')->with('Status', 'Draft Created Successfully');
+    }
+
+    public function edit($id)
+    {
+        $job_draft = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
+        return view('pages.content_writer.joborder.edit', compact('job_draft'));
     }
 
     public function update(Request $request, $id)
@@ -46,6 +67,6 @@ class ContentApprovalController extends Controller
             'status' => 'Submitted to Operations',
         ]);
 
-        return redirect()->route('content.approve')->with('Status', 'Job Order Updated Successfully');
+        return redirect()->route('content.approve')->with('Status', 'Draft Updated Successfully');
     }
 }

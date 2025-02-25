@@ -33,7 +33,7 @@
                 </div>
             </a>
         </div>
-        <form action="{{ url('/content/update/' . $job_draft->id) }}" method="POST">
+        <form action="{{ url('/content/store/' . $job_draft->id) }}" method="POST">
             @csrf
             @method('PUT')
             <h1 class="text-xl font-bold mt-4">Create Draft</h1>
