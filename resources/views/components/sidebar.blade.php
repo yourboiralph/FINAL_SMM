@@ -5,7 +5,7 @@
 
 @props(['link' => $user->role->position])
 
-<div class="space-y-4 z-10 overflow-y-auto h-full">
+<div class="space-y-4 z-10 h-full">
     @if ($link === 'operations')
 
         {{-- Operations Sidebar Menu --}}
@@ -136,7 +136,7 @@
         </div>
 
         <div class="block px-6">
-            <a href="{{ url('/operation/requestForm') }}"
+            <a href="{{ url('/requestForm/create') }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('operation/requestForm', 'operation/requestForm/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is('operation/requestForm', 'operation/requestForm/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
                 <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('operation/requestForm', 'operation/requestForm/*') ? 'bg-black' : 'bg-[#f66d11]' }}">

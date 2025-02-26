@@ -202,7 +202,10 @@ Route::resource('/track', JobOrderTrackerController::class);
 
 Route::put('/signature/store', [SignatureController::class, 'store'])->name('signature.store');
 
-Route::get('requestForm/create', [RequestFormController::class, 'create']);
+Route::get('requestForm/create', [RequestFormController::class, 'create'])->name('requestForm');
+Route::post('requestForm/store', [RequestFormController::class, 'store']);
+
+
 
 
 require __DIR__ . '/auth.php';
