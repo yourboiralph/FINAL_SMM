@@ -16,8 +16,6 @@ class RequestFormController extends Controller
     {
         $users = User::all();
 
-        return view('pages.admin.RequestForm.history', compact('users'));
+        return view('pages.admin.RequestForm.create', compact('users'));
     }
-
-    public function store() {}
 }
