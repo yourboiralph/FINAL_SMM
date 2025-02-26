@@ -19,6 +19,7 @@ use App\Http\Controllers\OperationRenewalController;
 use App\Http\Controllers\OperationRevisionController;
 use App\Http\Controllers\OperationTaskController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RequestFormController;
 use App\Http\Controllers\RevisionController;
 use App\Http\Controllers\SignatureController;
 use App\Http\Controllers\SupervisorApprovalController;
@@ -200,6 +201,8 @@ Route::put('/revision/update/{id}', [RevisionController::class, 'update'])->name
 Route::resource('/track', JobOrderTrackerController::class);
 
 Route::put('/signature/store', [SignatureController::class, 'store'])->name('signature.store');
+
+Route::get('requestForm', [RequestFormController::class], 'create');
 
 
 require __DIR__ . '/auth.php';
