@@ -85,4 +85,25 @@ class User extends Authenticatable
     {
         return $this->hasMany(Revision::class, 'declined_by');
     }
+
+    public function requestForms()
+    {
+        return $this->hasMany(RequestForm::class, 'requested_by');
+    }
+
+    /**
+     * Relationship: User has many RequestForms as the manager.
+     */
+    public function managedRequests()
+    {
+        return $this->hasMany(RequestForm::class, 'manager_id');
+    }
+
+    /**
+     * Relationship: User has many RequestForms as the receiver.
+     */
+    public function receivedRequests()
+    {
+        return $this->hasMany(RequestForm::class, 'receiver_id');
+    }
 }
