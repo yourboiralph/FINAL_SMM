@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
 @section('title', 'Job Order')
-@section('header', 'List of Job Orders')
+@section('header', 'Request Form History')
 
 @section('content')
 <script src="https://cdn.tailwindcss.com"></script>
@@ -55,7 +55,17 @@
             <tbody id="tableBody">
                 @forelse ($request_forms as $request_form)
                     <tr class="project-row border-b text-sm" data-status="{{ strtolower($request_form->status) }}">
-                        <td class="px-4 py-3"><a id="approval-link" href="#">View Form</a></td>
+                        <td class="px-4 py-3 flex items-center justify-center">
+                            <a id="approval-link" href="#">View Form</a>
+                        
+                            <form action="{{ url('/requestForm/approve/' . $request_form->id) }}" method="POST" class="inline">
+                                @csrf
+                                <button {{$request_form->status === "Approved by Top Manager" ? "disabled" : ""}} type="submit" class="ml-2 {{$request_form->status === "Approved by Top Manager" ? "bg-gray-300" : "bg-green-500"}} text-white px-3 py-1 rounded">
+                                    Approve
+                                </button>
+                            </form>
+                        </td>
+                        
                         <td class="px-4 py-3">{{$request_form->id}}</td>
                         <td class="px-4 py-3"><i class="fa-solid fa-pen-to-square"></i></td>
                         <td class="px-4 py-3"><i class="fa-solid fa-trash"></i></td>
