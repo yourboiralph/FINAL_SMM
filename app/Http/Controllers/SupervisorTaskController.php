@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobDraft;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SupervisorTaskController extends Controller
@@ -79,5 +80,20 @@ class SupervisorTaskController extends Controller
         ]);
 
         return redirect()->route('supervisor.task')->with('Status', 'Draft Updated Successfully');
+    }
+
+    public function accept($id)
+    {
+        $job_draft = JobDraft::find($id);
+
+        $job_draft->update([
+            'status' => 'pending',
+            'date_started' => Carbon::now(),
+            'date_target' => Carbon::now()->addDays($job_draft->days_to_add),
+            'signature_worker' => auth()->user()->signature,
+            'worker_signed' => auth()->user()->id
+        ]);
+
+        return redirect()->route('supervisor.task')->with('Status', 'Job Order Accepted Successfully');
     }
 }
