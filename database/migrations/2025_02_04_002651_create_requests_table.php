@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->unsignedBigInteger('issued_by');
             $table->unsignedBigInteger('assigned_to');
+            $table->string('status');
             $table->timestamps();
 
             $table->foreign('assigned_to')->references('id')->on('users')->onDelete('cascade');

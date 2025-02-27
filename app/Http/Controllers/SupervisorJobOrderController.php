@@ -37,6 +37,7 @@ class SupervisorJobOrderController extends Controller
             'description' => $request->description,
             'assigned_to' => $request->assigned_to,
             'issued_by' => auth()->user()->id,
+            'status' => 'Waiting for Operation Approval'
         ]);
 
         return redirect()->route('supervisor.joborder')->with('Status', 'Job Order Created Successfully');

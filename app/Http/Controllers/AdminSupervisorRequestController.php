@@ -74,4 +74,15 @@ class AdminSupervisorRequestController extends Controller
 
         return redirect()->route('operation.request')->with('Status', 'Job Order Create Successfully');
     }
+
+    public function accept($id)
+    {
+
+        $model_request = ModelsRequest::find($id);
+        $model_request->update([ // Use ModelsRequest instead of Request
+            'status' => 'Approved by Operation'
+        ]);
+
+        return redirect()->route('supervisor.joborder')->with('Status', 'Job Order Created Successfully');
+    }
 }
