@@ -73,7 +73,7 @@ class ContentApprovalController extends Controller
 
     public function accept($id)
     {
-        dd($id);
+        
         $job_draft = JobDraft::find($id);
 
         $job_draft->update([
