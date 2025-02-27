@@ -8,8 +8,8 @@
 
 <div class="container mx-auto p-6">
 
-        {{-- Success Message Component --}}
-        @if(session('Status'))
+    {{-- Success Message Component --}}
+    @if(session('Status'))
         <x-success />
     @endif
 
@@ -71,19 +71,28 @@
                             @endif
                         </td>
                         <td>
-                                                    <p class="w-full text-center text-white px-2 py-1 rounded-lg text-wrap
+                            <p class="w-full text-center text-white px-2 py-1 rounded-lg text-wrap
                                 {{ $job_draft->status == 'completed' ? 'bg-green-400' : 
                                 ($job_draft->status == 'Revision' ? 'bg-red-600' : 'bg-[#fa6e117e]') }} ">
                                 {{ ucfirst($job_draft->status) }}
                             </p>
                         </td>
                         <td class="px-6 py-3">
-                            @if ($job_draft->status == 'pending')
-                                <a href="{{url('operation/task/create/' . $job_draft->id)}}">
-                                    <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
-                                        Create
-                                    </button>
-                                </a>
+                            @if ($job_draft->status == 'pending' || $job_draft->status == 'Waiting for Content Writer Approval')
+
+                                @if ($job_draft->status == 'pending')
+                                    <a href="{{url('operation/task/create/' . $job_draft->id)}}">
+                                        <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
+                                            Create
+                                        </button>
+                                    </a>
+                                @elseif ($job_draft->status == 'Waiting for Content Writer Approval')
+                                    <a href="{{url('operation/task/accept/' . $job_draft->id)}}">
+                                        <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
+                                            Create
+                                        </button>
+                                    </a>
+                                @endif
                                 <a href="{{url('operation/task/show/' . $job_draft->id)}}">
                                     <button class="px-2 py-1 lg:px-4 lg:py-2 text-sm text-white bg-gray-700 rounded hover:bg-gray-800">
                                         Show
@@ -159,33 +168,37 @@
 
 <script>
     function filterByStatus(status) {
-        let tableBody = document.getElementById("tableBody");
-        let rows = tableBody.getElementsByTagName("tr");
+    let tableBody = document.getElementById("tableBody");
+    let rows = tableBody.getElementsByTagName("tr");
 
-        let buttons = document.querySelectorAll('.flex a'); // Select all buttons
+    let buttons = document.querySelectorAll('.flex a'); // Select all buttons
 
-        // Reset the active class for all buttons
-        buttons.forEach(button => button.classList.remove('border-b', 'border-[#fa7011]'));
+    // Reset the active class for all buttons
+    buttons.forEach(button => button.classList.remove('border-b', 'border-[#fa7011]'));
 
-        // Loop through rows and filter
-        for (let row of rows) {
-            let rowStatus = row.getAttribute("data-status");
-            if (status === 'all') {
-                row.style.display = ""; // Show all rows
-            } else {
-                row.style.display = (rowStatus === status) ? "" : "none";
-            }
-        }
+    // Loop through rows and filter
+    for (let row of rows) {
+        let rowStatus = row.getAttribute("data-status");
 
-        // Add active class to the clicked button
-        if (status === 'pending') {
-            document.getElementById('pendingBtn').classList.add('border-b', 'border-[#fa7011]');
-        } else if (status === 'submitted to operations') {
-            document.getElementById('submittedBtn').classList.add('border-b', 'border-[#fa7011]');
-        } else if (status === 'all') {
-            document.getElementById('allBtn').classList.add('border-b', 'border-[#fa7011]');
+        if (status === 'all') {
+            row.style.display = ""; // Show all rows
+        } else if (status === 'pending') {
+            row.style.display = (rowStatus === 'pending' || rowStatus === 'waiting for content writer approval') ? "" : "none";
+        } else {
+            row.style.display = (rowStatus === status) ? "" : "none";
         }
     }
+
+    // Add active class to the clicked button
+    if (status === 'pending') {
+        document.getElementById('pendingBtn').classList.add('border-b', 'border-[#fa7011]');
+    } else if (status === 'submitted to operations') {
+        document.getElementById('submittedBtn').classList.add('border-b', 'border-[#fa7011]');
+    } else if (status === 'all') {
+        document.getElementById('allBtn').classList.add('border-b', 'border-[#fa7011]');
+    }
+}
+
 
     // ✅ Set default active tab to "Pending" when the page loads
     document.addEventListener('DOMContentLoaded', function() {
