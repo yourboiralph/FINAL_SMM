@@ -75,7 +75,7 @@
 </style>
 <div id="container-pdf">
     <div class="bg-[#fa7011] px-3 py-1 w-fit mb-4">
-        <a href="{{url('/operation/task')}}">Back</a>
+        <a href="{{url('/supervisor/directjob')}}">Back</a>
     </div>
     <div class="header">
         <img src="{{ asset('/Assets/doc_header.png') }}" alt="Header">
@@ -93,8 +93,14 @@
         <div class="gray-bar"></div>
         <table>
             <tr>
-                <td><strong>Date Issued:</strong><br>{{ \Carbon\Carbon::parse($job_draft->date_started)->format('Y-m-d') }}</td>
-                <td><strong>Target Finished Date:</strong><br>{{ \Carbon\Carbon::parse($job_draft->date_started)->addDays($job_draft->days_to_add)->format('Y-m-d') }}</td>                
+                <td><strong>Date Issued:</strong><br>
+                    {{ $job_draft->date_started ? \Carbon\Carbon::parse($job_draft->date_started)->format('Y-m-d') : 'N/A' }}
+                </td>
+                
+                <td><strong>Target Finished Date:</strong><br>
+                    {{ $job_draft->date_started ? \Carbon\Carbon::parse($job_draft->date_started)->addDays($job_draft->days_to_add)->format('Y-m-d') : 'N/A' }}
+                </td>
+                          
             </tr>
         </table>
         <table>
@@ -120,8 +126,17 @@
         <div class=""><strong> Complete Information </strong></div>
         <table>
             <tr>
-                <td><strong>Date Completed:</strong><br>{{ $job_draft->date_started }}</td>
-                <td><strong>Time Required:</strong><br>{{ $job_draft->date_target }}</td>
+                <td><strong>Date Completed:</strong><br>
+                    {{ $job_draft->date_completed ? \Carbon\Carbon::parse($job_draft->date_completed)->format('Y-m-d') : 'N/A' }}
+                </td>
+                
+                <td><strong>Time Required:</strong><br>
+                    @if($job_draft->date_started && $job_draft->date_completed)
+                        {{ \Carbon\Carbon::parse($job_draft->date_started)->diffInDays(\Carbon\Carbon::parse($job_draft->date_completed)) }} days
+                    @else
+                        N/A
+                    @endif
+                </td>                             
             </tr>
         </table>
         <div class="section-remarks">
@@ -134,7 +149,7 @@
             <tr>
                 <td class="signature">
                     <strong>Assigned Personnel Signature:</strong><br>
-                    <img src="{{ asset($job_draft->signature_admin) }}" alt="Admin Signature">
+                    <img src="{{ asset($job_draft->signature_worker) }}" alt="Admin Signature">
                 </td>
                 <td class="signature">
                     <strong>Supervisor Signature:</strong><br>
