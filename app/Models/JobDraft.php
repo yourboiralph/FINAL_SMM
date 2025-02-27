@@ -27,7 +27,8 @@ class JobDraft extends Model
         'client_id',
         'feedback',
         'date_completed',
-        'reference_draft_id'
+        'reference_draft_id',
+        'days_to_add'
     ];
 
     public function jobOrder()

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('type', ['content_writer', 'graphic_designer']);
             $table->text('draft')->nullable();
             $table->date('date_started')->default(DB::raw('CURRENT_DATE'));
-            $table->date('date_target');
+            $table->date('date_target')->nullable();
             $table->longText('signature_worker')->nullable();
             $table->unsignedBigInteger('worker_signed')->nullable();
             $table->longText('signature_supervisor')->nullable();
