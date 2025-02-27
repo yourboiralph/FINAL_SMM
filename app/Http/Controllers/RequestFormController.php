@@ -11,7 +11,8 @@ class RequestFormController extends Controller
 {
     public function history()
     {
-        return view('pages.admin.RequestForm.history');
+        $request_forms = RequestForm::all();
+        return view('pages.admin.RequestForm.history', compact($request_forms));
     }
 
     public function create()
@@ -33,6 +34,8 @@ class RequestFormController extends Controller
             'date' => $request->date,
             'description' => $request->description,
             'requested_by' => auth()->user()->id,
+            'manager_id' => $request->manager_id,
+            'receiver_id' => $request->manager_id,
             'status' => 'Approved by Operation'
         ]);
 
