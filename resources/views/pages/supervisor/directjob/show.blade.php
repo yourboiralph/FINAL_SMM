@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
-@section('title', 'Admin')
-@section('header', 'Show Job Order')
+@section('title', 'Supervisor')
+@section('header', 'Direct Job Order')
 
 @section('content')
 <script src="https://cdn.tailwindcss.com"></script>
@@ -23,79 +23,130 @@
 
 <!-- CKEditor 5 Classic -->
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+<style>
 
-<div class="container mx-auto p-6">
-    <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow bg-white">
-        <div>
-            <a href="{{ url('/supervisor/directjob') }}">
-                <div class="w-fit px-4 py-1 bg-gray-400 rounded-md text-white custom-shadow custom-hover-shadow">
-                    Back
-                </div>
-            </a>
+    .header, .footer {
+        text-align: center;
+    }
+    .header img, .footer img {
+        width: 100%;
+        max-height: 150px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+    td, th {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: left;
+        vertical-align: top;
+    }
+    .highlight {
+        background-color: #fa7011;
+        height: 40px;
+        text-align: center;
+    }
+    .gray-bar {
+        background-color: #6b7280;
+        height: 40px;
+        text-align: center;
+    }
+    .section{
+        border: 1px solid black;
+    }
+    .section-title {
+        font-weight: bold;
+        background-color: #6b7280;
+        color: white;
+        text-align: center;
+    }
+    .signature img {
+        width: 100px;
+        height: auto;
+    }
+    .section-remarks {
+        padding: 10px;
+    }
+    #container-pdf{
+        padding: 20px
+    }
+</style>
+<div id="container-pdf">
+    <div class="bg-[#fa7011] px-3 py-1 w-fit mb-4">
+        <a href="{{url('/operation/task')}}">Back</a>
+    </div>
+    <div class="header">
+        <img src="{{ asset('/Assets/doc_header.png') }}" alt="Header">
+        <h2>Operation Job Order Form</h2>
+    </div>
+
+    <div class="section">
+        <div class="highlight"></div>
+        <table>
+            <tr>
+                <td><strong>Client Name:</strong><br>{{ $job_draft->client->name }}</td>
+                <td><strong>Client Address:</strong><br>{{ $job_draft->client->address }}</td>
+            </tr>
+        </table>
+        <div class="gray-bar"></div>
+        <table>
+            <tr>
+                <td><strong>Date Issued:</strong><br>{{ \Carbon\Carbon::parse($job_draft->date_started)->format('Y-m-d') }}</td>
+                <td><strong>Target Finished Date:</strong><br>{{ \Carbon\Carbon::parse($job_draft->date_started)->addDays($job_draft->days_to_add)->format('Y-m-d') }}</td>                
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Issued by:</strong><br>{{ $job_draft->jobOrder->issuer->name }}</td>
+                <td>
+                    <strong>Work Performed by:</strong><br>
+                    @if ($job_draft->type == "content_writer")
+                        {{ $job_draft->contentWriter->name }}
+                    @else
+                        {{ $job_draft->graphicDesigner->name }}
+                    @endif
+                </td>
+            </tr>
+        </table>
+        <div class="section-remarks">
+            <strong>Description:</strong>
+            <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
+                {!! $job_draft->jobOrder->description !!}
+            </div>
         </div>
-        <h1 class="text-xl font-bold mt-4">Show</h1>
-        <div class="mt-4 grid grid-cols-4">
-            <div class="col-span-4 flex flex-col space-y-4 mb-10 md:flex-row  md:space-y-0">
-                <div class="w-full">
-                    <p class="text-sm font-bold text-gray-600">Title</p>
-                    <p class="border-b-2 border-[#fa7011] w-fit">{{ $job_draft->jobOrder->title }}</p>
-                </div>
-                <div class="w-full">
-                    <p class="text-sm font-bold text-gray-600">Client</p>
-                    <p class="border-b-2 border-[#fa7011] w-fit">{{ $job_draft->client->name }}</p>
-                </div>
-                <div class="w-full">
-                    <p class="text-sm font-bold text-gray-600">Date Started</p>
-                    <p class="border-b-2 border-[#fa7011] w-fit">{{ $job_draft->date_started }}</p>
-                </div>
-                <div class="w-full">
-                    <p class="text-sm font-bold text-gray-600">Deadline</p>
-                    <p class="border-b-2 border-[#fa7011] w-fit">{{ $job_draft->date_target }}</p>
-                </div>
+        <div class="gray-bar"></div>
+        <div class=""><strong> Complete Information </strong></div>
+        <table>
+            <tr>
+                <td><strong>Date Completed:</strong><br>{{ $job_draft->date_started }}</td>
+                <td><strong>Time Required:</strong><br>{{ $job_draft->date_target }}</td>
+            </tr>
+        </table>
+        <div class="section-remarks">
+            <strong>Remarks:</strong>
+            <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
+                {!! $job_draft->feedback !!}
             </div>
-            <div class="col-span-4 h-fit">
-                <p class="text-sm font-bold text-gray-600">Instructions</p>
-
-                <!-- CKEditor Read-Only -->
-                <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
-                    {!! $job_draft->jobOrder->description !!}
-                </div>
-
-
-                {{-- Graphic Designer & Content Writer --}}
-            <div class="mt-10 flex gap-8 w-full col-span-4">
-                <div class="flex items-center justify-center flex-col">
-                    <img class="size-14 border-2 rounded-full border-[#fa7011]" src="{{ $job_draft->graphicDesigner->image ? asset($job_draft->graphicDesigner->image) : asset('/Assets/user-profile-profilepage.png')}}" alt="">
-                    {{-- <img src="{{ asset('/Assets/' . $job_draft->content_writer->image) }}" alt="Content Writer Image"> --}}
-                    <h1 class="text-sm">{{$job_draft->graphicDesigner->name}}</h1>
-                    <h1 class="text-[10px] border-b-2 border-[#fa7011] w-fit">Graphic Designer</h1>
-                </div>
-                <div class="flex items-center justify-center flex-col">
-                    <img class="size-14 border-2 rounded-full border-[#fa7011]" src="{{ $job_draft->contentWriter->image ? asset($job_draft->contentWriter->image) : asset('/Assets/user-profile-profilepage.png')}}" alt="">
-                    {{-- <img src="{{ asset('/Assets/' . $job_draft->content_writer->image) }}" alt="Content Writer Image"> --}}
-                    <h1 class="text-sm">{{$job_draft->contentWriter->name}}</h1>
-                    <h1 class="text-[10px] border-b-2 border-[#fa7011] w-fit">Content Writer</h1>
-                </div>
-            </div>
-            </div>
-
         </div>
+        <table>
+            <tr>
+                <td class="signature">
+                    <strong>Assigned Personnel Signature:</strong><br>
+                    <img src="{{ asset($job_draft->signature_admin) }}" alt="Admin Signature">
+                </td>
+                <td class="signature">
+                    <strong>Supervisor Signature:</strong><br>
+                    <img src="{{ asset($job_draft->signature_supervisor) }}" alt="Supervisor Signature">
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="footer">
+        <img src="{{ asset('/Assets/doc_footer.png') }}" alt="Footer">
     </div>
 </div>
-
-<script>
-    // Initialize CKEditor in Read-Only mode
-    ClassicEditor
-        .create(document.querySelector('#editor'), {
-            toolbar: false, // Hide toolbar since it's read-only
-            readOnly: true // Disable editing
-        })
-        .then(editor => {
-            console.log('CKEditor (Read-Only) initialized');
-        })
-        .catch(error => {
-            console.error(error);
-        });
-</script>
 
 @endsection
