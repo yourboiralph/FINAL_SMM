@@ -76,14 +76,14 @@
                             </p>
                         </td>
                         <td class="px-6 py-3">
-                            @if ($job_draft->status == 'pending' || $job_draft->status == 'Waiting for Grapic Designer Approval')
+                            @if ($job_draft->status == 'pending' || $job_draft->status == 'Waiting for Graphic Designer Approval')
                                 @if ($job_draft->status == 'pending')
                                     <a href="{{url('graphic/create/' . $job_draft->id)}}">
                                         <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
                                             Create
                                         </button>
                                     </a>
-                                @elseif ($job_draft->status == 'Waiting for Content Writer Approval')
+                                @elseif ($job_draft->status == 'Waiting for Graphic Designer Approval')
                                     <form action="{{ url('graphic/accept/' . $job_draft->id) }}" method="POST" class="inline">
                                         @csrf
                                         @method('PUT')
