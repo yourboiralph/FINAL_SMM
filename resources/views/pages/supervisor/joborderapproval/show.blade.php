@@ -72,21 +72,20 @@
             <div class="lg:col-span-4">
                 @php
                     $isDisabled = $job_draft->status != "Submitted to Supervisor";
-                    $isSigned = !empty($job_draft->signature_supervisor);
                 @endphp
                 <div class="mt-6 bg-white p-4 rounded-md shadow-md w-fit">
                     <div class="flex justify-between">
                         <h1 class="text-sm font-semibold">Choose Signature Method:</h1>
                         <div class="flex space-x-2">
                             <button id="useUpload"
-                                class="px-2 border rounded {{ Auth::user()->signature ? '' : 'bg-gray-200' }}" {{ $isSigned ? 'disabled' : '' }}>
+                                class="px-2 border rounded {{ Auth::user()->signature ? '' : 'bg-gray-200' }}" >
                                 <i class="fa-solid fa-file-arrow-up" style="color: #fa7011;"></i>
                             </button>
-                            <button id="usePad" class="px-2 border rounded" {{ $isSigned ? 'disabled' : '' }}>
+                            <button id="usePad" class="px-2 border rounded" >
                                 <i class="fa-solid fa-file-signature" style="color: #fa7011;"></i>
                             </button>
                             <button id="useSavedSignature"
-                                class="px-2 border rounded {{ Auth::user()->signature ? 'bg-gray-200' : '' }}" {{ $isSigned ? 'disabled' : '' }}>
+                                class="px-2 border rounded {{ Auth::user()->signature ? 'bg-gray-200' : '' }}" >
                                 <i class="fa-solid fa-cloud-arrow-up" style="color: #fa7011;"></i>
                             </button>
                         </div>
@@ -114,7 +113,7 @@
                             <canvas id="signature-pad" class="w-[300px] lg:w-[400px]"
                                 style="height:200px; {{ $isSigned ? 'pointer-events:none;opacity:0.5;' : '' }}"></canvas>
                             <div class="mt-2 flex">
-                                <button type="button" id="clearPad" class="bg-gray-500 text-white px-2 py-1 rounded mr-2" {{ $isSigned ? 'disabled' : '' }}>
+                                <button type="button" id="clearPad" class="bg-gray-500 text-white px-2 py-1 rounded mr-2" >
                                     Clear
                                 </button>
                             </div>
@@ -140,7 +139,7 @@
 
                         {{-- Agreement Checkbox --}}
                         <div class="mt-4 flex items-center space-x-2">
-                            <input type="checkbox" id="agree" required {{ $isSigned ? 'disabled' : '' }}>
+                            <input type="checkbox" id="agree" required>
                             <label for="agree">I agree to the terms and conditions.</label>
                         </div>
 
@@ -154,14 +153,14 @@
                         <div class="mt-4 flex space-x-4">
                             <button type="submit"
                                 class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                                id="submitBtn" {{ $isSigned ? 'disabled' : '' }}>
+                                id="submitBtn">
                                 Submit Approval
                             </button>
 
                             <a href="{{ url('/supervisor/approve/declineForm/' . $job_draft->id) }}">
                                 <button type="button"
                                     class="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                                    id="declineBtn" {{ $isSigned ? 'disabled' : '' }}>
+                                    id="declineBtn" >
                                     Decline
                                 </button>
                             </a>
