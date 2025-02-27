@@ -13,20 +13,24 @@ class RequestFormController extends Controller
     {
         $authuser = auth()->user();
 
-        if ($authuser == '5') {
-            dd($authuser);
+        if ($authuser->role_id == '5') {
+            $request_forms = RequestForm::whereIn('manager_id', [$authuser->id, null])->get();
+        } elseif ($authuser->role_id == '7') {
+            $request_forms = RequestForm::whereIn('receiver_id', [$authuser->id, null])->get();
+        } elseif ($authuser->role_id == '2') {
+            $request_forms = RequestForm::all();
         }
-        $request_forms = RequestForm::all();
-        $request_forms = RequestForm::where();
 
-        return view('pages.admin.RequestForm.history', compact($request_forms));
+        return view('pages.admin.RequestForm.history', compact('request_forms'));
     }
 
     public function create()
     {
         $users = User::all();
 
-        return view('pages.admin.RequestForm.create', compact('users'));
+        $managers = User::where('role_id', 5);
+        $accounting = User::where('role_id', 7);
+        return view('pages.admin.RequestForm.create', compact('users', 'managers', 'accounting'));
     }
 
     public function store(Request $request)
@@ -42,7 +46,7 @@ class RequestFormController extends Controller
             'description' => $request->description,
             'requested_by' => auth()->user()->id,
             'manager_id' => $request->manager_id,
-            'receiver_id' => $request->manager_id,
+            'receiver_id' => $request->receiver_id,
             'status' => 'Approved by Operation'
         ]);
 
