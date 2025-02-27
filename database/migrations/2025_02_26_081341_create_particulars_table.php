@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('particular');
             $table->timestamps();
 
-            $table->foreign('request_form_id')->references('id')->on('request_form')->onDelete('cascade');
+            $table->foreign('request_form_id')->references('id')->on('request_forms')->onDelete('cascade');
         });
     }
 

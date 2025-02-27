@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('request_form', function (Blueprint $table) {
+        Schema::create('request_forms', function (Blueprint $table) {
             $table->id();
             $table->string('department');
             $table->date('date');
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('request_form');
+        Schema::dropIfExists('request_forms');
     }
 };

@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'email' => 'client@gmail.com',
             'role_id' => 1,
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
         // Create 2 users for role 2
         User::create([
             'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'email' => 'operation@gmail.com',
             'role_id' => 2,
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
@@ -72,7 +72,7 @@ class DatabaseSeeder extends Seeder
         // Create 2 users for role 3
         User::create([
             'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'email' => 'content@gmail.com',
             'role_id' => 3,
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
@@ -97,7 +97,7 @@ class DatabaseSeeder extends Seeder
         // Create 2 users for role 4
         User::create([
             'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'email' => 'graphic@gmail.com',
             'role_id' => 4,
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
@@ -122,7 +122,7 @@ class DatabaseSeeder extends Seeder
         // Create 2 users for role 5
         User::create([
             'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'email' => 'topmanager@gmail.com',
             'role_id' => 5,
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
@@ -147,7 +147,7 @@ class DatabaseSeeder extends Seeder
         // Create 2 users for role 6
         User::create([
             'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'email' => 'supervisor@gmail.com',
             'role_id' => 6,
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
@@ -161,6 +161,18 @@ class DatabaseSeeder extends Seeder
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'role_id' => 6,
+            'phone' => fake()->phoneNumber(),
+            'address' => fake()->address(),
+            'image' => null,
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ]);
+
+        User::create([
+            'name' => fake()->name(),
+            'email' => 'accounting@gmail.com',
+            'role_id' => 7,
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
             'image' => null,
