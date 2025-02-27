@@ -12,6 +12,7 @@ class RequestFormController extends Controller
     public function history()
     {
         $authuser = auth()->user();
+        $request_forms = collect(); // Empty collection to avoid errors
 
         if ($authuser->role_id == '5') {
             $request_forms = RequestForm::whereIn('manager_id', [$authuser->id, null])->get();
