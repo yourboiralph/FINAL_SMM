@@ -70,7 +70,7 @@
                         @enderror
                     </div>
                     <!-- Content Writer -->
-                    <div class="col-span-2 lg:col-span-1 w-full">
+                    {{-- <div class="col-span-2 lg:col-span-1 w-full">
                         <p class="text-sm text-gray-600">Content Writer</p>
                         <div class="relative">
                             <input type="text" id="selected-content-writer-name"
@@ -83,10 +83,10 @@
                         @error('content_writer_id')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
-                    </div>
+                    </div> --}}
 
                     <!-- Graphics Designer -->
-                    <div class="col-span-2 lg:col-span-1 w-full">
+                    {{-- <div class="col-span-2 lg:col-span-1 w-full">
                         <p class="text-sm text-gray-600">Graphics Designer</p>
                         <div class="relative">
                             <input type="text" id="selected-graphic-designer-name"
@@ -99,20 +99,45 @@
                         @error('graphic_designer_id')
                             <p class="text-red-600 text-sm">{{ $message }}</p>
                         @enderror
-                    </div>
+                    </div> --}}
 
-                    <div class="col-span-2 grid grid-cols-2 w-full gap-4 rounded-lg">
+                    <div class="col-span-2 grid grid-cols-3 w-full gap-4 rounded-lg">
                         <div>
-                            <p class="text-sm text-gray-600">Date Started</p>
-                            <input type="date" name="date_started" value="{{ old('date_started') }}" class="w-full rounded-lg border px-3 py-2  border-gray-200 focus:ring-0">
-                            @error('date_started')
+                            <p class="text-sm text-gray-600">Content Writer</p>
+                            <div class="relative">
+                                <input type="text" id="selected-content-writer-name"
+                                    value="{{ old('content_writer_id') ? ($contentworkers->firstWhere('id', old('content_writer_id'))->name ?? 'Select a Content Writer') : 'Select a Content Writer' }}"
+                                    class="w-full border px-3 py-2  border-gray-200 rounded-lg cursor-pointer" readonly
+                                    onclick="openContentWriterModal()">
+                                <input type="hidden" name="content_writer_id" id="selected-content-writer-id"
+                                    value="{{ old('content_writer_id') }}">
+                            </div>
+                            @error('content_writer_id')
                                 <p class="text-red-600 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
                         <div>
-                            <p class="text-sm text-gray-600">Date Deadline</p>
-                            <input type="date" name="date_target" value="{{ old('date_target') }}" class="w-full rounded-lg border px-3 py-2  border-gray-200 focus:ring-0">
-                            @error('date_target')
+                            <p class="text-sm text-gray-600">Graphics Designer</p>
+                            <div class="relative">
+                                <input type="text" id="selected-graphic-designer-name"
+                                    value="{{ old('graphic_designer_id') ? ($graphicworkers->firstWhere('id', old('graphic_designer_id'))->name ?? 'Select a Graphics Designer') : 'Select a Graphics Designer' }}"
+                                    class="w-full border px-3 py-2  border-gray-200 rounded-lg cursor-pointer" readonly
+                                    onclick="openGraphicDesignerModal()">
+                                <input type="hidden" name="graphic_designer_id" id="selected-graphic-designer-id"
+                                    value="{{ old('graphic_designer_id') }}">
+                            </div>
+                            @error('graphic_designer_id')
+                                <p class="text-red-600 text-sm">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600">Days to Add</p>
+                            <div class="relative">
+                                <input type="number" name="days_to_add"
+                                    value="{{old('days_to_add')}}"
+                                    class="w-full border px-3 py-2  border-gray-200 rounded-lg">
+                            </div>
+                            @error('days_to_add')
                                 <p class="text-red-600 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
