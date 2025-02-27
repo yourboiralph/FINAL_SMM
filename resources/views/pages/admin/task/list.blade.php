@@ -79,7 +79,6 @@
                         </td>
                         <td class="px-6 py-3">
                             @if ($job_draft->status == 'pending' || $job_draft->status == 'Waiting for Content Writer Approval')
-
                                 @if ($job_draft->status == 'pending')
                                     <a href="{{url('operation/task/create/' . $job_draft->id)}}">
                                         <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
@@ -87,11 +86,13 @@
                                         </button>
                                     </a>
                                 @elseif ($job_draft->status == 'Waiting for Content Writer Approval')
-                                    <a href="{{url('operation/task/accept/' . $job_draft->id)}}">
-                                        <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
-                                            Create
+                                    <form action="{{ url('operation/task/accept/' . $job_draft->id) }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-[#fa7011] rounded hover:bg-[#fa7011]">
+                                            Accept
                                         </button>
-                                    </a>
+                                    </form>                                
                                 @endif
                                 <a href="{{url('operation/task/show/' . $job_draft->id)}}">
                                     <button class="px-2 py-1 lg:px-4 lg:py-2 text-sm text-white bg-gray-700 rounded hover:bg-gray-800">
@@ -167,21 +168,20 @@
 
 
 <script>
-    function filterByStatus(status) {
+
+function filterByStatus(status) {
     let tableBody = document.getElementById("tableBody");
     let rows = tableBody.getElementsByTagName("tr");
 
     let buttons = document.querySelectorAll('.flex a'); // Select all buttons
-
-    // Reset the active class for all buttons
     buttons.forEach(button => button.classList.remove('border-b', 'border-[#fa7011]'));
 
-    // Loop through rows and filter
     for (let row of rows) {
-        let rowStatus = row.getAttribute("data-status");
+        let rowStatus = row.getAttribute("data-status")?.trim().toLowerCase();
+        console.log(`Row status: "${rowStatus}"`); // Debugging output
 
         if (status === 'all') {
-            row.style.display = ""; // Show all rows
+            row.style.display = "";
         } else if (status === 'pending') {
             row.style.display = (rowStatus === 'pending' || rowStatus === 'waiting for content writer approval') ? "" : "none";
         } else {
@@ -189,7 +189,6 @@
         }
     }
 
-    // Add active class to the clicked button
     if (status === 'pending') {
         document.getElementById('pendingBtn').classList.add('border-b', 'border-[#fa7011]');
     } else if (status === 'submitted to operations') {
