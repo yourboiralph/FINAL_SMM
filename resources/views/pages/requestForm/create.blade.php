@@ -5,7 +5,9 @@
 
 @section('content')
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 
 
 <style>
@@ -81,6 +83,9 @@
             padding: 10px;
         }
 
+        #printable-area {
+            page-break-after: always; /* Ensures footer appears at the bottom */
+        }
         #signature-2 {
             display: flex;
             justify-content: space-around;
@@ -89,94 +94,136 @@
         #graphicDesignerTableBody tr td, #graphicDesignerTableHead tr th, #contentWriterTableBody tr td, #contentWriterTableHead tr th {
             border: none;
         }
+        #btn-container{
+            display: flex;
+            gap: 2rem;
+            padding: 1rem;
+            justify-content: end;
+            align-items: center;
+        }
+        #history-btn {
+            padding-left: 1.75rem;
+            padding-right: 1.75rem;
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            border: 1px solid none;
+            background-color: #4CAF50;
+            border-radius: 5px;
+        }
+        #print-btn {
+            padding-left: 1.75rem;
+            padding-right: 1.75rem;
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            border: 1px solid none;
+            background-color: #c1c1c1;
+            border-radius: 5px;
+        }
+        
 </style>
 
 <div class="container mx-auto p-4 sm:p-6">
     <body>
-        <div class="header">
-            <img src="{{ asset('/Assets/doc_header.png') }}" alt="Header">
-            <h2>Request Form</h2>
-        </div>
-    
-        <div class="section">
-            <div class="highlight"></div>
-            <table>
-                <tr>
-                    <td><strong>Department:</strong><br>
-                    </td>
-                    <td><strong>Date:</strong><br></td>
-                </tr>
-            </table>
-            <div class="long-bar">
-                <p>Requested By: </p>
-            </div>
-            <div class="gray-bar"></div>
-            <table>
-                <tr>
-                    <td><strong>Particulars:</strong><br>
-
-                            <label><input type="checkbox" name="particulars[]" value="Domain"> Domain</label><br>
-                            <label><input type="checkbox" name="particulars[]" value="Hosting and Servers"> Hosting and Servers</label><br>
-                            <label><input type="checkbox" name="particulars[]" value="Office Supplies"> Office Supplies</label><br>
-                            <label><input type="checkbox" name="particulars[]" value="Fare"> Fare</label><br>
-                            <label><input type="checkbox" name="particulars[]" value="Petty Cash"> Petty Cash</label><br>
-                            <label><input type="checkbox" name="particulars[]" value="Credit Card"> Credit Card</label><br>
-                            <label><input type="checkbox" name="particulars[]" value="Office Asset / Cash Advance"> Office Asset / Cash Advance</label><br>
-                            <label><input type="checkbox" name="particulars[]" value="Car"> Car</label><br>
-                            <label><input type="checkbox" name="particulars[]" value="Flyers"> Flyers</label><br>
-                        
-                    </td>
-                        <td>
-                            <label><input type="checkbox" name="particulars[]" value="for Multimedia Use"> for Multimedia Use</label><br>
-                            <label><input type="checkbox" name="particulars[]" value="Cash Advance"> Cash Advance</label><br>
-                            <label><input type="checkbox" name="particulars[]" value="Signage"> Signage</label><br>
-                            <label><input type="checkbox" name="particulars[]" value="Reimbursement"> Reimbursement</label><br>
-                            <label><input type="checkbox" name="particulars[]" value="For Marketing Use"> For Marketing Use</label><br>
-                            <label><input type="checkbox" name="particulars[]" value="Ads - AUB"> Ads - AUB</label><br>
-                            <label><input type="checkbox" name="particulars[]" value="Repair and Maintenance"> Repair and Maintenance</label><br>
-                            <label><input type="checkbox" name="particulars[]" value="Refund"> Refund</label><br>
-                            <label>
-                                <input type="checkbox" name="particulars[]" value="Others">
-                                Others: <input type="text" name="other_particulars" class="border p-1">
-                            </label>
-                        </td>
-                </tr>
-            </table>
-            
-            <div class="long-bar" id="open-modal">
-                <strong>Description:</strong>
-                <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
-                    
-                    
-                </div>
-            </div>
-
+        <div id="btn-container">
             <div>
-                <div id="signature-2">
-                    <div>
-                        <strong>Requested By:</strong><br>
-                        <img src="{{ asset($users) }}" alt="Supervisor Signature">
-                    </div>
-                    <div>
-                        <strong>Received By:</strong><br>
-                        <img src="{{ asset($users) }}" alt="Supervisor Signature">
-                    </div>
-                </div>
-
-                <div id="signature-2">
-
-                    <div>
-                        <strong>Manager:</strong><br>
-                        <img src="{{ asset($users) }}" alt="Supervisor Signature">
-
-                    </div>
-                </div>
+                <button id="history-btn">
+                    <a href="{{url('/requestForm/history')}}"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+                </button>
+            </div>
+            <div>
+                <button id="print-btn" onclick="downloadRequestForm()">
+                    <i class="fa-solid fa-download"></i> Download
+                </button>
             </div>
             
+            
         </div>
+        <div id="printable-area">
+            <div class="header">
+                <img src="{{ asset('/Assets/doc_header.png') }}" alt="Header">
+                <h2>Request Form</h2>
+            </div>
+        
+            <div class="section">
+                <div class="highlight"></div>
+                <table>
+                    <tr>
+                        <td><strong>Department:</strong><br>
+                        </td>
+                        <td><strong>Date:</strong><br></td>
+                    </tr>
+                </table>
+                <div class="long-bar">
+                    <p>Requested By: </p>
+                </div>
+                <div class="gray-bar"></div>
+                <table>
+                    <tr>
+                        <td><strong>Particulars:</strong><br>
     
-        <div class="footer">
-            <img src="{{ asset('/Assets/doc_footer.png') }}" alt="Footer">
+                                <label><input type="checkbox" name="particulars[]" value="Domain"> Domain</label><br>
+                                <label><input type="checkbox" name="particulars[]" value="Hosting and Servers"> Hosting and Servers</label><br>
+                                <label><input type="checkbox" name="particulars[]" value="Office Supplies"> Office Supplies</label><br>
+                                <label><input type="checkbox" name="particulars[]" value="Fare"> Fare</label><br>
+                                <label><input type="checkbox" name="particulars[]" value="Petty Cash"> Petty Cash</label><br>
+                                <label><input type="checkbox" name="particulars[]" value="Credit Card"> Credit Card</label><br>
+                                <label><input type="checkbox" name="particulars[]" value="Office Asset / Cash Advance"> Office Asset / Cash Advance</label><br>
+                                <label><input type="checkbox" name="particulars[]" value="Car"> Car</label><br>
+                                <label><input type="checkbox" name="particulars[]" value="Flyers"> Flyers</label><br>
+                            
+                        </td>
+                            <td>
+                                <label><input type="checkbox" name="particulars[]" value="for Multimedia Use"> for Multimedia Use</label><br>
+                                <label><input type="checkbox" name="particulars[]" value="Cash Advance"> Cash Advance</label><br>
+                                <label><input type="checkbox" name="particulars[]" value="Signage"> Signage</label><br>
+                                <label><input type="checkbox" name="particulars[]" value="Reimbursement"> Reimbursement</label><br>
+                                <label><input type="checkbox" name="particulars[]" value="For Marketing Use"> For Marketing Use</label><br>
+                                <label><input type="checkbox" name="particulars[]" value="Ads - AUB"> Ads - AUB</label><br>
+                                <label><input type="checkbox" name="particulars[]" value="Repair and Maintenance"> Repair and Maintenance</label><br>
+                                <label><input type="checkbox" name="particulars[]" value="Refund"> Refund</label><br>
+                                <label>
+                                    <input type="checkbox" name="particulars[]" value="Others">
+                                    Others: <input type="text" name="other_particulars" class="border p-1">
+                                </label>
+                            </td>
+                    </tr>
+                </table>
+                
+                <div class="long-bar" id="open-modal">
+                    <strong>Description:</strong>
+                    <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
+                        
+                        
+                    </div>
+                </div>
+    
+                <div>
+                    <div id="signature-2">
+                        <div>
+                            <strong>Requested By:</strong><br>
+                            <img src="{{ asset($users) }}" alt="Supervisor Signature">
+                        </div>
+                        <div>
+                            <strong>Received By:</strong><br>
+                            <img src="{{ asset($users) }}" alt="Supervisor Signature">
+                        </div>
+                    </div>
+    
+                    <div id="signature-2">
+    
+                        <div>
+                            <strong>Manager:</strong><br>
+                            <img src="{{ asset($users) }}" alt="Supervisor Signature">
+    
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="footer" style="page-break-before: always;">
+                <img src="{{ asset('/Assets/doc_footer.png') }}" alt="Footer">
+            </div>            
         </div>
     </body>
 </div>
@@ -357,7 +404,7 @@
 </div>
 
 <!-- CKEditor Script -->
-<script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 <script>
         // Open Content Writer Modal
         function openContentWriterModal() {
@@ -426,8 +473,16 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-        CKEDITOR.replace('description-editor'); // Initialize CKEditor
+        ClassicEditor
+            .create(document.querySelector("#description-editor"))
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(error => {
+                console.error("There was a problem initializing CKEditor:", error);
+            });
 
+        // Open and Close Modal
         const openModal = document.getElementById("open-modal");
         const modal = document.getElementById("description-modal");
         const closeModal = document.getElementById("close-modal");
@@ -442,12 +497,40 @@
             modal.classList.add("hidden");
         });
 
-        // Ensure CKEditor content is submitted
+        // Ensure CKEditor content is included in form submission
         form.addEventListener("submit", function () {
-            let editorData = CKEDITOR.instances['description-editor'].getData();
-            document.querySelector("textarea[name='description']").value = editorData;
+            document.querySelector("textarea[name='description']").value = editor.getData();
         });
     });
+</script>
+
+<script>
+    function downloadRequestForm() {
+        var element = document.getElementById('printable-area'); // Select the printable content
+
+        html2pdf(element, {
+            margin: [10, 10, 10, 10], // Top, right, bottom, left margins
+            filename: 'Job_Order.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { 
+                scale: 2, 
+                logging: false,
+                scrollX: 0, 
+                scrollY: 0, 
+                windowWidth: document.documentElement.offsetWidth,
+                windowHeight: document.documentElement.offsetHeight
+            },
+            jsPDF: { 
+                unit: 'mm', 
+                format: 'a4', 
+                orientation: 'portrait'
+            }
+        }).then(() => {
+            console.log("PDF Downloaded Successfully");
+        }).catch(error => {
+            console.error("Error generating PDF:", error);
+        });
+    }
 </script>
 
 
