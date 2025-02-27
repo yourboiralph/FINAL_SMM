@@ -72,6 +72,7 @@ Route::get('/content/create/{id}', [ContentApprovalController::class, 'create'])
 Route::put('/content/store/{id}', [ContentApprovalController::class, 'store'])->name('content.store');
 Route::get('/content/edit/{id}', [ContentApprovalController::class, 'edit'])->name('content.edit');
 Route::put('/content/update/{id}', [ContentApprovalController::class, 'update'])->name('content.update');
+Route::put('/content/accept/{id}', [ContentApprovalController::class, 'accept'])->name('content.accept');
 
 Route::get('/graphic', [GraphicApprovalController::class, 'index'])->name('graphic.approve');
 Route::get('/graphic/show/{id}', [GraphicApprovalController::class, 'show'])->name('graphic.show');
