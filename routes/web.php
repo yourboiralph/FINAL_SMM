@@ -206,6 +206,7 @@ Route::put('/signature/store', [SignatureController::class, 'store'])->name('sig
 Route::get('requestForm/history', [RequestFormController::class, 'history'])->name('requestForm.history');
 Route::get('requestForm/create', [RequestFormController::class, 'create'])->name('requestForm');
 Route::post('requestForm/store', [RequestFormController::class, 'store']);
+Route::post('requestForm/approve/{id}', [RequestFormController::class, 'approve'])->name('requestForm.approve');
 
 
 
