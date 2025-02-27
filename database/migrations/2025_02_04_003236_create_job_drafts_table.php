@@ -21,8 +21,8 @@ return new class extends Migration
             $table->text('draft')->nullable();
             $table->date('date_started')->default(DB::raw('CURRENT_DATE'));
             $table->date('date_target');
-            $table->longText('signature_admin')->nullable();
-            $table->unsignedBigInteger('admin_signed')->nullable();
+            $table->longText('signature_worker')->nullable();
+            $table->unsignedBigInteger('worker_signed')->nullable();
             $table->longText('signature_supervisor')->nullable();
             $table->unsignedBigInteger('supervisor_signed')->nullable();
             $table->string('status');
@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('feedback')->nullable();
             $table->date('date_completed')->nullable();
             $table->unsignedBigInteger('reference_draft_id')->nullable();
+            $table->integer('days_to_add')->default(0);
 
             // Foreign Key Constraint
             $table->foreign('job_order_id')->references('id')->on('job_orders')->onDelete('cascade');
