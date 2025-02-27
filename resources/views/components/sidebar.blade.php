@@ -136,17 +136,6 @@
         </div>
 
         <div class="block px-6">
-            <a href="{{ url('/requestForm/create') }}"
-                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('operation/requestForm', 'operation/requestForm/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
-                style="{{ request()->is('operation/requestForm', 'operation/requestForm/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
-                <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('operation/requestForm', 'operation/requestForm/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
-                    <i class="fa-solid fa-file-export text-sm" style="color: #ffffff;"></i>
-                </div>
-                <h1 class="block">Request Form</h1>
-            </a>
-        </div>
-
-        <div class="block px-6">
             <a href="{{ url('/operation/history') }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('operation/history', 'operation/history/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is('operation/history', 'operation/history/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
@@ -459,6 +448,17 @@
         </div>
 
         <div class="block px-6">
+            <a href="{{ url('/requestForm/history') }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('operation/requestForm', 'operation/requestForm/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is('operation/requestForm', 'operation/requestForm/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('operation/requestForm', 'operation/requestForm/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
+                    <i class="fa-solid fa-file-export text-sm" style="color: #ffffff;"></i>
+                </div>
+                <h1 class="block">Request Form</h1>
+            </a>
+        </div>
+
+        <div class="block px-6">
             <a href="{{ url('/profile/show') }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('profile', 'profile/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
                 style="{{ request()->is('profile', 'profile/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
@@ -616,6 +616,18 @@
                 <h1 class="block">Profile</h1>
             </a>
         </div>
+
+        <div class="block px-6">
+            <a href="{{ url('/requestForm/create') }}"
+                class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('operation/requestForm', 'operation/requestForm/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
+                style="{{ request()->is('operation/requestForm', 'operation/requestForm/*') ? 'box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);' : '' }}">
+                <div class="size-10 flex items-center justify-center rounded-lg {{ request()->is('operation/requestForm', 'operation/requestForm/*') ? 'bg-black' : 'bg-[#f66d11]' }}">
+                    <i class="fa-solid fa-file-export text-sm" style="color: #ffffff;"></i>
+                </div>
+                <h1 class="block">Request Form</h1>
+            </a>
+        </div>
+
         <div class="block px-6">
             <a href="{{ url('/supervisor/history') }}"
                 class="p-2 flex items-center w-full gap-2 rounded-md {{ request()->is('supervisor/history', 'supervisor/history/*') ? 'bg-[#f68e12] text-white font-bold' : '' }}"
