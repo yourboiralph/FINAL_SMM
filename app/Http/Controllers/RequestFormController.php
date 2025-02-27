@@ -15,22 +15,29 @@ class RequestFormController extends Controller
         $request_forms = collect(); // Empty collection to avoid errors
 
         if ($authuser->role_id == '5') {
-            $request_forms = RequestForm::whereIn('manager_id', [$authuser->id, null])->get();
+            $request_forms = RequestForm::with('requestedBy', 'manager', 'receiver', 'particulars')
+                ->whereIn('manager_id', [$authuser->id, null])
+                ->get();
         } elseif ($authuser->role_id == '7') {
-            $request_forms = RequestForm::whereIn('receiver_id', [$authuser->id, null])->get();
+            $request_forms = RequestForm::with('requestedBy', 'manager', 'receiver', 'particulars')
+                ->whereIn('receiver_id', [$authuser->id, null])
+                ->get();
         } elseif ($authuser->role_id == '2') {
-            $request_forms = RequestForm::all();
+            $request_forms = RequestForm::with('requestedBy', 'manager', 'receiver', 'particulars')
+                ->get(); // Changed from all() to get()
         }
 
         return view('pages.admin.RequestForm.history', compact('request_forms'));
     }
 
+
     public function create()
     {
         $users = User::all();
 
-        $managers = User::where('role_id', 5);
-        $accounting = User::where('role_id', 7);
+        $managers = User::where('role_id', 5)->get();
+        $accounting = User::where('role_id', 7)->get();
+
         return view('pages.admin.RequestForm.create', compact('users', 'managers', 'accounting'));
     }
 
@@ -42,7 +49,7 @@ class RequestFormController extends Controller
         ]);
 
         $request_form = RequestForm::create([
-            'department' => auth()->user()->role_id,
+            'department' => auth()->user()->role->position,
             'date' => $request->date,
             'description' => $request->description,
             'requested_by' => auth()->user()->id,
