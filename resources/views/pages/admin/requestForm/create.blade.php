@@ -219,13 +219,13 @@
                 <h1 class="font-bold">Manager:</h1>
                 <div class="relative">
                     <input type="text" id="selected-graphic-designer-name"
-                        value="{{ old('graphic_designer_id') ? ($graphicworkers->firstWhere('id', old('graphic_designer_id'))->name ?? 'Select a Manager') : ($job_draft->graphicDesigner->name ?? 'Select a Manager') }}"
+                        value="{{ old('manager_id') ? ($graphicworkers->firstWhere('id', old('manager_id'))->name ?? 'Select a Manager') : ($job_draft->graphicDesigner->name ?? 'Select a Manager') }}"
                         class="w-full border px-3 py-2  border-gray-200 rounded-lg cursor-pointer" readonly
                         onclick="openGraphicDesignerModal()">
-                    <input type="hidden" name="graphic_designer_id" id="selected-graphic-designer-id"
-                        value="{{ old('graphic_designer_id', $job_draft->graphicDesigner->id ?? '') }}">
+                    <input type="hidden" name="manager_id" id="selected-graphic-designer-id"
+                        value="{{ old('manager_id', $job_draft->graphicDesigner->id ?? '') }}">
                 </div>
-                @error('graphic_designer_id')
+                @error('manager_id')
                     <p class="text-red-600 text-sm">{{ $message }}</p>
                 @enderror
             </div>
@@ -234,13 +234,13 @@
                 <h1 class="font-bold">Auditor:</h1>
                 <div class="relative">
                     <input type="text" id="selected-content-writer-name"
-                        value="{{ old('content_writer_id') ? ($contentworkers->firstWhere('id', old('content_writer_id'))->name ?? 'Select an Auditor') : ($job_draft->contentWriter->name ?? 'Select an Auditor') }}"
+                        value="{{ old('receiver_id') ? ($contentworkers->firstWhere('id', old('receiver_id'))->name ?? 'Select an Auditor') : ($job_draft->contentWriter->name ?? 'Select an Auditor') }}"
                         class="w-full border px-3 py-2  border-gray-200 rounded-lg cursor-pointer" readonly
                         onclick="openContentWriterModal()">
-                    <input type="hidden" name="content_writer_id" id="selected-content-writer-id"
-                        value="{{ old('content_writer_id', $job_draft->contentWriter->id ?? '') }}">
+                    <input type="hidden" name="receiver_id" id="selected-content-writer-id"
+                        value="{{ old('receiver_id', $job_draft->contentWriter->id ?? '') }}">
                 </div>
-                @error('content_writer_id')
+                @error('receiver_id')
                     <p class="text-red-600 text-sm">{{ $message }}</p>
                 @enderror
             </div>
