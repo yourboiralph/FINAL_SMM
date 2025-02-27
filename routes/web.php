@@ -202,7 +202,7 @@ Route::resource('/track', JobOrderTrackerController::class);
 
 Route::put('/signature/store', [SignatureController::class, 'store'])->name('signature.store');
 
-Route::get('requestForm/history', [RequestFormController::class, 'history']);
+Route::get('requestForm/history', [RequestFormController::class, 'history'])->name('requestForm.history');
 Route::get('requestForm/create', [RequestFormController::class, 'create'])->name('requestForm');
 Route::post('requestForm/store', [RequestFormController::class, 'store']);
 
