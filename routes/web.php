@@ -80,6 +80,7 @@ Route::get('/graphic/create/{id}', [GraphicApprovalController::class, 'create'])
 Route::put('/graphic/store/{id}', [GraphicApprovalController::class, 'store'])->name('graphic.store');
 Route::get('/graphic/edit/{id}', [GraphicApprovalController::class, 'edit'])->name('graphic.edit');
 Route::put('/graphic/update/{id}', [GraphicApprovalController::class, 'update'])->name('graphic.update');
+Route::put('/graphic/accept/{id}', [GraphicApprovalController::class, 'accept'])->name('graphic.accept');
 
 Route::get('/operation', [OperationApprovalController::class, 'index'])->name('operation.approve');
 Route::get('/operation/show/{id}', [OperationApprovalController::class, 'show'])->name('operation.show');
@@ -174,6 +175,7 @@ Route::get('/operation/task/create/{id}', [OperationTaskController::class, 'crea
 Route::put('/operation/task/store/{id}', [OperationTaskController::class, 'store'])->name('operation.store');
 Route::get('/operation/task/edit/{id}', [OperationTaskController::class, 'edit'])->name('operation.edit');
 Route::put('/operation/task/update/{id}', [OperationTaskController::class, 'update'])->name('operation.update');
+Route::put('/operation/task/accept/{id}', [OperationTaskController::class, 'accept'])->name('operation.accept');
 
 //Create "My Revisions" tab for Admin DONE
 Route::get('/operation/revision', [OperationRevisionController::class, 'index'])->name('operation.revision');
@@ -187,6 +189,7 @@ Route::get('/supervisor/task/create/{id}', [SupervisorTaskController::class, 'cr
 Route::put('/supervisor/task/store/{id}', [SupervisorTaskController::class, 'store'])->name('supervisor.store');
 Route::get('/supervisor/task/edit/{id}', [SupervisorTaskController::class, 'edit'])->name('supervisor.edit');
 Route::put('/supervisor/task/update/{id}', [SupervisorTaskController::class, 'update'])->name('supervisor.update');
+Route::put('/supervisor/task/accept/{id}', [SupervisorTaskController::class, 'accept'])->name('supervisor.accept');
 
 //Create "My Revisions" tab for Supervisor  DONE
 Route::get('/supervisor/revision', [SupervisorRevisionController::class, 'index'])->name('supervisor.revision');
