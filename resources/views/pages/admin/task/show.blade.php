@@ -134,7 +134,7 @@
             <tr>
                 <td class="signature">
                     <strong>Assigned Personnel Signature:</strong><br>
-                    <img src="{{ asset($job_draft->signature_admin) }}" alt="Admin Signature">
+                    <img src="{{ asset($job_draft->signature_worker) }}" alt="Admin Signature">
                 </td>
                 <td class="signature">
                     <strong>Supervisor Signature:</strong><br>

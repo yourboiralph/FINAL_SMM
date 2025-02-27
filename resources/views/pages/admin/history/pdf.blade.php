@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Order</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            margin: 0;
-        }
+
         .header, .footer {
             text-align: center;
         }
@@ -54,11 +50,14 @@
         .section-remarks {
             padding: 10px;
         }
+        #container-pdf{
+            padding: 20px
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <img src="{{ public_path('/Assets/doc_header.png') }}" alt="Header">
+        <img src="{{ asset('/Assets/doc_header.png') }}" alt="Header">
         <h2>Operation Job Order Form</h2>
     </div>
 
@@ -73,8 +72,14 @@
         <div class="gray-bar"></div>
         <table>
             <tr>
-                <td><strong>Date Issued:</strong><br>{{ $job_draft->date_started }}</td>
-                <td><strong>Target Finished Date:</strong><br>{{ $job_draft->date_target }}</td>
+                <td><strong>Date Issued:</strong><br>
+                    {{ $job_draft->date_started ? \Carbon\Carbon::parse($job_draft->date_started)->format('Y-m-d') : 'N/A' }}
+                </td>
+                
+                <td><strong>Target Finished Date:</strong><br>
+                    {{ $job_draft->date_started ? \Carbon\Carbon::parse($job_draft->date_started)->addDays($job_draft->days_to_add)->format('Y-m-d') : 'N/A' }}
+                </td>
+                          
             </tr>
         </table>
         <table>
@@ -100,8 +105,17 @@
         <div class=""><strong> Complete Information </strong></div>
         <table>
             <tr>
-                <td><strong>Date Completed:</strong><br>{{ $job_draft->date_started }}</td>
-                <td><strong>Time Required:</strong><br>{{ $job_draft->date_target }}</td>
+                <td><strong>Date Completed:</strong><br>
+                    {{ $job_draft->date_completed ? \Carbon\Carbon::parse($job_draft->date_completed)->format('Y-m-d') : 'N/A' }}
+                </td>
+                
+                <td><strong>Time Required:</strong><br>
+                    @if($job_draft->date_started && $job_draft->date_completed)
+                        {{ \Carbon\Carbon::parse($job_draft->date_started)->diffInDays(\Carbon\Carbon::parse($job_draft->date_completed)) }} days
+                    @else
+                        N/A
+                    @endif
+                </td>                             
             </tr>
         </table>
         <div class="section-remarks">
@@ -114,18 +128,18 @@
             <tr>
                 <td class="signature">
                     <strong>Assigned Personnel Signature:</strong><br>
-                    <img src="{{ public_path($job_draft->signature_admin) }}" alt="Admin Signature">
+                    <img src="{{ asset($job_draft->signature_worker) }}" alt="Admin Signature">
                 </td>
                 <td class="signature">
                     <strong>Supervisor Signature:</strong><br>
-                    <img src="{{ public_path($job_draft->signature_supervisor) }}" alt="Supervisor Signature">
+                    <img src="{{ asset($job_draft->signature_supervisor) }}" alt="Supervisor Signature">
                 </td>
             </tr>
         </table>
     </div>
 
     <div class="footer">
-        <img src="{{ public_path('/Assets/doc_footer.png') }}" alt="Footer">
+        <img src="{{ asset('/Assets/doc_footer.png') }}" alt="Footer">
     </div>
 </body>
 </html>
