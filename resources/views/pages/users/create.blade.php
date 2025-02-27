@@ -91,6 +91,8 @@
                             <option value="3" {{ old('role_id') == 3 ? 'selected' : '' }}>Content Writer</option>
                             <option value="4" {{ old('role_id') == 4 ? 'selected' : '' }}>Graphic Designer</option>
                             <option value="5" {{ old('role_id') == 5 ? 'selected' : '' }}>Top Manager</option>
+                            <option value="5" {{ old('role_id') == 6 ? 'selected' : '' }}>Supervisor</option>
+                            <option value="5" {{ old('role_id') == 7 ? 'selected' : '' }}>Accounting</option>
                         </select>
                         @error('role_id')
                             <p class="text-red-600 text-sm">{{ $message }}</p>

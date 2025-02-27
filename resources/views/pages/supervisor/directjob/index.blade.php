@@ -65,7 +65,7 @@
                         </td>
                         <td class="w-[20%] px-4 py-3 text-center">
                             <a href="{{url('supervisor/directjob/edit/' . $job_draft->id)}}">
-                                <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white {{$job_draft->status !== 'pending' ? "bg-gray-400 cursor-not-allowed" : "bg-green-500 hover:bg-green-600"}} rounded " {{$job_draft->status !== 'pending' ? "disabled" : ""}}>
+                                <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white {{$job_draft->status === 'pending' || $job_draft->status === 'Waiting for Content Writer Approval' || $job_draft->status === 'Waiting for Graphic Designer Approval'  ? "bg-green-500 hover:bg-green-600" : "bg-gray-400 cursor-not-allowed"}} rounded " {{$job_draft->status === 'pending' || $job_draft->status === 'Waiting for Content Writer Approval' || $job_draft->status === 'Waiting for Graphic Designer Approval' ? "" : "disabled"}}>
                                     Edit
                                 </button>
                             </a>
