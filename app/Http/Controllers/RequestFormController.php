@@ -11,7 +11,14 @@ class RequestFormController extends Controller
 {
     public function history()
     {
+        $authuser = auth()->user();
+
+        if ($authuser == '5') {
+            dd($authuser);
+        }
         $request_forms = RequestForm::all();
+        $request_forms = RequestForm::where();
+
         return view('pages.admin.RequestForm.history', compact($request_forms));
     }
 
