@@ -33,8 +33,7 @@ class SupervisorDirectJobOrderController extends Controller
             'content_writer_id' => 'required|integer',
             'graphic_designer_id' => 'required|integer',
             'client_id' => 'required|integer',
-            'date_target' => 'required|date',
-            'date_started' => 'required|date'
+            'days_to_add' => 'required'
         ]);
 
         $job_order = JobOrder::create([
@@ -46,7 +45,6 @@ class SupervisorDirectJobOrderController extends Controller
         $job_draft = JobDraft::create([
             'job_order_id' => $job_order->id,
             'type' => 'content_writer',
-            'date_started' => $request->date_started,
             'days_to_add' => $request->days_to_add,
             'status' => 'Waiting for Content Writer Approval',
             'content_writer_id' => $request->content_writer_id,
