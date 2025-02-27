@@ -49,7 +49,7 @@
                 <tr>
                     <th class="px-6 py-3 w-[35%]">Title</th>
                     <th class="px-6 py-3 w-[25]">Designated</th>
-                    <th class="px-6 py-3 w-[20%] text-center">Status</th>
+                    <th class="px-6 py-3 w-[20%]">Status</th>
                     <th class="px-6 py-3 w-[20%] ">Actions</th>
                 </tr>
             </thead>
@@ -78,14 +78,14 @@
                             </p>
                         </td>
                         <td class="px-6 py-3">
-                            @if ($job_draft->status == 'pending' || $job_draft->status == 'Waiting for Content Writer Approval')
+                            @if ($job_draft->status == 'pending' || $job_draft->status == 'Waiting for Content Writer Approval' || $job_draft->status == 'Waiting for Graphic Designer Approval')
                                 @if ($job_draft->status == 'pending')
                                     <a href="{{url('operation/task/create/' . $job_draft->id)}}">
                                         <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
                                             Create
                                         </button>
                                     </a>
-                                @elseif ($job_draft->status == 'Waiting for Content Writer Approval')
+                                @elseif ($job_draft->status == 'Waiting for Content Writer Approval' || $job_draft->status == 'Waiting for Graphic Designer Approval')
                                     <form action="{{ url('operation/task/accept/' . $job_draft->id) }}" method="POST" class="inline">
                                         @csrf
                                         @method('PUT')
@@ -168,27 +168,29 @@
 
 
 <script>
-
-function filterByStatus(status) {
+    function filterByStatus(status) {
     let tableBody = document.getElementById("tableBody");
     let rows = tableBody.getElementsByTagName("tr");
 
     let buttons = document.querySelectorAll('.flex a'); // Select all buttons
+
+    // Reset the active class for all buttons
     buttons.forEach(button => button.classList.remove('border-b', 'border-[#fa7011]'));
 
+    // Loop through rows and filter
     for (let row of rows) {
-        let rowStatus = row.getAttribute("data-status")?.trim().toLowerCase();
-        console.log(`Row status: "${rowStatus}"`); // Debugging output
+        let rowStatus = row.getAttribute("data-status");
 
         if (status === 'all') {
-            row.style.display = "";
+            row.style.display = ""; // Show all rows
         } else if (status === 'pending') {
-            row.style.display = (rowStatus === 'pending' || rowStatus === 'waiting for content writer approval') ? "" : "none";
+            row.style.display = (rowStatus === 'pending' || rowStatus === 'waiting for content writer approval' || rowStatus === 'waiting for graphic designer approval') ? "" : "none";
         } else {
             row.style.display = (rowStatus === status) ? "" : "none";
         }
     }
 
+    // Add active class to the clicked button
     if (status === 'pending') {
         document.getElementById('pendingBtn').classList.add('border-b', 'border-[#fa7011]');
     } else if (status === 'submitted to operations') {
