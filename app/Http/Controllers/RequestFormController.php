@@ -66,6 +66,27 @@ class RequestFormController extends Controller
             ]);
         }
 
-        return redirect()->route('requestForm')->with('success', 'Request form created successfully.');
+        return redirect()->route('requestForm')->with('Status', 'Request Form Created Successfully.');
+    }
+
+    public function approve($id)
+    {
+        $request_form = RequestForm::find($id);
+        $authuser = auth()->user();
+
+        // Determine the status based on the role
+        $status = null;
+        if ($authuser->role_id == 5) {
+            $status = 'Approved by Top Manager';
+        } elseif ($authuser->role_id == 7) {
+            $status = 'Approved by Accounting';
+        }
+
+        $request_form->update([
+            'manager_id' => $authuser->id,
+            'status' => $status,
+        ]);
+
+        return redirect()->route('requestForm.history')->with('Status', 'Request Form Approve Successfully.');
     }
 }
