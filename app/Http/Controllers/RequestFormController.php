@@ -27,7 +27,7 @@ class RequestFormController extends Controller
                 ->get(); // Changed from all() to get()
         }
 
-        return view('pages.admin.RequestForm.history', compact('request_forms'));
+        return view('pages.RequestForm.history', compact('request_forms'));
     }
 
 
@@ -38,7 +38,7 @@ class RequestFormController extends Controller
         $managers = User::where('role_id', 5)->get();
         $accounting = User::where('role_id', 7)->get();
 
-        return view('pages.admin.RequestForm.create', compact('users', 'managers', 'accounting'));
+        return view('pages.RequestForm.create', compact('users', 'managers', 'accounting'));
     }
 
     public function store(Request $request)
