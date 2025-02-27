@@ -86,7 +86,7 @@
             justify-content: space-around;
             align-items: center;
         }
-        #GraphicDesignerTableBody tr td, #GraphicDesignerTableHead tr th, #contentWriterTableBody tr td, #contentWriterTableHead tr th {
+        #graphicDesignerTableBody tr td, #graphicDesignerTableHead tr th, #contentWriterTableBody tr td, #contentWriterTableHead tr th {
             border: none;
         }
 </style>
