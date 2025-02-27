@@ -53,13 +53,15 @@ class ClientApprovalController extends Controller
             JobDraft::create([
                 'job_order_id' => $job_draft_id->job_order_id,
                 'type' => 'graphic_designer',
-                'date_started' => Carbon::now()->toDateString(), // Set date_started to today
-                'date_target' => Carbon::now()->addDays(3)->toDateString(),
-                'status' => 'pending',
+                // 'date_started' => Carbon::now()->toDateString(), // Set date_started to today
+                // 'date_target' => Carbon::now()->addDays(3)->toDateString(),
+                'status' => 'Waiting for Graphic Designer Approval',
                 'content_writer_id' => $job_draft_id->content_writer_id,
                 'graphic_designer_id' => $job_draft_id->graphic_designer_id,
                 'client_id' => $job_draft_id->client_id,
-                'reference_draft_id' => $id
+                'reference_draft_id' => $id,
+                'signature_supervisor' => $job_draft_id->signature_supervisor,
+                'supervisor_signed' => $job_draft_id->supervisor_signed
             ]);
         } elseif ($job_draft_id->type == 'graphic_designer') {
             if ($job_draft_id->jobOrder->renewable == 0) {
@@ -68,12 +70,14 @@ class ClientApprovalController extends Controller
                 JobDraft::create([
                     'job_order_id' => $job_draft_id->job_order_id,
                     'type' => 'content_writer',
-                    'date_started' => Carbon::now()->toDateString(), // Set date_started to today
-                    'date_target' => Carbon::now()->addDays(3)->toDateString(),
-                    'status' => 'pending',
+                    // 'date_started' => Carbon::now()->toDateString(), // Set date_started to today
+                    // 'date_target' => Carbon::now()->addDays(3)->toDateString(),
+                    'status' => 'Waiting for Content Writer Approval',
                     'content_writer_id' => $job_draft_id->content_writer_id,
                     'graphic_designer_id' => $job_draft_id->graphic_designer_id,
                     'client_id' => $job_draft_id->client_id,
+                    'signature_supervisor' => $job_draft_id->signature_supervisor,
+                    'supervisor_signed' => $job_draft_id->supervisor_signed
                 ]);
             }
         }
