@@ -268,7 +268,7 @@ document.getElementById('agree').addEventListener('change', function () {
     document.getElementById('submitBtn').disabled = !this.checked;
 });
 
-✅ Form Submission - Correctly capture signaturePad value
+// ✅ Form Submission - Correctly capture signaturePad value
 document.getElementById("approvalForm").addEventListener("submit", function (event) {
     // Capture Signature Pad data before submitting
     if (!document.getElementById("uploadSection").classList.contains("hidden")) {

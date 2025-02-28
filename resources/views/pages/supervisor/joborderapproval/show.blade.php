@@ -79,14 +79,14 @@
                         <h1 class="text-sm font-semibold">Choose Signature Method:</h1>
                         <div class="flex space-x-2">
                             <button id="useUpload"
-                                class="px-2 border rounded {{ Auth::user()->signature ? '' : 'bg-gray-200' }}" >
+                                class="px-2 border rounded {{ Auth::user()->signature ? '' : 'bg-gray-200' }}" {{ $isSigned ? 'disabled' : '' }}>
                                 <i class="fa-solid fa-file-arrow-up" style="color: #fa7011;"></i>
                             </button>
-                            <button id="usePad" class="px-2 border rounded" >
+                            <button id="usePad" class="px-2 border rounded" {{ $isSigned ? 'disabled' : '' }}>
                                 <i class="fa-solid fa-file-signature" style="color: #fa7011;"></i>
                             </button>
                             <button id="useSavedSignature"
-                                class="px-2 border rounded {{ Auth::user()->signature ? 'bg-gray-200' : '' }}" >
+                                class="px-2 border rounded {{ Auth::user()->signature ? 'bg-gray-200' : '' }}" {{ $isSigned ? 'disabled' : '' }}>
                                 <i class="fa-solid fa-cloud-arrow-up" style="color: #fa7011;"></i>
                             </button>
                         </div>
@@ -114,7 +114,7 @@
                             <canvas id="signature-pad" class="w-[300px] lg:w-[400px]"
                                 style="height:200px; {{ $isSigned ? 'pointer-events:none;opacity:0.5;' : '' }}"></canvas>
                             <div class="mt-2 flex">
-                                <button type="button" id="clearPad" class="bg-gray-500 text-white px-2 py-1 rounded mr-2" >
+                                <button type="button" id="clearPad" class="bg-gray-500 text-white px-2 py-1 rounded mr-2" {{ $isSigned ? 'disabled' : '' }}>
                                     Clear
                                 </button>
                             </div>
@@ -140,7 +140,7 @@
 
                         {{-- Agreement Checkbox --}}
                         <div class="mt-4 flex items-center space-x-2">
-                            <input type="checkbox" id="agree" required>
+                            <input type="checkbox" id="agree" required {{ $isSigned ? 'disabled' : '' }}>
                             <label for="agree">I agree to the terms and conditions.</label>
                         </div>
 
@@ -154,14 +154,14 @@
                         <div class="mt-4 flex space-x-4">
                             <button type="submit"
                                 class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                                id="submitBtn">
+                                id="submitBtn" {{ $isSigned ? 'disabled' : '' }}>
                                 Submit Approval
                             </button>
 
                             <a href="{{ url('/supervisor/approve/declineForm/' . $job_draft->id) }}">
                                 <button type="button"
                                     class="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                                    id="declineBtn" >
+                                    id="declineBtn" {{ $isSigned ? 'disabled' : '' }}>
                                     Decline
                                 </button>
                             </a>
@@ -265,7 +265,7 @@ document.getElementById('agree').addEventListener('change', function () {
     document.getElementById('submitBtn').disabled = !this.checked;
 });
 
-✅ Form Submission - Correctly capture signaturePad value
+// ✅ Form Submission - Correctly capture signaturePad value
 document.getElementById("approvalForm").addEventListener("submit", function (event) {
     // Capture Signature Pad data before submitting
     if (!document.getElementById("uploadSection").classList.contains("hidden")) {
