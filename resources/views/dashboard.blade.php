@@ -149,14 +149,37 @@
                                                         </td>
                                                         <td class="px-4 py-2 text-sm">
                                                             @if (auth()->user()->role_id == 2)
-                                                                <a href="{{url('operation/task/edit/' . $my_task->id)}}">
-                                                                    <p class="text-[#fa7011]">Create</p>
-                                                                </a>
-
+                                                                @if ($my_task->status == "Waiting for Content Writer Approval" || $my_task->status == "Waiting for Graphic Designer Approval")
+                                                                    <form action="{{ url('operation/task/accept/' . $my_task->id) }}" method="POST">
+                                                                        @csrf
+                                                                        @method('PUT')
+                                                                        <button type="submit" class="text-[#fa7011] bg-transparent border-none cursor-pointer">
+                                                                            Accept
+                                                                        </button>
+                                                                    </form>
+                                                                
+                                                                @else
+                                                                    <a href="{{url('operation/task/edit/' . $my_task->id)}}">
+                                                                        <p class="text-[#fa7011]">Create</p>
+                                                                    </a>
+                                                                @endif
+                                                
                                                             @elseif (auth()->user()->role_id == 6)
-                                                                <a href="{{url('supervisor/task/edit/' . $my_task->id)}}">
-                                                                    <p class="text-[#fa7011]">Create</p>
-                                                                </a>
+                                                                @if ($my_task->status == "Waiting for Content Writer Approval" || $my_task->status == "Waiting for Graphic Designer Approval")
+                                                                    <form action="{{ url('supervisor/task/accept/' . $my_task->id) }}" method="POST">
+                                                                        @csrf
+                                                                        @method('PUT')
+                                                                        <button type="submit" class="text-[#fa7011] bg-transparent border-none cursor-pointer">
+                                                                            Accept
+                                                                        </button>
+                                                                    </form>
+                                                                  
+                                                                @else
+                                                                    <a href="{{url('supervisor/task/edit/' . $my_task->id)}}">
+                                                                        <p class="text-[#fa7011]">Create</p>
+                                                                    </a>
+                                                                @endif
+                                                             
                                                             @endif
                                                         </td>
 
