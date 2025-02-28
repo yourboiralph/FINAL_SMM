@@ -140,7 +140,7 @@ class ClientApprovalController extends Controller
             'type' => 'content_writer',
             // 'date_started' => Carbon::now()->toDateString(), // Set date_started to today
             // 'date_target' => Carbon::now()->addDays(3)->toDateString(),
-            'status' => 'pending',
+            'status' => 'Waiting for Content Writer Approval',
             'content_writer_id' => $job_draft->content_writer_id,
             'graphic_designer_id' => $job_draft->graphic_designer_id,
             'client_id' => $job_draft->client_id,
