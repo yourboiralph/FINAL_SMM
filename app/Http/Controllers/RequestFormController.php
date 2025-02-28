@@ -39,9 +39,12 @@ class RequestFormController extends Controller
 
     public function edit($id)
     {
+        $users = User::all();
+        $managers = User::where('role_id', 5)->get();
+        $accounting = User::where('role_id', 7)->get();
         $request_form = RequestForm::with(['requestedBy', 'manager', 'receiver', 'particulars'])->findOrFail($id);
 
-        return view('pages.RequestForm.edit', compact('request_form'));
+        return view('pages.RequestForm.edit', compact('request_form', 'users', 'managers', 'accounting'));
     }
 
     public function update(Request $request, $id)
