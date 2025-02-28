@@ -148,7 +148,8 @@
         <table>
             <tr>
                 <td class="signature">
-                    <strong>Assigned Personnel Signature:                     @if ($job_draft->type == "content_writer")
+                    <strong>Assigned Personnel Signature:
+                    @if ($job_draft->type == "content_writer")
                         {{ $job_draft->contentWriter->name }}
                     @else
                         {{ $job_draft->graphicDesigner->name }}

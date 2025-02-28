@@ -35,7 +35,7 @@
     <div class="h-full mx-auto max-w-screen-xl">
         <div class="h-auto gap-8 m-10 p-10 relative bg-white" style="box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.3); border-radius: 8px;">
             <div class="rounded-md text-white flex justify-end mb-10">
-                <a href="{{ url('/operation') }}" class="w-fit px-4 py-1 bg-[#fa7011] rounded hover:bg-[#d95f0a] transition duration-200">
+                <a href="{{ url('/client') }}" class="w-fit px-4 py-1 bg-[#fa7011] rounded hover:bg-[#d95f0a] transition duration-200">
                     Back
                 </a>
             </div>

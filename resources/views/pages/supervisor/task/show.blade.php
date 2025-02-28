@@ -75,7 +75,7 @@
 </style>
 <div id="container-pdf">
     <div class="bg-[#fa7011] px-3 py-1 w-fit mb-4">
-        <a href="{{url('/supervisor/directjob')}}">Back</a>
+        <a href="{{url('/supervisor/task')}}">Back</a>
     </div>
     <div class="header">
         <img src="{{ asset('/Assets/doc_header.png') }}" alt="Header">
