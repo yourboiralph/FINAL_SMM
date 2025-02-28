@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
-@section('title', 'Graphic')
-@section('header', 'Graphic Job Order')
+@section('title', 'Supervisor')
+@section('header', 'Graphic Designer Job Order')
 
 @section('content')
 <script src="https://cdn.tailwindcss.com"></script>
@@ -75,7 +75,7 @@
 </style>
 <div id="container-pdf">
     <div class="bg-[#fa7011] px-3 py-1 w-fit mb-4">
-        <a href="{{url('/graphic')}}">Back</a>
+        <a href="{{url('/supervisor/directjob')}}">Back</a>
     </div>
     <div class="header">
         <img src="{{ asset('/Assets/doc_header.png') }}" alt="Header">
@@ -148,11 +148,15 @@
         <table>
             <tr>
                 <td class="signature">
-                    <strong>Assigned Personnel Signature:</strong><br>
+                    <strong>Assigned Personnel Signature:                     @if ($job_draft->type == "content_writer")
+                        {{ $job_draft->contentWriter->name }}
+                    @else
+                        {{ $job_draft->graphicDesigner->name }}
+                    @endif</strong><br>
                     <img src="{{ asset($job_draft->signature_worker) }}" alt="Admin Signature">
                 </td>
                 <td class="signature">
-                    <strong>Supervisor Signature:</strong><br>
+                    <strong>Supervisor Signature: {{$job_draft->jobOrder->issuer->name}}</strong><br>
                     <img src="{{ asset($job_draft->signature_supervisor) }}" alt="Supervisor Signature">
                 </td>
             </tr>
