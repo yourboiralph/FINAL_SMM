@@ -44,7 +44,38 @@ class RequestFormController extends Controller
         return view('pages.RequestForm.edit', compact('request_form'));
     }
 
-    public function update(Request $request, $id) {}
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'date' => 'required|date',
+            'description' => 'required'
+        ]);
+
+        $request_form = RequestForm::findOrFail($id);
+
+        $request_form->update([
+            'department' => auth()->user()->role->position,
+            'date' => $request->date,
+            'description' => $request->description,
+            'requested_by' => auth()->user()->id,
+            'manager_id' => $request->manager_id,
+            'receiver_id' => $request->receiver_id,
+            'status' => 'Approved by Operation'
+        ]);
+
+        // Update particulars: delete existing ones and insert new ones
+        $request_form->particulars()->delete();
+
+        foreach ($request->particulars as $particular) {
+            Particular::create([
+                'request_form_id' => $request_form->id,
+                'particular' => $particular
+            ]);
+        }
+
+        return redirect()->route('requestForm')->with('Status', 'Request Form Updated Successfully.');
+    }
+
 
     public function create()
     {
