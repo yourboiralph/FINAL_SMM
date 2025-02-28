@@ -148,11 +148,15 @@
         <table>
             <tr>
                 <td class="signature">
-                    <strong>Assigned Personnel Signature:</strong><br>
+                    <strong>Assigned Personnel Signature:                     @if ($job_draft->type == "content_writer")
+                        {{ $job_draft->contentWriter->name }}
+                    @else
+                        {{ $job_draft->graphicDesigner->name }}
+                    @endif</strong><br>
                     <img src="{{ asset($job_draft->signature_worker) }}" alt="Admin Signature">
                 </td>
                 <td class="signature">
-                    <strong>Supervisor Signature:</strong><br>
+                    <strong>Supervisor Signature: {{$job_draft->jobOrder->issuer->name}}</strong><br>
                     <img src="{{ asset($job_draft->signature_supervisor) }}" alt="Supervisor Signature">
                 </td>
             </tr>
