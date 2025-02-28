@@ -25,6 +25,12 @@ return new class extends Migration
             $table->unsignedBigInteger('worker_signed')->nullable();
             $table->longText('signature_supervisor')->nullable();
             $table->unsignedBigInteger('supervisor_signed')->nullable();
+
+            $table->longText('draft_op_sign')->nullable();
+            $table->unsignedBigInteger('op_signed_draft')->nullable();
+            $table->longText('draft_sup_sign')->nullable();
+            $table->unsignedBigInteger('sup_signed_draft')->nullable();
+
             $table->string('status');
             $table->unsignedBigInteger('content_writer_id');
             $table->unsignedBigInteger('graphic_designer_id');
@@ -41,6 +47,8 @@ return new class extends Migration
             $table->foreign('client_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('worker_signed')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('supervisor_signed')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('op_signed_draft')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('sup_signed_draft')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('reference_draft_id')->references('id')->on('job_drafts')->onDelete('cascade');
         });
     }

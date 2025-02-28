@@ -33,53 +33,53 @@ class OperationApprovalController extends Controller
 
     public function update(Request $request, $id)
     {
-        // $validated = $request->validate([
-        //     'signature_admin'  => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        //     'signature_pad'    => 'nullable|string',
-        //     'new_signature_pad' => 'nullable|string',
-        // ]);
+        $validated = $request->validate([
+            'signature_admin'  => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'signature_pad'    => 'nullable|string',
+            'new_signature_pad' => 'nullable|string',
+        ]);
 
-        // $signatureCount = 0;
+        $signatureCount = 0;
 
-        // if ($request->hasFile('signature_admin')) {
-        //     $signatureCount++;
-        // }
-        // if (!empty($request->signature_pad)) {
-        //     $signatureCount++;
-        // }
-        // if (!empty($request->new_signature_pad)) {
-        //     $signatureCount++;
-        // }
+        if ($request->hasFile('signature_admin')) {
+            $signatureCount++;
+        }
+        if (!empty($request->signature_pad)) {
+            $signatureCount++;
+        }
+        if (!empty($request->new_signature_pad)) {
+            $signatureCount++;
+        }
 
-        // // If no signature was provided, return an error.
-        // if ($signatureCount === 0) {
-        //     return redirect()->back()->withErrors(['signature' => 'A signature is required.'])->withInput();
-        // }
+        // If no signature was provided, return an error.
+        if ($signatureCount === 0) {
+            return redirect()->back()->withErrors(['signature' => 'A signature is required.'])->withInput();
+        }
 
-        // // If more than one signature was provided, return an error.
-        // if ($signatureCount > 1) {
-        //     return redirect()->back()->withErrors(['signature' => 'Only one signature is allowed.'])->withInput();
-        // }
+        // If more than one signature was provided, return an error.
+        if ($signatureCount > 1) {
+            return redirect()->back()->withErrors(['signature' => 'Only one signature is allowed.'])->withInput();
+        }
 
         $job_draft = JobDraft::findOrFail($id);
-        // $imagePath = $job_draft->signature_admin; // Keep existing signature if no new one is uploaded
+        $imagePath = $job_draft->draft_op_sign; // Keep existing signature if no new one is uploaded
 
-        // if ($request->hasFile('signature_admin')) {
-        //     $file = $request->file('signature_admin');
-        //     $imagePath = 'signatures/signature_' . time() . '.' . $file->extension();
-        //     $file->move(public_path('signatures'), $imagePath);
-        // } elseif ($request->signature_pad) {
-        //     $image = str_replace('data:image/png;base64,', '', $request->signature_pad);
-        //     $imagePath = 'signatures/signature_' . time() . '.png';
-        //     file_put_contents(public_path($imagePath), base64_decode($image));
-        // } elseif ($request->new_signature_pad) {
-        //     $imagePath = auth()->user()->signature;
-        // }
+        if ($request->hasFile('signature_admin')) {
+            $file = $request->file('signature_admin');
+            $imagePath = 'signatures/signature_' . time() . '.' . $file->extension();
+            $file->move(public_path('signatures'), $imagePath);
+        } elseif ($request->signature_pad) {
+            $image = str_replace('data:image/png;base64,', '', $request->signature_pad);
+            $imagePath = 'signatures/signature_' . time() . '.png';
+            file_put_contents(public_path($imagePath), base64_decode($image));
+        } elseif ($request->new_signature_pad) {
+            $imagePath = auth()->user()->signature;
+        }
 
         // Update Database with Signature Path
         $job_draft->update([
-            // 'signature_admin' => $imagePath,
-            // 'admin_signed' => auth()->user()->id,
+            'draft_op_sign' => $imagePath,
+            'op_signed_draft' => auth()->user()->id,
             'status' => 'Submitted to Supervisor',
         ]);
 
