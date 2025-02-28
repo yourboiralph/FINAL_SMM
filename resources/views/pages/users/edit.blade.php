@@ -63,13 +63,14 @@
                             </div>
                             <div class="gap-4 items-center">
                                 <h1 class="text-slate-500 font-bold">Role</h1>
-                                <select name="role_id" class="w-full border-gray-200 rounded-lg custom-shadow custom-focus-ring" required>
+                                <select name="role_id" class="w-full border-gray-200 px-3 py-1 rounded-lg custom-shadow custom-focus-ring" required>
                                     <option value="1" {{ old('role_id', $user->role_id) == 1 ? 'selected' : '' }}>Client</option>
                                     <option value="2" {{ old('role_id', $user->role_id) == 2 ? 'selected' : '' }}>Operations Manager</option>
                                     <option value="3" {{ old('role_id', $user->role_id) == 3 ? 'selected' : '' }}>Content Writer</option>
                                     <option value="4" {{ old('role_id', $user->role_id) == 4 ? 'selected' : '' }}>Graphic Designer</option>
                                     <option value="5" {{ old('role_id', $user->role_id) == 5 ? 'selected' : '' }}>Top Manager</option>
                                     <option value="6" {{ old('role_id', $user->role_id) == 6 ? 'selected' : '' }}>Supervisor</option>
+                                    <option value="6" {{ old('role_id', $user->role_id) == 6 ? 'selected' : '' }}>Accounting</option>
                                 </select>
                                 @error('role_id') <p class="text-sm text-red-700">{{ $message }}</p> @enderror
                             </div>

@@ -60,7 +60,7 @@
                         
                             <form action="{{ url('/requestForm/approve/' . $request_form->id) }}" method="POST" class="inline">
                                 @csrf
-                                <button {{$request_form->status === "Approved by Top Manager" ? "disabled" : ""}} type="submit" class="ml-2 {{$request_form->status === "Approved by Top Manager" ? "bg-gray-300" : "bg-green-500"}} text-white px-3 py-1 rounded">
+                                <button {{ (Auth::user()->role_id === 5 && $request_form->status === "Approved by Top Manager") || (Auth::user()->role_id === 7 && $request_form->status === "Approved by Accounting") ? "disabled" : ""}} type="submit" class="ml-2 {{ (Auth::user()->role_id === 5 && $request_form->status === "Approved by Top Manager") || (Auth::user()->role_id === 7 && $request_form->status === "Approved by Accounting") ? "bg-gray-300" : "bg-green-500"}} text-white px-3 py-1 rounded">
                                     Approve
                                 </button>
                             </form>

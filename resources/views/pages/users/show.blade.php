@@ -11,7 +11,9 @@
         2 => 'Operations Manager',
         3 => 'Content Writer',
         4 => 'Graphic Designer',
-        5 => 'Top Manager'
+        5 => 'Top Manager',
+        6 => 'Supervisor',
+        7 => 'Accounting'
     ];
 @endphp
 <div class="mx-auto max-w-screen-2xl">
@@ -48,7 +50,7 @@
                 <div class="flex justify-between">
                     <h1 class="text-sm font-semibold">User Information</h1>
                     <div class="px-4 py-1 bg-[#f68e12] cursor-pointer text-white rounded-md hover:bg-[#e57f0f]"
-                        onclick="window.location.assign('{{ route('profile.edit') }}')">Edit</div>
+                    onclick="window.location.assign('{{ url('users/edit/' . $user->id) }}')">Edit</div>
                 </div>
                 <div class="space-y-4 mt-4">
                     <div>
