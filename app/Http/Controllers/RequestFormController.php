@@ -42,12 +42,17 @@ class RequestFormController extends Controller
     public function create()
     {
         $users = User::all();
-
         $managers = User::where('role_id', 5)->get();
         $accounting = User::where('role_id', 7)->get();
 
-        return view('pages.RequestForm.create', compact('users', 'managers', 'accounting'));
+        // Get the latest request form
+        $request_form = RequestForm::with(['requestedBy', 'manager', 'receiver', 'particulars'])
+            ->latest()
+            ->first();
+
+        return view('pages.RequestForm.create', compact('users', 'managers', 'accounting', 'request_form'));
     }
+
 
     public function store(Request $request)
     {
