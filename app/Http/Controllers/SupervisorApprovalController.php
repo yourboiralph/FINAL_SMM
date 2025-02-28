@@ -11,7 +11,7 @@ class SupervisorApprovalController extends Controller
 {
     public function index()
     {
-        $job_drafts = JobDraft::whereNotIn('status', ['pending', 'Submitted to Operations'])
+        $job_drafts = JobDraft::whereNotIn('status', ['pending', 'Submitted to Operations', 'Waiting for Content Writer Approval', 'Waiting for Graphic Designer Approval'])
             ->with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
             ->get();
 

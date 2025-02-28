@@ -24,7 +24,7 @@ class DashboardController extends Controller
             return view('dashboard', compact('job_drafts'));
         } elseif ($user_role == 2) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
-                ->whereNotIn('status', ["pending", "Revision"])
+                ->whereNotIn('status', ["pending", "Revision", 'Waiting for Content Writer Approval', 'Waiting for Graphic Designer Approval'])
                 ->orderBy('id', 'desc') // Sort by id descending
                 ->limit(5) // Ensure a maximum of 5 records
                 ->get();
@@ -60,7 +60,7 @@ class DashboardController extends Controller
             return view('dashboard', compact('job_drafts', 'job_drafts_revisions', 'my_tasks')); // Include both variables
         } elseif ($user_role == 3) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
-                ->whereNot('status', 'Revision')
+                ->whereNotIn('status', ['Revision', 'Waiting for Content Writer Approval', 'Waiting for Graphic Designer Approval'])
                 ->where('content_writer_id', $user->id)
                 ->where('type', 'content_writer')
                 ->orderBy('id', 'desc') // Sort by id descending
@@ -77,7 +77,7 @@ class DashboardController extends Controller
             return view('dashboard', compact('job_drafts', 'job_drafts_revisions'));
         } elseif ($user_role == 4) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
-                ->whereNot('status', 'Revision')
+                ->whereNotIn('status', ['Revision', 'Waiting for Content Writer Approval', 'Waiting for Graphic Designer Approval'])
                 ->where('graphic_designer_id', $user->id)
                 ->where('type', 'graphic_designer')
                 ->orderBy('id', 'desc') // Sort by id descending
@@ -103,7 +103,7 @@ class DashboardController extends Controller
             return view('dashboard', compact('job_drafts'));
         } elseif ($user_role == 6) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
-                ->whereNotIn('status', ['pending', 'Submitted to Operations', 'Revision'])
+                ->whereNotIn('status', ['pending', 'Submitted to Operations', 'Revision', 'Waiting for Content Writer Approval', 'Waiting for Graphic Designer Approval'])
                 ->orderBy('id', 'desc') // Sort by id descending
                 ->limit(5) // Use limit for consistency
                 ->get();
