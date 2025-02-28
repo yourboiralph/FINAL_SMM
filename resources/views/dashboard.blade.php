@@ -44,10 +44,26 @@
                                                     <a href="{{url('operation/show/' . $job_draft->id)}}">
                                                         <p class="text-[#fa7011]">Sign</p>
                                                     </a>
+                                                    @elseif (auth()->user()->role_id == '3' and $job_draft->status == 'Waiting for Content Writer Approval' || $job_draft->status == 'Waiting for Graphic Designer Approval')
+                                                        <form action="{{ url('content/accept/' . $job_draft->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <button type="submit" class="text-[#fa7011] bg-transparent border-none cursor-pointer">
+                                                                Accept
+                                                            </button>
+                                                        </form>
                                                     @elseif (auth()->user()->role_id == '3' and $job_draft->status == 'pending')
                                                     <a href="{{url('content/edit/' . $job_draft->id)}}">
                                                         <p class="text-[#fa7011]">Create</p>
                                                     </a>
+                                                    @elseif (auth()->user()->role_id == '4' and $job_draft->status == 'Waiting for Content Writer Approval' || $job_draft->status == 'Waiting for Graphic Designer Approval')
+                                                    <form action="{{ url('graphic/accept/' . $job_draft->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" class="text-[#fa7011] bg-transparent border-none cursor-pointer">
+                                                            Accept
+                                                        </button>
+                                                    </form>
                                                     @elseif (auth()->user()->role_id == '4' and $job_draft->status == 'pending')
                                                     <a href="{{url('graphic/edit/' . $job_draft->id)}}">
                                                         <p class="text-[#fa7011]">Create</p>
@@ -150,13 +166,13 @@
                                                         <td class="px-4 py-2 text-sm">
                                                             @if (auth()->user()->role_id == 2)
                                                                 @if ($my_task->status == "Waiting for Content Writer Approval" || $my_task->status == "Waiting for Graphic Designer Approval")
-                                                                    <form action="{{ url('operation/task/accept/' . $my_task->id) }}" method="POST">
-                                                                        @csrf
-                                                                        @method('PUT')
-                                                                        <button type="submit" class="text-[#fa7011] bg-transparent border-none cursor-pointer">
-                                                                            Accept
-                                                                        </button>
-                                                                    </form>
+                                                                <form action="{{ url('operation/task/accept/' . $my_task->id) }}" method="POST">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <button type="submit" class="text-[#fa7011] bg-transparent border-none cursor-pointer">
+                                                                        Accept
+                                                                    </button>
+                                                                </form>
                                                                 
                                                                 @else
                                                                     <a href="{{url('operation/task/edit/' . $my_task->id)}}">
