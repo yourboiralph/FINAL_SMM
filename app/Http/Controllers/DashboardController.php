@@ -60,7 +60,7 @@ class DashboardController extends Controller
             return view('dashboard', compact('job_drafts', 'job_drafts_revisions', 'my_tasks')); // Include both variables
         } elseif ($user_role == 3) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
-                ->whereNotIn('status', ['Revision', 'Waiting for Content Writer Approval', 'Waiting for Graphic Designer Approval'])
+                ->whereNot('status', 'Revision')
                 ->where('content_writer_id', $user->id)
                 ->where('type', 'content_writer')
                 ->orderBy('id', 'desc') // Sort by id descending
@@ -77,7 +77,7 @@ class DashboardController extends Controller
             return view('dashboard', compact('job_drafts', 'job_drafts_revisions'));
         } elseif ($user_role == 4) {
             $job_drafts = JobDraft::with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client'])
-                ->whereNotIn('status', ['Revision', 'Waiting for Content Writer Approval', 'Waiting for Graphic Designer Approval'])
+                ->whereNot('status', 'Revision')
                 ->where('graphic_designer_id', $user->id)
                 ->where('type', 'graphic_designer')
                 ->orderBy('id', 'desc') // Sort by id descending
@@ -138,6 +138,9 @@ class DashboardController extends Controller
 
 
             return view('dashboard', compact('job_drafts', 'job_drafts_revisions', 'my_tasks')); // Include both variables
+        } elseif ($user_role == 7) {
+
+            return view('dashboard'); // Include both variables
         }
     }
 }
