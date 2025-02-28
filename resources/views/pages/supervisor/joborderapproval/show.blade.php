@@ -72,6 +72,7 @@
             <div class="lg:col-span-4">
                 @php
                     $isDisabled = $job_draft->status != "Submitted to Supervisor";
+                    $isSigned = !empty($job_draft->signature_supervisor);
                 @endphp
                 <div class="mt-6 bg-white p-4 rounded-md shadow-md w-fit">
                     <div class="flex justify-between">
@@ -97,7 +98,7 @@
                         @method('PUT')
 
                         {{-- File Upload --}}
-                        {{-- <div id="uploadSection" class="{{ Auth::user()->signature ? 'hidden' : '' }}">
+                        <div id="uploadSection" class="{{ Auth::user()->signature ? 'hidden' : '' }}">
                             <input type="file" name="signature_supervisor" accept="image/*"
                                 class="mt-2 border p-2 w-full rounded-md" id="signatureInput" {{ $isDisabled || $isSigned ? 'disabled' : '' }}>
                             <div
@@ -106,10 +107,10 @@
                                     alt="Selected Image"
                                     class="{{ $isSigned ? 'block' : 'hidden' }} w-full h-full object-cover">
                             </div>
-                        </div> --}}
+                        </div>
 
                         {{-- Signature Pad --}}
-                        {{-- <div id="padSection" class="hidden">
+                        <div id="padSection" class="hidden">
                             <canvas id="signature-pad" class="w-[300px] lg:w-[400px]"
                                 style="height:200px; {{ $isSigned ? 'pointer-events:none;opacity:0.5;' : '' }}"></canvas>
                             <div class="mt-2 flex">
@@ -119,10 +120,10 @@
                             </div>
                             <input type="hidden" name="signature_pad" id="signaturePadData"
                                 value="{{ old('signature_pad') }}">
-                        </div> --}}
+                        </div>
 
                         {{-- Saved Signature Section --}}
-                        {{-- <div id="savedPadSection" class="{{ Auth::user()->signature ? '' : 'hidden' }}">
+                        <div id="savedPadSection" class="{{ Auth::user()->signature ? '' : 'hidden' }}">
                             <img id="new-signature-pad-main" class="w-[300px] lg:w-[400px]" style="height:200px;"
                                 src="{{ asset(Auth::user()->signature) }}" alt="Your Saved Signature">
                             <div class="mt-2 flex">
@@ -135,7 +136,7 @@
                             <p class="text-sm text-red-600">
                                 {{ $errors->first('signature_supervisor') ?: $errors->first('signature_pad') }}
                             </p>
-                        @endif --}}
+                        @endif
 
                         {{-- Agreement Checkbox --}}
                         <div class="mt-4 flex items-center space-x-2">
@@ -264,33 +265,33 @@ document.getElementById('agree').addEventListener('change', function () {
     document.getElementById('submitBtn').disabled = !this.checked;
 });
 
-// ✅ Form Submission - Correctly capture signaturePad value
-// document.getElementById("approvalForm").addEventListener("submit", function (event) {
-//     // Capture Signature Pad data before submitting
-//     if (!document.getElementById("uploadSection").classList.contains("hidden")) {
-//         if (!document.getElementById("signatureInput").value) {
-//             alert("Please upload an image before submitting.");
-//             event.preventDefault();
-//             return;
-//         }
-//     } else if (!document.getElementById("padSection").classList.contains("hidden")) {
-//         if (!signaturePad || signaturePad.isEmpty()) {
-//             alert("Please sign before submitting.");
-//             event.preventDefault();
-//             return;
-//         } else {
-//             // ✅ Set signaturePad value into hidden input
-//             const signatureData = signaturePad.toDataURL("image/png");
-//             document.getElementById("signaturePadData").value = signatureData;
-//         }
-//     } else if (!document.getElementById("savedPadSection").classList.contains("hidden")) {
-//         if (!document.getElementById("savedSignatureData").value) {
-//             alert("Please select your saved signature before submitting.");
-//             event.preventDefault();
-//             return;
-//         }
-//     }
-// });
+✅ Form Submission - Correctly capture signaturePad value
+document.getElementById("approvalForm").addEventListener("submit", function (event) {
+    // Capture Signature Pad data before submitting
+    if (!document.getElementById("uploadSection").classList.contains("hidden")) {
+        if (!document.getElementById("signatureInput").value) {
+            alert("Please upload an image before submitting.");
+            event.preventDefault();
+            return;
+        }
+    } else if (!document.getElementById("padSection").classList.contains("hidden")) {
+        if (!signaturePad || signaturePad.isEmpty()) {
+            alert("Please sign before submitting.");
+            event.preventDefault();
+            return;
+        } else {
+            // ✅ Set signaturePad value into hidden input
+            const signatureData = signaturePad.toDataURL("image/png");
+            document.getElementById("signaturePadData").value = signatureData;
+        }
+    } else if (!document.getElementById("savedPadSection").classList.contains("hidden")) {
+        if (!document.getElementById("savedSignatureData").value) {
+            alert("Please select your saved signature before submitting.");
+            event.preventDefault();
+            return;
+        }
+    }
+});
 
     </script>
 

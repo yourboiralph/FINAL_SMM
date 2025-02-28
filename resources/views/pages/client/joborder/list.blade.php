@@ -27,10 +27,10 @@
         @if(session('Status'))
             <x-success />
         @endif
-        <table class="w-full table-fixed text-left border-collapse min-w-[600px]" id="projectTable">
+        <table class="w-full text-left border-collapse min-w-[600px]" id="projectTable">
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
-                    <th class="w-[30%] px-4 sm:px-6 py-3">Title</th>
+                    <th class="w-[20%] px-4 sm:px-6 py-3">Title</th>
                     <th class="w-[25%] px-4 sm:px-6 py-3">Designated</th>
                     <th class="w-[20%] px-4 sm:px-6 py-3">Deadline</th>
                     <th class="w-[15%] px-4 sm:px-6 py-3 text-center">Status</th>
@@ -40,23 +40,23 @@
             <tbody id="tableBody">
                 @forelse ($job_drafts as $job_draft)
                     <tr class="project-row border-b text-sm sm:text-base">
-                        <td class="w-[30%] px-4 sm:px-6 py-3 truncate">{{ $job_draft->jobOrder->title }}</td>
-                        <td class="w-[25%] px-4 sm:px-6 py-3 truncate">
+                        <td class="px-4 sm:px-6 py-3 truncate">{{ $job_draft->jobOrder->title }}</td>
+                        <td class="px-4 sm:px-6 py-3 truncate">
                             @if ($job_draft->type == "content_writer")
                                 Content Writer - {{ $job_draft->contentWriter->name }}
                             @else
                                 Graphic Designer - {{ $job_draft->graphicDesigner->name }}
                             @endif
                         </td>
-                        <td class="w-[20%] px-4 sm:px-6 py-3 whitespace-nowrap">{{ $job_draft->date_target }}</td>
-                        <td class="w-[15%] px-4 sm:px-6 py-3 text-center text-white">
+                        <td class="px-4 sm:px-6 py-3 whitespace-nowrap">{{ $job_draft->date_target }}</td>
+                        <td class="px-4 sm:px-6 py-3 text-center text-white">
                             <p class="w-full px-2 py-1 rounded-lg text-wrap
                                 {{ $job_draft->status == 'completed' ? 'bg-green-400' : 
                                 ($job_draft->status == 'Revision' ? 'bg-red-600' : 'bg-[#fa6e117e]') }} ">
                                 {{ ucfirst($job_draft->status) }}
                             </p>
                         </td>
-                        <td class="w-[10%] px-4 sm:px-6 py-3 text-center border-b">
+                        <td class="px-4 sm:px-6 py-3 text-center border-b">
                             <a href="{{ url('client/show/' . $job_draft->id) }}">
                                 <button class="px-3 sm:px-4 py-2 text-xs sm:text-sm text-white bg-green-500 rounded hover:bg-green-600 whitespace-nowrap">
                                     View Form
