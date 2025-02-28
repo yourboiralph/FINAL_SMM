@@ -138,12 +138,14 @@ class ClientApprovalController extends Controller
         JobDraft::create([
             'job_order_id' => $job_draft->job_order_id, // Correct reference
             'type' => 'content_writer',
-            'date_started' => Carbon::now()->toDateString(), // Set date_started to today
-            'date_target' => Carbon::now()->addDays(3)->toDateString(),
+            // 'date_started' => Carbon::now()->toDateString(), // Set date_started to today
+            // 'date_target' => Carbon::now()->addDays(3)->toDateString(),
             'status' => 'pending',
             'content_writer_id' => $job_draft->content_writer_id,
             'graphic_designer_id' => $job_draft->graphic_designer_id,
             'client_id' => $job_draft->client_id,
+            'signature_supervisor' => $job_draft->signature_supervisor,
+            'supervisor_signed' => $job_draft->supervisor_signed
         ]);
 
         return redirect()->route('client.approve')->with('Status', 'Job Order Approved Successfully');
