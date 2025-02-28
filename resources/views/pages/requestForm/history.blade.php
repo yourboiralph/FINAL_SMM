@@ -16,7 +16,12 @@
     #approval-link {
         text-decoration: underline;
     }
+    /* Add a minimum width to each column */
+    th, td {
+        min-width: 150px;
+    }
 </style>
+
 
 <div class="container mx-auto p-4 sm:p-6">
     @if(session('Status'))
@@ -55,16 +60,24 @@
             <tbody id="tableBody">
                 @forelse ($request_forms as $request_form)
                     <tr class="project-row border-b text-sm" data-status="{{ strtolower($request_form->status) }}">
-                        <td class="px-4 py-3 flex items-center justify-center">
-                            <a id="approval-link" href="#">View Form</a>
-                        
-                            <form action="{{ url('/requestForm/approve/' . $request_form->id) }}" method="POST" class="inline">
-                                @csrf
-                                <button {{ (Auth::user()->role_id === 5 && $request_form->status === "Approved by Top Manager") || (Auth::user()->role_id === 7 && $request_form->status === "Approved by Accounting") ? "disabled" : ""}} type="submit" class="ml-2 {{ (Auth::user()->role_id === 5 && $request_form->status === "Approved by Top Manager") || (Auth::user()->role_id === 7 && $request_form->status === "Approved by Accounting") ? "bg-gray-300" : "bg-green-500"}} text-white px-3 py-1 rounded">
-                                    Approve
-                                </button>
-                            </form>
+                        <td class="px-4 py-3">
+                            <div class="flex items-center space-x-4">
+                                <a id="approval-link" href="{{ url('/requestForm/show/' . $request_form->id) }}" class="text-blue-500 hover:underline">
+                                    View
+                                </a>
+                                <form action="{{ url('/requestForm/approve/' . $request_form->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    <button 
+                                        {{ (Auth::user()->role_id === 5 && $request_form->status === "Approved by Top Manager") || (Auth::user()->role_id === 7 && $request_form->status === "Approved by Accounting") ? "disabled" : "" }}
+                                        type="submit"
+                                        class="px-3 py-1 rounded text-white {{ (Auth::user()->role_id === 5 && $request_form->status === "Approved by Top Manager") || (Auth::user()->role_id === 7 && $request_form->status === "Approved by Accounting") ? "bg-gray-300" : "bg-green-500" }}">
+                                        Approve
+                                    </button>
+                                </form>
+                            </div>
                         </td>
+                        
+                        
                         
                         <td class="px-4 py-3">{{$request_form->id}}</td>
                         <td class="px-4 py-3"><i class="fa-solid fa-pen-to-square"></i></td>
