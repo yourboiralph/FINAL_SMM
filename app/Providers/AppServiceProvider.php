@@ -45,13 +45,13 @@ class AppServiceProvider extends ServiceProvider
 
                 $supervisorTaskCountContent = JobDraft::where('content_writer_id', $authuser->id)
                     ->where('type', 'content_writer')
-                    ->where('status', 'pending')
+                    ->whereIn('status', ['pending', 'Waiting for Content Writer Approval', 'Waiting for Graphic Designer Approval'])
                     ->with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client']) // Ensures relations are loaded
                     ->count();
 
                 $supervisorTaskCountGraphic = JobDraft::where('graphic_designer_id', $authuser->id)
                     ->where('type', 'graphic_designer')
-                    ->where('status', 'pending')
+                    ->whereIn('status', ['pending', 'Waiting for Content Writer Approval', 'Waiting for Graphic Designer Approval'])
                     ->with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client']) // Ensures relations are loaded
                     ->count();
 
@@ -83,13 +83,13 @@ class AppServiceProvider extends ServiceProvider
                 // ADMIN OPERATION
                 $operationTaskCountContent = JobDraft::where('content_writer_id', $authuser->id)
                     ->where('type', 'content_writer')
-                    ->where('status', 'pending')
+                    ->whereIn('status', ['pending', 'Waiting for Content Writer Approval', 'Waiting for Graphic Designer Approval'])
                     ->with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client']) // Ensures relations are loaded
                     ->count();
 
                 $operationTaskCountGraphic = JobDraft::where('graphic_designer_id', $authuser->id)
                     ->where('type', 'graphic_designer')
-                    ->where('status', 'pending')
+                    ->whereIn('status', ['pending', 'Waiting for Content Writer Approval', 'Waiting for Graphic Designer Approval'])
                     ->with(['jobOrder', 'contentWriter', 'graphicDesigner', 'client']) // Ensures relations are loaded
                     ->count();
 
