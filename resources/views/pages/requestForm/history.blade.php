@@ -80,7 +80,7 @@
                         
                         
                         <td class="px-4 py-3">{{$request_form->id}}</td>
-                        <td class="px-4 py-3"><i class="fa-solid fa-pen-to-square"></i></td>
+                        <td class="px-4 py-3"><a href="{{url('/requestForm/edit/' . $request_form->id)}}"><i class="fa-solid fa-pen-to-square"></i></a></td>
                         <td class="px-4 py-3"><i class="fa-solid fa-trash"></i></td>
                         <td class="px-4 py-3">{{$request_form->requestedBy->name}}</td>
                         <td class="px-4 py-3">
