@@ -139,8 +139,8 @@ class DashboardController extends Controller
 
             return view('dashboard', compact('job_drafts', 'job_drafts_revisions', 'my_tasks')); // Include both variables
         } elseif ($user_role == 7) {
-
-            return view('dashboard'); // Include both variables
+            $job_drafts = [];
+            return view('dashboard', compact('job_drafts')); // Include both variables
         }
     }
 }
