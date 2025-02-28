@@ -113,7 +113,7 @@ class AppServiceProvider extends ServiceProvider
                 // Content Writer
 
                 $contentDraftCount = JobDraft::where('content_writer_id', $authuser->id)
-                    ->where('status', 'pending')
+                    ->whereIn('status', ['pending', 'Waiting for Content Writer Approval', 'Waiting for Graphic Designer Approval'])
                     ->where('type', 'content_writer')
                     ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client') // Corrected ->with() usage
                     ->count();
@@ -126,7 +126,7 @@ class AppServiceProvider extends ServiceProvider
                     ->count();
 
                 $graphicDraftCount = JobDraft::where('graphic_designer_id', $authuser->id)
-                    ->where('status', 'pending')
+                    ->whereIn('status', ['pending', 'Waiting for Content Writer Approval', 'Waiting for Graphic Designer Approval'])
                     ->where('type', 'graphic_designer')
                     ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client') // Corrected ->with() usage
                     ->count();
