@@ -22,7 +22,7 @@ class RequestFormController extends Controller
             $request_forms = RequestForm::with('requestedBy', 'manager', 'receiver', 'particulars')
                 ->whereIn('receiver_id', [$authuser->id, null])
                 ->get();
-        } elseif ($authuser->role_id == '2') {
+        } elseif ($authuser->role_id == '6') {
             $request_forms = RequestForm::with('requestedBy', 'manager', 'receiver', 'particulars')
                 ->get(); // Changed from all() to get()
         }
