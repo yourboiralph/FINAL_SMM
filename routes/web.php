@@ -211,6 +211,8 @@ Route::get('requestForm/history', [RequestFormController::class, 'history'])->na
 Route::get('requestForm/create', [RequestFormController::class, 'create'])->name('requestForm');
 Route::post('requestForm/store', [RequestFormController::class, 'store']);
 Route::post('requestForm/approve/{id}', [RequestFormController::class, 'approve'])->name('requestForm.approve');
+Route::get('requestForm/show/{id}', [RequestFormController::class, 'show']);
+
 
 
 
