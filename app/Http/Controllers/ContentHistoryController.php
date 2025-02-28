@@ -14,7 +14,6 @@ class ContentHistoryController extends Controller
 
         // Fetch all job drafts for the authenticated user
         $job_drafts = JobDraft::where('content_writer_id', $authuser->id)
-            ->where('status', 'completed')
             ->where('type', 'content_writer')
             ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client') // Corrected ->with() usage
             ->get();

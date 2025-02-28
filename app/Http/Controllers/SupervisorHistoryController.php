@@ -13,8 +13,7 @@ class SupervisorHistoryController extends Controller
         $authuser = auth()->user();
 
         // Fetch all job drafts for the authenticated user
-        $job_drafts = JobDraft::where('status', 'completed')
-            ->with('jobOrder', 'contentWriter', 'graphicDesigner', 'client') // Corrected ->with() usage
+        $job_drafts = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client') // Corrected ->with() usage
             ->get();
         return view('pages.supervisor.history.index', compact('job_drafts'));
     }
