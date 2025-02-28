@@ -52,7 +52,7 @@ class DashboardController extends Controller
                     $query->where('content_writer_id', $user->id)
                         ->orWhere('graphic_designer_id', $user->id);
                 })
-                ->where('status', 'pending')
+                ->whereIn('status', ['pending', 'Waiting for Content Writer Approval', 'Waiting for Graphic Designer Approval'])
                 ->orderBy('id', 'desc')
                 ->take(5) // Eloquent's alternative to limit()
                 ->get();
