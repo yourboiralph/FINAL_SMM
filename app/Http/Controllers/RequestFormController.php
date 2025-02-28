@@ -30,6 +30,14 @@ class RequestFormController extends Controller
         return view('pages.RequestForm.history', compact('request_forms'));
     }
 
+    public function show($id)
+    {
+        $request_form = RequestForm::with(['requestedBy', 'manager', 'receiver', 'particulars'])->findOrFail($id);
+
+        return view('pages.RequestForm.show', compact('request_form'));
+    }
+
+
 
     public function create()
     {
