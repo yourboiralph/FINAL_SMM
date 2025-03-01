@@ -94,15 +94,20 @@
                         
                         <td class="px-4 py-3">
                             @if(Auth::user()->role_id == 7)
-                                <span class="text-gray-400 cursor-not-allowed">
+                                <span class="text-gray-400">
                                     <i class="fa-solid fa-trash"></i>
                                 </span>
                             @else
-                                <a href="{{ url('/requestForm/delete/' . $request_form->id) }}" class="text-red-500 hover:text-red-700">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
+                                <form action="{{ url('/requestForm/delete/' . $request_form->id) }}" method="POST" class="inline-block">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:text-red-700 focus:outline-none">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
                             @endif
                         </td>
+                        
                         
                         <td class="px-4 py-3">{{$request_form->requestedBy->name}}</td>
                         <td class="px-4 py-3">
