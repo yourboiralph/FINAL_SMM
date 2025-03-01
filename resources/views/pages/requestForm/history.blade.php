@@ -82,7 +82,7 @@
                         <td class="px-4 py-3">{{$request_form->id}}</td>
                         <td class="px-4 py-3">
                             @if(Auth::user()->role_id == 7)
-                                <span class="text-gray-400">
+                                <span class="text-gray-400 cursor-not-allowed">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </span>
                             @else
@@ -94,7 +94,7 @@
                         
                         <td class="px-4 py-3">
                             @if(Auth::user()->role_id == 7)
-                                <span class="text-gray-400">
+                                <span class="text-gray-400 cursor-not-allowed">
                                     <i class="fa-solid fa-trash"></i>
                                 </span>
                             @else

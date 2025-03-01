@@ -151,23 +151,23 @@
                 <table>
                     <tr>
                         <td><strong>Department:</strong><br>
-                            <p>{{$request_form->requestedBy->role->position}}</p>
+                            <p>{{$request_form?->requestedBy->role->position}}</p>
                         </td>
                         <td><strong>Date:</strong><br>
-                            <p>{{$request_form->date}}</p>
+                            <p>{{$request_form?->date}}</p>
                         </td>
                     </tr>
                 </table>
                 <div class="long-bar">
                     <p><strong>Requested By: </strong></p>
-                    <p>{{$request_form->requestedBy->name}}</p>
+                    <p>{{$request_form?->requestedBy->name}}</p>
                 </div>
                 <div class="gray-bar"></div>
                 <table>
                     <tr>
                         <td><strong>Particulars:</strong><br>
                             @php
-                                $selectedParticulars = collect($request_form->particulars)->pluck('particular')->toArray();
+                                $selectedParticulars = collect($request_form?->particulars)->pluck('particular')->toArray();
                             @endphp
                         
                             <label><input type="checkbox" name="particulars[]" value="Domain" {{ in_array('Domain', $selectedParticulars) ? 'checked' : '' }}> Domain</label><br>
@@ -191,7 +191,7 @@
                             <label><input type="checkbox" name="particulars[]" value="Refund" {{ in_array('Refund', $selectedParticulars) ? 'checked' : '' }}> Refund</label><br>
                             <label>
                                 <input type="checkbox" name="particulars[]" value="Others" {{ in_array('Others', $selectedParticulars) ? 'checked' : '' }}>
-                                Others: <input type="text" name="other_particulars" class="border p-1" value="{{ in_array('Others', $selectedParticulars) ? $request_form->other_particulars : '' }}">
+                                Others: <input type="text" name="other_particulars" class="border p-1" value="{{ in_array('Others', $selectedParticulars) ? $request_form?->other_particulars : '' }}">
                             </label>
                         </td>
                         
@@ -201,7 +201,7 @@
                 <div class="long-bar" id="open-modal">
                     <strong>Description:</strong>
                     <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
-                        {!! $request_form->description !!}
+                        {!! $request_form?->description !!}
                     </div>
                 </div>
     
@@ -209,20 +209,35 @@
                     <div id="signature-2">
                         
                         <div>
-                            <strong>Requested By:</strong> <p>{{$request_form->requestedBy->name ? $request_form->requestedBy->name : ""}}</p> <br>
-                            <img src="{{ asset($request_form->requestedBy->signature) }}" alt="Supervisor Signature">
+                            <strong>Requested By:</strong>
+                            <p>{{ $request_form?->requestedBy->name ?? '' }}</p> <br>
+                            @if(!empty($request_form?->requestedBy->signature))
+                                <img src="{{ asset($request_form?->requestedBy->signature) }}" alt="Supervisor Signature">
+                            @endif
                         </div>
                         <div>
-                            <strong>Received By:</strong> <p>{{$request_form->receiver->name ? $request_form->receiver->name : ""}}</p> <br>
-                            <img src="{{ asset($request_form->receiver->signature) }}" alt="Supervisor Signature">
+                            <strong>Received By:</strong>
+                            <p>{{ $request_form?->receiver->name ?? '' }}</p> <br>
+                            @if ($request_form?->status == "Approved by Accounting")
+                                @if(!empty($request_form?->receiver->signature))
+                                    <img src="{{ asset($request_form?->receiver->signature) }}" alt="Supervisor Signature">
+                                @endif
+                            @endif
                         </div>
+                        
                     </div>
     
                     <div id="signature-2">
     
                         <div>
-                            <strong>Manager: {{$request_form->manager->name}}</strong><br>
-                            <img src="{{ asset($request_form->manager->signature) }}" alt="Supervisor Signature">
+                            <strong>Manager:</strong>
+                            <p>{{ $request_form?->manager->name ?? '' }}</p> <br>
+                            @if ($request_form?->status != "Approved by Operation")
+                                @if(!empty($request_form?->receiver->signature))
+                                    <img src="{{ asset($request_form?->receiver->signature) }}" alt="Supervisor Signature">
+                                @endif
+                            @endif
+                        
     
                         </div>
                     </div>
@@ -240,13 +255,13 @@
 
 @php
     // Collect the selected particulars from the request form
-    $selectedParticulars = collect($request_form->particulars)->pluck('particular')->toArray();
+    $selectedParticulars = collect($request_form?->particulars)->pluck('particular')->toArray();
 @endphp
 
 <!-- Modal -->
 <div id="description-modal" class="fixed inset-0 z-50 bg-black bg-opacity-50 hidden flex items-center justify-center">
     <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
-        <form id="description-form" action="{{ url('requestForm/update/' . $request_form->id) }}" method="POST">
+        <form id="description-form" action="{{ url('requestForm/update/' . $request_form?->id) }}" method="POST">
             @csrf
             <div class="h-40 overflow-y-auto">
                 <label>
@@ -319,23 +334,23 @@
                 </label><br>
                 <label>
                     <input type="checkbox" name="particulars[]" value="Others" {{ in_array('Others', $selectedParticulars) ? 'checked' : '' }}>
-                    Others: <input type="text" name="other_particulars" class="border p-1" value="{{ in_array('Others', $selectedParticulars) ? $request_form->other_particulars : '' }}">
+                    Others: <input type="text" name="other_particulars" class="border p-1" value="{{ in_array('Others', $selectedParticulars) ? $request_form?->other_particulars : '' }}">
                 </label>
             </div>
             <div class="mt-4">
                 <h1 class="font-bold">Date:</h1>
-                <input type="date" name="date" class="border p-2 w-full rounded" value="{{ $request_form->date }}">
+                <input type="date" name="date" class="border p-2 w-full rounded" value="{{ $request_form?->date }}">
             </div>
             <!-- Graphics Designer BUT CHANGED NAME TO MANAGER -->
             <div class="w-full col-span-2 lg:col-span-1">
                 <h1 class="font-bold">Manager:</h1>
                 <div class="relative">
                     <input type="text" id="selected-graphic-designer-name"
-                        value="{{ $request_form->manager->name ?? 'Select a Manager' }}"
+                        value="{{ $request_form?->manager->name ?? 'Select a Manager' }}"
                         class="w-full border px-3 py-2 border-gray-200 rounded-lg cursor-pointer" readonly
                         onclick="openGraphicDesignerModal()">
                     <input type="hidden" name="manager_id" id="selected-graphic-designer-id"
-                        value="{{ $request_form->manager->id ?? '' }}">
+                        value="{{ $request_form?->manager->id ?? '' }}">
                 </div>
                 @error('manager_id')
                     <p class="text-red-600 text-sm">{{ $message }}</p>
@@ -346,11 +361,11 @@
                 <h1 class="font-bold">Auditor:</h1>
                 <div class="relative">
                     <input type="text" id="selected-content-writer-name"
-                        value="{{ $request_form->receiver->name ?? 'Select an Auditor' }}"
+                        value="{{ $request_form?->receiver->name ?? 'Select an Auditor' }}"
                         class="w-full border px-3 py-2 border-gray-200 rounded-lg cursor-pointer" readonly
                         onclick="openContentWriterModal()">
                     <input type="hidden" name="receiver_id" id="selected-content-writer-id"
-                        value="{{ $request_form->receiver->id ?? '' }}">
+                        value="{{ $request_form?->receiver->id ?? '' }}">
                 </div>
                 @error('receiver_id')
                     <p class="text-red-600 text-sm">{{ $message }}</p>
@@ -359,7 +374,7 @@
             
             <div class="mt-4">
                 <h1 class="font-bold">Description:</h1>
-                <textarea id="description-editor" name="description">{{ $request_form->description }}</textarea>
+                <textarea id="description-editor" name="description">{{ $request_form?->description }}</textarea>
             </div>
             <div class="mt-4 flex justify-end">
                 <button type="button" id="close-modal" class="px-4 py-2 bg-gray-500 text-white rounded">Cancel</button>
