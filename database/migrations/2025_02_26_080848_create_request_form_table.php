@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('manager_id')->nullable();
             $table->unsignedBigInteger('receiver_id')->nullable();
             $table->timestamps();
+            $table->softDeletes(); // Add this line for soft deletes
 
             $table->foreign('requested_by')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('manager_id')->references('id')->on('users')->onDelete('cascade');
