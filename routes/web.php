@@ -214,6 +214,7 @@ Route::post('requestForm/approve/{id}', [RequestFormController::class, 'approve'
 Route::get('requestForm/show/{id}', [RequestFormController::class, 'show']);
 Route::get('requestForm/edit/{id}', [RequestFormController::class, 'edit']);
 Route::put('requestForm/update/{id}', [RequestFormController::class, 'update']);
+Route::delete('requestForm/delete/{id}', [RequestFormController::class, 'delete']);
 
 
 

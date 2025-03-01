@@ -143,4 +143,17 @@ class RequestFormController extends Controller
 
         return redirect()->route('requestForm.history')->with('Status', 'Request Form Approve Successfully.');
     }
+
+    public function delete($id)
+    {
+        $request_form = RequestForm::findOrFail($id);
+
+        // Delete related particulars first to avoid foreign key constraint issues
+        $request_form->particulars()->delete();
+
+        // Delete the request form
+        $request_form->delete();
+
+        return redirect()->route('requestForm.history')->with('Status', 'Request Form Deleted Successfully.');
+    }
 }
