@@ -209,20 +209,30 @@
                     <div id="signature-2">
                         
                         <div>
-                            <strong>Requested By:</strong> <p>{{$request_form->requestedBy->name}}</p> <br>
-                            <img src="{{ asset($request_form->requestedBy->signature) }}" alt="Supervisor Signature">
+                            <strong>Requested By:</strong>
+                            <p>{{ $request_form->requestedBy->name ?? '' }}</p> <br>
+                            @if(!empty($request_form->requestedBy->signature))
+                                <img src="{{ asset($request_form->requestedBy->signature) }}" alt="Supervisor Signature">
+                            @endif
                         </div>
                         <div>
-                            <strong>Received By:</strong> <p>{{$request_form->receiver->name }}</p> <br>
-                            <img src="{{ asset($request_form->receiver->signature) }}" alt="Supervisor Signature">
+                            <strong>Received By:</strong>
+                            <p>{{ $request_form->receiver->name ?? '' }}</p> <br>
+                            @if(!empty($request_form->receiver->signature))
+                                <img src="{{ asset($request_form->receiver->signature) }}" alt="Supervisor Signature">
+                            @endif
                         </div>
+                        
                     </div>
     
                     <div id="signature-2">
     
                         <div>
                             <strong>Manager:</strong><br>
-                            <img src="{{ asset($request_form->manager->signature) }}" alt="Supervisor Signature">
+                            @if(!empty($request_form->manager->signature))
+                                <img src="{{ asset($request_form->manager->signature) }}" alt="Supervisor Signature">
+                            @endif
+                        
     
                         </div>
                     </div>

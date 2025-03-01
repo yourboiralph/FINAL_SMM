@@ -209,11 +209,11 @@
                     <div id="signature-2">
                         
                         <div>
-                            <strong>Requested By:</strong> <p>{{$request_form->requestedBy->name}}</p> <br>
+                            <strong>Requested By:</strong> <p>{{$request_form->requestedBy->name ? $request_form->requestedBy->name : ""}}</p> <br>
                             <img src="{{ asset($request_form->requestedBy->signature) }}" alt="Supervisor Signature">
                         </div>
                         <div>
-                            <strong>Received By:</strong> <p>{{$request_form->receiver->name }}</p> <br>
+                            <strong>Received By:</strong> <p>{{$request_form->receiver->name ? $request_form->receiver->name : ""}}</p> <br>
                             <img src="{{ asset($request_form->receiver->signature) }}" alt="Supervisor Signature">
                         </div>
                     </div>
@@ -221,7 +221,7 @@
                     <div id="signature-2">
     
                         <div>
-                            <strong>Manager:</strong><br>
+                            <strong>Manager: {{$request_form->manager->name}}</strong><br>
                             <img src="{{ asset($request_form->manager->signature) }}" alt="Supervisor Signature">
     
                         </div>
@@ -238,37 +238,93 @@
 </div>
 
 
+@php
+    // Collect the selected particulars from the request form
+    $selectedParticulars = collect($request_form->particulars)->pluck('particular')->toArray();
+@endphp
+
 <!-- Modal -->
 <div id="description-modal" class="fixed inset-0 z-50 bg-black bg-opacity-50 hidden flex items-center justify-center">
     <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
         <form id="description-form" action="{{ url('requestForm/update/' . $request_form->id) }}" method="POST">
             @csrf
             <div class="h-40 overflow-y-auto">
-                <label><input type="checkbox" name="particulars[]" value="Domain"> Domain</label><br>
-                <label><input type="checkbox" name="particulars[]" value="Hosting and Servers"> Hosting and Servers</label><br>
-                <label><input type="checkbox" name="particulars[]" value="Office Supplies"> Office Supplies</label><br>
-                <label><input type="checkbox" name="particulars[]" value="Fare"> Fare</label><br>
-                <label><input type="checkbox" name="particulars[]" value="Petty Cash"> Petty Cash</label><br>
-                <label><input type="checkbox" name="particulars[]" value="Credit Card"> Credit Card</label><br>
-                <label><input type="checkbox" name="particulars[]" value="Office Asset / Cash Advance"> Office Asset / Cash Advance</label><br>
-                <label><input type="checkbox" name="particulars[]" value="Car"> Car</label><br>
-                <label><input type="checkbox" name="particulars[]" value="Flyers"> Flyers</label><br>
-                <label><input type="checkbox" name="particulars[]" value="for Multimedia Use"> for Multimedia Use</label><br>
-                <label><input type="checkbox" name="particulars[]" value="Cash Advance"> Cash Advance</label><br>
-                <label><input type="checkbox" name="particulars[]" value="Signage"> Signage</label><br>
-                <label><input type="checkbox" name="particulars[]" value="Reimbursement"> Reimbursement</label><br>
-                <label><input type="checkbox" name="particulars[]" value="For Marketing Use"> For Marketing Use</label><br>
-                <label><input type="checkbox" name="particulars[]" value="Ads - AUB"> Ads - AUB</label><br>
-                <label><input type="checkbox" name="particulars[]" value="Repair and Maintenance"> Repair and Maintenance</label><br>
-                <label><input type="checkbox" name="particulars[]" value="Refund"> Refund</label><br>
                 <label>
-                    <input type="checkbox" name="particulars[]" value="Others">
-                    Others: <input type="text" name="other_particulars" class="border p-1">
+                    <input type="checkbox" name="particulars[]" value="Domain" {{ in_array('Domain', $selectedParticulars) ? 'checked' : '' }}>
+                    Domain
+                </label><br>
+                <label>
+                    <input type="checkbox" name="particulars[]" value="Hosting and Servers" {{ in_array('Hosting and Servers', $selectedParticulars) ? 'checked' : '' }}>
+                    Hosting and Servers
+                </label><br>
+                <label>
+                    <input type="checkbox" name="particulars[]" value="Office Supplies" {{ in_array('Office Supplies', $selectedParticulars) ? 'checked' : '' }}>
+                    Office Supplies
+                </label><br>
+                <label>
+                    <input type="checkbox" name="particulars[]" value="Fare" {{ in_array('Fare', $selectedParticulars) ? 'checked' : '' }}>
+                    Fare
+                </label><br>
+                <label>
+                    <input type="checkbox" name="particulars[]" value="Petty Cash" {{ in_array('Petty Cash', $selectedParticulars) ? 'checked' : '' }}>
+                    Petty Cash
+                </label><br>
+                <label>
+                    <input type="checkbox" name="particulars[]" value="Credit Card" {{ in_array('Credit Card', $selectedParticulars) ? 'checked' : '' }}>
+                    Credit Card
+                </label><br>
+                <label>
+                    <input type="checkbox" name="particulars[]" value="Office Asset / Cash Advance" {{ in_array('Office Asset / Cash Advance', $selectedParticulars) ? 'checked' : '' }}>
+                    Office Asset / Cash Advance
+                </label><br>
+                <label>
+                    <input type="checkbox" name="particulars[]" value="Car" {{ in_array('Car', $selectedParticulars) ? 'checked' : '' }}>
+                    Car
+                </label><br>
+                <label>
+                    <input type="checkbox" name="particulars[]" value="Flyers" {{ in_array('Flyers', $selectedParticulars) ? 'checked' : '' }}>
+                    Flyers
+                </label><br>
+                <label>
+                    <input type="checkbox" name="particulars[]" value="for Multimedia Use" {{ in_array('for Multimedia Use', $selectedParticulars) ? 'checked' : '' }}>
+                    for Multimedia Use
+                </label><br>
+                <label>
+                    <input type="checkbox" name="particulars[]" value="Cash Advance" {{ in_array('Cash Advance', $selectedParticulars) ? 'checked' : '' }}>
+                    Cash Advance
+                </label><br>
+                <label>
+                    <input type="checkbox" name="particulars[]" value="Signage" {{ in_array('Signage', $selectedParticulars) ? 'checked' : '' }}>
+                    Signage
+                </label><br>
+                <label>
+                    <input type="checkbox" name="particulars[]" value="Reimbursement" {{ in_array('Reimbursement', $selectedParticulars) ? 'checked' : '' }}>
+                    Reimbursement
+                </label><br>
+                <label>
+                    <input type="checkbox" name="particulars[]" value="For Marketing Use" {{ in_array('For Marketing Use', $selectedParticulars) ? 'checked' : '' }}>
+                    For Marketing Use
+                </label><br>
+                <label>
+                    <input type="checkbox" name="particulars[]" value="Ads - AUB" {{ in_array('Ads - AUB', $selectedParticulars) ? 'checked' : '' }}>
+                    Ads - AUB
+                </label><br>
+                <label>
+                    <input type="checkbox" name="particulars[]" value="Repair and Maintenance" {{ in_array('Repair and Maintenance', $selectedParticulars) ? 'checked' : '' }}>
+                    Repair and Maintenance
+                </label><br>
+                <label>
+                    <input type="checkbox" name="particulars[]" value="Refund" {{ in_array('Refund', $selectedParticulars) ? 'checked' : '' }}>
+                    Refund
+                </label><br>
+                <label>
+                    <input type="checkbox" name="particulars[]" value="Others" {{ in_array('Others', $selectedParticulars) ? 'checked' : '' }}>
+                    Others: <input type="text" name="other_particulars" class="border p-1" value="{{ in_array('Others', $selectedParticulars) ? $request_form->other_particulars : '' }}">
                 </label>
             </div>
             <div class="mt-4">
                 <h1 class="font-bold">Date:</h1>
-                <input type="date" name="date" class="border p-2 w-full rounded">
+                <input type="date" name="date" class="border p-2 w-full rounded" value="{{ $request_form->date }}">
             </div>
             <!-- Graphics Designer BUT CHANGED NAME TO MANAGER -->
             <div class="w-full col-span-2 lg:col-span-1">
@@ -276,7 +332,7 @@
                 <div class="relative">
                     <input type="text" id="selected-graphic-designer-name"
                         value="{{ old('manager_id') ? ($graphicworkers->firstWhere('id', old('manager_id'))->name ?? 'Select a Manager') : ($job_draft->graphicDesigner->name ?? 'Select a Manager') }}"
-                        class="w-full border px-3 py-2  border-gray-200 rounded-lg cursor-pointer" readonly
+                        class="w-full border px-3 py-2 border-gray-200 rounded-lg cursor-pointer" readonly
                         onclick="openGraphicDesignerModal()">
                     <input type="hidden" name="manager_id" id="selected-graphic-designer-id"
                         value="{{ old('manager_id', $job_draft->graphicDesigner->id ?? '') }}">
@@ -285,13 +341,12 @@
                     <p class="text-red-600 text-sm">{{ $message }}</p>
                 @enderror
             </div>
-
             <div class="w-full col-span-2 lg:col-span-1">
                 <h1 class="font-bold">Auditor:</h1>
                 <div class="relative">
                     <input type="text" id="selected-content-writer-name"
                         value="{{ old('receiver_id') ? ($contentworkers->firstWhere('id', old('receiver_id'))->name ?? 'Select an Auditor') : ($job_draft->contentWriter->name ?? 'Select an Auditor') }}"
-                        class="w-full border px-3 py-2  border-gray-200 rounded-lg cursor-pointer" readonly
+                        class="w-full border px-3 py-2 border-gray-200 rounded-lg cursor-pointer" readonly
                         onclick="openContentWriterModal()">
                     <input type="hidden" name="receiver_id" id="selected-content-writer-id"
                         value="{{ old('receiver_id', $job_draft->contentWriter->id ?? '') }}">
@@ -302,7 +357,7 @@
             </div>
             <div class="mt-4">
                 <h1 class="font-bold">Description:</h1>
-                <textarea id="description-editor" name="description"></textarea>
+                <textarea id="description-editor" name="description">{{ $request_form->description }}</textarea>
             </div>
             <div class="mt-4 flex justify-end">
                 <button type="button" id="close-modal" class="px-4 py-2 bg-gray-500 text-white rounded">Cancel</button>
@@ -328,7 +383,6 @@
                 <button onclick="closeContentWriterModal()" class="bg-[#fa7011] text-white px-4 py-2 rounded w-fit">Close</button>
             </div>
         </div>
-
         <!-- Table Container -->
         <div class="overflow-x-auto w-full bg-white shadow-md rounded-lg max-h-[500px]">
             <table class="w-full text-left border-collapse min-w-[300px] md:min-w-[500px]">
@@ -382,7 +436,6 @@
                 <button onclick="closeGraphicDesignerModal()" class="bg-[#fa7011] text-white px-4 py-2 rounded w-fit">Close</button>
             </div>
         </div>
-
         <!-- Table Container -->
         <div class="overflow-x-auto w-full bg-white shadow-md rounded-lg max-h-[500px]">
             <table class="w-full text-left border-collapse min-w-[300px] md:min-w-[500px]">
@@ -398,7 +451,6 @@
                         <tr class="border-b">
                             <td class="px-4 md:px-6 py-3">{{ $manager->name }}</td>
                             <td class="px-4 md:px-6 py-3">{{ Str::title(str_replace('_', ' ', $manager->role->position)) }}</td>
-
                             <td class="px-4 md:px-6 py-3 text-center">
                                 <button onclick="selectGraphicDesigner('{{ $manager->id }}', '{{ $manager->name }}')" class="px-2 py-1 md:px-4 md:py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 w-full md:w-auto">
                                     Select
