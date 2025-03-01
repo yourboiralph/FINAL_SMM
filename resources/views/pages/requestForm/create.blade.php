@@ -228,7 +228,8 @@
                     <div id="signature-2">
     
                         <div>
-                            <strong>Manager:</strong><br>
+                            <strong>Manager:</strong>
+                            <p>{{ $request_form?->manager->name ?? '' }}</p> <br>
                             @if(!empty($request_form?->manager->signature))
                                 <img src="{{ asset($request_form?->manager->signature) }}" alt="Supervisor Signature">
                             @endif
