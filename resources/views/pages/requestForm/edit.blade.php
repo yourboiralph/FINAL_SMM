@@ -331,30 +331,32 @@
                 <h1 class="font-bold">Manager:</h1>
                 <div class="relative">
                     <input type="text" id="selected-graphic-designer-name"
-                        value="{{ old('manager_id') ? ($graphicworkers->firstWhere('id', old('manager_id'))->name ?? 'Select a Manager') : ($job_draft->graphicDesigner->name ?? 'Select a Manager') }}"
+                        value="{{ $request_form->manager->name ?? 'Select a Manager' }}"
                         class="w-full border px-3 py-2 border-gray-200 rounded-lg cursor-pointer" readonly
                         onclick="openGraphicDesignerModal()">
                     <input type="hidden" name="manager_id" id="selected-graphic-designer-id"
-                        value="{{ old('manager_id', $job_draft->graphicDesigner->id ?? '') }}">
+                        value="{{ $request_form->manager->id ?? '' }}">
                 </div>
                 @error('manager_id')
                     <p class="text-red-600 text-sm">{{ $message }}</p>
                 @enderror
             </div>
+            
             <div class="w-full col-span-2 lg:col-span-1">
                 <h1 class="font-bold">Auditor:</h1>
                 <div class="relative">
                     <input type="text" id="selected-content-writer-name"
-                        value="{{ old('receiver_id') ? ($contentworkers->firstWhere('id', old('receiver_id'))->name ?? 'Select an Auditor') : ($job_draft->contentWriter->name ?? 'Select an Auditor') }}"
+                        value="{{ $request_form->receiver->name ?? 'Select an Auditor' }}"
                         class="w-full border px-3 py-2 border-gray-200 rounded-lg cursor-pointer" readonly
                         onclick="openContentWriterModal()">
                     <input type="hidden" name="receiver_id" id="selected-content-writer-id"
-                        value="{{ old('receiver_id', $job_draft->contentWriter->id ?? '') }}">
+                        value="{{ $request_form->receiver->id ?? '' }}">
                 </div>
                 @error('receiver_id')
                     <p class="text-red-600 text-sm">{{ $message }}</p>
                 @enderror
             </div>
+            
             <div class="mt-4">
                 <h1 class="font-bold">Description:</h1>
                 <textarea id="description-editor" name="description">{{ $request_form->description }}</textarea>

@@ -68,9 +68,9 @@
                                 <form action="{{ url('/requestForm/approve/' . $request_form->id) }}" method="POST" class="inline">
                                     @csrf
                                     <button 
-                                        {{ (Auth::user()->role_id === 5 && $request_form->status === "Approved by Top Manager") || (Auth::user()->role_id === 7 && $request_form->status === "Approved by Accounting") ? "disabled" : "" }}
+                                        {{ (Auth::user()->role_id === 6) || (Auth::user()->role_id === 5 && $request_form->status === "Approved by Top Manager") || (Auth::user()->role_id === 7 && $request_form->status === "Approved by Accounting" || Auth::user()->role_id === 7 && $request_form->status === "Approved by Operation") ? "disabled" : "" }}
                                         type="submit"
-                                        class="px-3 py-1 rounded text-white {{ (Auth::user()->role_id === 5 && $request_form->status === "Approved by Top Manager") || (Auth::user()->role_id === 7 && $request_form->status === "Approved by Accounting") ? "bg-gray-300" : "bg-green-500" }}">
+                                        class="px-3 py-1 rounded text-white {{ (Auth::user()->role_id === 6) || (Auth::user()->role_id === 5 && $request_form->status === "Approved by Top Manager") || (Auth::user()->role_id === 7 && $request_form->status === "Approved by Accounting" || Auth::user()->role_id === 7 && $request_form->status === "Approved by Operation") ? "bg-gray-300" : "bg-green-500" }}">
                                         Approve
                                     </button>
                                 </form>
