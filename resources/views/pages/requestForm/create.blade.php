@@ -218,8 +218,10 @@
                         <div>
                             <strong>Received By:</strong>
                             <p>{{ $request_form?->receiver->name ?? '' }}</p> <br>
-                            @if(!empty($request_form?->receiver->signature))
-                                <img src="{{ asset($request_form?->receiver->signature) }}" alt="Supervisor Signature">
+                            @if ($request_form?->status == "Approved by Accounting")
+                                @if(!empty($request_form?->receiver->signature))
+                                    <img src="{{ asset($request_form?->receiver->signature) }}" alt="Supervisor Signature">
+                                @endif
                             @endif
                         </div>
                         
@@ -230,8 +232,10 @@
                         <div>
                             <strong>Manager:</strong>
                             <p>{{ $request_form?->manager->name ?? '' }}</p> <br>
-                            @if(!empty($request_form?->manager->signature))
-                                <img src="{{ asset($request_form?->manager->signature) }}" alt="Supervisor Signature">
+                            @if ($request_form?->status != "Approved by Operation")
+                                @if(!empty($request_form?->receiver->signature))
+                                    <img src="{{ asset($request_form?->receiver->signature) }}" alt="Supervisor Signature">
+                                @endif
                             @endif
                         
     
