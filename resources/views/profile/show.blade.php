@@ -12,7 +12,8 @@
         3 => 'Content Writer',
         4 => 'Graphic Designer',
         5 => 'Top Manager',
-        6 => 'Supervisor'
+        6 => 'Supervisor',
+        7 => 'Accounting'
     ];
 @endphp
 <div class="mx-auto max-w-screen-2xl h-screen">
