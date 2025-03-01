@@ -151,23 +151,23 @@
                 <table>
                     <tr>
                         <td><strong>Department:</strong><br>
-                            <p>{{$request_form->requestedBy->role->position}}</p>
+                            <p>{{$request_form?->requestedBy->role->position}}</p>
                         </td>
                         <td><strong>Date:</strong><br>
-                            <p>{{$request_form->date}}</p>
+                            <p>{{$request_form?->date}}</p>
                         </td>
                     </tr>
                 </table>
                 <div class="long-bar">
                     <p><strong>Requested By: </strong></p>
-                    <p>{{$request_form->requestedBy->name}}</p>
+                    <p>{{$request_form?->requestedBy->name}}</p>
                 </div>
                 <div class="gray-bar"></div>
                 <table>
                     <tr>
                         <td><strong>Particulars:</strong><br>
                             @php
-                                $selectedParticulars = collect($request_form->particulars)->pluck('particular')->toArray();
+                                $selectedParticulars = collect($request_form?->particulars)->pluck('particular')->toArray();
                             @endphp
                         
                             <label><input type="checkbox" name="particulars[]" value="Domain" {{ in_array('Domain', $selectedParticulars) ? 'checked' : '' }}> Domain</label><br>
@@ -191,7 +191,7 @@
                             <label><input type="checkbox" name="particulars[]" value="Refund" {{ in_array('Refund', $selectedParticulars) ? 'checked' : '' }}> Refund</label><br>
                             <label>
                                 <input type="checkbox" name="particulars[]" value="Others" {{ in_array('Others', $selectedParticulars) ? 'checked' : '' }}>
-                                Others: <input type="text" name="other_particulars" class="border p-1" value="{{ in_array('Others', $selectedParticulars) ? $request_form->other_particulars : '' }}">
+                                Others: <input type="text" name="other_particulars" class="border p-1" value="{{ in_array('Others', $selectedParticulars) ? $request_form?->other_particulars : '' }}">
                             </label>
                         </td>
                         
@@ -201,7 +201,7 @@
                 <div class="long-bar" id="open-modal">
                     <strong>Description:</strong>
                     <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
-                        {!! $request_form->description !!}
+                        {!! $request_form?->description !!}
                     </div>
                 </div>
     
@@ -210,16 +210,16 @@
                         
                         <div>
                             <strong>Requested By:</strong>
-                            <p>{{ $request_form->requestedBy->name ?? '' }}</p> <br>
-                            @if(!empty($request_form->requestedBy->signature))
-                                <img src="{{ asset($request_form->requestedBy->signature) }}" alt="Supervisor Signature">
+                            <p>{{ $request_form?->requestedBy->name ?? '' }}</p> <br>
+                            @if(!empty($request_form?->requestedBy->signature))
+                                <img src="{{ asset($request_form?->requestedBy->signature) }}" alt="Supervisor Signature">
                             @endif
                         </div>
                         <div>
                             <strong>Received By:</strong>
-                            <p>{{ $request_form->receiver->name ?? '' }}</p> <br>
-                            @if(!empty($request_form->receiver->signature))
-                                <img src="{{ asset($request_form->receiver->signature) }}" alt="Supervisor Signature">
+                            <p>{{ $request_form?->receiver->name ?? '' }}</p> <br>
+                            @if(!empty($request_form?->receiver->signature))
+                                <img src="{{ asset($request_form?->receiver->signature) }}" alt="Supervisor Signature">
                             @endif
                         </div>
                         
@@ -229,8 +229,8 @@
     
                         <div>
                             <strong>Manager:</strong><br>
-                            @if(!empty($request_form->manager->signature))
-                                <img src="{{ asset($request_form->manager->signature) }}" alt="Supervisor Signature">
+                            @if(!empty($request_form?->manager->signature))
+                                <img src="{{ asset($request_form?->manager->signature) }}" alt="Supervisor Signature">
                             @endif
                         
     
