@@ -80,8 +80,30 @@
                         
                         
                         <td class="px-4 py-3">{{$request_form->id}}</td>
-                        <td class="px-4 py-3"><a href="{{url('/requestForm/edit/' . $request_form->id)}}"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                        <td class="px-4 py-3"><i class="fa-solid fa-trash"></i></td>
+                        <td class="px-4 py-3">
+                            @if(Auth::user()->role_id == 7)
+                                <span class="text-gray-400">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </span>
+                            @else
+                                <a href="{{ url('/requestForm/edit/' . $request_form->id) }}" class="text-blue-500 hover:text-blue-700">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            @endif
+                        </td>
+                        
+                        <td class="px-4 py-3">
+                            @if(Auth::user()->role_id == 7)
+                                <span class="text-gray-400">
+                                    <i class="fa-solid fa-trash"></i>
+                                </span>
+                            @else
+                                <a href="{{ url('/requestForm/delete/' . $request_form->id) }}" class="text-red-500 hover:text-red-700">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            @endif
+                        </td>
+                        
                         <td class="px-4 py-3">{{$request_form->requestedBy->name}}</td>
                         <td class="px-4 py-3">
                             @foreach ($request_form->particulars as $particular)
