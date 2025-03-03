@@ -11,7 +11,7 @@ class JobOrderController extends Controller
 {
     public function index()
     {
-        $job_drafts = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner')->where('status', 'pending')->get();
+        $job_drafts = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner')->get();
         return view('pages/admin/joborder/joborder', compact('job_drafts'));
     }
     public function create()
