@@ -159,7 +159,7 @@
                         @endif
                     @else
                         {{ $job_draft->graphicDesigner->name }}
-                        @if ($job_draft->status === "Waiting for Content Writer Approval")
+                        @if ($job_draft->status === "Waiting for Graphic Designer Approval")
                         <br />
                         <p class="font-normal">Waiting For Graphic Design Approval</p>
                         @else
