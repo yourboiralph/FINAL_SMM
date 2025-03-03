@@ -84,7 +84,7 @@
                     <!-- Role -->
                     <div class="w-full col-span-2 lg:col-span-1">
                         <p class="text-sm text-gray-600">Role</p>
-                        <select name="role_id" class="w-full border-gray-200 rounded-lg px-2 py-2" required>
+                        <select name="role_id" class="w-full border border-gray-200 rounded-lg px-2 py-2" required>
                             <option value="">Select a role</option>
                             <option value="1" {{ old('role_id') == 1 ? 'selected' : '' }}>Client</option>
                             <option value="2" {{ old('role_id') == 2 ? 'selected' : '' }}>Operations Manager</option>
