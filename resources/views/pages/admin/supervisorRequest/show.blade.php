@@ -79,11 +79,14 @@
                     Back
                 </div>
             </a>
-            <a href="{{ url('/operation/request/create/' . $supervisor_request->id) }}">
-                <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
-                    Create Draft
-                </div>
-            </a>
+        
+            @if ($supervisor_request->status !== "Waiting for Operation Approval")
+                <a href="{{ url('/operation/request/create/' . $supervisor_request->id) }}">
+                    <div class="w-fit px-4 py-1 bg-[#fa7011] rounded-md text-white custom-shadow custom-hover-shadow">
+                        Create Draft
+                    </div>
+                </a>
+            @endif
 
         </div>
         <div id="container-pdf">
