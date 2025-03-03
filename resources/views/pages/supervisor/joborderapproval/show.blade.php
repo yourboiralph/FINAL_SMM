@@ -72,21 +72,20 @@
             <div class="lg:col-span-4">
                 @php
                     $isDisabled = $job_draft->status != "Submitted to Supervisor";
-                    $isSigned = !empty($job_draft->signature_supervisor);
                 @endphp
                 <div class="mt-6 bg-white p-4 rounded-md shadow-md w-fit">
                     <div class="flex justify-between">
                         <h1 class="text-sm font-semibold">Choose Signature Method:</h1>
                         <div class="flex space-x-2">
                             <button id="useUpload"
-                                class="px-2 border rounded {{ Auth::user()->signature ? '' : 'bg-gray-200' }}" {{ $isSigned ? 'disabled' : '' }}>
+                                class="px-2 border rounded {{ Auth::user()->signature ? '' : 'bg-gray-200' }}" {{ $isDisabled ? 'disabled' : '' }}>
                                 <i class="fa-solid fa-file-arrow-up" style="color: #fa7011;"></i>
                             </button>
-                            <button id="usePad" class="px-2 border rounded" {{ $isSigned ? 'disabled' : '' }}>
+                            <button id="usePad" class="px-2 border rounded" {{ $isDisabled ? 'disabled' : '' }}>
                                 <i class="fa-solid fa-file-signature" style="color: #fa7011;"></i>
                             </button>
                             <button id="useSavedSignature"
-                                class="px-2 border rounded {{ Auth::user()->signature ? 'bg-gray-200' : '' }}" {{ $isSigned ? 'disabled' : '' }}>
+                                class="px-2 border rounded {{ Auth::user()->signature ? 'bg-gray-200' : '' }}" {{ $isDisabled ? 'disabled' : '' }}>
                                 <i class="fa-solid fa-cloud-arrow-up" style="color: #fa7011;"></i>
                             </button>
                         </div>
@@ -100,21 +99,21 @@
                         {{-- File Upload --}}
                         <div id="uploadSection" class="{{ Auth::user()->signature ? 'hidden' : '' }}">
                             <input type="file" name="signature_supervisor" accept="image/*"
-                                class="mt-2 border p-2 w-full rounded-md" id="signatureInput" {{ $isDisabled || $isSigned ? 'disabled' : '' }}>
+                                class="mt-2 border p-2 w-full rounded-md" id="signatureInput" {{ $isDisabled || $isDisabled ? 'disabled' : '' }}>
                             <div
                                 class="mt-4 w-52 h-32 border border-gray-300 rounded-md overflow-hidden flex items-center justify-center bg-gray-100">
-                                <img id="imagePreview" src="{{ $isSigned ? asset($job_draft->signature_supervisor) : '' }}"
+                                <img id="imagePreview" src="{{ $isDisabled ? asset($job_draft->signature_supervisor) : '' }}"
                                     alt="Selected Image"
-                                    class="{{ $isSigned ? 'block' : 'hidden' }} w-full h-full object-cover">
+                                    class="{{ $isDisabled ? 'block' : 'hidden' }} w-full h-full object-cover">
                             </div>
                         </div>
 
                         {{-- Signature Pad --}}
                         <div id="padSection" class="hidden">
                             <canvas id="signature-pad" class="w-[300px] lg:w-[400px]"
-                                style="height:200px; {{ $isSigned ? 'pointer-events:none;opacity:0.5;' : '' }}"></canvas>
+                                style="height:200px; {{ $isDisabled ? 'pointer-events:none;opacity:0.5;' : '' }}"></canvas>
                             <div class="mt-2 flex">
-                                <button type="button" id="clearPad" class="bg-gray-500 text-white px-2 py-1 rounded mr-2" {{ $isSigned ? 'disabled' : '' }}>
+                                <button type="button" id="clearPad" class="bg-gray-500 text-white px-2 py-1 rounded mr-2" {{ $isDisabled ? 'disabled' : '' }}>
                                     Clear
                                 </button>
                             </div>
@@ -140,7 +139,7 @@
 
                         {{-- Agreement Checkbox --}}
                         <div class="mt-4 flex items-center space-x-2">
-                            <input type="checkbox" id="agree" required {{ $isSigned ? 'disabled' : '' }}>
+                            <input type="checkbox" id="agree" required {{ $isDisabled ? 'disabled' : '' }}>
                             <label for="agree">I agree to the terms and conditions.</label>
                         </div>
 
@@ -154,14 +153,14 @@
                         <div class="mt-4 flex space-x-4">
                             <button type="submit"
                                 class="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                                id="submitBtn" {{ $isSigned ? 'disabled' : '' }}>
+                                id="submitBtn" {{ $isDisabled ? 'disabled' : '' }}>
                                 Submit Approval
                             </button>
 
                             <a href="{{ url('/supervisor/approve/declineForm/' . $job_draft->id) }}">
                                 <button type="button"
                                     class="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                                    id="declineBtn" {{ $isSigned ? 'disabled' : '' }}>
+                                    id="declineBtn" {{ $isDisabled ? 'disabled' : '' }}>
                                     Decline
                                 </button>
                             </a>
@@ -181,126 +180,132 @@
     {{-- Include the signature modal (hidden by default) --}}
     <x-signature id="signatureModal" class="hidden" />
 
-    {{-- JS for Live Preview, Signature Pad, and Modal Switching --}}
-    <script>
-        // Main Signature Pad
-var canvas = document.getElementById("signature-pad");
-var signaturePad = new SignaturePad(canvas);
+{{-- JS for Live Preview, Signature Pad, and Modal Switching --}}
+<script>
+    // Main Signature Pad
+    var canvas = document.getElementById("signature-pad");
+    var signaturePad = new SignaturePad(canvas);
 
-// Resize canvas for better drawing experience
-function resizeCanvas() {
-    var ratio = Math.max(window.devicePixelRatio || 1, 1);
-    canvas.width = canvas.offsetWidth * ratio;
-    canvas.height = canvas.offsetHeight * ratio;
-    canvas.getContext("2d").scale(ratio, ratio);
-    signaturePad.clear(); // Clear canvas after resizing
-}
-window.addEventListener("resize", resizeCanvas);
-resizeCanvas(); // Call on page load
-
-// Signature Method Buttons
-document.getElementById("useUpload").addEventListener("click", function () {
-    toggleSection("upload");
-});
-document.getElementById("usePad").addEventListener("click", function () {
-    toggleSection("pad");
-});
-document.getElementById("useSavedSignature").addEventListener("click", function () {
-    const userSignature = "{{ Auth::user()->signature }}";
-    if (!userSignature) {
-        document.getElementById("signatureModal").classList.remove("hidden");
-    } else {
-        toggleSection("saved");
+    // Resize canvas for better drawing experience
+    function resizeCanvas() {
+        var ratio = Math.max(window.devicePixelRatio || 1, 1);
+        canvas.width = canvas.offsetWidth * ratio;
+        canvas.height = canvas.offsetHeight * ratio;
+        canvas.getContext("2d").scale(ratio, ratio);
+        signaturePad.clear(); // Clear canvas after resizing
     }
-});
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas(); // Call on page load
 
-function toggleSection(method) {
-    const sections = ["uploadSection", "padSection", "savedPadSection"];
-    sections.forEach(section => document.getElementById(section).classList.add("hidden"));
-
-    if (method === "upload") {
-        document.getElementById("uploadSection").classList.remove("hidden");
-    } else if (method === "pad") {
-        document.getElementById("padSection").classList.remove("hidden");
-        setTimeout(() => resizeCanvas(), 100);
-    } else if (method === "saved") {
-        document.getElementById("savedPadSection").classList.remove("hidden");
-    }
-
-    // Highlight the selected button
-    ["useUpload", "usePad", "useSavedSignature"].forEach(btn => {
-        document.getElementById(btn).classList.remove("bg-gray-200");
+    // Signature Method Buttons
+    document.getElementById("useUpload").addEventListener("click", function () {
+        toggleSection("upload");
     });
-    document.getElementById("use" + method.charAt(0).toUpperCase() + method.slice(1)).classList.add("bg-gray-200");
-
-    // Reset hidden inputs
-    document.getElementById("signaturePadData").value = "";
-    document.getElementById("savedSignatureData").value = method === "saved" ? "{{ asset(Auth::user()->signature) }}" : "";
-}
-
-// Signature Pad Clear
-document.getElementById("clearPad").addEventListener("click", function () {
-    signaturePad.clear();
-});
-
-// Live Preview for File Upload
-document.getElementById('signatureInput').addEventListener('change', function (event) {
-    const file = event.target.files[0];
-    const preview = document.getElementById('imagePreview');
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            preview.src = e.target.result;
-            preview.classList.remove('hidden');
-        };
-        reader.readAsDataURL(file);
-    } else {
-        preview.src = '#';
-        preview.classList.add('hidden');
-    }
-});
-
-// Enable Submit Button on Agreement
-document.getElementById('agree').addEventListener('change', function () {
-    document.getElementById('submitBtn').disabled = !this.checked;
-});
-
-// ✅ Form Submission - Correctly capture signaturePad value
-document.getElementById("approvalForm").addEventListener("submit", function (event) {
-    // Capture Signature Pad data before submitting
-    if (!document.getElementById("uploadSection").classList.contains("hidden")) {
-        if (!document.getElementById("signatureInput").value) {
-            alert("Please upload an image before submitting.");
-            event.preventDefault();
-            return;
-        }
-    } else if (!document.getElementById("padSection").classList.contains("hidden")) {
-        if (!signaturePad || signaturePad.isEmpty()) {
-            alert("Please sign before submitting.");
-            event.preventDefault();
-            return;
+    document.getElementById("usePad").addEventListener("click", function () {
+        toggleSection("pad");
+    });
+    document.getElementById("useSavedSignature").addEventListener("click", function () {
+        const userSignature = "{{ Auth::user()->signature }}";
+        if (!userSignature) {
+            document.getElementById("signatureModal").classList.remove("hidden");
         } else {
-            // ✅ Set signaturePad value into hidden input
-            const signatureData = signaturePad.toDataURL("image/png");
-            document.getElementById("signaturePadData").value = signatureData;
+            // Use "savedSignature" to match the button id in the toggle logic
+            toggleSection("savedSignature");
         }
-    } else if (!document.getElementById("savedPadSection").classList.contains("hidden")) {
-        if (!document.getElementById("savedSignatureData").value) {
-            alert("Please select your saved signature before submitting.");
-            event.preventDefault();
-            return;
-        }
-    }
-});
+    });
 
+    function toggleSection(method) {
+        const sections = ["uploadSection", "padSection", "savedPadSection"];
+        sections.forEach(section => document.getElementById(section).classList.add("hidden"));
+
+        if (method === "upload") {
+            document.getElementById("uploadSection").classList.remove("hidden");
+        } else if (method === "pad") {
+            document.getElementById("padSection").classList.remove("hidden");
+            setTimeout(() => resizeCanvas(), 100);
+        } else if (method === "savedSignature") {
+            document.getElementById("savedPadSection").classList.remove("hidden");
+        }
+
+        // Highlight the selected button
+        ["useUpload", "usePad", "useSavedSignature"].forEach(btn => {
+            document.getElementById(btn).classList.remove("bg-gray-200");
+        });
+        if (method === "upload") {
+            document.getElementById("useUpload").classList.add("bg-gray-200");
+        } else if (method === "pad") {
+            document.getElementById("usePad").classList.add("bg-gray-200");
+        } else if (method === "savedSignature") {
+            document.getElementById("useSavedSignature").classList.add("bg-gray-200");
+        }
+
+        // Reset hidden inputs
+        document.getElementById("signaturePadData").value = "";
+        document.getElementById("savedSignatureData").value = method === "savedSignature" ? "{{ asset(Auth::user()->signature) }}" : "";
+    }
+
+    // Signature Pad Clear
+    document.getElementById("clearPad").addEventListener("click", function () {
+        signaturePad.clear();
+    });
+
+    // Live Preview for File Upload
+    document.getElementById('signatureInput').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById('imagePreview');
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '#';
+            preview.classList.add('hidden');
+        }
+    });
+
+    // Enable Submit Button on Agreement
+    document.getElementById('agree').addEventListener('change', function () {
+        document.getElementById('submitBtn').disabled = !this.checked;
+    });
+
+    // Form Submission - Correctly capture signaturePad value
+    document.getElementById("approvalForm").addEventListener("submit", function (event) {
+        // Capture Signature Pad data before submitting
+        if (!document.getElementById("uploadSection").classList.contains("hidden")) {
+            if (!document.getElementById("signatureInput").value) {
+                alert("Please upload an image before submitting.");
+                event.preventDefault();
+                return;
+            }
+        } else if (!document.getElementById("padSection").classList.contains("hidden")) {
+            if (!signaturePad || signaturePad.isEmpty()) {
+                alert("Please sign before submitting.");
+                event.preventDefault();
+                return;
+            } else {
+                // Set signaturePad value into hidden input
+                const signatureData = signaturePad.toDataURL("image/png");
+                document.getElementById("signaturePadData").value = signatureData;
+            }
+        } else if (!document.getElementById("savedPadSection").classList.contains("hidden")) {
+            if (!document.getElementById("savedSignatureData").value) {
+                alert("Please select your saved signature before submitting.");
+                event.preventDefault();
+                return;
+            }
+        }
+    });
     </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const element = document.getElementById('draftContent');
-        if (element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth) {
-            element.classList.add('border', 'border-gray-200', 'p-4');
-        }
-    });
-</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const element = document.getElementById('draftContent');
+            if (element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth) {
+                element.classList.add('border', 'border-gray-200', 'p-4');
+            }
+        });
+    </script>
 @endsection
