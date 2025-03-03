@@ -27,14 +27,14 @@ class RequestFormController extends Controller
                 ->get(); // Changed from all() to get()
         }
 
-        return view('pages.RequestForm.history', compact('request_forms'));
+        return view('pages.requestForm.history', compact('request_forms'));
     }
 
     public function show($id)
     {
         $request_form = RequestForm::with(['requestedBy', 'manager', 'receiver', 'particulars'])->findOrFail($id);
 
-        return view('pages.RequestForm.show', compact('request_form'));
+        return view('pages.requestForm.show', compact('request_form'));
     }
 
     public function edit($id)
@@ -44,7 +44,7 @@ class RequestFormController extends Controller
         $accounting = User::where('role_id', 7)->get();
         $request_form = RequestForm::with(['requestedBy', 'manager', 'receiver', 'particulars'])->findOrFail($id);
 
-        return view('pages.RequestForm.edit', compact('request_form', 'users', 'managers', 'accounting'));
+        return view('pages.requestForm.edit', compact('request_form', 'users', 'managers', 'accounting'));
     }
 
     public function update(Request $request, $id)
@@ -91,7 +91,7 @@ class RequestFormController extends Controller
             ->latest()
             ->first();
 
-        return view('pages.RequestForm.create', compact('users', 'managers', 'accounting', 'request_form'));
+        return view('pages.requestForm.create', compact('users', 'managers', 'accounting', 'request_form'));
     }
 
 
