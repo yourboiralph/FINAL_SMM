@@ -133,7 +133,12 @@
                             <strong>Assigned Personnel Signature:                     
                             {{$supervisor_request->assignee->name}}
                         </strong><br>
+                        @if ($supervisor_request->status === "Waiting for Operation Approval")
+                            Waiting for Approval
+                        @else
                             <img src="{{ asset($supervisor_request->assignee->signature) }}" alt="Admin Signature">
+                        @endif
+                            
                         </td>
                         <td class="signature">
                             <strong>Supervisor Signature: {{$supervisor_request->issuer->name}}</strong><br>
