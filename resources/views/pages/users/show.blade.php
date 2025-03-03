@@ -32,7 +32,7 @@
                         alt="User Image"> --}}
 
                     <img class="rounded-full w-32 h-32 object-cover"
-                    src="{{ file_exists(asset($user->image)) && $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}"
+                    src="{{ file_exists(public_path($user->image)) && $user->image ? asset($user->image) : asset('/Assets/user-profile-profilepage.png') }}"
                     alt="User Image">
                 </div>
                 <div class="text-center mt-4">
