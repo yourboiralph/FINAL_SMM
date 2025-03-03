@@ -120,7 +120,7 @@
                                 <p class="text-sm text-gray-600">Days to Add</p>
                                 <div class="relative">
                                     <input type="number" name="days_to_add"
-                                        value="{{old('days_to_add')}}"
+                                        value={{$job_draft->days_to_add}}
                                         class="w-full border px-3 py-2  border-gray-200 rounded-lg">
                                 </div>
                                 @error('days_to_add')
