@@ -37,16 +37,18 @@
         <table class="w-full table-fixed text-left border-collapse min-w-[600px]">
             <thead class="sticky top-0 bg-[#fa7011] text-white">
                 <tr>
-                    <th class="w-[40%] px-4 py-3">Title</th>
-                    <th class="w-[40%] px-4 py-3">Issued To</th>
+                    <th class="w-[30%] px-4 py-3">Title</th>
+                    <th class="w-[20%] px-4 py-3">Issued To</th>
+                    <th class="w-[20%] px-4 py-3">Status</th>
                     <th class="w-[20%] px-4 py-3 text-center">Actions</th>
                 </tr>
             </thead>
             <tbody id="tableBody" class="overflow-y-auto">
                 @forelse ($supervisor_requests as $supervisor_request)
                     <tr class="border-b">
-                        <td class="w-[40%] px-4 py-3 truncate">{{ $supervisor_request->title }}</td>
-                        <td class="w-[40%] px-4 py-3 truncate">{{ $supervisor_request->assignee->name }}</td>
+                        <td class="w-[30%] px-4 py-3 truncate">{{ $supervisor_request->title }}</td>
+                        <td class="w-[20%] px-4 py-3 truncate">{{ $supervisor_request->assignee->name }}</td>
+                        <td class="w-[20%] px-4 py-3 text-wrap">{{ $supervisor_request->status }}</td>
                         <td class="w-[20%] px-4 py-3 text-center">
                             <a href="{{ url('/supervisor/joborder/edit/' . $supervisor_request->id) }}">
                                 <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
