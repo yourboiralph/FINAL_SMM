@@ -44,11 +44,22 @@
                         <td class="px-6 py-3">{{$supervisor_request->title}}</td>
                         <td class="px-6 py-3">{{$supervisor_request->issuer->name}}</td>
                         <td class="px-6 py-3">
-                            <a href="{{url('operation/request/show/' . $supervisor_request->id)}}">
-                                <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
-                                    Show
-                                </button>
-                            </a>
+                            @if ($supervisor_request->status == "Waiting for Operation Approval")
+                                <form action="{{ url('operation/request/accept/' . $supervisor_request->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-[#fa7011] rounded hover:bg-[#fa7011]">
+                                        Accept
+                                    </button>
+                                </form>  
+                            @else
+                                <a href="{{url('operation/request/show/' . $supervisor_request->id)}}">
+                                    <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
+                                        Show
+                                    </button>
+                                </a>
+                            @endif
+                            
                         </td>
                     </tr>
                 @empty
