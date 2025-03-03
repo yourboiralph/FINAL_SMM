@@ -37,6 +37,7 @@
                 <tr>
                     <th class="px-6 py-3">Title</th>
                     <th class="px-6 py-3">Designated</th>
+                    <th class="px-6 py-3">Status</th>
                     <th class="px-6 py-3">Actions</th>
                 </tr>
             </thead>
@@ -51,6 +52,7 @@
                                 Graphic Designer - {{ $job_draft->graphicDesigner->name }}
                             @endif
                         </td>
+                        <td class="px-6 py-3">{{ $job_draft->status }}</td>
                         <td class="px-6 py-3">
                             <a href="{{url('joborder/edit/' . $job_draft->id)}}">
                                 <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">

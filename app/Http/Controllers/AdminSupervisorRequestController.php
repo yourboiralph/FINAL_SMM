@@ -49,8 +49,7 @@ class AdminSupervisorRequestController extends Controller
             'content_writer_id' => 'required|integer',
             'graphic_designer_id' => 'required|integer',
             'client_id' => 'required|integer',
-            'date_target' => 'required|date',
-            'date_started' => 'required|date',
+            'days_to_add' => "required",
             'request_id' => 'required'
         ]);
 
