@@ -57,17 +57,20 @@
                         </td>
                         <td class="px-6 py-3">{{ $job_draft->status }}</td>
                         <td class="px-6 py-3">
-                            <a href="{{url('joborder/edit/' . $job_draft->id)}}">
-                                <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
-                                    Edit
-                                </button>
-                            </a>
-                            <a href="{{url('joborder/show/' . $job_draft->id)}}">
-                                <button class="px-2 py-1 lg:px-4 lg:py-2 text-sm text-white bg-gray-700 rounded hover:bg-gray-800">
-                                    Show
-                                </button>
-                            </a>
+                            <div class="flex space-x-2">
+                                <a href="{{ url('joborder/edit/' . $job_draft->id) }}">
+                                    <button class="px-2 py-1 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
+                                        Edit
+                                    </button>
+                                </a>
+                                <a href="{{ url('joborder/show/' . $job_draft->id) }}">
+                                    <button class="px-2 py-1 lg:px-4 lg:py-2 text-sm text-white bg-gray-700 rounded hover:bg-gray-800">
+                                        Show
+                                    </button>
+                                </a>
+                            </div>
                         </td>
+
                     </tr>
                 @empty
                     <tr class="h-[400px]">
