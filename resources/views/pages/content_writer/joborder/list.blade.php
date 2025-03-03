@@ -7,9 +7,17 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <div class="container mx-auto p-6">
-        {{-- Success Message Component --}}
-        @if(session('Status'))
+    {{-- Success Message Component --}}
+    @if(session('Status') === 'Job Order Accepted Successfully')
         <x-success />
+    @endif
+
+    @if(session('Status') === 'No Signature Found' && !Auth::user()->signature)
+        <form action="{{ url('signature/store') }}" method="POST" id="modalSignatureForm">
+            @csrf
+            @method('PUT')
+            <x-save-signature />
+        </form>
     @endif
 
     {{-- Search Bar --}}
