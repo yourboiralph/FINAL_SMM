@@ -150,16 +150,18 @@
                 <td class="signature">
                     <strong>Assigned Personnel Signature:                     
                     @if ($job_draft->type == "content_writer")
-                        {{ $job_draft->contentWriter->name }}
+                        {{ $job_draft->contentWriter->name }} <br />
                         @if ($job_draft->status === "Waiting for Content Writer Approval")
-                            Waiting For Content Writer Approval
+                        <br />
+                        <p class="font-normal">Waiting For Content Writer Approval</p>
                         @else
                             <img src="{{ asset($job_draft->signature_worker) }}" alt="Content Writer Signature">
                         @endif
                     @else
                         {{ $job_draft->graphicDesigner->name }}
                         @if ($job_draft->status === "Waiting for Content Writer Approval")
-                        Waiting For Graphic Design Approval
+                        <br />
+                        <p class="font-normal">Waiting For Graphic Design Approval</p>
                         @else
                             <img src="{{ asset($job_draft->signature_worker) }}" alt="Graphic Design Signature">
                         @endif
