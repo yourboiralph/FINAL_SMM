@@ -31,9 +31,14 @@
 
 <div class="container mx-auto p-6">
     {{-- Success Message Component --}}
-    @if(session('Status'))
-        <x-save-signature />
+    @if(session('Status') && !Auth::user()->signature)
+        <form action="{{ url('signature/store') }}" method="POST" id="modalSignatureForm">
+            @csrf
+            @method('PUT')
+            <x-save-signature />
+        </form>
     @endif
+
     <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow bg-white">
         <div>
             <a href="{{ url('/supervisor/directjob') }}">
