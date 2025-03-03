@@ -30,6 +30,7 @@ class SupervisorJobOrderController extends Controller
             'title' => 'required|string',
             'description' => 'required|string',
             'assigned_to' => 'required|integer|exists:users,id',
+            'deadline' => 'required|date'
         ]);
 
         ModelsRequest::create([ // Use ModelsRequest instead of Request
@@ -37,7 +38,8 @@ class SupervisorJobOrderController extends Controller
             'description' => $request->description,
             'assigned_to' => $request->assigned_to,
             'issued_by' => auth()->user()->id,
-            'status' => 'Waiting for Operation Approval'
+            'status' => 'Waiting for Operation Approval',
+            'deadline' => $request->deadline
         ]);
 
         return redirect()->route('supervisor.joborder')->with('Status', 'Job Order Created Successfully');

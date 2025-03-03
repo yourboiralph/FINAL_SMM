@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('issued_by');
             $table->unsignedBigInteger('assigned_to');
             $table->string('status');
+            $table->date('deadline');
             $table->timestamps();
 
             $table->foreign('assigned_to')->references('id')->on('users')->onDelete('cascade');
