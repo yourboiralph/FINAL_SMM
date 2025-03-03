@@ -119,35 +119,40 @@ class ClientApprovalController extends Controller
 
     public function renew(Request $request, $id)
     {
-        $job_draft = JobDraft::with('jobOrder')->find($id);
+        if ($request->renewable == 0) {
+            return redirect()->route('client.approve')->with('Status', 'Job Order Approved Successfully');
+        } else {
 
-        if (!$job_draft) {
-            return response()->json(['error' => 'Job draft not found'], 404);
+            $job_draft = JobDraft::with('jobOrder')->find($id);
+
+            if (!$job_draft) {
+                return response()->json(['error' => 'Job draft not found'], 404);
+            }
+
+            if (!$job_draft->jobOrder) {
+                return response()->json(['error' => 'Job order not found'], 404);
+            }
+
+            $job_order = JobOrder::find($job_draft->job_order_id);
+
+            $job_order->update([
+                'renewable' => $request->renewable,
+            ]);
+
+            JobDraft::create([
+                'job_order_id' => $job_draft->job_order_id, // Correct reference
+                'type' => 'content_writer',
+                // 'date_started' => Carbon::now()->toDateString(), // Set date_started to today
+                // 'date_target' => Carbon::now()->addDays(3)->toDateString(),
+                'status' => 'Waiting for Content Writer Approval',
+                'content_writer_id' => $job_draft->content_writer_id,
+                'graphic_designer_id' => $job_draft->graphic_designer_id,
+                'client_id' => $job_draft->client_id,
+                'signature_supervisor' => $job_draft->signature_supervisor,
+                'supervisor_signed' => $job_draft->supervisor_signed
+            ]);
+
+            return redirect()->route('client.approve')->with('Status', 'Job Order Approved Successfully');
         }
-
-        if (!$job_draft->jobOrder) {
-            return response()->json(['error' => 'Job order not found'], 404);
-        }
-
-        $job_order = JobOrder::find($job_draft->job_order_id);
-
-        $job_order->update([
-            'renewable' => $request->renewable,
-        ]);
-
-        JobDraft::create([
-            'job_order_id' => $job_draft->job_order_id, // Correct reference
-            'type' => 'content_writer',
-            // 'date_started' => Carbon::now()->toDateString(), // Set date_started to today
-            // 'date_target' => Carbon::now()->addDays(3)->toDateString(),
-            'status' => 'Waiting for Content Writer Approval',
-            'content_writer_id' => $job_draft->content_writer_id,
-            'graphic_designer_id' => $job_draft->graphic_designer_id,
-            'client_id' => $job_draft->client_id,
-            'signature_supervisor' => $job_draft->signature_supervisor,
-            'supervisor_signed' => $job_draft->supervisor_signed
-        ]);
-
-        return redirect()->route('client.approve')->with('Status', 'Job Order Approved Successfully');
     }
 }
