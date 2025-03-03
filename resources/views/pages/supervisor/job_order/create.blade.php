@@ -49,19 +49,28 @@
                     </div>
 
                     <!-- Operator Selection Modal Trigger -->
-                    <div class="col-span-2 lg:col-span-1 w-full">
-                        <p class="text-sm text-gray-600">Operator</p>
-                        <div class="relative">
-                            <input type="text" id="selected-operator-name"
-                                value="{{ old('assigned_to') ? ($operators->firstWhere('id', old('assigned_to'))->name ?? 'Select an Operator') : 'Select an Operator' }}"
-                                class="w-full border px-3 py-2  border-gray-200 rounded-lg cursor-pointer" readonly
-                                onclick="openOperatorModal()">
-                            <input type="hidden" name="assigned_to" id="selected-operator-id"
-                                value="{{ old('assigned_to') }}">
+                    <div class="col-span-2 lg:col-span-1 grid grid-cols-2 gap-4 w-full">
+                        <div>
+                            <p class="text-sm text-gray-600">Operator</p>
+                            <div class="relative">
+                                <input type="text" id="selected-operator-name"
+                                    value="{{ old('assigned_to') ? ($operators->firstWhere('id', old('assigned_to'))->name ?? 'Select an Operator') : 'Select an Operator' }}"
+                                    class="w-full border px-3 py-2  border-gray-200 rounded-lg cursor-pointer" readonly
+                                    onclick="openOperatorModal()">
+                                <input type="hidden" name="assigned_to" id="selected-operator-id"
+                                    value="{{ old('assigned_to') }}">
+                            </div>
+                            @error('assigned_to')
+                                <p class="text-red-600 text-sm">{{ $message }}</p>
+                            @enderror
                         </div>
-                        @error('assigned_to')
-                            <p class="text-red-600 text-sm">{{ $message }}</p>
-                        @enderror
+                        <div>
+                            <p class="text-sm text-gray-600">Deadline</p>
+                            <input type="date" name="deadline" value="{{ old('deadline') }}" class="w-full rounded-lg border px-3 py-2  border-gray-200 focus:ring-0">
+                            @error('deadline')
+                                <p class="text-red-600 text-sm">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
 
                     <!-- Description CKEditor Textarea -->
