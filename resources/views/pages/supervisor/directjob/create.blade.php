@@ -32,7 +32,7 @@
 <div class="container mx-auto p-6">
     {{-- Success Message Component --}}
     @if(session('Status'))
-        <x-success />
+        <x-save-signature />
     @endif
     <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow bg-white">
         <div>
