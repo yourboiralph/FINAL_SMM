@@ -25,6 +25,13 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 
 <div class="container mx-auto p-6">
+    @if(!Auth::user()->signature)
+        <form action="{{ url('signature/store') }}" method="POST" id="modalSignatureForm">
+            @csrf
+            @method('PUT')
+            <x-save-signature />
+        </form>
+    @endif
     <div class="w-full px-6 py-10 mx-auto rounded-lg custom-shadow bg-white">
         <div>
             <a href="{{ url('/supervisor/joborder') }}">
