@@ -83,6 +83,6 @@ class AdminSupervisorRequestController extends Controller
             'status' => 'Approved by Operation'
         ]);
 
-        return redirect()->route('supervisor.joborder')->with('Status', 'Job Order Accepted Successfully');
+        return redirect()->route('operation.request')->with('Status', 'Job Order Accepted Successfully');
     }
 }
