@@ -74,6 +74,9 @@
     }
 </style>
 <div id="container-pdf">
+    <div class="bg-[#fa7011] text-white rounded-md px-3 py-1 w-fit mb-4">
+        <a href="{{url('/supervisor/joborder')}}">Back</a>
+    </div>
     <div class="header">
         <img src="{{ asset('/Assets/doc_header.png') }}" alt="Header">
         <h2>Supervisor Job Order Form</h2>
@@ -114,10 +117,14 @@
         <table>
             <tr>
                 <td class="signature">
-                    <strong>Assigned Personnel Signature:                     
+                    <strong>Assigned Personnel Signature:                
                     {{$supervisor_request->assignee->name}}
                 </strong><br>
-                    <img src="{{ asset($supervisor_request->assignee->signature) }}" alt="Admin Signature">
+                    @if ($supervisor_request->status === "Waiting for Operation Approval")
+                        Waiting for Approval
+                    @else
+                        <img src="{{ asset($supervisor_request->assignee->signature) }}" alt="Admin Signature">
+                    @endif
                 </td>
                 <td class="signature">
                     <strong>Supervisor Signature: {{$supervisor_request->issuer->name}}</strong><br>
