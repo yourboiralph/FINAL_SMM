@@ -64,6 +64,7 @@ class SupervisorJobOrderController extends Controller
             'title' => 'sometimes|string',
             'description' => 'sometimes|string',
             'assigned_to' => 'sometimes|string',
+            'deadline' => 'sometimes|date'
         ]);
 
         $modelsrequest = ModelsRequest::find($id);
@@ -71,7 +72,8 @@ class SupervisorJobOrderController extends Controller
         $modelsrequest->update([
             'title' => $request->title,
             'description' => $request->description,
-            'assigned_to' => $request->assigned_to
+            'assigned_to' => $request->assigned_to,
+            'deadline' => $request->deadline
         ]);
         return redirect()->route('supervisor.joborder')->with('Status', 'Job Order Updated Successfully');
     }
