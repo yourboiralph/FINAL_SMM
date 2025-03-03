@@ -16,7 +16,8 @@ class Request extends Model
         'description',
         'issued_by',
         'assigned_to',
-        'status'
+        'status',
+        'deadline'
     ];
 
     /**
