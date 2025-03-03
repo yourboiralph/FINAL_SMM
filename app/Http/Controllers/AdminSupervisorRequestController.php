@@ -64,12 +64,14 @@ class AdminSupervisorRequestController extends Controller
         JobDraft::create([
             'job_order_id' => $job_order->id,
             'type' => 'content_writer',
-            'date_started' => $request->date_started,
-            'date_target' => $request->date_target,
-            'status' => 'pending',
+            // 'date_started' => $request->date_started,
+            // 'date_target' => $request->date_target,
+            'status' => 'Waiting for Content Writer Approval',
             'content_writer_id' => $request->content_writer_id,
             'graphic_designer_id' => $request->graphic_designer_id,
             'client_id' => $request->client_id,
+            'signature_supervisor' => auth()->user()->signature,
+            'supervisor_signed' => auth()->user()->id
         ]);
 
         return redirect()->route('operation.request')->with('Status', 'Job Order Create Successfully');
