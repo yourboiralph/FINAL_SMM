@@ -64,6 +64,7 @@ class AdminSupervisorRequestController extends Controller
         JobDraft::create([
             'job_order_id' => $job_order->id,
             'type' => 'content_writer',
+            'days_to_add' => $request->days_to_add,
             // 'date_started' => $request->date_started,
             // 'date_target' => $request->date_target,
             'status' => 'Waiting for Content Writer Approval',
