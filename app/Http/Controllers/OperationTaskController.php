@@ -84,6 +84,9 @@ class OperationTaskController extends Controller
 
     public function accept($id)
     {
+        if (!auth()->user()->signature) {
+            return redirect()->route('operation.task')->with('Status', 'No Signature Found');
+        }
         $job_draft = JobDraft::find($id);
 
         $job_draft->update([
