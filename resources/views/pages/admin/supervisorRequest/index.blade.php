@@ -35,6 +35,7 @@
                 <tr>
                     <th class="px-6 py-3">Title</th>
                     <th class="px-6 py-3">Assigned By</th>
+                    <th class="px-6 py-3">Status</th>
                     <th class="px-6 py-3">Actions</th>
                 </tr>
             </thead>
@@ -43,6 +44,7 @@
                     <tr class="border-b">
                         <td class="px-6 py-3">{{$supervisor_request->title}}</td>
                         <td class="px-6 py-3">{{$supervisor_request->issuer->name}}</td>
+                        <td class="px-6 py-3">{{$supervisor_request->status}}</td>
                         <td class="px-6 py-3">
                             @if ($supervisor_request->status == "Waiting for Operation Approval")
                                 <form action="{{ url('operation/request/accept/' . $supervisor_request->id) }}" method="POST" class="inline">
@@ -52,7 +54,19 @@
                                         Accept
                                     </button>
                                 </form>  
+                                <a href="{{url('operation/request/show/' . $supervisor_request->id)}}">
+                                    <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
+                                        Show
+                                    </button>
+                                </a>
                             @else
+                                <form action="{{ url('operation/request/accept/' . $supervisor_request->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" disabled class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-gray-400 rounded hover:bg-gray-500 cursor-not-allowed">
+                                        Accept
+                                    </button>
+                                </form>  
                                 <a href="{{url('operation/request/show/' . $supervisor_request->id)}}">
                                     <button class="px-2 py-1 mb-2 lg:mb-0 lg:px-4 lg:py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600">
                                         Show
