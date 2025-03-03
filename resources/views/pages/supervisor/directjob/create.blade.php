@@ -31,7 +31,7 @@
 
 <div class="container mx-auto p-6">
     {{-- Success Message Component --}}
-    @if(session('Status') && !Auth::user()->signature)
+    @if(!Auth::user()->signature)
         <form action="{{ url('signature/store') }}" method="POST" id="modalSignatureForm">
             @csrf
             @method('PUT')

@@ -11,6 +11,13 @@
 @section('content')
 <script src="https://cdn.tailwindcss.com"></script>
 <div class="container mx-auto p-6 max-w-screen-xl overflow-hidden">
+    @if(!Auth::user()->signature)
+        <form action="{{ url('signature/store') }}" method="POST" id="modalSignatureForm">
+            @csrf
+            @method('PUT')
+            <x-save-signature />
+        </form>
+    @endif
     <div>
         <div class="grid grid-cols-1 md:grid md:grid-cols-3 md:px-2 mx-auto">
             <div class="col-span-1 md:col-span-2">

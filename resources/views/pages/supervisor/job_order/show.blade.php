@@ -74,9 +74,6 @@
     }
 </style>
 <div id="container-pdf">
-    <div class="bg-[#fa7011] text-white rounded-md px-3 py-1 w-fit mb-4">
-        <a href="{{url('/supervisor/joborder')}}">Back</a>
-    </div>
     <div class="header">
         <img src="{{ asset('/Assets/doc_header.png') }}" alt="Header">
         <h2>Supervisor Job Order Form</h2>
@@ -84,12 +81,7 @@
 
     <div class="section">
         <div class="highlight"></div>
-        <table>
-            <tr>
-                <td><strong>Client Name:</strong><br>N/A</td>
-                <td><strong>Client Address:</strong><br>N/A</td>
-            </tr>
-        </table>
+
         <div class="gray-bar"></div>
         <table>
             <tr>
@@ -119,24 +111,6 @@
             </div>
         </div>
         <div class="gray-bar"></div>
-        <div class=""><strong> Complete Information </strong></div>
-        <table>
-            <tr>
-                <td><strong>Date Completed:</strong><br>
-                    N/A
-                </td>
-                
-                <td><strong>Time Required:</strong><br>
-                    N/A
-                </td>                             
-            </tr>
-        </table>
-        <div class="section-remarks">
-            <strong>Remarks:</strong>
-            <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
-                {!! $supervisor_request->feedback !!}
-            </div>
-        </div>
         <table>
             <tr>
                 <td class="signature">

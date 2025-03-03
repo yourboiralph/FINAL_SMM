@@ -19,6 +19,53 @@
         box-shadow: 0 0 0 1px #fa7011;
         transition: box-shadow 0.3s ease;
     }
+    .header, .footer {
+        text-align: center;
+    }
+    .header img, .footer img {
+        width: 100%;
+        max-height: 150px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+    td, th {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: left;
+        vertical-align: top;
+    }
+    .highlight {
+        background-color: #fa7011;
+        height: 40px;
+        text-align: center;
+    }
+    .gray-bar {
+        background-color: #6b7280;
+        height: 40px;
+        text-align: center;
+    }
+    .section{
+        border: 1px solid black;
+    }
+    .section-title {
+        font-weight: bold;
+        background-color: #6b7280;
+        color: white;
+        text-align: center;
+    }
+    .signature img {
+        width: 100px;
+        height: auto;
+    }
+    .section-remarks {
+        padding: 10px;
+    }
+    #container-pdf{
+        padding: 20px
+    }
 </style>
 
 <!-- CKEditor 5 Classic -->
@@ -39,28 +86,63 @@
             </a>
 
         </div>
-        <h1 class="text-xl font-bold mt-4">Show</h1>
-        <div class="mt-4 grid grid-cols-4">
-            <div class="col-span-4 flex flex-col space-y-4 mb-10 md:flex-row  md:space-y-0">
-                <div class="w-full">
-                    <p class="text-sm font-bold text-gray-600">Title</p>
-                    <p class="border-b-2 border-[#fa7011] w-fit">{{ $supervisor_request->title }}</p>
-                </div>
-                <div class="w-full">
-                    <p class="text-sm font-bold text-gray-600">Issued By</p>
-                    <p class="border-b-2 border-[#fa7011] w-fit">{{ $supervisor_request->issuer->name }}</p>
-                </div>
+        <div id="container-pdf">
+            <div class="header">
+                <img src="{{ asset('/Assets/doc_header.png') }}" alt="Header">
+                <h2>Supervisor Job Order Form</h2>
             </div>
-            <div class="col-span-4 h-fit">
-                <p class="text-sm font-bold text-gray-600">Instructions</p>
+        
+            <div class="section">
+                <div class="highlight"></div>
 
-                <!-- CKEditor Read-Only -->
-                <div class="border border-gray-400 rounded-lg break-words max-h-[500px] p-2 overflow-y-auto">
-                    {!! $supervisor_request->description !!}
+                <div class="gray-bar"></div>
+                <table>
+                    <tr>
+                        <td><strong>Date Issued:</strong><br>
+                            {{ $supervisor_request->created_at ? \Carbon\Carbon::parse($supervisor_request->created_at)->format('Y-m-d') : 'N/A' }}
+                        </td>
+                        
+                        <td><strong>Target Finished Date:</strong><br>
+                            {{ $supervisor_request->deadline }}
+                        </td>
+                                  
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td><strong>Issued by:</strong><br>{{ $supervisor_request->issuer->name }}</td>
+                        <td>
+                            <strong>Work Performed by:</strong><br>
+                            {{$supervisor_request->assignee->name}}
+                        </td>
+                    </tr>
+                </table>
+                <div class="section-remarks">
+                    <strong>Description:</strong>
+                    <div class="text-sm text-gray-600 w-full max-h-[500px] overflow-y-auto bg-white border border-gray-300 p-2 rounded">
+                        {!! $supervisor_request->description !!}
+                    </div>
                 </div>
-
+                <div class="gray-bar"></div>
+                <table>
+                    <tr>
+                        <td class="signature">
+                            <strong>Assigned Personnel Signature:                     
+                            {{$supervisor_request->assignee->name}}
+                        </strong><br>
+                            <img src="{{ asset($supervisor_request->assignee->signature) }}" alt="Admin Signature">
+                        </td>
+                        <td class="signature">
+                            <strong>Supervisor Signature: {{$supervisor_request->issuer->name}}</strong><br>
+                            <img src="{{ asset($supervisor_request->issuer->signature) }}" alt="Supervisor Signature">
+                        </td>
+                    </tr>
+                </table>
             </div>
-
+        
+            <div class="footer">
+                <img src="{{ asset('/Assets/doc_footer.png') }}" alt="Footer">
+            </div>
         </div>
     </div>
 </div>
