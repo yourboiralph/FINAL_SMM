@@ -74,7 +74,7 @@
     }
 </style>
 <div id="container-pdf">
-    <div class="bg-[#fa7011] px-3 py-1 w-fit mb-4">
+    <div class="bg-[#fa7011] text-white rounded-md px-3 py-1 w-fit mb-4">
         <a href="{{url('/content')}}">Back</a>
     </div>
     <div class="header">

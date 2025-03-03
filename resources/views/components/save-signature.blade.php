@@ -1,157 +1,67 @@
-<!-- saved-signature-modal.blade.php -->
-<div id="savedSignatureModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50 hidden">
-    <div class="bg-white rounded-lg p-6 max-w-md w-full">
-        <div class="flex justify-between items-center mb-4">
-            <h3 class="text-lg font-semibold">Saved Signature</h3>
-            <button id="closeSignatureModal" class="text-gray-500 hover:text-gray-700">
-                <i class="fa-solid fa-times"></i>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
+<div id="signatureModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+    <!-- Overlay -->
+    <div class="fixed inset-0 bg-black opacity-50"></div>
+    <!-- Modal Content -->
+    <div class="bg-white p-6 rounded z-10 max-w-md mx-auto">
+        <h1 class="text-xl font-bold mb-4">Add a Signature</h1>
+        <p class="mb-4">No signature found. Please create your signature below.</p>
+        
+        <!-- New Signature Pad -->
+        <div id="newSignaturePadContainer">
+            <canvas id="new-signature-pad" class="w-full border border-gray-400" style="height:200px;"></canvas>
+            <!-- Hidden input to store the signature data -->
+            <input type="hidden" name="new_signature_pad" id="savedSignaturePadData" value="">
+            <button type="submit" id="saveNewSignature" class="mt-2 px-4 py-2 bg-green-500 text-white rounded">
+                Save and Use Signature
             </button>
         </div>
         
-        <div class="flex justify-center mb-4">
-            <img id="savedSignatureImage" class="w-full max-h-40 object-contain" 
-                src="{{ Auth::user()->signature ? asset(Auth::user()->signature) : '/images/no-signature.png' }}" 
-                alt="Your Saved Signature">
-        </div>
-        
-        <div class="text-center mb-4">
-            @if(Auth::user()->signature)
-                <p class="text-sm text-gray-600">You can use this saved signature or upload a new one.</p>
-            @else
-                <p class="text-sm text-gray-600">You don't have a saved signature yet. Please upload one.</p>
-            @endif
-        </div>
-        
-        <div class="flex flex-col space-y-3">
-            @if(Auth::user()->signature)
-                <button id="useThisSignature" class="px-4 py-2 bg-[#fa7011] text-white rounded hover:bg-[#d95f0a] transition duration-200">
-                    Use This Signature
-                </button>
-            @endif
-            
-            <form id="uploadSignatureForm" action="{{ route('user.signature.save') }}" method="POST" enctype="multipart/form-data" class="flex flex-col space-y-3">
-                @csrf
-                <div class="border rounded p-2">
-                    <input type="file" name="signature" accept="image/*" class="w-full" id="modalSignatureInput">
-                </div>
-                <button type="submit" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition duration-200">
-                    {{ Auth::user()->signature ? 'Upload New Signature' : 'Upload Signature' }}
-                </button>
-            </form>
-        </div>
+        <!-- Close Modal Button -->
+        <button type="button" id="closeSignatureModal" class="mt-4 px-4 py-2 bg-red-500 text-white rounded">
+            Close
+        </button>
     </div>
 </div>
 
-
 <script>
-// Add this to your JavaScript file or in a script tag
 document.addEventListener('DOMContentLoaded', function() {
-    // Modal elements
-    const savedSignatureModal = document.getElementById('savedSignatureModal');
-    const closeSignatureModal = document.getElementById('closeSignatureModal');
-    const useThisSignature = document.getElementById('useThisSignature');
-    const useSavedSignatureBtn = document.getElementById('useSavedSignature');
-    const savedSignatureData = document.getElementById('savedSignatureData');
-    const savedPadSection = document.getElementById('savedPadSection');
-    const modalSignatureInput = document.getElementById('modalSignatureInput');
-    
-    // Open modal when clicking the saved signature button
-    if (useSavedSignatureBtn) {
-        useSavedSignatureBtn.addEventListener('click', function() {
-            savedSignatureModal.classList.remove('hidden');
-        });
+    const modal = document.getElementById('signatureModal');
+    // Immediately show the modal
+    modal.classList.remove('hidden');
+
+    const canvas = document.getElementById('new-signature-pad');
+    const signaturePad = new SignaturePad(canvas);
+    const saveButton = document.getElementById('saveNewSignature');
+    const closeButton = document.getElementById('closeSignatureModal');
+    const hiddenInput = document.getElementById('savedSignaturePadData');
+
+    function resizeCanvas() {
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        canvas.width = canvas.offsetWidth * ratio;
+        canvas.height = 200 * ratio;
+        canvas.getContext("2d").scale(ratio, ratio);
+        signaturePad.clear();
     }
+
+    // Delay resize to ensure the modal is rendered
+    setTimeout(resizeCanvas, 100);
     
-    // Close modal
-    if (closeSignatureModal) {
-        closeSignatureModal.addEventListener('click', function() {
-            savedSignatureModal.classList.add('hidden');
-        });
-    }
-    
-    // Use the saved signature
-    if (useThisSignature) {
-        useThisSignature.addEventListener('click', function() {
-            const signaturePath = document.getElementById('savedSignatureImage').src;
-            if (signaturePath) {
-                // Update the hidden input with the signature path
-                if (savedSignatureData) {
-                    savedSignatureData.value = signaturePath;
-                }
-                
-                // Show the saved signature section and hide others
-                toggleSection('saved');
-                
-                // Close the modal
-                savedSignatureModal.classList.add('hidden');
-            }
-        });
-    }
-    
-    // Preview uploaded signature in the modal
-    if (modalSignatureInput) {
-        modalSignatureInput.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            const preview = document.getElementById('savedSignatureImage');
-            
-            if (file && preview) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    }
-    
-    // Handle upload signature form submission (using AJAX)
-    const uploadSignatureForm = document.getElementById('uploadSignatureForm');
-    if (uploadSignatureForm) {
-        uploadSignatureForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const formData = new FormData(this);
-            
-            fetch(this.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Update the signature image
-                    const savedSignatureImage = document.getElementById('savedSignatureImage');
-                    savedSignatureImage.src = data.signature_url;
-                    
-                    // Update the hidden input
-                    if (savedSignatureData) {
-                        savedSignatureData.value = data.signature_url;
-                    }
-                    
-                    // Show the success button if it was hidden
-                    if (useThisSignature) {
-                        useThisSignature.classList.remove('hidden');
-                    }
-                    
-                    // Show a success message
-                    alert('Signature uploaded successfully!');
-                    
-                    // Auto-use the new signature
-                    toggleSection('saved');
-                    savedSignatureModal.classList.add('hidden');
-                } else {
-                    alert(data.message || 'Error uploading signature.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred while uploading the signature.');
-            });
-        });
-    }
+    saveButton.addEventListener('click', function(e) {
+        if(signaturePad.isEmpty()){
+            alert("Please provide a signature first.");
+            e.preventDefault();
+        } else {
+            hiddenInput.value = signaturePad.toDataURL("image/png");
+            modal.classList.add('hidden');
+        }
+    });
+
+    closeButton.addEventListener('click', function(){
+        modal.classList.add('hidden');
+    });
+
+    window.addEventListener('resize', resizeCanvas);
 });
 </script>
