@@ -26,9 +26,7 @@ class SupervisorDirectJobOrderController extends Controller
 
     public function store(Request $request)
     {
-        if (!auth()->user()->signature) {
-            return redirect()->route('supervisor.directjob.create')->with('Status', 'No Signature Found');
-        }
+
         // Validate request before proceeding
         $request->validate([
             'title' => 'required|string',
@@ -38,6 +36,10 @@ class SupervisorDirectJobOrderController extends Controller
             'client_id' => 'required|integer',
             'days_to_add' => 'required'
         ]);
+
+        if (!auth()->user()->signature) {
+            return redirect()->route('supervisor.directjob.create')->with('Status', 'No Signature Found');
+        }
 
         $job_order = JobOrder::create([
             'title' => $request->title,
