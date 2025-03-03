@@ -82,40 +82,54 @@ class JobOrderController extends Controller
             'graphic_designer_id' => 'sometimes|integer|nullable',
             'client_id' => 'sometimes|integer|nullable',
             'date_target' => 'sometimes|date',
-            'date_started' => 'sometimes|date'
+            'date_started' => 'sometimes|date',
+            'days_to_add' => 'sometimes|integer'
         ]);
-
-        // Find the job order by ID
+    
+        // Find the job draft by ID
         $job_draft = JobDraft::findOrFail($id);
-
-        $updateDraft =
-            [
-                'date_started' => $request->date_started,
-                'date_target' => $request->date_target,
-            ];
-
-        // Conditionally update graphic_designer_id and client_id if provided
-        if ($request->has('graphic_designer_id') && $request->graphic_designer_id !== null) {
+    
+        // Build update array only for fields that are filled
+        $updateDraft = [];
+        if ($request->filled('date_started')) {
+            $updateDraft['date_started'] = $request->date_started;
+        }
+        if ($request->filled('date_target')) {
+            $updateDraft['date_target'] = $request->date_target;
+        }
+        if ($request->filled('days_to_add')) {
+            $updateDraft['days_to_add'] = $request->days_to_add;
+        }
+        if ($request->filled('graphic_designer_id')) {
             $updateDraft['graphic_designer_id'] = $request->graphic_designer_id;
         }
-
-        if ($request->has('client_id') && $request->client_id !== null) {
+        if ($request->filled('client_id')) {
             $updateDraft['client_id'] = $request->client_id;
         }
-
-        if ($request->has('content_writer_id') && $request->content_writer_id !== null) {
+        if ($request->filled('content_writer_id')) {
             $updateDraft['content_writer_id'] = $request->content_writer_id;
         }
-
-        $job_draft->update($updateDraft);
-        // Find the related job draft
-        $job_order = JobOrder::findOrFail($job_draft->job_order_id);
-        // Update the job order
-        $job_order->update([
-            'title' => $request->title,
-            'description' => $request->description,
-        ]);
-
-        return redirect()->route('joborder.edit', $id)->with('Status', 'Job Order Updated Successfully');
+    
+        // Update only if there's something to update
+        if (!empty($updateDraft)) {
+            $job_draft->update($updateDraft);
+        }
+    
+        // Build update array for JobOrder fields conditionally
+        $jobOrderUpdate = [];
+        if ($request->filled('title')) {
+            $jobOrderUpdate['title'] = $request->title;
+        }
+        if ($request->filled('description')) {
+            $jobOrderUpdate['description'] = $request->description;
+        }
+        if (!empty($jobOrderUpdate)) {
+            $job_order = JobOrder::findOrFail($job_draft->job_order_id);
+            $job_order->update($jobOrderUpdate);
+        }
+    
+        return redirect()->route('joborder')
+                         ->with('Status', 'Job Order Updated Successfully');
     }
+    
 }
