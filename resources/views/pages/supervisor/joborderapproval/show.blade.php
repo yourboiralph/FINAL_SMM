@@ -35,7 +35,7 @@
     <div class="h-auto gap-8 m-4 lg:m-10 p-4 lg:p-10 relative bg-white"
         style="box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.3); border-radius: 8px;">
         <div class="rounded-md text-white flex justify-end mb-10">
-            <a href="{{ url('/supervisor/approve') }}"
+            <a href="{{ url('/supervisor/approve/') }}"
                 class="w-fit px-4 py-1 bg-[#fa7011] rounded hover:bg-[#d95f0a] transition duration-200">
                 Back
             </a>
@@ -157,13 +157,12 @@
                                 Submit Approval
                             </button>
 
-                            <a href="{{ url('/supervisor/approve/declineForm/' . $job_draft->id) }}">
-                                <button type="button"
-                                    class="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                                    id="declineBtn" {{ $isDisabled ? 'disabled' : '' }}>
-                                    Decline
-                                </button>
-                            </a>
+                            <button type="button"
+                                class="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                                id="declineBtn" {{ $isDisabled ? 'disabled' : '' }} onclick="openDeclineModal()">
+                                Decline
+                            </button>
+
                         </div>
 
                     </form>
@@ -177,9 +176,58 @@
     </div>
     </div>
 
-    {{-- Include the signature modal (hidden by default) --}}
-    <x-signature id="signatureModal" class="hidden" />
+    <!-- Decline Modal -->
+    <div id="declineModal" class="fixed inset-0 flex items-center justify-center hidden bg-gray-500 bg-opacity-50 z-50">
+        <div class="bg-white p-6 rounded-md w-[50%]">
+            <h2 class="text-xl font-bold mb-4">Decline Job Order</h2>
+            <form action="{{ url('/supervisor/approve/decline/' . $job_draft->id) }}" method="POST" id="declineForm">
+                @csrf
+                @method('PUT')
+                <div class="mb-4">
+                    <label for="declineReason" class="block text-sm font-semibold mb-2">Reason for Decline:</label>
+                    <textarea name="summary" id="declineReason" rows="4" class="w-full border rounded-md p-2" placeholder="Enter your reason..."></textarea>
+                </div>
+                <div class="flex justify-end space-x-2">
+                    <button type="button" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onclick="closeDeclineModal()">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Submit Decline</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
+{{-- Include the signature modal (hidden by default) --}}
+<x-signature id="signatureModal" class="hidden" />
+<script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+<script>
+    let declineEditor; // to store the CKEditor instance
+
+    function openDeclineModal() {
+        // Show the modal
+        document.getElementById('declineModal').classList.remove('hidden');
+        // Initialize CKEditor if not already done
+        if (!declineEditor) {
+            ClassicEditor
+                .create(document.querySelector('#declineReason'))
+                .then(editor => {
+                    declineEditor = editor;
+                })
+                .catch(error => {
+                    console.error('Error initializing CKEditor:', error);
+                });
+        }
+    }
+
+    function closeDeclineModal() {
+        document.getElementById('declineModal').classList.add('hidden');
+    }
+
+    // Ensure the CKEditor content is updated into the textarea before the form is submitted
+    document.getElementById("declineForm").addEventListener("submit", function (event) {
+        if (declineEditor) {
+            document.querySelector('#declineReason').value = declineEditor.getData();
+        }
+    });
+</script>
 {{-- JS for Live Preview, Signature Pad, and Modal Switching --}}
 <script>
     // Main Signature Pad
