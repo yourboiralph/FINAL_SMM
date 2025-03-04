@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
 @section('title', 'Supervisor')
-@section('header', 'Content Writer Job Order')
+@section('header', 'Operation Job Order')
 
 @section('content')
 <script src="https://cdn.tailwindcss.com"></script>

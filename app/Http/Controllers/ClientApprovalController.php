@@ -38,13 +38,13 @@ class ClientApprovalController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'feedback' => 'required',
+            'summary' => 'required',
         ]);
 
         $job_draft_id = JobDraft::with('jobOrder', 'contentWriter', 'graphicDesigner', 'client')->find($id);
 
         $job_draft_id->update([
-            'feedback' => $request->feedback,
+            'feedback' => $request->summary,
             'status' => 'completed',
             'date_completed' => now(),
         ]);

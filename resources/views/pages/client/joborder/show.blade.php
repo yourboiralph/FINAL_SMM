@@ -60,29 +60,46 @@
                                 </div>
 
             <div class="mt-10">
-                <form action="{{ url('/client/update/' . $job_draft->id) }}" method="POST">
+                <form id="jobForm" action="{{ url('/client/update/' . $job_draft->id) }}" method="POST">
                     @csrf
-                    @method('PUT')
+                    @method('PUT') <!-- Default method for Accept -->
+                    
                     <label for="feedback" class="block font-semibold">Feedback:</label>
-                    <textarea class="w-full border p-2 rounded-md" name="feedback" id="summaryEditor"></textarea>
-
+                    <textarea class="w-full border p-2 rounded-md" name="summary" id="summaryEditor"></textarea>
+                    
                     <div class="mt-4 flex space-x-4">
-                        <button type="submit"
+                        <button type="submit" id="acceptButton"
                             class="px-4 py-2 text-sm text-white bg-[#fa7011] rounded hover:bg-[#c06b32] disabled:opacity-50 disabled:cursor-not-allowed">
                             Accept
                         </button>
-                        <a href="{{ url('/client/decline/' . $job_draft->id) }}">
-                            <button type="button"
-                                class="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed">
-                                Decline
-                            </button>
-                        </a>
+                        <button type="submit" id="declineButton"
+                            class="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed">
+                            Decline
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+
+<script>
+    // When clicking the Decline button, change the form action to the decline URL,
+    // remove the method spoofing so it submits as POST, and then submit the form.
+    document.getElementById('declineButton').addEventListener('click', function(e) {
+        e.preventDefault();
+        var form = document.getElementById('jobForm');
+        form.action = "{{ url('/client/decline/' . $job_draft->id) }}";
+        // Remove the hidden _method input (for PUT) so the form submits as POST.
+        var methodInput = form.querySelector('input[name="_method"]');
+        if(methodInput) {
+            methodInput.parentNode.removeChild(methodInput);
+        }
+        form.submit();
+    });
+</script>
+
 
 <!-- Initialize CKEditor 5 -->
 <script>
